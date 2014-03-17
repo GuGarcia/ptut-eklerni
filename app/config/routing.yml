@@ -1,0 +1,12 @@
+eklerni_rest:
+    resource: "@EklerniRESTBundle/Resources/config/routing.xml"
+    prefix:   /
+
+eklerni_front:
+    resource: "@EklerniFrontBundle/Resources/config/routing.xml"
+    prefix:   /
+
+eklerni_back:
+    resource: "@EklerniBackBundle/Resources/config/routing.xml"
+    prefix:   /
+
