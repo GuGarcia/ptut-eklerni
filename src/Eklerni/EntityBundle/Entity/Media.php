@@ -18,12 +18,20 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Media extends EklerniEntity {
 
+    /********************
+     * ATTRIBUTES
+     ********************/
+
     /**
      * @var string
      *
      * @ORM\Column(name="media", type="string", length=50)
      */
     private $media;
+
+    /********************
+     * GETTERS AND SETTERS
+     ********************/
 
     /**
      * @param string $media

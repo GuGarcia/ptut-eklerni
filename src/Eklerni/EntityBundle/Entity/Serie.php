@@ -12,33 +12,55 @@ use Doctrine\ORM\Mapping as ORM;
  */
 
 class Serie extends EklerniEntity {
+
+    /********************
+     * ATTRIBUTES
+     ********************/
+
     /**
      * @var string
      * @ORM\Column(type="string", length=50)
      */
-    protected $name;
+    private $name;
 
     /**
      * @var integer
      * @ORM\Column(type="integer")
      */
-    protected $difficulte;
+    private $difficulte;
 
     /**
-     * @var integer
+     * @var Activite
      * @ORM\ManyToOne(targetEntity="Activite", inversedBy="series")
      * @ORM\JoinColumn(name="idActivite", referencedColumnName="id")
      */
-    protected $activite;
+    private $activite;
 
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Question", mappedBy="serie")
      */
-    protected $questions;
+    private $questions;
 
     /**
-     * @param int $activite
+     * @var Enseignant
+     * @ORM\ManyToOne(targetEntity="Enseignant", inversedBy="series")
+     * @ORM\JoinColumn(name="idEnseignant", referencedColumnName="id")
+     */
+    private $enseignant;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Resultat", mappedBy="serie")
+     */
+    private $resultats;
+
+    /********************
+     * GETTERS AND SETTERS
+     ********************/
+
+    /**
+     * @param Activite $activite
      */
     public function setActivite($activite)
     {
@@ -46,7 +68,7 @@ class Serie extends EklerniEntity {
     }
 
     /**
-     * @return int
+ * @return Activite
      */
     public function getActivite()
     {

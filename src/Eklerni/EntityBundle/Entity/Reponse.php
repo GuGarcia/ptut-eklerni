@@ -12,13 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Reponse
- *
  * @package Eklerni\EntityBundle\Entity
- *
  * @ORM\Table(name="t_reponse")
  * @ORM\Entity
  */
 class Reponse extends EklerniEntity {
+
+    /********************
+     * ATTRIBUTES
+     ********************/
+
     /**
      * @var string
      *
@@ -44,9 +47,20 @@ class Reponse extends EklerniEntity {
      * @var Media
      *
      * @ORM\ManyToOne(targetEntity="Media")
-     * @ORM\JoinColumn(name="idMedia", referencedColumnName="")
+     * @ORM\JoinColumn(name="idMedia", referencedColumnName="id")
      */
     private $media;
+
+    /**
+     * @var Question
+     * @ORM\ManyToOne(targetEntity="Question", inversedBy="reponses")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     */
+    private $question;
+
+    /********************
+     * GETTERS AND SETTERS
+     ********************/
 
     /**
      * @param string $label
@@ -127,4 +141,21 @@ class Reponse extends EklerniEntity {
     {
         return $this->valid;
     }
+
+    /**
+     * @param \Eklerni\EntityBundle\Entity\Question $question
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+    }
+
+    /**
+     * @return \Eklerni\EntityBundle\Entity\Question
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
 }

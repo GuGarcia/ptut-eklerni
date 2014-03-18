@@ -11,33 +11,42 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="t_activite")
  */
 class Activite extends EklerniEntity {
+
+    /********************
+     * ATTRIBUTES
+     ********************/
+
     /**
      * @var string
      * @ORM\Column(type="string", length=50)
      */
-    protected $name;
+    private $name;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=200)
      */
-    protected $description;
+    private $description;
 
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Serie", mappedBy="activite")
      */
-    protected $series;
+    private $series;
 
     /**
-     * @var integer
+     * @var Matiere
      * @ORM\ManyToOne(targetEntity="Matiere", inversedBy="activites")
      * @ORM\JoinColumn(name="idMatiere", referencedColumnName="id")
      */
-    protected $matiere;
+    private $matiere;
+
+    /********************
+     * GETTERS AND SETTERS
+     ********************/
 
     /**
-     * @param int $matiere
+     * @param Matiere $matiere
      */
     public function setMatiere($matiere)
     {
@@ -45,7 +54,7 @@ class Activite extends EklerniEntity {
     }
 
     /**
-     * @return int
+     * @return Matiere
      */
     public function getMatiere()
     {

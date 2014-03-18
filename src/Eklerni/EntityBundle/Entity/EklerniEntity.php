@@ -15,6 +15,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @package Eklerni\EntityBundle\Entity
  */
 class EklerniEntity {
+
+    /********************
+     * ATTRIBUTES
+     ********************/
+
     /**
      * @var integer
      * @ORM\Column(name="id", type="integer")
@@ -33,7 +38,9 @@ class EklerniEntity {
      */
     protected $dateModification;
 
-
+    /********************
+     * CONSTRUCTORS
+     ********************/
 
     public function __construct()
     {
@@ -41,7 +48,9 @@ class EklerniEntity {
         $this->dateModification = new \DateTime();
     }
 
-
+    /********************
+     * GETTERS AND SETTERS
+     ********************/
 
     /**
      * @param \DateTime $dateCreation

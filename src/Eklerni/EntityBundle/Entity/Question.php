@@ -8,17 +8,21 @@
 
 namespace Eklerni\EntityBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Question
- *
  * @package Eklerni\EntityBundle\Entity
- *
  * @ORM\Table(name="t_question")
  * @ORM\Entity
  */
 class Question extends EklerniEntity {
+
+    /********************
+     * ATTRIBUTES
+     ********************/
+
     /**
      * @var string
      *
@@ -48,6 +52,16 @@ class Question extends EklerniEntity {
      * @ORM\JoinColumn(name="idMedia", referencedColumnName="id")
      */
     private $media;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Reponse", mappedBy="question")
+     */
+    private $reponses;
+
+    /********************
+     * GETTERS AND SETTERS
+     ********************/
 
     /**
      * @param string $label
@@ -128,4 +142,21 @@ class Question extends EklerniEntity {
     {
         return $this->serie;
     }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $reponses
+     */
+    public function setReponses($reponses)
+    {
+        $this->reponses = $reponses;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getReponses()
+    {
+        return $this->reponses;
+    }
+
 }
