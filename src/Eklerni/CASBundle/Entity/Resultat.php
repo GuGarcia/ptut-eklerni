@@ -6,17 +6,17 @@
  * Time: 11:43
  */
 
-namespace Eklerni\EntityBundle\Entity;
+namespace Eklerni\CASBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Resultat
- * @package Eklerni\EntityBundle\Entity
+ * @package Eklerni\CASBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="t_resultat")
  */
-class Resultat extends EklerniEntity {
+class Resultat extends BaseEntity {
 
     /********************
      * ATTRIBUTES
@@ -48,7 +48,7 @@ class Resultat extends EklerniEntity {
      ********************/
 
     /**
-     * @param \Eklerni\EntityBundle\Entity\Eleve $eleve
+     * @param \Eklerni\CASBundle\Entity\Eleve $eleve
      */
     public function setEleve($eleve)
     {
@@ -56,7 +56,7 @@ class Resultat extends EklerniEntity {
     }
 
     /**
-     * @return \Eklerni\EntityBundle\Entity\Eleve
+     * @return \Eklerni\CASBundle\Entity\Eleve
      */
     public function getEleve()
     {
@@ -80,7 +80,7 @@ class Resultat extends EklerniEntity {
     }
 
     /**
-     * @param \Eklerni\EntityBundle\Entity\Serie $serie
+     * @param \Eklerni\CASBundle\Entity\Serie $serie
      */
     public function setSerie($serie)
     {
@@ -88,7 +88,7 @@ class Resultat extends EklerniEntity {
     }
 
     /**
-     * @return \Eklerni\EntityBundle\Entity\Serie
+     * @return \Eklerni\CASBundle\Entity\Serie
      */
     public function getSerie()
     {

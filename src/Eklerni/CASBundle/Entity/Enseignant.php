@@ -6,14 +6,14 @@
  * Time: 09:25
  */
 
-namespace Eklerni\EntityBundle\Entity;
+namespace Eklerni\CASBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Enseignant
- * @package Eklerni\EntityBundle\Entity
+ * @package Eklerni\CASBundle\Entity
  * @ORM\Entity
  */
 class Enseignant extends Personne{

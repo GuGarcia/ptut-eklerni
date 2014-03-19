@@ -6,21 +6,20 @@
  * Time: 09:24
  */
 
-namespace Eklerni\EntityBundle\Entity;
+namespace Eklerni\CASBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Personne
- * @package Eklerni\EntityBundle\Entity
+ * @package Eklerni\CASBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="t_personne")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"enseignant" = "Enseignant", "eleve" = "Eleve"})
  */
-abstract class Personne extends EklerniEntity{
+abstract class Personne extends BaseEntity{
 
     /********************
      * ATTRIBUTES

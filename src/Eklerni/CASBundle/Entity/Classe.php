@@ -6,18 +6,18 @@
  * Time: 09:23
  */
 
-namespace Eklerni\EntityBundle\Entity;
+namespace Eklerni\CASBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Classe
- * @package Eklerni\EntityBundle\Entity
+ * @package Eklerni\CASBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="t_classe")
  */
-class Classe extends EklerniEntity {
+class Classe extends BaseEntity {
 
     /********************
      * ATTRIBUTES
@@ -67,7 +67,7 @@ class Classe extends EklerniEntity {
      ********************/
 
     /**
-     * @param \Eklerni\EntityBundle\Entity\Ecole $ecole
+     * @param \Eklerni\CASBundle\Entity\Ecole $ecole
      * @return Classe
      */
     public function setEcole($ecole)
@@ -77,7 +77,7 @@ class Classe extends EklerniEntity {
     }
 
     /**
-     * @return \Eklerni\EntityBundle\Entity\Ecole
+     * @return \Eklerni\CASBundle\Entity\Ecole
      */
     public function getEcole()
     {

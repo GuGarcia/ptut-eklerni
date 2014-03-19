@@ -1,16 +1,17 @@
 <?php
 
-namespace Eklerni\EntityBundle\Entity;
+namespace Eklerni\CASBundle\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Activite
- * @package Eklerni\EntityBundle\Entity
+ * @package Eklerni\CASBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="t_activite")
  */
-class Activite extends EklerniEntity {
+class Activite extends BaseEntity {
 
     /********************
      * ATTRIBUTES

@@ -6,15 +6,15 @@
  * Time: 09:42
  */
 
-namespace Eklerni\EntityBundle\Entity;
+namespace Eklerni\CASBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class EklerniEntity
- * @package Eklerni\EntityBundle\Entity
+ * Class BaseEntity
+ * @package Eklerni\CASBundle\Entity
  */
-class EklerniEntity {
+class BaseEntity {
 
     /********************
      * ATTRIBUTES
@@ -54,7 +54,7 @@ class EklerniEntity {
 
     /**
      * @param \DateTime $dateCreation
-     * @return EklerniEntity
+     * @return BaseEntity
      */
     public function setDateCreation($dateCreation)
     {
@@ -73,7 +73,7 @@ class EklerniEntity {
 
     /**
      * @param \Datetime $dateModification
-     * @return EklerniEntity
+     * @return BaseEntity
      */
     public function setDateModification($dateModification)
     {

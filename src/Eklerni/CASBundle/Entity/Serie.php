@@ -1,17 +1,17 @@
 <?php
 
-namespace Eklerni\EntityBundle\Entity;
+namespace Eklerni\CASBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Serie
- * @package Eklerni\EntityBundle\Entity
+ * @package Eklerni\CASBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="t_serie")
  */
 
-class Serie extends EklerniEntity {
+class Serie extends BaseEntity {
 
     /********************
      * ATTRIBUTES
@@ -65,6 +65,45 @@ class Serie extends EklerniEntity {
     public function setActivite($activite)
     {
         $this->activite = $activite;
+    }
+
+    /**
+     * @param \Eklerni\CASBundle\Entity\Enseignant $enseignant
+     *
+     * @return Serie
+     */
+    public function setEnseignant($enseignant)
+    {
+        $this->enseignant = $enseignant;
+
+        return $this;
+    }
+
+    /**
+     * @return \Eklerni\CASBundle\Entity\Enseignant
+     */
+    public function getEnseignant()
+    {
+        return $this->enseignant;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $resultats
+     * @return Serie
+     */
+    public function setResultats($resultats)
+    {
+        $this->resultats = $resultats;
+
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getResultats()
+    {
+        return $this->resultats;
     }
 
     /**

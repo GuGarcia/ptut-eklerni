@@ -6,17 +6,17 @@
  * Time: 09:24
  */
 
-namespace Eklerni\EntityBundle\Entity;
+namespace Eklerni\CASBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Media
- * @package Eklerni\EntityBundle\Entity
+ * @package Eklerni\CASBundle\Entity
  * @ORM\Table(name="t_media")
  * @ORM\Entity
  */
-class Media extends EklerniEntity {
+class Media extends BaseEntity {
 
     /********************
      * ATTRIBUTES

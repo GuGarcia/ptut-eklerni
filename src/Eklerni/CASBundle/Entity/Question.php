@@ -6,18 +6,18 @@
  * Time: 09:24
  */
 
-namespace Eklerni\EntityBundle\Entity;
+namespace Eklerni\CASBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Question
- * @package Eklerni\EntityBundle\Entity
+ * @package Eklerni\CASBundle\Entity
  * @ORM\Table(name="t_question")
  * @ORM\Entity
  */
-class Question extends EklerniEntity {
+class Question extends BaseEntity {
 
     /********************
      * ATTRIBUTES
@@ -84,7 +84,7 @@ class Question extends EklerniEntity {
     }
 
     /**
-     * @param \Eklerni\EntityBundle\Entity\Media $media
+     * @param \Eklerni\CASBundle\Entity\Media $media
      *
      * @return Question
      */
@@ -96,7 +96,7 @@ class Question extends EklerniEntity {
     }
 
     /**
-     * @return \Eklerni\EntityBundle\Entity\Media
+     * @return \Eklerni\CASBundle\Entity\Media
      */
     public function getMedia()
     {
@@ -124,7 +124,7 @@ class Question extends EklerniEntity {
     }
 
     /**
-     * @param \Eklerni\EntityBundle\Entity\Serie $serie
+     * @param \Eklerni\CASBundle\Entity\Serie $serie
      *
      * @return Question
      */
@@ -136,7 +136,7 @@ class Question extends EklerniEntity {
     }
 
     /**
-     * @return \Eklerni\EntityBundle\Entity\Serie
+     * @return \Eklerni\CASBundle\Entity\Serie
      */
     public function getSerie()
     {

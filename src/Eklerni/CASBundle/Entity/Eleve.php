@@ -6,14 +6,14 @@
  * Time: 09:25
  */
 
-namespace Eklerni\EntityBundle\Entity;
+namespace Eklerni\CASBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Eleve
- * @package Eklerni\EntityBundle\Entity
+ * @package Eklerni\CASBundle\Entity
  * @ORM\Entity
  */
 class Eleve extends Personne {
@@ -40,7 +40,7 @@ class Eleve extends Personne {
      ********************/
 
     /**
-     * @param \Eklerni\EntityBundle\Entity\Classe $classe
+     * @param \Eklerni\CASBundle\Entity\Classe $classe
      * @return Eleve
      */
     public function setClasse($classe)
@@ -50,12 +50,30 @@ class Eleve extends Personne {
     }
 
     /**
-     * @return \Eklerni\EntityBundle\Entity\Classe
+     * @return \Eklerni\CASBundle\Entity\Classe
      */
     public function getClasse()
     {
         return $this->classe;
     }
 
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $resultats
+     * @return Eleve
+     */
+    public function setResultats($resultats)
+    {
+        $this->resultats = $resultats;
+
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getResultats()
+    {
+        return $this->resultats;
+    }
 
 } 
