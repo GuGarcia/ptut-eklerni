@@ -66,6 +66,11 @@ class Classe extends BaseEntity {
      * GETTERS AND SETTERS
      ********************/
 
+    public function getFullName()
+    {
+        return $this->$nom . ' (' . $this->$niveau . ')';
+    }
+
     /**
      * @param \Eklerni\CASBundle\Entity\Ecole $ecole
      * @return Classe

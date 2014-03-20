@@ -47,6 +47,13 @@ class EleveType extends AbstractType
             )
         );
 
+        $builder->add('classe', 'entity', array(
+                'label' => 'Classe',
+                'class' => 'EklerniCASBundle:Classe',
+                'property' => 'fullName'
+            )
+        );
+
         $builder->add(
             'valider', 'submit', array(
                 'attr' => array(

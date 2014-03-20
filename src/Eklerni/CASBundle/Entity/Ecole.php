@@ -51,6 +51,11 @@ class Ecole extends BaseEntity{
      * GETTERS AND SETTERS
      ********************/
 
+    public function getFullName()
+    {
+        return $this->nom . ' - ' . $this->codePostal . ' ' . $this->ville;
+    }
+
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection $classes
      * @return Ecole

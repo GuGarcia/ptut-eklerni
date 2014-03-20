@@ -23,7 +23,7 @@ class EcoleType extends AbstractType {
         );
 
         $builder->add(
-            'codePostal', array(
+            'codePostal', 'text', array(
                 'label' => 'Code postal'
             )
         );

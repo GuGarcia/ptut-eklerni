@@ -21,7 +21,7 @@ class Serie extends BaseEntity {
      * @var string
      * @ORM\Column(type="string", length=50)
      */
-    private $name;
+    private $nom;
 
     /**
      * @var integer

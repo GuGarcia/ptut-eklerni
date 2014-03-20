@@ -23,8 +23,22 @@ class ClasseType extends AbstractType {
         );
 
         $builder->add(
-            'niveau', 'text', array(
-                'label' => 'Niveau'
+            'niveau', 'choice', array(
+                'label' => 'Niveau',
+                'choices' => array(
+                    '1' => 'CP',
+                    '2' => 'CE1',
+                    '3' => 'CE2',
+                    '4' => 'CM1',
+                    '5' => 'CM2'
+                )
+            )
+        );
+
+        $builder->add('ecole', 'entity', array(
+                'label' => 'Ecole',
+                'class' => 'EklerniCASBundle:Ecole',
+                'property' => 'fullName'
             )
         );
 
