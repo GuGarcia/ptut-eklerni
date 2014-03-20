@@ -5,7 +5,20 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service>
+        <service id="eklerni.form.type.ecole" class="Eklerni\CASBundle\Form\Type\EcoleType">
+            <tag name="form.type" alias="ecole"/>
+        </service>
+        <service id="eklerni.form.type.classe" class="Eklerni\CASBundle\Form\Type\ClasseType">
+            <tag name="form.type" alias="classe"/>
+        </service>
+        <service id="eklerni.form.type.enseignant" class="Eklerni\CASBundle\Form\Type\EnseignantType">
+            <tag name="form.type" alias="enseignant"/>
+        </service>
+        <service id="eklerni.form.type.eleve" class="Eklerni\CASBundle\Form\Type\EleveType">
+            <tag name="form.type" alias="eleve"/>
+        </service>
+        <service id="eklerni.form.type.serie" class="Eklerni\CASBundle\Form\Type\SerieType">
+            <tag name="form.type" alias="serie"/>
         </service>
     </services>
 

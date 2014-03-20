@@ -21,7 +21,7 @@ security:
             security: false
 
         cas:
-            pattern:  ^/
+            pattern:  ^/admin
             #anonymous: ~
             http_basic:
                 realm: "Secured Demo Area"

@@ -17,6 +17,18 @@ class EnseignantType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add(
+            'username', 'text', array(
+                'label' => 'Nom d\'utilisateur'
+            )
+        );
+
+        $builder->add(
+            'password', 'text', array(
+                'label' => 'Mot de passe'
+            )
+        );
+
+        $builder->add(
             'valider', 'submit', array(
                 'attr' => array(
                     'class' => 'btn btn-default'
