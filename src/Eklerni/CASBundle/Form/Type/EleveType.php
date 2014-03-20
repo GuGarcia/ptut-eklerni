@@ -13,9 +13,40 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class EleveType extends AbstractType {
+class EleveType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add(
+            'username', 'text', array(
+                'label' => 'Nom d\'utilisateur'
+            )
+        );
 
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder->add(
+            'password', 'text', array(
+                'label' => 'Mot de passe'
+            )
+        );
+
+        $builder->add(
+            'nom', 'text', array(
+                'label' => 'Nom'
+            )
+        );
+
+        $builder->add(
+            'prenom', 'text', array(
+                'label' => 'Prénom'
+            )
+        );
+
+        $builder->add(
+            'dateNaissance', 'text', array(
+                'label' => 'Date de Naissance'
+            )
+        );
+
         $builder->add(
             'valider', 'submit', array(
                 'attr' => array(
@@ -28,11 +59,13 @@ class EleveType extends AbstractType {
     /**
      * @inheritdoc
      */
-    public function getName() {
+    public function getName()
+    {
         return 'eleve';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults(array(
             'data_class' => 'Eklerni\CASBundle\Entity\Eleve',
         ));
