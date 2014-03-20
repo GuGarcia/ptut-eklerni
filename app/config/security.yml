@@ -3,7 +3,7 @@ security:
         Eklerni\CASBundle\Entity\Enseignant:
             algorithm:  sha512
         Eklerni\CASBundle\Entity\Eleve:
-            algorithm: sha512
+            algorithm:  sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_ENSEIGNANT
@@ -34,4 +34,7 @@ security:
             #    target: _demo
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/cas, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/front, roles: ROLE_ELEVE }
+        - { path: ^/back, roles: ROLE_ENSEIGNANT }
