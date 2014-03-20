@@ -73,5 +73,11 @@ class Enseignant extends Personne{
     }
 
 
-
-} 
+    /**
+     * @inheritdoc
+     */
+    public function getRoles()
+    {
+        return array('ROLE_ENSEIGNANT');
+    }
+}

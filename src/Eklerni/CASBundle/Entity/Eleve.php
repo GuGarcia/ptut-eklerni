@@ -76,4 +76,11 @@ class Eleve extends Personne {
         return $this->resultats;
     }
 
-} 
+    /**
+     * @inheritdoc
+     */
+    public function getRoles()
+    {
+        return array('ROLE_ELEVE');
+    }
+}
