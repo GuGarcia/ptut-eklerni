@@ -2,13 +2,15 @@
 
 namespace Eklerni\CASBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+
 class ActiviteRepository extends EntityRepository implements CASRepositoryInterface
 {
 
     /**
      * @return mixed
      */
-    public function findByAll()
+    public function findAll()
     {
         return $this->_em->createQueryBuilder()
             ->select("a")
@@ -36,7 +38,7 @@ class ActiviteRepository extends EntityRepository implements CASRepositoryInterf
     {
         return $this->_em->createQueryBuilder()
             ->select("a")
-            ->from("EkleniCASBundle:Activite", "a")
+            ->from("EklerniCASBundle:Activite", "a")
             ->innerJoin("a.matiere", "m")
             ->innerJoin("m.classes", "c")
             ->innerJoin("c.enseignant", "e")
@@ -48,7 +50,7 @@ class ActiviteRepository extends EntityRepository implements CASRepositoryInterf
     {
         return $this->_em->createQueryBuilder()
             ->select("a")
-            ->from("EkleniCASBundle:Activite", "a")
+            ->from("EklerniCASBundle:Activite", "a")
             ->innerJoin("a.matiere", "m")
             ->where("m.id = :id")
             ->setParameter("id", $idMatiere);

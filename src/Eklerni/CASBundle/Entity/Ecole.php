@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Ecole
  * @package Eklerni\CASBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Eklerni\CASBundle\Repository\EcoleRepository")
  * @ORM\Table(name="t_ecole")
  */
 class Ecole extends BaseEntity{

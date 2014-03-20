@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Serie
  * @package Eklerni\CASBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Eklerni\CASBundle\Repository\SerieRepository")
  * @ORM\Table(name="t_serie")
  */
 

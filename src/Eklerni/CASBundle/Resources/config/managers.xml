@@ -4,24 +4,38 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="manager_ecole.class">Eklerni\CASBundle\EcoleManager</parameter>
-        <parameter key="manager_classe.class">Eklerni\CASBundle\ClasseManager</parameter>
-        <parameter key="manager_eleve.class">Eklerni\CASBundle\EleveManager</parameter>
-        <parameter key="manager_enseignant.class">Eklerni\CASBundle\EnseignantManager</parameter>
-        <parameter key="manager_matiere.class">Eklerni\CASBundle\MatiereManager</parameter>
-        <parameter key="manager_activite.class">Eklerni\CASBundle\ActiviteManager</parameter>
-        <parameter key="manager_serie.class">Eklerni\CASBundle\SerieManager</parameter>
+        <parameter key="manager_ecole.class">Eklerni\CASBundle\Manager\EcoleManager</parameter>
+        <parameter key="manager_classe.class">Eklerni\CASBundle\Manager\ClasseManager</parameter>
+        <parameter key="manager_eleve.class">Eklerni\CASBundle\Manager\EleveManager</parameter>
+        <parameter key="manager_enseignant.class">Eklerni\CASBundle\Manager\EnseignantManager</parameter>
+        <parameter key="manager_matiere.class">Eklerni\CASBundle\Manager\MatiereManager</parameter>
+        <parameter key="manager_activite.class">Eklerni\CASBundle\Manager\ActiviteManager</parameter>
+        <parameter key="manager_serie.class">Eklerni\CASBundle\Manager\SerieManager</parameter>
 
     </parameters>
 
     <services>
-        <service id="eklerni.manager_ecole" class="%manager_ecole.class%"/>
-        <service id="eklerni.manager_classe" class="%manager_classe.class%"/>
-        <service id="eklerni.manager_eleve" class="%manager_eleve.class%"/>
-        <service id="eklerni.manager_enseignant" class="%manager_enseignant.class%"/>
-        <service id="eklerni.manager_matiere" class="%manager_matiere.class%"/>
-        <service id="eklerni.manager_activite" class="%manager_activite.class%"/>
-        <service id="eklerni.manager_serie" class="%manager_serie.class%"/>
+        <service id="eklerni.manager.ecole" class="%manager_ecole.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.classe" class="%manager_classe.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.eleve" class="%manager_eleve.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.enseignant" class="%manager_enseignant.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.matiere" class="%manager_matiere.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.activite" class="%manager_activite.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.serie" class="%manager_serie.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
 
     </services>
 </container>

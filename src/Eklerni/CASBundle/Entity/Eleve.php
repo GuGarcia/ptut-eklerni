@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Eleve
  * @package Eklerni\CASBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Eklerni\CASBundle\Repository\EleveRepository")
  */
 class Eleve extends Personne {
 

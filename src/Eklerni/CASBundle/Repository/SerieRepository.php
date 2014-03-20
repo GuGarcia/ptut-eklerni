@@ -8,6 +8,7 @@
 
 namespace Eklerni\CASBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
 
 class SerieRepository extends EntityRepository implements CASRepositoryInterface
 {
@@ -15,7 +16,7 @@ class SerieRepository extends EntityRepository implements CASRepositoryInterface
     /**
      * @return mixed
      */
-    public function findByAll()
+    public function findAll()
     {
         return $this->_em->createQueryBuilder()
             ->select("s")
@@ -43,7 +44,7 @@ class SerieRepository extends EntityRepository implements CASRepositoryInterface
     {
         return $this->_em->createQueryBuilder()
             ->select("a")
-            ->from("EkleniCASBundle:Serie", "s")
+            ->from("EklerniCASBundle:Serie", "s")
             ->innerJoin("s.enseignant", "e")
             ->where("e.id = :id")
             ->setParameter("id", $idProf);
@@ -53,7 +54,7 @@ class SerieRepository extends EntityRepository implements CASRepositoryInterface
     {
         return $this->_em->createQueryBuilder()
             ->select("a")
-            ->from("EkleniCASBundle:Serie", "s")
+            ->from("EklerniCASBundle:Serie", "s")
             ->innerJoin("s.activite","a")
             ->where("a.id = :id")
             ->setParameter("id", $idActivite);
@@ -63,7 +64,7 @@ class SerieRepository extends EntityRepository implements CASRepositoryInterface
     {
         return $this->_em->createQueryBuilder()
             ->select("a")
-            ->from("EkleniCASBundle:Serie", "s")
+            ->from("EklerniCASBundle:Serie", "s")
             ->innerJoin("s.activite","a")
             ->innerJoin("a.matiere","m")
             ->where("m.id = :id")

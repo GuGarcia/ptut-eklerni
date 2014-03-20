@@ -9,7 +9,7 @@ class EcoleRepository extends EntityRepository implements CASRepositoryInterface
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function findByAll()
+    public function findAll()
     {
         return $this->_em->createQueryBuilder()
             ->select("e")
@@ -24,7 +24,7 @@ class EcoleRepository extends EntityRepository implements CASRepositoryInterface
     {
         return $this->_em->createQueryBuilder()
             ->select("e")
-            ->from("EkleniCASBundle:Ecole", "e")
+            ->from("EklerniCASBundle:Ecole", "e")
             ->where("e.id = :id")
             ->setParameter("id", $id);
     }
@@ -37,7 +37,7 @@ class EcoleRepository extends EntityRepository implements CASRepositoryInterface
     {
         return $this->_em->createQueryBuilder()
             ->select("e")
-            ->from("EkleniCASBundle:Ecole", "e")
+            ->from("EklerniCASBundle:Ecole", "e")
             ->innerJoin("e.classes","c")
             ->innerJoin("c.enseignant","p")
             ->where("p.id = :id")
@@ -51,7 +51,7 @@ class EcoleRepository extends EntityRepository implements CASRepositoryInterface
     public function findByEleve($idEleve) {
         return $this->_em->createQueryBuilder()
             ->select("e")
-            ->from("EkleniCASBundle:Ecole", "e")
+            ->from("EklerniCASBundle:Ecole", "e")
             ->innerJoin("e.classes","c")
             ->innerJoin("c.eleves","p")
             ->where("p.id = :id")

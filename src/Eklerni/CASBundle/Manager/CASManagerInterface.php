@@ -2,12 +2,15 @@
 
 namespace Eklerni\CASBundle\Manager;
 
+use Eklerni\CASBundle\Entity\BaseEntity;
+use Eklerni\CASBundle\Entity\Enseignant;
+
 interface CASManagerInterface {
 
     /**
      * @return mixed
      */
-    public function findByAll();
+    public function findAll();
 
     /**
      * @param BaseEntity $entity

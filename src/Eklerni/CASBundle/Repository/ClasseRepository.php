@@ -2,16 +2,18 @@
 
 namespace Eklerni\CASBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+
 class ClasseRepository extends EntityRepository implements CASRepositoryInterface {
 
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function findByAll()
+    public function findAll()
     {
         return $this->_em->createQueryBuilder()
             ->select("c")
-            ->from("EkleniCASBundle:Classe", "c");
+            ->from("EklerniCASBundle:Classe", "c");
     }
 
     /**
@@ -22,7 +24,7 @@ class ClasseRepository extends EntityRepository implements CASRepositoryInterfac
     {
         return $this->_em->createQueryBuilder()
             ->select("c")
-            ->from("EkleniCASBundle:Classe", "c")
+            ->from("EklerniCASBundle:Classe", "c")
             ->where("c.id = :id")
             ->setParameter("id", $id);
     }
@@ -35,7 +37,7 @@ class ClasseRepository extends EntityRepository implements CASRepositoryInterfac
     {
         return $this->_em->createQueryBuilder()
             ->select("c")
-            ->from("EkleniCASBundle:Classe", "c")
+            ->from("EklerniCASBundle:Classe", "c")
             ->innerJoin("c.enseignant","p")
             ->where("p.id = :id")
             ->setParameter("id", $idProf);

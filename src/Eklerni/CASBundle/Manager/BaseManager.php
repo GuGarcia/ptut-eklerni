@@ -45,9 +45,9 @@ abstract class BaseManager implements CASManagerInterface
     /**
      * @return mixed
      */
-    public function findByAll()
+    public function findAll()
     {
-        return $this->repository->findByAll()->getQuery()->getResult();
+        return $this->repository->findAll()->getQuery()->getResult();
     }
 
     /**
