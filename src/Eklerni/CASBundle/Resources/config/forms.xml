@@ -6,19 +6,19 @@
 
     <services>
         <service id="eklerni.form.type.ecole" class="Eklerni\CASBundle\Form\Type\EcoleType">
-            <tag name="form.type" alias="ecole"/>
+            <tag name="form.type" alias="eklerni_ecole"/>
         </service>
         <service id="eklerni.form.type.classe" class="Eklerni\CASBundle\Form\Type\ClasseType">
-            <tag name="form.type" alias="classe"/>
+            <tag name="form.type" alias="eklerni_classe"/>
         </service>
         <service id="eklerni.form.type.enseignant" class="Eklerni\CASBundle\Form\Type\EnseignantType">
-            <tag name="form.type" alias="enseignant"/>
+            <tag name="form.type" alias="eklerni_enseignant"/>
         </service>
         <service id="eklerni.form.type.eleve" class="Eklerni\CASBundle\Form\Type\EleveType">
-            <tag name="form.type" alias="eleve"/>
+            <tag name="form.type" alias="eklerni_eleve"/>
         </service>
         <service id="eklerni.form.type.serie" class="Eklerni\CASBundle\Form\Type\SerieType">
-            <tag name="form.type" alias="serie"/>
+            <tag name="form.type" alias="eklerni_serie"/>
         </service>
     </services>
 

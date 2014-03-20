@@ -39,8 +39,13 @@ class SignController extends Controller
         );
     }
 
+    public function loginCheckAction()
+    {
+        // The security layer will intercept this request
+    }
+
     public function logoutAction(Request $request)
     {
-
+        // The security layer will intercept this request
     }
 } 

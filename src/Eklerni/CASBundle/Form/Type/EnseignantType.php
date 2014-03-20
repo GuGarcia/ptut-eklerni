@@ -23,7 +23,7 @@ class EnseignantType extends AbstractType
         );
 
         $builder->add(
-            'password', 'text', array(
+            'password', 'password', array(
                 'label' => 'Mot de passe'
             )
         );
@@ -60,7 +60,7 @@ class EnseignantType extends AbstractType
      */
     public function getName()
     {
-        return 'enseignant';
+        return 'eklerni_enseignant';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

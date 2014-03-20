@@ -24,7 +24,7 @@ class EleveType extends AbstractType
         );
 
         $builder->add(
-            'password', 'text', array(
+            'password', 'password', array(
                 'label' => 'Mot de passe'
             )
         );
@@ -68,7 +68,7 @@ class EleveType extends AbstractType
      */
     public function getName()
     {
-        return 'eleve';
+        return 'eklerni_eleve';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

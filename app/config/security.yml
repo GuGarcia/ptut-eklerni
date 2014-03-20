@@ -20,21 +20,22 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        login_firewall:
+            pattern: ^/cas
+            security: false
+
         cas:
-            pattern:  ^/admin
-            #anonymous: ~
-            http_basic:
-                realm: "Secured Demo Area"
-            #form_login:
-            #    login_path: login
-            #    check_check: login_check
-            #    csrf_provider: form.csrf_provider
-            #logout:
-            #    path:   _demo_logout
-            #    target: _demo
+            pattern:  ^/
+            form_login:
+                login_path: eklerni_cas_login
+                check_path: eklerni_cas_login_check
+                csrf_provider: form.csrf_provider
+            logout:
+                path:   eklerni_cas_logout
+                target: eklerni_cas_login
 
     access_control:
         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/cas, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/cas, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/front, roles: ROLE_ELEVE }
         - { path: ^/back, roles: ROLE_ENSEIGNANT }

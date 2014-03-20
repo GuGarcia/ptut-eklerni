@@ -55,7 +55,7 @@ class ClasseType extends AbstractType {
      * @inheritdoc
      */
     public function getName() {
-        return 'classe';
+        return 'eklerni_classe';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

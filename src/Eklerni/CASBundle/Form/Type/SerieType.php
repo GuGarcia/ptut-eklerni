@@ -47,7 +47,7 @@ class SerieType extends AbstractType {
      * @inheritdoc
      */
     public function getName() {
-        return 'serie';
+        return 'eklerni_serie';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

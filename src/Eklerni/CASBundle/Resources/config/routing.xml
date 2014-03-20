@@ -7,4 +7,16 @@
     <route id="eklerni_cas_homepage" pattern="/hello">
         <default key="_controller">EklerniCASBundle:Default:index</default>
     </route>
+    <route id="eklerni_cas_login" pattern="/login">
+        <default key="_controller">EklerniCASBundle:Sign:login</default>
+    </route>
+    <route id="eklerni_cas_login_check" pattern="/login_check">
+        <default key="_controller">EklerniCASBundle:Sign:loginCheck</default>
+    </route>
+    <route id="eklerni_cas_logout" pattern="/logout">
+        <default key="_controller">EklerniCASBundle:Sign:logout</default>
+    </route>
+    <route id="eklerni_cas_register" pattern="/register">
+        <default key="_controller">EklerniCASBundle:Register:register</default>
+    </route>
 </routes>

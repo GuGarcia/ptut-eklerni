@@ -47,7 +47,7 @@ class EcoleType extends AbstractType {
      * @inheritdoc
      */
     public function getName() {
-        return 'ecole';
+        return 'eklerni_ecole';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

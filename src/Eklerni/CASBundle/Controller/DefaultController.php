@@ -11,7 +11,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $form = $this->createForm('eleve');
+        $form = $this->createForm('eklerni_eleve');
 
         return $this->render('EklerniCASBundle:Default:index.html.twig', array(
                 'form' => $form->createView()

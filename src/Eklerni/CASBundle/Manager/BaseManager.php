@@ -16,7 +16,7 @@ abstract class BaseManager implements CASManagerInterface
         $this->em = $em;
     }
 
-    protected function remove($entity)
+    public function remove($entity)
     {
         $this->em->remove($entity);
         $this->em->flush();
@@ -27,7 +27,7 @@ abstract class BaseManager implements CASManagerInterface
      * @param BaseEntity $entity
      * @param bool $persist false when updating
      */
-    protected function save(BaseEntity $entity, $persist = true)
+    public function save(BaseEntity $entity, $persist = true)
     {
         if (property_exists($entity, 'dateModification')) {
             $entity->setDateModification(new \DateTime('now'));
