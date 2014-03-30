@@ -2,12 +2,12 @@ welcome:
     pattern: /
     defaults:
         _controller: "FrameworkBundle:Redirect:redirect"
-        route: eklerni_cas_homepage
+        route: eklerni_cas_login
         permanent: true
 
 eklerni_cas:
     resource: "@EklerniCASBundle/Resources/config/routing.xml"
-    prefix:   /cas/
+    prefix:   /cas
 
 eklerni_rest:
     resource: "@EklerniRESTBundle/Resources/config/routing.xml"

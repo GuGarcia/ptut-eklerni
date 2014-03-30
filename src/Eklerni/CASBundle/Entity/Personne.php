@@ -52,7 +52,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
 
     /**
      * @var string
-     * @ORM\Column(name="password", type="string", length=40)
+     * @ORM\Column(name="password", type="string", length=88)
      */
     protected $password;
 

@@ -1,3 +1,6 @@
-{% for classe in classes %}
-    {{ classe.nom }}
-{% endfor %}
+{% extends "::base.html.twig" %}
+{% block body %}
+	{% for classe in classes %}
+	    {{ classe.nom }}
+	{% endfor %}
+{% endblock %}

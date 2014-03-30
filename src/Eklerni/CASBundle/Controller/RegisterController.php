@@ -27,10 +27,17 @@ class RegisterController extends Controller{
 
             $encoder = $factory->getEncoder($enseignant);
             $password = $encoder->encodePassword($enseignant->getPassword(), $enseignant->getSalt());
-            $enseignant->setPassword($password);
+            
+            if (!$encoder->isPasswordValid($password, $enseignant->getPassword(), $enseignant->getSalt())) {
+                throw new \Exception('Password incorrectly encoded during user registration');
+            } else {
+                $enseignant->setPassword($password);
+            }
 
             $enseignant->setDateNaissance(new \DateTime());
             $this->get('eklerni.manager.enseignant')->save($enseignant, true);
+            
+            return $this->redirect($this->generateUrl('eklerni_cas_login'));
         }
 
         return $this->render('EklerniCASBundle:Default:index.html.twig', array(

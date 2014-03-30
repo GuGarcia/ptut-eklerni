@@ -6,10 +6,13 @@ security:
             algorithm:  sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_ENSEIGNANT
-        ROLE_SUPER_ADMIN: [ROLE_ELEVE, ROLE_ENSEIGNANT, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ELEVE:       ROLE_ELEVE
+        ROLE_ENSEIGNANT:  [ROLE_ENSEIGNANT, ROLE_ELEVE]
 
     providers:
+        chain_provider:
+            chain:
+                providers: [enseignants, eleves]
         enseignants:
             entity: { class: EklerniCASBundle:Enseignant, property: username }
         eleves:
@@ -19,11 +22,6 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        login_firewall:
-            pattern: ^/cas
-            security: false
-
         cas:
             pattern:  ^/
             form_login:
@@ -33,9 +31,10 @@ security:
             logout:
                 path:   eklerni_cas_logout
                 target: eklerni_cas_login
+            anonymous:  ~
 
     access_control:
-        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/cas, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/front, roles: ROLE_ELEVE }
         - { path: ^/back, roles: ROLE_ENSEIGNANT }
