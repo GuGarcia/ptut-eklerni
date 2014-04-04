@@ -31,10 +31,10 @@ security:
             logout:
                 path:   eklerni_cas_logout
                 target: eklerni_cas_login
-            anonymous:  ~
+            anonymous:  true
 
     access_control:
         - { path: ^/cas, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/front, roles: ROLE_ELEVE }
-        - { path: ^/back, roles: ROLE_ENSEIGNANT }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/back, roles: IS_AUTHENTICATED_ANONYMOUSLY }

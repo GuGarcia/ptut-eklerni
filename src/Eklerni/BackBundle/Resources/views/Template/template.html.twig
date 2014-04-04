@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr-Fr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    {% stylesheets '@EklerniBackBundle/Resources/public/css/*' filter="cssrewrite" %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
+
+    {% endstylesheets %}
+    {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+</head>
+<body class="skin-black pace-done fixed">
+{% include 'EklerniBackBundle:Template:header.html.twig' %}
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    {% include 'EklerniBackBundle:Template:sidebar.html.twig' %}
+    <aside class="right-side">
+        <section class="content-header"><h1>{{ title }}</h1></section>
+        <section class="content">
+            {% block body %}
+            {% endblock %}
+        </section>
+    </aside>
+</div>
+
+{% javascripts '@EklerniBackBundle/Resources/public/js/*' %}
+<script src="{{ asset_url }}" type="text/javascript"></script>
+{% endjavascripts %}
+{% javascripts '@EklerniBackBundle/Resources/public/js/AdminLTE/*' %}
+<script src="{{ asset_url }}" type="text/javascript"></script>
+{% endjavascripts %}
+{% block javascripts %}{% endblock %}
+</body>
+</html>

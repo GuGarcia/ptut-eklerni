@@ -14,7 +14,7 @@ class ClasseController extends Controller
     public function indexAction()
     {
         $classes = $this->get("eklerni.manager.classe")->findAll();
-        return $this->render('EklerniBackBundle:Classe:index.html.twig', array("classes" => $classes));
+        return $this->render('EklerniBackBundle:Classe:index.html.twig', array("classes" => $classes, "title" => "Classe"));
     }
 
     public function updateAction() {

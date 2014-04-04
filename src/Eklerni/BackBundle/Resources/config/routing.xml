@@ -5,6 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="eklerni_back_homepage" pattern="/">
-        <default key="_controller">EklerniBackBundle:Classe:index</default>
+        <default key="_controller">EklerniBackBundle:Index:index</default>
     </route>
+
+    <import resource="@EklerniBackBundle/Resources/config/routing_classe.xml" prefix="/classe" />
+    <import resource="@EklerniBackBundle/Resources/config/routing_exercice.xml" prefix="/exercices" />
+    <import resource="@EklerniBackBundle/Resources/config/routing_statistique.xml" prefix="/statistiques" />
+    <import resource="@EklerniBackBundle/Resources/config/routing_eleve.xml" prefix="/eleves" />
 </routes>
