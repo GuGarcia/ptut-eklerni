@@ -7,8 +7,7 @@
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {% stylesheets '@EklerniBackBundle/Resources/public/css/*' filter="cssrewrite" %}
-    <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
-
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
     {% endstylesheets %}
     {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
 </head>
@@ -26,10 +25,10 @@
 </div>
 
 {% javascripts '@EklerniBackBundle/Resources/public/js/*' %}
-<script src="{{ asset_url }}" type="text/javascript"></script>
+    <script src="{{ asset_url }}" type="text/javascript"></script>
 {% endjavascripts %}
 {% javascripts '@EklerniBackBundle/Resources/public/js/AdminLTE/*' %}
-<script src="{{ asset_url }}" type="text/javascript"></script>
+    <script src="{{ asset_url }}" type="text/javascript"></script>
 {% endjavascripts %}
 {% block javascripts %}{% endblock %}
 </body>

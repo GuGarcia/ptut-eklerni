@@ -28,13 +28,14 @@ security:
                 login_path: eklerni_cas_login
                 check_path: eklerni_cas_login_check
                 csrf_provider: form.csrf_provider
+                success_handler: eklerni_cas.auth.handler
             logout:
                 path:   eklerni_cas_logout
                 target: eklerni_cas_login
-            anonymous:  true
+            anonymous:  ~
 
     access_control:
         - { path: ^/cas, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/back, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/front, roles: ROLE_ELEVE }
+        - { path: ^/back, roles: ROLE_ENSEIGNANT }
