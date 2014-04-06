@@ -2,8 +2,10 @@
 
 namespace Eklerni\BackBundle\Controller;
 
+use Eklerni\CASBundle\Entity\Classe;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Eklerni\CASBundle\Manager\ClasseManager;
+use Symfony\Component\HttpFoundation\Request;
 
 class ClasseController extends Controller
 {
@@ -13,11 +15,29 @@ class ClasseController extends Controller
      */
     public function indexAction()
     {
-        $classes = $this->get("eklerni.manager.classe")->findAll();
+        $prof = $this->get('security.context')->getToken()->getUser();
+        $classes = $this->get("eklerni.manager.classe")->findByProf($prof);
         return $this->render('EklerniBackBundle:Classe:index.html.twig', array("classes" => $classes, "title" => "Classe"));
     }
 
-    public function updateAction() {
+    public function ajouterAction(Request $request)
+    {
+        $classe = new Classe();
+        $form = $this->createFormBuilder($classe);
+        $this->get("eklerni.form.type.classe")->buildForm($form, array());
+        $form = $form->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->get("eklerni.manager.classe")->save($classe);
+            return $this->redirect($this->generateUrl('eklerni_back_classe'));
+        } else {
+            return $this->render('EklerniBackBundle:Classe:ajouter.html.twig', array("form" => $form->createView(), "title" => "Cration d'une Classe"));
+        }
+    }
+
+    public function updateAction()
+    {
 
     }
 
