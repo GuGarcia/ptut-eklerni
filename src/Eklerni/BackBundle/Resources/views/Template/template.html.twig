@@ -4,9 +4,9 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-    {% stylesheets '@EklerniBackBundle/Resources/public/css/*' filter="cssrewrite" %}
+    {% block stylesheets %}{% endblock %}
+    {% stylesheets 'css/*' filter="cssrewrite" %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
     {% endstylesheets %}
     {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
@@ -24,10 +24,10 @@
     </aside>
 </div>
 
-{% javascripts '@EklerniBackBundle/Resources/public/js/*' %}
+{% javascripts 'js/*' %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
 {% endjavascripts %}
-{% javascripts '@EklerniBackBundle/Resources/public/js/AdminLTE/*' %}
+{% javascripts 'js/AdminLTE/*' %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
 {% endjavascripts %}
 {% block javascripts %}{% endblock %}
