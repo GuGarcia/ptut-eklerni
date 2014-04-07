@@ -21,6 +21,17 @@ class EleveType extends AbstractType
                 'data_class' => 'Eklerni\CASBundle\Entity\Eleve'
             )
         );
+
+        $builder->add(
+            'classe', 'entity', array(
+                'label'         => 'Classe',
+                'class'         => 'EklerniCASBundle:Classe',
+                'property'      => 'fullName',
+                'query_builder' => function (ClasseRepository $cr) {
+                        return $cr->findAll();
+                    },
+            )
+        );
     }
 
     /**

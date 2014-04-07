@@ -38,7 +38,7 @@ class ClasseRepository extends EntityRepository implements CASRepositoryInterfac
         return $this->_em->createQueryBuilder()
             ->select("c")
             ->from("EklerniCASBundle:Classe", "c")
-            ->innerJoin("c.enseignant","p")
+            ->innerJoin("c.enseignants","p")
             ->where("p.id = :id")
             ->setParameter("id", $idProf);
 

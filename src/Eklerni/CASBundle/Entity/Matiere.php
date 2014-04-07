@@ -1,6 +1,7 @@
 <?php
 
 namespace Eklerni\CASBundle\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,8 +11,19 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Eklerni\CASBundle\Repository\MatiereRepository")
  * @ORM\Table(name="t_matiere")
  */
-class Matiere extends BaseEntity {
+class Matiere extends BaseEntity
+{
 
+    /********************
+     * CONSTRUCTORS
+     ********************/
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->activites = new ArrayCollection();
+        $this->classes = new ArrayCollection();
+    }
     /********************
      * ATTRIBUTES
      ********************/

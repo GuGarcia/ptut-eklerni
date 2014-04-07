@@ -17,7 +17,18 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Eklerni\CASBundle\Repository\ClasseRepository")
  * @ORM\Table(name="t_classe")
  */
-class Classe extends BaseEntity {
+class Classe extends BaseEntity
+{
+    /********************
+     * CONSTRUCTORS
+     ********************/
+
+    public function __construct() {
+        parent::__construct();
+        $this->eleves = new ArrayCollection();
+        $this->matieres = new ArrayCollection();
+        $this->enseignants = new ArrayCollection();
+    }
 
     /********************
      * ATTRIBUTES
@@ -37,17 +48,16 @@ class Classe extends BaseEntity {
     private $niveau;
 
     /**
+     * @var integer
+     * @ORM\Column(name="annee", type="integer")
+     */
+    private $annee;
+
+    /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Eleve", mappedBy="classe")
      */
     private $eleves;
-
-    /**
-     * @var Enseignant
-     * @ORM\ManyToOne(targetEntity="Enseignant", inversedBy="classes")
-     * @ORM\JoinColumn(name="idEnseignant", referencedColumnName="id")
-     */
-    private $enseignant;
 
     /**
      * @var Ecole
@@ -114,24 +124,6 @@ class Classe extends BaseEntity {
     }
 
     /**
-     * @param mixed $enseignant
-     * @return Classe
-     */
-    public function setEnseignant($enseignant)
-    {
-        $this->enseignant = $enseignant;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEnseignant()
-    {
-        return $this->enseignant;
-    }
-
-    /**
      * @param string $niveau
      * @return Classe
      */
@@ -169,10 +161,12 @@ class Classe extends BaseEntity {
 
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection $matieres
+     * @return Classe
      */
     public function setMatieres($matieres)
     {
         $this->matieres = $matieres;
+        return $this;
     }
 
     /**
@@ -185,10 +179,12 @@ class Classe extends BaseEntity {
 
     /**
      * @param mixed $enseignants
+     * @return Classe
      */
-    public function setEnseignants($enseignants)
+    public function setEnseignants(ArrayCollection $enseignants)
     {
         $this->enseignants = $enseignants;
+        return $this;
     }
 
     /**
@@ -197,6 +193,34 @@ class Classe extends BaseEntity {
     public function getEnseignants()
     {
         return $this->enseignants;
+    }
+
+    /**
+     * @param Enseignant $e
+     * @return Classe
+     */
+    public function addEnseignant(Enseignant $e)
+    {
+        $this->enseignants->add($e);
+        return $this;
+    }
+
+    /**
+     * @param int $annee
+     * @return Classe
+     */
+    public function setAnnee($annee)
+    {
+        $this->annee = $annee;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnnee()
+    {
+        return $this->annee;
     }
 
 

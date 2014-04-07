@@ -8,6 +8,7 @@
 
 namespace Eklerni\CASBundle\Form\Type;
 
+use Eklerni\CASBundle\Repository\ClasseRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -20,6 +21,17 @@ class EnseignantType extends AbstractType
                 'data_class' => 'Eklerni\CASBundle\Entity\Enseignant'
             )
         );
+/*
+        $builder->add(
+            'classes', 'entity', array(
+                'label' => 'Classe',
+                'property' => 'fullName',
+                'class' => 'EklerniCASBundle:Classe',
+                'query_builder' => function (ClasseRepository $cr) {
+                        return $cr->findAll();
+                    },
+            )
+        );*/
     }
 
     /**

@@ -44,20 +44,10 @@ class PersonneType extends AbstractType
 
         $builder->add(
             'dateNaissance', 'date', array(
+                'label' => "Date de Naissance",
                 'input'  => 'datetime',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
-            )
-        );
-
-        $builder->add(
-            'classe', 'entity', array(
-                'label'         => 'Classe',
-                'class'         => 'EklerniCASBundle:Classe',
-                'property'      => 'fullName',
-                'query_builder' => function (ClasseRepository $cr) {
-                        return $cr->findAll();
-                },
             )
         );
 

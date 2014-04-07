@@ -10,13 +10,25 @@ namespace Eklerni\CASBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Proxies\__CG__\Eklerni\CASBundle\Entity\Serie;
 
 /**
  * Class Enseignant
  * @package Eklerni\CASBundle\Entity
  * @ORM\Entity(repositoryClass="Eklerni\CASBundle\Repository\EnseignantRepository")
  */
-class Enseignant extends Personne{
+class Enseignant extends Personne
+{
+
+    /********************
+     * CONSTRUCTORS
+     ********************/
+
+    public function __construct() {
+        parent::__construct();
+        $this->classes = new ArrayCollection();
+        $this->series = new ArrayCollection();
+    }
 
     /********************
      * ATTRIBUTES
@@ -24,7 +36,8 @@ class Enseignant extends Personne{
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Classe", mappedBy="enseignants")
+     * @ORM\ManyToMany(targetEntity="Classe", inversedBy="enseignants")
+     * @ORM\JoinTable(name="t_classeEnseignant")
      */
     private $classes;
 
@@ -40,10 +53,12 @@ class Enseignant extends Personne{
 
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection $classes
+     * @return Enseignant
      */
     public function setClasses($classes)
     {
         $this->classes = $classes;
+        return $this;
     }
 
     /**
@@ -55,11 +70,22 @@ class Enseignant extends Personne{
     }
 
     /**
+     * @param Classe $c
+     * @return Enseignant
+     */
+    public function addClasses(Classe $c) {
+        $this->classes->add($c);
+        return $this;
+    }
+
+    /**
      * @param \Doctrine\Common\Collections\ArrayCollection $series
+     * @return Enseignant
      */
     public function setSeries($series)
     {
         $this->series = $series;
+        return $this;
     }
 
     /**
@@ -68,6 +94,15 @@ class Enseignant extends Personne{
     public function getSeries()
     {
         return $this->series;
+    }
+
+    /**
+     * @param Serie $s
+     * @return Enseignant $this
+     */
+    public function addSerie(Serie $s) {
+        $this->series->add($s);
+        return $this;
     }
 
 

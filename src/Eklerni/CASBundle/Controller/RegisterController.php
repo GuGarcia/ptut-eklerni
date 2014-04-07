@@ -34,7 +34,7 @@ class RegisterController extends Controller{
                 $enseignant->setPassword($password);
             }
             //@todo correction of form type
-            $enseignant->setDateNaissance(new \DateTime());
+            //$enseignant->setDateNaissance(new \DateTime());
             $this->get('eklerni.manager.enseignant')->save($enseignant, true);
             
             return $this->redirect($this->generateUrl('eklerni_cas_login'));
