@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "braincrafted/bootstrap-bundle": "2.0.*",
         "twbs/bootstrap": "3.0.*",
-        "leafo/lessphp": "0.4.*"
+        "leafo/lessphp": "0.4.*",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*"
     },
     "scripts": {
         "post-install-cmd": [

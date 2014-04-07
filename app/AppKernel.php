@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new Eklerni\BackBundle\EklerniBackBundle(),
             new Eklerni\FrontBundle\EklerniFrontBundle(),
             new Eklerni\RESTBundle\EklerniRESTBundle(),
+            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
