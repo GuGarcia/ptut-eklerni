@@ -34,6 +34,7 @@ class SignController extends Controller
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error' => $error,
             'csrf_token' => $csrfToken,
+            'title' => "Login"
         ));
     }
 

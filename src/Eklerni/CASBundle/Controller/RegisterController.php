@@ -40,8 +40,9 @@ class RegisterController extends Controller{
             return $this->redirect($this->generateUrl('eklerni_cas_login'));
         }
 
-        return $this->render('EklerniCASBundle:Default:index.html.twig', array(
-                'form' => $form->createView()
+        return $this->render('EklerniCASBundle:Register:register.html.twig', array(
+                'form' => $form->createView(),
+                'title' => "Registration"
             )
         );
     }
