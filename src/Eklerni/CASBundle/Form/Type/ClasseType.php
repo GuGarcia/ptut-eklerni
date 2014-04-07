@@ -48,11 +48,7 @@ class ClasseType extends AbstractType
         );
 
         $builder->add(
-            'valider', 'submit', array(
-                'attr' => array(
-                    'class' => 'btn btn-default'
-                )
-            )
+            'valider', 'submit'
         );
     }
 
