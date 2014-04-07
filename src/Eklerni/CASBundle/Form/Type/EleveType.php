@@ -17,48 +17,8 @@ class EleveType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(
-            'username', 'text', array(
-                'label' => 'Nom d\'utilisateur'
-            )
-        );
-
-        $builder->add(
-            'password', 'password', array(
-                'label' => 'Mot de passe'
-            )
-        );
-
-        $builder->add(
-            'nom', 'text', array(
-                'label' => 'Nom'
-            )
-        );
-
-        $builder->add(
-            'prenom', 'text', array(
-                'label' => 'Prénom'
-            )
-        );
-
-        $builder->add(
-            'dateNaissance', 'text', array(
-                'label' => 'Date de Naissance'
-            )
-        );
-
-        $builder->add('classe', 'entity', array(
-                'label' => 'Classe',
-                'class' => 'EklerniCASBundle:Classe',
-                'property' => 'fullName'
-            )
-        );
-
-        $builder->add(
-            'valider', 'submit', array(
-                'attr' => array(
-                    'class' => 'btn btn-default'
-                )
+        $builder->add('eleve', new PersonneType(), array(
+                'data_class' => 'Eklerni\CASBundle\Entity\Eleve'
             )
         );
     }

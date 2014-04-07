@@ -8,11 +8,13 @@
 
 namespace Eklerni\CASBundle\Manager;
 
+use Doctrine\ORM\EntityManager;
 
-class EleveManager {
-
-    public function __construct(EntityManager $em) {
-        $this->em - $em;
+class EleveManager extends BaseManager
+{
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
         $this->repository = $em->getRepository("EklerniCASBundle:Eleve");
     }
-} 
+}
