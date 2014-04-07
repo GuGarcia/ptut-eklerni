@@ -40,7 +40,7 @@ class Attribuer extends BaseEntity
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Resultat", mappedBy="eleve")
+     * @ORM\OneToMany(targetEntity="Resultat", mappedBy="attribution")
      */
     private $resultats;
 

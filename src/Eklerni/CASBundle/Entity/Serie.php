@@ -62,6 +62,12 @@ class Serie extends BaseEntity
      */
     private $public;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Attribuer", mappedBy="serie")
+     */
+    private $listeAttribution;
+
     /********************
      * GETTERS AND SETTERS
      ********************/

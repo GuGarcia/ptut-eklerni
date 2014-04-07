@@ -35,6 +35,12 @@ class Eleve extends Personne {
      */
     private $resultats;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Attribuer", mappedBy="eleve")
+     */
+    private $listeAttribution;
+
     /********************
      * GETTERS AND SETTERS
      ********************/

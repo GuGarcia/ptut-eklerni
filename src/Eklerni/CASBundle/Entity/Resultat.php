@@ -43,6 +43,13 @@ class Resultat extends BaseEntity {
      */
     private $serie;
 
+    /**
+     * @var Attribution
+     * @ORM\ManyToOne(targetEntity="Attribuer", inversedBy="resultats")
+     * @ORM\JoinColumn(name="idAttribution", referencedColumnName="id")
+     */
+    private $attribution;
+
     /********************
      * GETTERS AND SETTERS
      ********************/
