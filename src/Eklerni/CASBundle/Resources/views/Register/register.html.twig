@@ -7,7 +7,42 @@
 
     <form action="{{ path('eklerni_cas_register') }}" method="post">
         <div class="body bg-gray">
-            {{ form(form) }}
+            <div class="form-group">
+                {{ form_label(form.enseignant.username) }}
+                {{ form_errors(form.enseignant.username) }}
+                <div class="input-group">
+                    {{ form_widget(form.enseignant.username) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.enseignant.password) }}
+                {{ form_errors(form.enseignant.password) }}
+                <div class="input-group">
+                    {{ form_widget(form.enseignant.password) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.enseignant.nom) }}
+                {{ form_errors(form.enseignant.nom) }}
+                <div class="input-group">
+                    {{ form_widget(form.enseignant.nom) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.enseignant.prenom) }}
+                {{ form_errors(form.enseignant.prenom) }}
+                <div class="input-group">
+                    {{ form_widget(form.enseignant.prenom) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.enseignant.dateNaissance) }}
+                {{ form_errors(form.enseignant.dateNaissance) }}
+                <div class="input-group">
+                    {{ form_widget(form.enseignant.dateNaissance) }}
+                </div>
+            </div>
+            {{ form_rest(form) }}
         </div>
         <div class="footer">
             <button type="submit" class="btn bg-olive btn-block">Register</button>

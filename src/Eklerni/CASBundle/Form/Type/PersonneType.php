@@ -21,7 +21,8 @@ class PersonneType extends AbstractType
             'username', 'text', array(
                 'label' => 'personne.username',
                 'attr' => array(
-                    'placeholder' => 'personne.username'
+                    'placeholder' => 'personne.username',
+                    'class' => 'form-control'
                 )
             )
         );
@@ -30,7 +31,8 @@ class PersonneType extends AbstractType
             'password', 'password', array(
                 'label' => 'personne.password',
                 'attr' => array(
-                    'placeholder' => "personne.password"
+                    'placeholder' => "personne.password",
+                    'class' => 'form-control'
                 )
             )
         );
@@ -39,7 +41,8 @@ class PersonneType extends AbstractType
             'nom', 'text', array(
                 'label' => 'personne.lastname',
                 'attr' => array(
-                    'placeholder' => "personne.lastname"
+                    'placeholder' => "personne.lastname",
+                    'class' => 'form-control'
                 )
             )
         );
@@ -48,7 +51,8 @@ class PersonneType extends AbstractType
             'prenom', 'text', array(
                 'label' => 'personne.firstname',
                 'attr' => array(
-                    'placeholder' => "personne.firstname"
+                    'placeholder' => "personne.firstname",
+                    'class' => 'form-control'
                 )
             )
         );
@@ -60,7 +64,7 @@ class PersonneType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
                 'attr' => array(
-                    'placeholder' => "personne.birthdate"
+                    'class' => 'form-control masked_date'
                 )
             )
         );
