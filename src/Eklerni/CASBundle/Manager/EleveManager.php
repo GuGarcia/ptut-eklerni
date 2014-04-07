@@ -8,6 +8,7 @@
 
 namespace Eklerni\CASBundle\Manager;
 
+use Doctrine\ORM\EntityManager;
 
 class EleveManager extends BaseManager
 {
@@ -16,4 +17,4 @@ class EleveManager extends BaseManager
         $this->em = $em;
         $this->repository = $em->getRepository("EklerniCASBundle:Eleve");
     }
-} 
+}

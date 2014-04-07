@@ -41,7 +41,8 @@ class RegisterController extends Controller{
         }
 
         return $this->render('EklerniCASBundle:Register:register.html.twig', array(
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'title' => "Registration"
             )
         );
     }

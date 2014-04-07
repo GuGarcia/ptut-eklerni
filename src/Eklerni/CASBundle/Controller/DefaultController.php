@@ -2,14 +2,16 @@
 
 namespace Eklerni\CASBundle\Controller;
 
+use Eklerni\CASBundle\Entity\Eleve;
 use Eklerni\CASBundle\Form\Type\ClasseType;
 use Eklerni\CASBundle\Form\Type\EcoleType;
 use Eklerni\CASBundle\Form\Type\EnseignantType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $eleve = new Eleve();
         $form = $this->createForm('eklerni_eleve', $eleve);
@@ -30,6 +32,7 @@ class DefaultController extends Controller
 
             $this->get('eklerni.manager.eleve')->save($eleve, true);
         }
+
         return $this->render('EklerniCASBundle:Default:index.html.twig', array(
                 'form' => $form->createView()
             )

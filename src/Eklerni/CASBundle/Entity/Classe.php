@@ -74,7 +74,7 @@ class Classe extends BaseEntity {
 
     public function getFullName()
     {
-        return $this->$nom . ' (' . $this->$niveau . ')';
+        return $this->nom . ' (' . $this->niveau . ')';
     }
 
     /**
