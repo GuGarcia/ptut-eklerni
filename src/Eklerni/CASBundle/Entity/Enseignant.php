@@ -24,7 +24,7 @@ class Enseignant extends Personne{
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Classe", mappedBy="enseignant")
+     * @ORM\ManyToMany(targetEntity="Classe", mappedBy="enseignants")
      */
     private $classes;
 
@@ -40,12 +40,10 @@ class Enseignant extends Personne{
 
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection $classes
-     * @return Enseignant
      */
     public function setClasses($classes)
     {
         $this->classes = $classes;
-        return $this;
     }
 
     /**

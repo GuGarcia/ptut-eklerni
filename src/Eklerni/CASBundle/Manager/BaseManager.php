@@ -51,12 +51,12 @@ abstract class BaseManager implements CASManagerInterface
     }
 
     /**
-     * @param BaseEntity $entity
+     * @param integer $id
      * @return mixed
      */
-    public function findById(BaseEntity $entity)
+    public function findById($id)
     {
-        return $this->repository->findById($entity->getId())->getQuery()->getResult();
+        return $this->repository->findById($id)->getQuery()->getResult();
     }
 
     /**

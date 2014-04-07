@@ -16,41 +16,8 @@ class EnseignantType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(
-            'username', 'text', array(
-                'label' => 'Nom d\'utilisateur'
-            )
-        );
-
-        $builder->add(
-            'password', 'password', array(
-                'label' => 'Mot de passe'
-            )
-        );
-
-        $builder->add(
-            'nom', 'text', array(
-                'label' => 'Nom'
-            )
-        );
-
-        $builder->add(
-            'prenom', 'text', array(
-                'label' => 'Prénom'
-            )
-        );
-
-        $builder->add(
-            'dateNaissance', 'text', array(
-                'label' => 'Date de Naissance'
-            )
-        );
-
-        $builder->add(
-            'valider', 'submit', array(
-                'attr' => array(
-                    'class' => 'btn btn-default'
-                )
+        $builder->add('enseignant', new PersonneType(), array(
+                'data_class' => 'Eklerni\CASBundle\Entity\Enseignant'
             )
         );
     }
