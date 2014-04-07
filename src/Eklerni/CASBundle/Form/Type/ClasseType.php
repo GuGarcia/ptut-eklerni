@@ -8,14 +8,17 @@
 
 namespace Eklerni\CASBundle\Form\Type;
 
-
+use Doctrine\ORM\EntityRepository;
+use Eklerni\CASBundle\Repository\EcoleRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ClasseType extends AbstractType {
+class ClasseType extends AbstractType
+{
 
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->add(
             'nom', 'text', array(
                 'label' => 'Nom'
@@ -26,11 +29,11 @@ class ClasseType extends AbstractType {
             'niveau', 'choice', array(
                 'label' => 'Niveau',
                 'choices' => array(
-                    '1' => 'CP',
-                    '2' => 'CE1',
-                    '3' => 'CE2',
-                    '4' => 'CM1',
-                    '5' => 'CM2'
+                    'CP' => 'CP',
+                    'CE1' => 'CE1',
+                    'CE2' => 'CE2',
+                    'CM1' => 'CM1',
+                    'CM2' => 'CM2'
                 )
             )
         );
@@ -38,7 +41,9 @@ class ClasseType extends AbstractType {
         $builder->add('ecole', 'entity', array(
                 'label' => 'Ecole',
                 'class' => 'EklerniCASBundle:Ecole',
-                'property' => 'fullName'
+                'query_builder' => function (EcoleRepository $er) {
+                        return $er->findAll();
+                    },
             )
         );
 
@@ -54,11 +59,13 @@ class ClasseType extends AbstractType {
     /**
      * @inheritdoc
      */
-    public function getName() {
+    public function getName()
+    {
         return 'eklerni_classe';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults(array(
             'data_class' => 'Eklerni\CASBundle\Entity\Classe',
         ));

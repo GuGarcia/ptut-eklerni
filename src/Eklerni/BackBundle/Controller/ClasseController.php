@@ -29,6 +29,7 @@ class ClasseController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $classe->setEnseignant($this->get("security.context")->getToken()->getUser());
             $this->get("eklerni.manager.classe")->save($classe);
             return $this->redirect($this->generateUrl('eklerni_back_classe'));
         } else {

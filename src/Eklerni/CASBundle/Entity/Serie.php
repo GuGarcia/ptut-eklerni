@@ -1,6 +1,7 @@
 <?php
 
 namespace Eklerni\CASBundle\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Eklerni\CASBundle\Repository\SerieRepository")
  * @ORM\Table(name="t_serie")
  */
-
-class Serie extends BaseEntity {
+class Serie extends BaseEntity
+{
 
     /********************
      * ATTRIBUTES
@@ -54,6 +55,12 @@ class Serie extends BaseEntity {
      * @ORM\OneToMany(targetEntity="Resultat", mappedBy="serie")
      */
     private $resultats;
+
+    /**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    private $public;
 
     /********************
      * GETTERS AND SETTERS
@@ -107,7 +114,7 @@ class Serie extends BaseEntity {
     }
 
     /**
- * @return Activite
+     * @return Activite
      */
     public function getActivite()
     {
@@ -131,22 +138,6 @@ class Serie extends BaseEntity {
     }
 
     /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * @param \Doctrine\Common\Collections\ArrayCollection $questions
      */
     public function setQuestions($questions)
@@ -160,6 +151,38 @@ class Serie extends BaseEntity {
     public function getQuestions()
     {
         return $this->questions;
+    }
+
+    /**
+     * @param string $nom
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param boolean $public
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getPublic()
+    {
+        return $this->public;
     }
 
 

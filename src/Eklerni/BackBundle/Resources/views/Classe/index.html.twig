@@ -4,27 +4,26 @@
     {% if classes|length > 0 %}
         <div class="box-body table-responsive">
             <div id="example2_wrapper" class="dataTables_wrapper form-inline" role="grid">
-                <div class="row">
-                    <div class="col-xs-6"></div>
-                    <div class="col-xs-6"></div>
-                </div>
                 <table id="example2" class="table table-bordered table-hover dataTable" aria-describedby="example2_info">
                     <thead>
                     <tr>
-                        <th rowspan="1" colspan="1">Nom</th>
+                        <th rowspan="1" colspan="1">id</th>
+                        <th rowspan="1" colspan="1">Ecole</th>
                         <th rowspan="1" colspan="1">Niveau</th>
+                        <th rowspan="1" colspan="1">Nom</th>
                         <th rowspan="1" colspan="1">Nombre d'Élèves</th>
                     </tr>
                     </thead>
-
                     <tfoot>
                     </tfoot>
                     <tbody role="alert" aria-live="polite" aria-relevant="all">
                     {% for classe in classes %}
                         <tr class="odd">
+                            <td class=" ">{{ classe.id }}</td>
+                            <td class=" ">{{ classe.ecole }}</td>
+                            <td class=" ">{{ classe.niveau }}</td>
                             <td class=" sorting_1">{{ classe.nom }}</td>
-                            <td class=" ">{{ class.niveau }}</td>
-                            <td class=" ">{{ class.eleves|length }}</td>
+                            <td class=" ">{{ classe.eleves|length }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

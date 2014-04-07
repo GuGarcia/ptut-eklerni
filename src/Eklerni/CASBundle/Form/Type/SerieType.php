@@ -35,6 +35,10 @@ class SerieType extends AbstractType {
         );
 
         $builder->add(
+            "public","chackbox"
+        );
+
+        $builder->add(
             'valider', 'submit', array(
                 'attr' => array(
                     'class' => 'btn btn-default'

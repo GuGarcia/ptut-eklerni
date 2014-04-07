@@ -17,7 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Eklerni\CASBundle\Repository\EcoleRepository")
  * @ORM\Table(name="t_ecole")
  */
-class Ecole extends BaseEntity{
+class Ecole extends BaseEntity
+{
 
     /********************
      * ATTRIBUTES
@@ -128,6 +129,9 @@ class Ecole extends BaseEntity{
         return $this->ville;
     }
 
-
+    public function __toString()
+    {
+        return $this->getNom();
+    }
 
 } 
