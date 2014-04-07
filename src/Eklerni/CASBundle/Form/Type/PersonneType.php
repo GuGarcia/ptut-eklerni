@@ -8,7 +8,6 @@
 
 namespace Eklerni\CASBundle\Form\Type;
 
-use Eklerni\CASBundle\Repository\ClasseRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -20,42 +19,55 @@ class PersonneType extends AbstractType
     {
         $builder->add(
             'username', 'text', array(
-                'label' => 'Nom d\'utilisateur'
+                'label' => 'personne.username',
+                'attr' => array(
+                    'placeholder' => 'personne.username'
+                )
             )
         );
 
         $builder->add(
             'password', 'password', array(
-                'label' => 'Mot de passe'
+                'label' => 'personne.password',
+                'attr' => array(
+                    'placeholder' => "personne.password"
+                )
             )
         );
 
         $builder->add(
             'nom', 'text', array(
-                'label' => 'Nom'
+                'label' => 'personne.lastname',
+                'attr' => array(
+                    'placeholder' => "personne.lastname"
+                )
             )
         );
 
         $builder->add(
             'prenom', 'text', array(
-                'label' => 'Prénom'
+                'label' => 'personne.firstname',
+                'attr' => array(
+                    'placeholder' => "personne.firstname"
+                )
             )
         );
 
         $builder->add(
             'dateNaissance', 'date', array(
-                'label' => "Date de Naissance",
+                'label' => "personne.birthdate",
                 'input'  => 'datetime',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
+                'attr' => array(
+                    'placeholder' => "personne.birthdate"
+                )
             )
         );
 
         $builder->add(
             'valider', 'submit', array(
-                'attr' => array(
-                    'class' => 'btn btn-default'
-                )
+                'label' => "button.validation"
             )
         );
     }

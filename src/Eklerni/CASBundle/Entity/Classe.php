@@ -43,7 +43,7 @@ class Classe extends BaseEntity
     /**
      * Type: CP,CE1,CE2,CM1,CM2
      * @var string
-     * @ORM\Column(name="niveau", type="string", length=3)
+     * @ORM\Column(name="niveau", type="string", length=20)
      */
     private $niveau;
 

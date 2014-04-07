@@ -4,83 +4,83 @@
         <body>
             <trans-unit id="1">
                 <source>personne.username</source>
-                <target>Nom d'utilisateur</target>
+                <target>Username</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>personne.password</source>
-                <target>Mot de passe</target>
+                <target>Password</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>personne.lastname</source>
-                <target>Nom</target>
+                <target>Last name</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>personne.firstname</source>
-                <target>Prénom</target>
+                <target>First name</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>personne.birthdate</source>
-                <target>Date de naissance</target>
+                <target>Birthdate</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>button.validation</source>
-                <target>Valider</target>
+                <target>Submit</target>
             </trans-unit>
             <trans-unit id="7">
                 <source>serie.name</source>
-                <target>Nom</target>
+                <target>Name</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>serie.difficulty</source>
-                <target>Difficultée</target>
+                <target>Difficulty</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>serie.public</source>
-                <target>Publique</target>
+                <target>Public</target>
             </trans-unit>
             <trans-unit id="10">
                 <source>ecole.name</source>
-                <target>Nom</target>
+                <target>Name</target>
             </trans-unit>
             <trans-unit id="11">
                 <source>classe.name</source>
-                <target>Nom</target>
+                <target>Name</target>
             </trans-unit>
             <trans-unit id="12">
                 <source>ecole.postcode</source>
-                <target>Code postal</target>
+                <target>Post code</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>ecole.city</source>
-                <target>Ville</target>
+                <target>City</target>
             </trans-unit>
             <trans-unit id="14">
                 <source>classe.grade</source>
-                <target>Niveau</target>
+                <target>Grade</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>classe.school</source>
-                <target>Ecole</target>
+                <target>School</target>
             </trans-unit>
             <trans-unit id="16">
                 <source>grade.year1</source>
-                <target>CP</target>
+                <target>Year 1</target>
             </trans-unit>
             <trans-unit id="17">
                 <source>grade.year2</source>
-                <target>CE1</target>
+                <target>Year 2</target>
             </trans-unit>
             <trans-unit id="18">
                 <source>grade.year3</source>
-                <target>CE2</target>
+                <target>Year 3</target>
             </trans-unit>
             <trans-unit id="19">
                 <source>grade.year4</source>
-                <target>CM1</target>
+                <target>Year 4</target>
             </trans-unit>
             <trans-unit id="20">
                 <source>grade.year5</source>
-                <target>CM2</target>
+                <target>Year 5</target>
             </trans-unit>
         </body>
     </file>
