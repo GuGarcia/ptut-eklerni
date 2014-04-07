@@ -8,6 +8,7 @@
 
 namespace Eklerni\CASBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -44,9 +45,16 @@ class Resultat extends BaseEntity {
     private $serie;
 
     /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="Reponse", mappedBy="resultats")
+     */
+    private $reponses;
+
+    /**
      * @var Attribution
      * @ORM\ManyToOne(targetEntity="Attribuer", inversedBy="resultats")
-     * @ORM\JoinColumn(name="idAttribution", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idSerie", referencedColumnName="idSerie")
+     * @ORM\JoinColumn(name="idEleve", referencedColumnName="idEleve")
      */
     private $attribution;
 
@@ -100,6 +108,38 @@ class Resultat extends BaseEntity {
     public function getSerie()
     {
         return $this->serie;
+    }
+
+    /**
+     * @param \Eklerni\CASBundle\Entity\Attribution $attribution
+     */
+    public function setAttribution($attribution)
+    {
+        $this->attribution = $attribution;
+    }
+
+    /**
+     * @return \Eklerni\CASBundle\Entity\Attribution
+     */
+    public function getAttribution()
+    {
+        return $this->attribution;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $reponses
+     */
+    public function setReponses($reponses)
+    {
+        $this->reponses = $reponses;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getReponses()
+    {
+        return $this->reponses;
     }
 
 

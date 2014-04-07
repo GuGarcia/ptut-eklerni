@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Serie extends BaseEntity
 {
+    /********************
+     * CONSTRUCTORS
+     ********************/
+
+    public function __construct() {
+        $this->questions = new ArrayCollection();
+        $this->listeAttribution = new ArrayCollection();
+        $this->resultats = new ArrayCollection();
+    }
 
     /********************
      * ATTRIBUTES
@@ -189,6 +198,22 @@ class Serie extends BaseEntity
     public function getPublic()
     {
         return $this->public;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $listeAttribution
+     */
+    public function setListeAttribution($listeAttribution)
+    {
+        $this->listeAttribution = $listeAttribution;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getListeAttribution()
+    {
+        return $this->listeAttribution;
     }
 
 

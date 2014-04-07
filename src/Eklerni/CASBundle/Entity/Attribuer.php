@@ -9,6 +9,8 @@
 namespace Eklerni\CASBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Class Attribuer
@@ -16,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="t_attribuer")
  */
-class Attribuer extends BaseEntity
+class Attribuer
 {
     /********************
      * ATTRIBUTES
@@ -24,7 +26,7 @@ class Attribuer extends BaseEntity
 
     /**
      * @var Eleve
-     * @Id @Column(type="integer")
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Eleve", inversedBy="listeAttribution")
      * @ORM\JoinColumn(name="idEleve", referencedColumnName="id")
      */
@@ -32,7 +34,7 @@ class Attribuer extends BaseEntity
 
     /**
      * @var Serie
-     * @Id @Column(type="integer")
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Serie", inversedBy="listeAttribution")
      * @ORM\JoinColumn(name="idSerie", referencedColumnName="id")
      */

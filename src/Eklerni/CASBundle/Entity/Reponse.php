@@ -58,6 +58,13 @@ class Reponse extends BaseEntity {
      */
     private $question;
 
+    /**
+     * @var ArrayCollecion
+     * @ORM\ManyToMany(targetEntity="Resultat", inversedBy="reponses")
+     * @ORM\JoinTable(name="t_resultatReponse")
+     */
+    private $resultats;
+
     /********************
      * GETTERS AND SETTERS
      ********************/
@@ -157,5 +164,23 @@ class Reponse extends BaseEntity {
     {
         return $this->question;
     }
+
+    /**
+     * @param \Eklerni\CASBundle\Entity\ArrayCollecion $resultats
+     */
+    public function setResultats($resultats)
+    {
+        $this->resultats = $resultats;
+    }
+
+    /**
+     * @return \Eklerni\CASBundle\Entity\ArrayCollecion
+     */
+    public function getResultats()
+    {
+        return $this->resultats;
+    }
+
+
 
 }

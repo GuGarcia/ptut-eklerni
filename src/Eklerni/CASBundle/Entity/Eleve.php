@@ -89,4 +89,23 @@ class Eleve extends Personne {
     {
         return array('ROLE_ELEVE');
     }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $listeAttribution
+     * @return Eleve
+     */
+    public function setListeAttribution($listeAttribution)
+    {
+        $this->listeAttribution = $listeAttribution;
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getListeAttribution()
+    {
+        return $this->listeAttribution;
+    }
+
 }
