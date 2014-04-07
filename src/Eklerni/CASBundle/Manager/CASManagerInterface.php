@@ -16,7 +16,7 @@ interface CASManagerInterface {
      * @param BaseEntity $entity
      * @return mixed
      */
-    public function findById(BaseEntity $entity);
+    public function findById($id);
 
     /**
      * @param Enseignant $enseignant

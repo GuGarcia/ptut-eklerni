@@ -62,6 +62,12 @@ class Classe extends BaseEntity {
      */
     private $matieres;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="Enseignant", mappedBy="classes")
+     */
+    private $enseignants;
+
     /********************
      * GETTERS AND SETTERS
      ********************/
@@ -175,6 +181,22 @@ class Classe extends BaseEntity {
     public function getMatieres()
     {
         return $this->matieres;
+    }
+
+    /**
+     * @param mixed $enseignants
+     */
+    public function setEnseignants($enseignants)
+    {
+        $this->enseignants = $enseignants;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnseignants()
+    {
+        return $this->enseignants;
     }
 
 
