@@ -25,9 +25,9 @@ class Resultat extends BaseEntity {
     /**
      * Apprentissage ou Exercice
      * @var Boolean
-     * @ORM\Column(name="mode", type="boolean")
+     * @ORM\Column(name="isTest", type="boolean")
      */
-    private $mode;
+    private $isTest;
 
     /**
      * @var Eleve
@@ -64,19 +64,19 @@ class Resultat extends BaseEntity {
     }
 
     /**
-     * @param boolean $mode
+     * @param boolean $isTest
      */
-    public function setMode($mode)
+    public function setIsTest($isTest)
     {
-        $this->mode = $mode;
+        $this->isTest = $isTest;
     }
 
     /**
      * @return boolean
      */
-    public function getMode()
+    public function getIsTest()
     {
-        return $this->mode;
+        return $this->isTest;
     }
 
     /**
