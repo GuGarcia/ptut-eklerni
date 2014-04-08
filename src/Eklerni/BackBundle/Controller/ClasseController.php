@@ -26,13 +26,15 @@ class ClasseController extends Controller
     public function ajouterAction(Request $request)
     {
         $classe = new Classe();
+        $enseignant = $this->get("security.context")->getToken()->getUser();
         $form = $this->createFormBuilder($classe);
         $this->get("eklerni.form.type.classe")->buildForm($form, array());
         $form = $form->getForm();
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $classe->setEnseignant($this->get("security.context")->getToken()->getUser());
+            $classe->addEnseignant($enseignant);
+            $enseignant->addClasses($classe);
             $this->get("eklerni.manager.classe")->save($classe);
             return $this->redirect($this->generateUrl('eklerni_back_classe'));
         } else {

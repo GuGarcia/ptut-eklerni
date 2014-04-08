@@ -10,7 +10,6 @@ namespace Eklerni\CASBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Proxies\__CG__\Eklerni\CASBundle\Entity\Serie;
 
 /**
  * Class Enseignant

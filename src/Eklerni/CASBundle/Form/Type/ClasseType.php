@@ -36,6 +36,11 @@ class ClasseType extends AbstractType
                 )
             )
         );
+        $builder->add(
+            'annee', 'integer', array(
+                'label' => 'classe.grade'
+            )
+        );
 
         $builder->add('ecole', 'entity', array(
                 'label' => 'classe.school',

@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new Eklerni\BackBundle\EklerniBackBundle(),
             new Eklerni\FrontBundle\EklerniFrontBundle(),
             new Eklerni\RESTBundle\EklerniRESTBundle(),
-            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
 
