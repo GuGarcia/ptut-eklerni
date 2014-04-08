@@ -36,8 +36,9 @@ class SerieType extends AbstractType {
         );
 
         $builder->add(
-            "public", "chackbox", array(
-                'label' => "serie.public"
+            "public", "checkbox", array(
+                'label'     => "serie.public",
+                'required'  => false,
             )
         );
 

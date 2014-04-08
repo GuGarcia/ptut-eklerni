@@ -32,7 +32,7 @@
             </trans-unit>
             <trans-unit id="8">
                 <source>serie.difficulty</source>
-                <target>Difficultée</target>
+                <target>Difficulté</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>serie.public</source>
