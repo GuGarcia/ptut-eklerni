@@ -1,95 +1,153 @@
-<?xml version="1.0"?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" datatype="plaintext" original="file.ext">
-        <body>
-            <trans-unit id="1">
-                <source>personne.username</source>
-                <target>Nom d'utilisateur</target>
-            </trans-unit>
-            <trans-unit id="2">
-                <source>personne.password</source>
-                <target>Mot de passe</target>
-            </trans-unit>
-            <trans-unit id="21">
-                <source>personne.password.retype</source>
-                <target>Confirmation mot de passe</target>
-            </trans-unit>
-            <trans-unit id="22">
-                <source>personne.password.notequal</source>
-                <target>Les mots de passe doivent être identiques.</target>
-            </trans-unit>
-            <trans-unit id="3">
-                <source>personne.lastname</source>
-                <target>Nom</target>
-            </trans-unit>
-            <trans-unit id="4">
-                <source>personne.firstname</source>
-                <target>Prénom</target>
-            </trans-unit>
-            <trans-unit id="5">
-                <source>personne.birthdate</source>
-                <target>Date de naissance</target>
-            </trans-unit>
-            <trans-unit id="6">
-                <source>button.validation</source>
-                <target>Valider</target>
-            </trans-unit>
-            <trans-unit id="7">
-                <source>serie.name</source>
-                <target>Nom</target>
-            </trans-unit>
-            <trans-unit id="8">
-                <source>serie.difficulty</source>
-                <target>Difficulté</target>
-            </trans-unit>
-            <trans-unit id="9">
-                <source>serie.public</source>
-                <target>Publique</target>
-            </trans-unit>
-            <trans-unit id="10">
-                <source>ecole.name</source>
-                <target>Nom</target>
-            </trans-unit>
-            <trans-unit id="11">
-                <source>classe.name</source>
-                <target>Nom</target>
-            </trans-unit>
-            <trans-unit id="12">
-                <source>ecole.postcode</source>
-                <target>Code postal</target>
-            </trans-unit>
-            <trans-unit id="13">
-                <source>ecole.city</source>
-                <target>Ville</target>
-            </trans-unit>
-            <trans-unit id="14">
-                <source>classe.grade</source>
-                <target>Niveau</target>
-            </trans-unit>
-            <trans-unit id="15">
-                <source>classe.school</source>
-                <target>Ecole</target>
-            </trans-unit>
-            <trans-unit id="16">
-                <source>grade.year1</source>
-                <target>CP</target>
-            </trans-unit>
-            <trans-unit id="17">
-                <source>grade.year2</source>
-                <target>CE1</target>
-            </trans-unit>
-            <trans-unit id="18">
-                <source>grade.year3</source>
-                <target>CE2</target>
-            </trans-unit>
-            <trans-unit id="19">
-                <source>grade.year4</source>
-                <target>CM1</target>
-            </trans-unit>
-            <trans-unit id="20">
-                <source>grade.year5</source>
-                <target>CM2</target>
-            </trans-unit>
-        </body>
-    </file>
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2014-04-08T21:04:19Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="1f910d98d7d2712ea2aac95d06a509c8edaa2ebd" resname="Année">
+        <source>Année</source>
+        <target state="new">Année</target>
+        <jms:reference-file line="35">Form/Type/ClasseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3c38412a945a02353319af9c2a9e61bdbb30060b" resname="Classe">
+        <source>Classe</source>
+        <target state="new">Classe</target>
+        <jms:reference-file line="21">Form/Type/EleveType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="378257878fd787260ca08472c3a6aee60b5f7f3e" resname="Niveau 1">
+        <source>Niveau 1</source>
+        <target state="new">Niveau 1</target>
+        <jms:reference-file line="29">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1713e64f12f083c468b657e206d3585d6fc19327" resname="Niveau 2">
+        <source>Niveau 2</source>
+        <target state="new">Niveau 2</target>
+        <jms:reference-file line="30">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="66084ee84c9f2efc9b5764600cba528327960d26" resname="Niveau 3">
+        <source>Niveau 3</source>
+        <target state="new">Niveau 3</target>
+        <jms:reference-file line="31">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="32bfec47d1f40554e41b5efb4071dd9ce6e53543" resname="Niveau 4">
+        <source>Niveau 4</source>
+        <target state="new">Niveau 4</target>
+        <jms:reference-file line="32">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="60d7db84394a77f1334ccd273ac0382b24eba4bc" resname="Niveau 5">
+        <source>Niveau 5</source>
+        <target state="new">Niveau 5</target>
+        <jms:reference-file line="33">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="774d1c4c5225846103f8d4dfe40639f2e79fa91c" resname="button.validation">
+        <source>button.validation</source>
+        <target>Valider</target>
+        <jms:reference-file line="51">Form/Type/ClasseType.php</jms:reference-file>
+        <jms:reference-file line="39">Form/Type/EcoleType.php</jms:reference-file>
+        <jms:reference-file line="68">Form/Type/PersonneType.php</jms:reference-file>
+        <jms:reference-file line="46">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="82427a355e0dbd8be969ba05569a6c0eab2b9d02" resname="classe.grade">
+        <source>classe.grade</source>
+        <target>Niveau</target>
+        <jms:reference-file line="23">Form/Type/ClasseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c72eab01165e5f9f7c867ef919ec97802aa7cfbf" resname="classe.name">
+        <source>classe.name</source>
+        <target>Nom</target>
+        <jms:reference-file line="17">Form/Type/ClasseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="02df9b5656f7da33430ff320f307bc40db8d07b6" resname="classe.school">
+        <source>classe.school</source>
+        <target>Ecole</target>
+        <jms:reference-file line="41">Form/Type/ClasseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="54fc87a1ba80ffbf0442bca619ddd3b2c1ec7752" resname="ecole.city">
+        <source>ecole.city</source>
+        <target>Ville</target>
+        <jms:reference-file line="33">Form/Type/EcoleType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="82f59f133355e967eb96258009c2fb58f516c01c" resname="ecole.name">
+        <source>ecole.name</source>
+        <target>Nom</target>
+        <jms:reference-file line="21">Form/Type/EcoleType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c930a0b26ec13e14921627ec13c057cf2c85c64a" resname="ecole.postcode">
+        <source>ecole.postcode</source>
+        <target>Code postal</target>
+        <jms:reference-file line="27">Form/Type/EcoleType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7f76859e0156ac54a8692f6cf14946aed30a28bd" resname="grade.year1">
+        <source>grade.year1</source>
+        <target>CP</target>
+        <jms:reference-file line="25">Form/Type/ClasseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d50b21b26cc8e50e51b68a0e833590679d728c04" resname="grade.year2">
+        <source>grade.year2</source>
+        <target>CE1</target>
+        <jms:reference-file line="26">Form/Type/ClasseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a80ef49dbab6c68907681cdf033d7f99d76580b6" resname="grade.year3">
+        <source>grade.year3</source>
+        <target>CE2</target>
+        <jms:reference-file line="27">Form/Type/ClasseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9b3c17d894ca813a2e9de856c5a8b4ba7be8083a" resname="grade.year4">
+        <source>grade.year4</source>
+        <target>CM1</target>
+        <jms:reference-file line="28">Form/Type/ClasseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2d5851f7e3e290db938bbff5efdd653d1610d022" resname="grade.year5">
+        <source>grade.year5</source>
+        <target>CM2</target>
+        <jms:reference-file line="29">Form/Type/ClasseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="449ccad1fdacdac68c92290a48cd3c8705165b91" resname="personne.birthdate">
+        <source>personne.birthdate</source>
+        <target>Date de naissance</target>
+        <jms:reference-file line="56">Form/Type/PersonneType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0488b609ae44f7d0d4e1bc4b2ff0661dd637c9bb" resname="personne.firstname">
+        <source>personne.firstname</source>
+        <target>Prénom</target>
+        <jms:reference-file line="46">Form/Type/PersonneType.php</jms:reference-file>
+        <jms:reference-file line="48">Form/Type/PersonneType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4a104c4ba318e9811d346898f27eb55278b865c2" resname="personne.lastname">
+        <source>personne.lastname</source>
+        <target>Nom</target>
+        <jms:reference-file line="36">Form/Type/PersonneType.php</jms:reference-file>
+        <jms:reference-file line="38">Form/Type/PersonneType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7d8dba4c1f2c08b7a70f1940fe8ccddd58b3c3e3" resname="personne.password">
+        <source>personne.password</source>
+        <target>Mot de passe</target>
+        <jms:reference-file line="26">Form/Type/PersonneType.php</jms:reference-file>
+        <jms:reference-file line="28">Form/Type/PersonneType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="defdc2857a7b125365c9e25c10c59fdb8fb41650" resname="personne.username">
+        <source>personne.username</source>
+        <target>Nom d'utilisateur</target>
+        <jms:reference-file line="16">Form/Type/PersonneType.php</jms:reference-file>
+        <jms:reference-file line="18">Form/Type/PersonneType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="78ce876b235da177725c84502e75d328638b265f" resname="serie.difficulty">
+        <source>serie.difficulty</source>
+        <target>Difficulté</target>
+        <jms:reference-file line="27">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8da496c977a549044e53e6ad481dcb8ff7359edd" resname="serie.name">
+        <source>serie.name</source>
+        <target>Nom</target>
+        <jms:reference-file line="21">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c83cad46bef0cfb578a172d2b5c546f4bfc27980" resname="serie.public">
+        <source>serie.public</source>
+        <target>Publique</target>
+        <jms:reference-file line="40">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
