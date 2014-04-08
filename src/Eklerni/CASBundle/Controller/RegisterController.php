@@ -18,7 +18,7 @@ class RegisterController extends Controller{
     public function registerAction(Request $request)
     {
         $enseignant = new Enseignant();
-        $form = $this->createForm('eklerni_enseignant', $enseignant);
+        $form = $this->createForm('eklerni_register', $enseignant);
 
         $form->handleRequest($request);
 
@@ -33,8 +33,7 @@ class RegisterController extends Controller{
             } else {
                 $enseignant->setPassword($password);
             }
-            //@todo correction of form type
-            //$enseignant->setDateNaissance(new \DateTime());
+
             $this->get('eklerni.manager.enseignant')->save($enseignant, true);
             
             return $this->redirect($this->generateUrl('eklerni_cas_login'));

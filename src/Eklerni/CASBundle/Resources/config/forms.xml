@@ -14,6 +14,12 @@
         <service id="eklerni.form.type.enseignant" class="Eklerni\CASBundle\Form\Type\EnseignantType">
             <tag name="form.type" alias="eklerni_enseignant"/>
         </service>
+        <service id="eklerni.form.type.register" class="Eklerni\CASBundle\Form\Type\RegisterType">
+            <tag name="form.type" alias="eklerni_register"/>
+        </service>
+        <service id="eklerni.form.type.login" class="Eklerni\CASBundle\Form\Type\LoginType">
+            <tag name="form.type" alias="eklerni_login"/>
+        </service>
         <service id="eklerni.form.type.eleve" class="Eklerni\CASBundle\Form\Type\EleveType">
             <tag name="form.type" alias="eklerni_eleve"/>
         </service>

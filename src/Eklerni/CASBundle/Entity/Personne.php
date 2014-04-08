@@ -64,7 +64,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="dateNaissance", type="datetime")
+     * @ORM\Column(name="dateNaissance", type="datetime", nullable=true)
      */
     protected $dateNaissance;
 

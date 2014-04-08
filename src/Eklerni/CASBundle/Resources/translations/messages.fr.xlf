@@ -10,6 +10,14 @@
                 <source>personne.password</source>
                 <target>Mot de passe</target>
             </trans-unit>
+            <trans-unit id="21">
+                <source>personne.password.retype</source>
+                <target>Confirmation mot de passe</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>personne.password.notequal</source>
+                <target>Les mots de passe doivent être identiques.</target>
+            </trans-unit>
             <trans-unit id="3">
                 <source>personne.lastname</source>
                 <target>Nom</target>
@@ -32,7 +40,7 @@
             </trans-unit>
             <trans-unit id="8">
                 <source>serie.difficulty</source>
-                <target>Difficultée</target>
+                <target>Difficulté</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>serie.public</source>
