@@ -7,5 +7,7 @@
     <route id="eklerni_back_exercice" pattern="/">
         <default key="_controller">EklerniBackBundle:Exercice:index</default>
     </route>
-
+    <route id="eklerni_back_serie_create" pattern="/ajouter">
+        <default key="_controller">EklerniBackBundle:Exercice:ajouter</default>
+    </route>
 </routes>
