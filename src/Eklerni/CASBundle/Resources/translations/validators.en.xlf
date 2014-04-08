@@ -8,7 +8,7 @@
     <body>
       <trans-unit id="6844b632c1723ecfd93f958ce082570c87d01650" resname="personne.password.notequal">
         <source>personne.password.notequal</source>
-        <target state="new">personne.password.notequal</target>
+        <target state="translated">The two passwords must be equal.</target>
         <jms:reference-file line="26">Form/Type/RegisterType.php</jms:reference-file>
       </trans-unit>
     </body>

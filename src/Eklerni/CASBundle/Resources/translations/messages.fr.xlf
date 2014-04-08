@@ -8,25 +8,25 @@
     <body>
       <trans-unit id="774d1c4c5225846103f8d4dfe40639f2e79fa91c" resname="button.validation">
         <source>button.validation</source>
-        <target>button.validation</target>
+        <target state="translated">Valider</target>
         <jms:reference-file line="35">Form/Type/LoginType.php</jms:reference-file>
         <jms:reference-file line="66">Form/Type/RegisterType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0488b609ae44f7d0d4e1bc4b2ff0661dd637c9bb" resname="personne.firstname">
         <source>personne.firstname</source>
-        <target>personne.firstname</target>
+        <target state="translated">Nom</target>
         <jms:reference-file line="56">Form/Type/RegisterType.php</jms:reference-file>
         <jms:reference-file line="58">Form/Type/RegisterType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4a104c4ba318e9811d346898f27eb55278b865c2" resname="personne.lastname">
         <source>personne.lastname</source>
-        <target>personne.lastname</target>
+        <target state="translated">Prénom</target>
         <jms:reference-file line="46">Form/Type/RegisterType.php</jms:reference-file>
         <jms:reference-file line="48">Form/Type/RegisterType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7d8dba4c1f2c08b7a70f1940fe8ccddd58b3c3e3" resname="personne.password">
         <source>personne.password</source>
-        <target>personne.password</target>
+        <target state="translated">Mot de passe</target>
         <jms:reference-file line="25">Form/Type/LoginType.php</jms:reference-file>
         <jms:reference-file line="27">Form/Type/LoginType.php</jms:reference-file>
         <jms:reference-file line="29">Form/Type/RegisterType.php</jms:reference-file>
@@ -40,7 +40,7 @@
       </trans-unit>
       <trans-unit id="defdc2857a7b125365c9e25c10c59fdb8fb41650" resname="personne.username">
         <source>personne.username</source>
-        <target>personne.username</target>
+        <target state="translated">Pseudo</target>
         <jms:reference-file line="15">Form/Type/LoginType.php</jms:reference-file>
         <jms:reference-file line="17">Form/Type/LoginType.php</jms:reference-file>
         <jms:reference-file line="15">Form/Type/RegisterType.php</jms:reference-file>
@@ -48,12 +48,12 @@
       </trans-unit>
       <trans-unit id="f1aba42d16e3ddbf1fb26088ffb9b672bb2c9280" resname="title.login">
         <source>title.login</source>
-        <target>title.login</target>
+        <target state="translated">Connexion</target>
         <jms:reference-file line="32">CASBundle/Controller/SignController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4c2cd30d7761e7175fe4c3333cd29fcb9071f0ef" resname="title.registration">
         <source>title.registration</source>
-        <target>title.registration</target>
+        <target state="translated">Enregistrement</target>
         <jms:reference-file line="39">CASBundle/Controller/RegisterController.php</jms:reference-file>
       </trans-unit>
     </body>

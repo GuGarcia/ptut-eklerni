@@ -39,7 +39,7 @@ class ClasseType extends AbstractType
 
         $builder->add('ecole', 'entity', array(
                 'label' => 'classe.school',
-                'class' => 'EklerniCASBundle:Ecole',
+                'class' => 'EklerniDatabaseBundle:Ecole',
                 'query_builder' => function (EcoleRepository $er) {
                         return $er->findAll();
                     },
