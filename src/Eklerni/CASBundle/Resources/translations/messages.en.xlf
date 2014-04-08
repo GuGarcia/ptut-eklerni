@@ -26,6 +26,14 @@
                 <source>personne.firstname</source>
                 <target>First name</target>
             </trans-unit>
+            <trans-unit id="100">
+                <source>title.login</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="101">
+                <source>title.registration</source>
+                <target>Registration</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

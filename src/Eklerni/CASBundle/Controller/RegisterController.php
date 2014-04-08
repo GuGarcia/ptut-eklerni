@@ -16,7 +16,9 @@ class RegisterController extends Controller{
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            /** @var \Symfony\Component\Security\Core\Encoder\EncoderFactory $factory */
             $factory = $this->get('security.encoder_factory');
+
 
             $encoder = $factory->getEncoder($enseignant);
             $password = $encoder->encodePassword($enseignant->getPassword(), $enseignant->getSalt());
@@ -34,7 +36,7 @@ class RegisterController extends Controller{
 
         return $this->render('EklerniCASBundle:Register:register.html.twig', array(
                 'form' => $form->createView(),
-                'title' => "Registration"
+                'title' => $this->get('translator')->trans("title.registration")
             )
         );
     }

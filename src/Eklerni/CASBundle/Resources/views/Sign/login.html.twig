@@ -3,7 +3,7 @@
     {% if error %}
         <div>{{ error.message }}</div>
     {% endif %}
-    <div class="header">Sign In</div>
+    <div class="header">{{ title }}</div>
 
     <form action="{{ path('eklerni_cas_login_check') }}" method="post">
         <div class="body bg-gray">
@@ -18,7 +18,7 @@
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         </div>
         <div class="footer">
-            <button type="submit" class="btn bg-olive btn-block">Login</button>
+            <button type="submit" class="btn bg-olive btn-block">{{ title }}</button>
         </div>
     </form>
 {% endblock %}
