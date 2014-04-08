@@ -12,13 +12,13 @@
     </table>
     {% endset %}
 {% else %}
-    {% set eleves %}
+    {% set elevesTable %}
     Il n'y a pas d'eleve dans cette Classe.
     {% endset %}
 {% endif %}
 
 {% if enseignant.classes|length > 0 %}
-    {% set classes %}
+    {% set classesTable %}
     <table class="table" id="profs">
         {% for classe in enseignant.classes %}
             <tr>
@@ -33,7 +33,7 @@
     </table>
     {% endset %}
 {% else %}
-    {% set eleves %}
+    {% set classesTable %}
     Vous n'avez pas de Classe
     {% endset %}
 {% endif %}
@@ -44,7 +44,7 @@
     {% block body %}
         <div class="row">
             <div class="col-md-4">
-                {{ eklerni.block("Liste des Classes", classes, footerclasses, "danger") }}
+                {{ eklerni.block("Liste des Classes", classesTable, footerclasses, "danger") }}
                 {{ eklerni.block("Liste des Eleves", elevesTable, "", "primary") }}
             </div>
             <div class="col-md-4">
