@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Eklerni\FrontBundle\EklerniFrontBundle(),
             new Eklerni\RESTBundle\EklerniRESTBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Eklerni\DatabaseBundle\EklerniDatabaseBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
