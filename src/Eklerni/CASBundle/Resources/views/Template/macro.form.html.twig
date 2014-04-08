@@ -1,0 +1,11 @@
+{% macro row(element) %}
+    <div class="form-group">
+        {{ form_label(element) }}
+        {{ form_errors(element) }}
+        {{ form_widget(element) }}
+    </div>
+{% endmacro %}
+
+{% macro submit(element) %}
+    {{ form_widget(element) }}
+{% endmacro %}

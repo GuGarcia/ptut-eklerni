@@ -10,6 +10,14 @@
                 <source>personne.password</source>
                 <target>Password</target>
             </trans-unit>
+            <trans-unit id="21">
+                <source>personne.password.retype</source>
+                <target>Confirm password</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>personne.password.notequal</source>
+                <target>The two passwords must be equal.</target>
+            </trans-unit>
             <trans-unit id="3">
                 <source>personne.lastname</source>
                 <target>Last name</target>
