@@ -1,8 +1,8 @@
 security:
     encoders:
-        Eklerni\CASBundle\Entity\Enseignant:
+        Eklerni\DatabaseBundle\Entity\Enseignant:
             algorithm:  sha512
-        Eklerni\CASBundle\Entity\Eleve:
+        Eklerni\DatabaseBundle\Entity\Eleve:
             algorithm:  sha512
 
     role_hierarchy:
@@ -14,9 +14,9 @@ security:
             chain:
                 providers: [enseignants, eleves]
         enseignants:
-            entity: { class: EklerniCASBundle:Enseignant, property: username }
+            entity: { class: EklerniDatabaseBundle:Enseignant, property: username }
         eleves:
-            entity: { class: EklerniCASBundle:Eleve, property: username }
+            entity: { class: EklerniDatabaseBundle:Eleve, property: username }
 
     firewalls:
         dev:

@@ -2,10 +2,7 @@
 
 namespace Eklerni\CASBundle\Controller;
 
-use Eklerni\CASBundle\Entity\Eleve;
-use Eklerni\CASBundle\Form\Type\ClasseType;
-use Eklerni\CASBundle\Form\Type\EcoleType;
-use Eklerni\CASBundle\Form\Type\EnseignantType;
+use Eklerni\DatabaseBundle\Entity\Eleve;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 

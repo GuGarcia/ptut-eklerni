@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="eklerni.form.type.ecole" class="Eklerni\DatabaseBundle\Form\Type\EcoleType">
+            <tag name="form.type" alias="eklerni_ecole"/>
+        </service>
+        <service id="eklerni.form.type.classe" class="Eklerni\DatabaseBundle\Form\Type\ClasseType">
+            <tag name="form.type" alias="eklerni_classe"/>
+        </service>
+        <service id="eklerni.form.type.enseignant" class="Eklerni\DatabaseBundle\Form\Type\EnseignantType">
+            <tag name="form.type" alias="eklerni_enseignant"/>
+        </service>
+        <service id="eklerni.form.type.eleve" class="Eklerni\DatabaseBundle\Form\Type\EleveType">
+            <tag name="form.type" alias="eklerni_eleve"/>
+        </service>
+        <service id="eklerni.form.type.serie" class="Eklerni\DatabaseBundle\Form\Type\SerieType">
+            <tag name="form.type" alias="eklerni_serie"/>
+        </service>
+    </services>
+
+</container>
