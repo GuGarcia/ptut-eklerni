@@ -32,7 +32,8 @@ class ClasseType extends AbstractType
         );
         $builder->add(
             'annee', 'integer', array(
-                'label' => 'classe.grade'
+                'label' => 'Année',
+                'data' => date("Y")
             )
         );
 

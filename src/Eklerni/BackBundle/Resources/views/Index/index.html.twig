@@ -1,5 +1,58 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
-{% block body %}
+{% if eleves|length > 0 %}
+    {% set elevesTable %}
+    <table class="table">
+        {% for eleve in eleves %}
+            <tr>
+                <td><a href="{{ path("eklerni_back_eleve") }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
+                <td>{{ eleve.classe.nom }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endset %}
+{% else %}
+    {% set eleves %}
+    Il n'y a pas d'eleve dans cette Classe.
+    {% endset %}
+{% endif %}
 
-{% endblock %}
+{% if enseignant.classes|length > 0 %}
+    {% set classes %}
+    <table class="table" id="profs">
+        {% for classe in enseignant.classes %}
+            <tr>
+                <td>
+                    <a href="{{ path("eklerni_back_classe_fiche", {idClasse:classe.id}) }}">{{ classe.nom }}</a>
+                </td>
+                <td>
+                    {{ classe.niveau }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endset %}
+{% else %}
+    {% set eleves %}
+    Vous n'avez pas de Classe
+    {% endset %}
+{% endif %}
+{% set footerclasses %}
+<a href="{{ path("eklerni_back_classe_create") }}" id="add_prof_link" class="btn btn-danger"><i class="fa fa-plus">
+        Ajouter</i></a>
+{% endset %}
+    {% block body %}
+        <div class="row">
+            <div class="col-md-4">
+                {{ eklerni.block("Liste des Classes", classes, footerclasses, "danger") }}
+                {{ eklerni.block("Liste des Eleves", elevesTable, "", "primary") }}
+            </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+
+    {% endblock %}
