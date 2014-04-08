@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>personne.username</source>
+                <target>Nom d'utilisateur</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>personne.password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>personne.password.retype</source>
+                <target>Confirmation mot de passe</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>personne.password.notequal</source>
+                <target>Les mots de passe doivent être identiques.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>personne.lastname</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>personne.firstname</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>personne.birthdate</source>
+                <target>Date de naissance</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>button.validation</source>
+                <target>Valider</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>serie.name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>serie.difficulty</source>
+                <target>Difficulté</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>serie.public</source>
+                <target>Publique</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>ecole.name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>classe.name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>ecole.postcode</source>
+                <target>Code postal</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>ecole.city</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>classe.grade</source>
+                <target>Niveau</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>classe.school</source>
+                <target>Ecole</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>grade.year1</source>
+                <target>CP</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>grade.year2</source>
+                <target>CE1</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>grade.year3</source>
+                <target>CE2</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>grade.year4</source>
+                <target>CM1</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>grade.year5</source>
+                <target>CM2</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

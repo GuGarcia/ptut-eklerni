@@ -2,10 +2,10 @@
 
 namespace Eklerni\BackBundle\Controller;
 
-use Eklerni\CASBundle\Entity\Classe;
-use Eklerni\CASBundle\Entity\Ecole;
+use Eklerni\DatabaseBundle\Entity\Classe;
+use Eklerni\DatabaseBundle\Entity\Ecole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Eklerni\CASBundle\Manager\ClasseManager;
+use Eklerni\DatabaseBundle\Manager\ClasseManager;
 use Symfony\Component\HttpFoundation\Request;
 
 class ClasseController extends Controller

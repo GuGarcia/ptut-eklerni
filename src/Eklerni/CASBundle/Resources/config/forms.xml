@@ -5,26 +5,11 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="eklerni.form.type.ecole" class="Eklerni\CASBundle\Form\Type\EcoleType">
-            <tag name="form.type" alias="eklerni_ecole"/>
-        </service>
-        <service id="eklerni.form.type.classe" class="Eklerni\CASBundle\Form\Type\ClasseType">
-            <tag name="form.type" alias="eklerni_classe"/>
-        </service>
-        <service id="eklerni.form.type.enseignant" class="Eklerni\CASBundle\Form\Type\EnseignantType">
-            <tag name="form.type" alias="eklerni_enseignant"/>
-        </service>
         <service id="eklerni.form.type.register" class="Eklerni\CASBundle\Form\Type\RegisterType">
             <tag name="form.type" alias="eklerni_register"/>
         </service>
         <service id="eklerni.form.type.login" class="Eklerni\CASBundle\Form\Type\LoginType">
             <tag name="form.type" alias="eklerni_login"/>
-        </service>
-        <service id="eklerni.form.type.eleve" class="Eklerni\CASBundle\Form\Type\EleveType">
-            <tag name="form.type" alias="eklerni_eleve"/>
-        </service>
-        <service id="eklerni.form.type.serie" class="Eklerni\CASBundle\Form\Type\SerieType">
-            <tag name="form.type" alias="eklerni_serie"/>
         </service>
     </services>
 

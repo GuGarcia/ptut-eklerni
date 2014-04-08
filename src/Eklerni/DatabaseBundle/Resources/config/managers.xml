@@ -3,4 +3,39 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="manager_ecole.class">Eklerni\DatabaseBundle\Manager\EcoleManager</parameter>
+        <parameter key="manager_classe.class">Eklerni\DatabaseBundle\Manager\ClasseManager</parameter>
+        <parameter key="manager_eleve.class">Eklerni\DatabaseBundle\Manager\EleveManager</parameter>
+        <parameter key="manager_enseignant.class">Eklerni\DatabaseBundle\Manager\EnseignantManager</parameter>
+        <parameter key="manager_matiere.class">Eklerni\DatabaseBundle\Manager\MatiereManager</parameter>
+        <parameter key="manager_activite.class">Eklerni\DatabaseBundle\Manager\ActiviteManager</parameter>
+        <parameter key="manager_serie.class">Eklerni\DatabaseBundle\Manager\SerieManager</parameter>
+
+    </parameters>
+
+    <services>
+        <service id="eklerni.manager.ecole" class="%manager_ecole.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.classe" class="%manager_classe.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.eleve" class="%manager_eleve.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.enseignant" class="%manager_enseignant.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.matiere" class="%manager_matiere.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.activite" class="%manager_activite.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.serie" class="%manager_serie.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+    </services>
 </container>

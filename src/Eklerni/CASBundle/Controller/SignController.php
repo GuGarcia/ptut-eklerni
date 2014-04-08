@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: DiDiNe
- * Date: 20/03/14
- * Time: 13:35
- */
+
 namespace Eklerni\CASBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
