@@ -17,11 +17,13 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Eklerni\CASBundle\EklerniCASBundle(),
+            new Eklerni\DatabaseBundle\EklerniDatabaseBundle(),
             new Eklerni\BackBundle\EklerniBackBundle(),
             new Eklerni\FrontBundle\EklerniFrontBundle(),
             new Eklerni\RESTBundle\EklerniRESTBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new Eklerni\DatabaseBundle\EklerniDatabaseBundle(),
+            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new JMS\TranslationBundle\JMSTranslationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
