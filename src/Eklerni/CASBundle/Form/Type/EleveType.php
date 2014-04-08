@@ -9,6 +9,7 @@
 namespace Eklerni\CASBundle\Form\Type;
 
 
+use Eklerni\CASBundle\Repository\ClasseRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

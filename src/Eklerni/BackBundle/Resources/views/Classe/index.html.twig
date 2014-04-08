@@ -1,5 +1,93 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
-{% block body %}
+{% if classe.eleves|length > 0 %}
+    {% set eleves = "" %}
+    {% set eleves %}
+    <table class="table">
+        {% for eleve in classe.eleves %}
+            <tr>
+                <td><a href="{{ path("eklerni_back_eleve") }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endset %}
+{% else %}
+    {% set eleves %}
+    Il n'y a pas d'eleve dans cette Classe.
+    {% endset %}
+{% endif %}
+    {% set footereleves %}
+<a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}">
+    <button class="btn btn-primary">Ajouter un Elève</button>
+</a>
+{% endset %}
 
+    {% set profs %}
+<table class="table" id="profs">
+    {% for prof in classe.enseignants %}
+        <tr>
+            <td>{{ prof.nom }} {{ prof.prenom }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endset %}
+    {% set footerprofs %}
+<a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}">
+    <div class="input-group">
+        <select id="add_prof" class="form-control">
+            <option value=""></option>
+            {% for prof in enseignants %}
+                <option value="{{ prof.id }}">{{ prof.nom }} {{ prof.prenom }}</option>
+            {% endfor %}
+        </select>
+
+        <div class="input-group-btn">
+            <a href="" id="add_prof_link" class="btn btn-danger" disabled="disabled"><i class="fa fa-plus"></i></a>
+        </div>
+    </div>
+</a>
+{% endset %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            {{ eklerni.block("Liste des Eleves", eleves, footereleves, "primary") }}
+        </div>
+        <div class="col-md-4">
+            {{ eklerni.block("Liste des Enseignants", profs, footerprofs, "danger") }}
+
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $("#add_prof").on("change", function () {
+                if ($(this).val() == "") {
+                    $("#add_prof_link").attr("disabled", "disabled")
+                } else {
+                    $("#add_prof_link").removeAttr("disabled");
+                }
+            });
+            $("#add_prof_link").on("click", function (event) {
+                event.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path("eklerni_back_classe_ajax_add_enseignant", {idClasse:classe.id}) }}",
+                    data: { idEnseignant: $("#add_prof").val() }
+                }).success(function () {
+                    $("#profs").append("<tr><td>" + $("#add_prof option:selected").text() + "</td></tr>");
+                    $("#add_prof option:selected").remove();
+
+
+                    $("#add_prof").value("");
+                });
+            });
+        });
+
+    </script>
 {% endblock %}

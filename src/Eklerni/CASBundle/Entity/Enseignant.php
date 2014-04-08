@@ -72,7 +72,7 @@ class Enseignant extends Personne
      * @param Classe $c
      * @return Enseignant
      */
-    public function addClasses(Classe $c) {
+    public function addClasse(Classe $c) {
         $this->classes->add($c);
         return $this;
     }

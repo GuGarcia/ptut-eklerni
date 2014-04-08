@@ -13,8 +13,14 @@
     <route id="eklerni_back_classe_create_ecole" pattern="/ajouterecole">
         <default key="_controller">EklerniBackBundle:Classe:ajouterEcole</default>
     </route>
-    <route id="eklerni_back_classe_fiche" pattern="/{id}">
+    <route id="eklerni_back_classe_fiche" pattern="/{idClasse}">
         <default key="_controller">EklerniBackBundle:Classe:index</default>
+    </route>
+    <route id="eklerni_back_classe_create_eleve" pattern="/ajouterEleve/{idClasse}">
+        <default key="_controller">EklerniBackBundle:Classe:ajouterEleve</default>
+    </route>
+    <route id="eklerni_back_classe_ajax_add_enseignant" pattern="/ajouterEnseignant/{idClasse}">
+        <default key="_controller">EklerniBackBundle:Classe:ajouterEnseignant</default>
     </route>
 
 </routes>

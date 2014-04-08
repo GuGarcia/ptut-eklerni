@@ -1,0 +1,18 @@
+{% macro block(title, content, footer, type) %}
+    <div class="box box-{{ type }}">
+        <div class="box-header" data-toggle="tooltip" title="{{ title }}" data-original-title="Header tooltip">
+            <h3 class="box-title">{{ title }}</h3>
+
+            <div class="box-tools pull-right">
+                <button class="btn btn-{{ type }} btn-xs" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-{{ type }} btn-xs" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            {{ content }}
+        </div>
+        <div class="box-footer">
+            {{ footer }}
+        </div>
+    </div>
+{% endmacro %}
