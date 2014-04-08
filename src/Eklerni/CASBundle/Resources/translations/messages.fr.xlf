@@ -82,6 +82,10 @@
                 <source>grade.year5</source>
                 <target>CM2</target>
             </trans-unit>
+            <trans-unit id="21">
+                <source>classe.year</source>
+                <target>Année</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
