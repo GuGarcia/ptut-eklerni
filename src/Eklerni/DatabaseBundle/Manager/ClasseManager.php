@@ -3,6 +3,7 @@
 namespace Eklerni\DatabaseBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
+use Eklerni\DatabaseBundle\Entity\Classe;
 
 class ClasseManager extends BaseManager{
 
@@ -10,4 +11,9 @@ class ClasseManager extends BaseManager{
         $this->em = $em;
         $this->repository = $em->getRepository("EklerniDatabaseBundle:Classe");
     }
-} 
+
+    public function clearMatieres(Classe $classe) {
+        $this->repository->clearMatieres($classe);
+    }
+
+}

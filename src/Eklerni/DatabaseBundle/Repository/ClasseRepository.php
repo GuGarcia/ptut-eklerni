@@ -2,9 +2,12 @@
 
 namespace Eklerni\DatabaseBundle\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
+use Eklerni\DatabaseBundle\Entity\Classe;
 
-class ClasseRepository extends EntityRepository implements CASRepositoryInterface {
+class ClasseRepository extends EntityRepository implements CASRepositoryInterface
+{
 
     /**
      * @return \Doctrine\ORM\QueryBuilder
@@ -38,10 +41,18 @@ class ClasseRepository extends EntityRepository implements CASRepositoryInterfac
         return $this->_em->createQueryBuilder()
             ->select("c")
             ->from("EklerniDatabaseBundle:Classe", "c")
-            ->innerJoin("c.enseignants","p")
+            ->innerJoin("c.enseignants", "p")
             ->where("p.id = :id")
             ->setParameter("id", $idProf);
 
+    }
+
+    public function clearMatieres(Classe $classe)
+    {
+        $this->_em->getConnection()
+            ->prepare("DELETE FROM t_classeMatiere WHERE classe_id = :id;")
+            ->execute(array("id" => $classe->getId()));
+        $this->_em->flush();
     }
 
 }

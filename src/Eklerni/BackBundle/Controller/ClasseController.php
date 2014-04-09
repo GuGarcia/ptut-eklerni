@@ -2,10 +2,10 @@
 
 namespace Eklerni\BackBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Ecole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Eklerni\DatabaseBundle\Manager\ClasseManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,8 +25,9 @@ class ClasseController extends Controller
             }
             $i++;
         }
+        $matieres = $this->get("eklerni.manager.matiere")->findAll();
 
-        return $this->render('EklerniBackBundle:Classe:index.html.twig', array("classe" => $classe, "enseignants" => $enseignants, "title" => $classe->getNom()));
+        return $this->render('EklerniBackBundle:Classe:index.html.twig', array("classe" => $classe, "enseignants" => $enseignants, "title" => "Classe ".$classe->getNom(), "matieres" => $matieres));
     }
 
     public function listAction()
@@ -99,6 +100,26 @@ class ClasseController extends Controller
             $this->get("eklerni.manager.classe")->save($classe);
 
             return new Response(json_encode(array()));
+        }
+    }
+
+    public function saveMatieresAction(Request $request, $idClasse) {
+        if ($request->isXmlHttpRequest()) {
+            $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+
+            $this->get("eklerni.manager.classe")->clearMatieres($classe);
+            foreach($request->get("matieres") as $idMatiere) {
+                $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere)[0];
+                if(get_class($matiere) == "Eklerni\\DatabaseBundle\\Entity\\Matiere") {
+                    $classe->getMatieres()->removeElement($matiere);
+                    $matiere->addClasse($classe);
+                    $this->get("eklerni.manager.matiere")->save($matiere);
+                    $classe->addMatiere($matiere);
+                }
+            }
+            $this->get("eklerni.manager.classe")->save($classe);
+
+            return new Response(json_encode(array($classe)));
         }
     }
 

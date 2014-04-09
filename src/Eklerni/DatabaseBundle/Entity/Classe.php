@@ -68,7 +68,9 @@ class Classe extends BaseEntity
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Matiere", mappedBy="classes")
+     * @ORM\ManyToMany(targetEntity="Matiere", mappedBy="classes", cascade={"remove", "persist"})
+     * @ORM\JoinTable(name="t_classeMatiere")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $matieres;
 
@@ -175,6 +177,15 @@ class Classe extends BaseEntity
     public function getMatieres()
     {
         return $this->matieres;
+    }
+
+    /**
+     * @param Matiere $matiere
+     * @return Classe
+     */
+    public function addMatiere(Matiere $matiere) {
+        $this->matieres->add($matiere);
+        return $this;
     }
 
     /**

@@ -1,8 +1,7 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
 {% if classe.eleves|length > 0 %}
-    {% set eleves = "" %}
-    {% set eleves %}
+    {% set elevesTable %}
     <table class="table">
         {% for eleve in classe.eleves %}
             <tr>
@@ -22,7 +21,7 @@
 </a>
 {% endset %}
 
-    {% set profs %}
+    {% set profsTable %}
 <table class="table" id="profs">
     {% for prof in classe.enseignants %}
         <tr>
@@ -32,32 +31,46 @@
 </table>
 {% endset %}
     {% set footerprofs %}
-<a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}">
-    <div class="input-group">
-        <select id="add_prof" class="form-control">
-            <option value=""></option>
-            {% for prof in enseignants %}
-                <option value="{{ prof.id }}">{{ prof.nom }} {{ prof.prenom }}</option>
-            {% endfor %}
-        </select>
+<div class="input-group">
+    <select id="add_prof" class="form-control">
+        <option value=""></option>
+        {% for prof in enseignants %}
+            <option value="{{ prof.id }}">{{ prof.nom }} {{ prof.prenom }}</option>
+        {% endfor %}
+    </select>
 
-        <div class="input-group-btn">
-            <a href="" id="add_prof_link" class="btn btn-danger" disabled="disabled"><i class="fa fa-plus"></i></a>
-        </div>
+    <div class="input-group-btn">
+        <a href="" id="add_prof_link" class="btn btn-danger" disabled="disabled"><i class="fa fa-plus"></i></a>
     </div>
+</div>
+{% endset %}
+
+{% set matieresTables %}
+<table class="table" id="matieres">
+    {% for matiere in matieres %}
+        <tr id="{{ matiere.id }}" class="{% if matiere in classe.matieres %}bg-success{% else %}bg-danger{% endif %}" style="cursor: pointer;">
+            <td>{{ matiere.name }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endset %}
+{% set footermatieres %}
+<a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}" id="matieres_link">
+    <button class="btn btn-primary">Enregistrer</button>
 </a>
+
 {% endset %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-4">
-            {{ eklerni.block("Liste des Eleves", eleves, footereleves, "primary") }}
+            {{ eklerni.block("Liste des Eleves", elevesTable, footereleves, "primary") }}
         </div>
         <div class="col-md-4">
-            {{ eklerni.block("Liste des Enseignants", profs, footerprofs, "danger") }}
-
+            {{ eklerni.block("Liste des Enseignants", profsTable, footerprofs, "danger") }}
         </div>
         <div class="col-md-4">
+            {{ eklerni.block("Matières", matieresTables, footermatieres, "primary") }}
 
         </div>
     </div>
@@ -83,11 +96,30 @@
                     $("#profs").append("<tr><td>" + $("#add_prof option:selected").text() + "</td></tr>");
                     $("#add_prof option:selected").remove();
 
+                    displayMessage("success","Les permissions de <strong>l'Enseignant</strong> pour cette <strong>Classe</strong> ont bien été ajoutées !");
 
                     $("#add_prof").value("");
                 });
             });
-        });
+            $("#matieres tr").on("click", function () {
+                $(this).toggleClass("bg-danger");
+                $(this).toggleClass("bg-success");
+            });
+            $("#matieres_link").on("click", function (event) {
+                event.preventDefault();
+                var matieres = [];
+                $("#matieres tr.bg-success").each(function() {
+                    matieres.push(this.id);
+                });
 
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path("eklerni_back_classe_ajax_save_matieres", {idClasse:classe.id}) }}",
+                    data: {"matieres": matieres}
+                }).success(function() {
+                    displayMessage("success","L'enregistrement des <strong>Matières</strong> a réussi !");
+                });
+            });
+        });
     </script>
 {% endblock %}

@@ -1,0 +1,8 @@
+#messages .alert {
+    margin-left: 0px;
+    margin-bottom: 5px;
+    display: none;
+}
+#messages {
+    padding: 0px 15px;
+}
