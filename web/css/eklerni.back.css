@@ -1,8 +1,12 @@
 #messages .alert {
-    margin-left: 0px;
-    margin-bottom: 5px;
+    padding: 5px;
+    margin: 5px;
     display: none;
 }
 #messages {
-    padding: 0px 15px;
+    padding: 0px 0px;
+    margin-top: 10px;
+}
+#messages .alert-dismissable .close {
+    right: 0;
 }
