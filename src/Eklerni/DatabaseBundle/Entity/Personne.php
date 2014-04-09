@@ -71,6 +71,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
 
     public function __construct()
     {
+        parent::__construct();
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
     }

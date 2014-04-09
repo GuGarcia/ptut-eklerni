@@ -11,7 +11,7 @@
     </table>
     {% endset %}
 {% else %}
-    {% set eleves %}
+    {% set elevesTable %}
     Il n'y a pas d'eleve dans cette Classe.
     {% endset %}
 {% endif %}
@@ -71,7 +71,6 @@
         </div>
         <div class="col-md-4">
             {{ eklerni.block("Matières", matieresTables, footermatieres, "primary") }}
-
         </div>
     </div>
 {% endblock %}

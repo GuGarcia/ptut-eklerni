@@ -5,6 +5,7 @@ namespace Eklerni\BackBundle\Controller;
 use Doctrine\Common\Collections\ArrayCollection;
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Ecole;
+use Eklerni\DatabaseBundle\Entity\Eleve;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -86,7 +87,7 @@ class ClasseController extends Controller
 
         if ($form->isValid()) {
             $this->get("eklerni.manager.eleve")->save($eleve);
-            return $this->redirect($this->generateUrl('eklerni_back_classe_fiche', array("id" => $idClasse)));
+            return $this->redirect($this->generateUrl('eklerni_back_classe_fiche', array("idClasse" => $idClasse)));
         } else {
             return $this->render('EklerniBackBundle:Classe:ajouter.html.twig', array("form" => $form->createView(), "title" => "Ajout d'un Eleve à la Classe : ".$classe->getNom()));
         }
