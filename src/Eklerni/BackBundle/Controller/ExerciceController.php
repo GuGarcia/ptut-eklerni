@@ -2,7 +2,8 @@
 
 namespace Eklerni\BackBundle\Controller;
 
-use Eklerni\CASBundle\Entity\Serie;
+use Eklerni\DatabaseBundle\Entity\Serie;
+use Proxies\__CG__\Eklerni\CASBundle\Entity\Enseignant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,6 +24,7 @@ class ExerciceController extends Controller {
 
     public function ajouterAction(Request $request) {
         $serie = new Serie();
+        /** @var \Eklerni\DatabaseBundle\Entity\Enseignant $enseignant */
         $enseignant = $this->get("security.context")->getToken()->getUser();
         $form = $this->createForm('eklerni_serie', $serie);
 
