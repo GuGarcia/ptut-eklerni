@@ -2,7 +2,9 @@
 
 namespace Eklerni\BackBundle\Controller;
 
+use Eklerni\CASBundle\Entity\Serie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class ExerciceController extends Controller {
 
@@ -11,6 +13,35 @@ class ExerciceController extends Controller {
      */
     public function indexAction()
     {
-        return $this->render('EklerniBackBundle:Exercice:index.html.twig', array("title" => "Exercice"));
+        // Lister matière
+
+        return $this->render('EklerniBackBundle:Exercice:index.html.twig', array(
+                "title" => "Exercice"
+            )
+        );
+    }
+
+    public function ajouterAction(Request $request) {
+        $serie = new Serie();
+        $enseignant = $this->get("security.context")->getToken()->getUser();
+        $form = $this->createForm('eklerni_serie', $serie);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $serie->setEnseignant($enseignant);
+            $enseignant->addSerie($serie);
+            $this->get('eklerni.manager.serie')->save($serie, true);
+        }
+
+        return $this->render('EklerniBackBundle:Exercice:ajouter.html.twig', array(
+                'form'  => $form->createView(),
+                'title' => 'Création d\'une série',
+            )
+        );
+    }
+
+    public function listerMatiereAction() {
+
     }
 } 

@@ -26,7 +26,7 @@ class EnseignantType extends AbstractType
             'classes', 'entity', array(
                 'label' => 'Classe',
                 'property' => 'fullName',
-                'class' => 'EklerniCASBundle:Classe',
+                'class' => 'EklerniDatabaseBundle:Classe',
                 'query_builder' => function (ClasseRepository $cr) {
                         return $cr->findAll();
                     },

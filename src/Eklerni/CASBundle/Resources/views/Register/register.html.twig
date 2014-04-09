@@ -5,7 +5,7 @@
     {% if error is defined %}
         <div>{{ error.message }}</div>
     {% endif %}
-    <div class="header">Registration</div>
+    <div class="header">{{ title }}</div>
 
     <form action="{{ path('eklerni_cas_register') }}" method="post">
         <div class="body bg-gray">
