@@ -2,9 +2,6 @@
 {% import 'EklerniCASBundle:Template:macro.form.html.twig' as eklerni_cas %}
 
 {% block body %}
-    {% if error is defined %}
-        <div>{{ error.message }}</div>
-    {% endif %}
     <div class="header">{{ title }}</div>
 
     <form action="{{ path('eklerni_cas_register') }}" method="post">

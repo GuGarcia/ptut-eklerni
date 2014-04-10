@@ -24,7 +24,7 @@ class RegisterController extends Controller{
             $password = $encoder->encodePassword($enseignant->getPassword(), $enseignant->getSalt());
             
             if (!$encoder->isPasswordValid($password, $enseignant->getPassword(), $enseignant->getSalt())) {
-                throw new \Exception('Password incorrectly encoded during user registration');
+                throw new \Exception($this->get('translator')->trans('register.encode_error'));
             } else {
                 $enseignant->setPassword($password);
             }

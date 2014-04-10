@@ -27,7 +27,11 @@ security:
             form_login:
                 login_path: eklerni_cas_login
                 check_path: eklerni_cas_login_check
+                username_parameter: "eklerni_login[username]"
+                password_parameter: "eklerni_login[password]"
                 csrf_provider: form.csrf_provider
+                csrf_parameter: "eklerni_login[_token]"
+                intention: authentication
                 success_handler: eklerni_cas.auth.handler
             logout:
                 path:   eklerni_cas_logout
