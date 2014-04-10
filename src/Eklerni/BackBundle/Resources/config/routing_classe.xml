@@ -22,6 +22,9 @@
     <route id="eklerni_back_classe_ajax_add_enseignant" pattern="/ajouterEnseignant/{idClasse}">
         <default key="_controller">EklerniBackBundle:Classe:ajouterEnseignant</default>
     </route>
+    <route id="eklerni_back_classe_ajax_delete_enseignant" pattern="/deleteEnseignant/{idClasse}">
+        <default key="_controller">EklerniBackBundle:Classe:deleteEnseignantClasse</default>
+    </route>
     <route id="eklerni_back_classe_ajax_save_matieres" pattern="/saveMatieres/{idClasse}">
         <default key="_controller">EklerniBackBundle:Classe:saveMatieres</default>
     </route>

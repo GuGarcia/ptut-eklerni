@@ -2,63 +2,68 @@
 
 {% if classe.eleves|length > 0 %}
     {% set elevesTable %}
-    <table class="table">
-        {% for eleve in classe.eleves %}
-            <tr>
-                <td><a href="{{ path("eklerni_back_eleve") }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
-            </tr>
-        {% endfor %}
-    </table>
+        <table class="table">
+            {% for eleve in classe.eleves %}
+                <tr>
+                    <td><a href="{{ path("eklerni_back_eleve") }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
     {% endset %}
 {% else %}
     {% set elevesTable %}
-    Il n'y a pas d'eleve dans cette Classe.
+        Il n'y a pas d'eleve dans cette Classe.
     {% endset %}
 {% endif %}
-    {% set footereleves %}
-<a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}">
-    <button class="btn btn-primary">Ajouter un Elève</button>
-</a>
+{% set footereleves %}
+    <a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}">
+        <button class="btn btn-primary">Ajouter un Elève</button>
+    </a>
 {% endset %}
 
-    {% set profsTable %}
-<table class="table" id="profs">
-    {% for prof in classe.enseignants %}
-        <tr>
-            <td>{{ prof.nom }} {{ prof.prenom }}</td>
-        </tr>
-    {% endfor %}
-</table>
-{% endset %}
-    {% set footerprofs %}
-<div class="input-group">
-    <select id="add_prof" class="form-control">
-        <option value=""></option>
-        {% for prof in enseignants %}
-            <option value="{{ prof.id }}">{{ prof.nom }} {{ prof.prenom }}</option>
+{% set profsTable %}
+    <table class="table" id="profs">
+        {% for prof in classe.enseignants %}
+            <tr id="{{ prof.id }}">
+                <td>
+                    {% if prof.id != app.user.id %}
+                        <a href="" title="Supprimer" class="delete right block"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                        <span>{{ prof.nom }} {{ prof.prenom }}</span>
+                    {% else %}
+                        <span style="margin-left: 24px;">{{ prof.nom }} {{ prof.prenom }}</span>
+                    {% endif %}
+                </td>
+            </tr>
         {% endfor %}
-    </select>
-
-    <div class="input-group-btn">
-        <a href="" id="add_prof_link" class="btn btn-danger" disabled="disabled"><i class="fa fa-plus"></i></a>
+    </table>
+{% endset %}
+{% set footerprofs %}
+    <div class="input-group">
+        <select id="add_prof" class="form-control">
+            <option value=""></option>
+            {% for prof in enseignants %}
+                <option value="{{ prof.id }}">{{ prof.nom }} {{ prof.prenom }}</option>
+            {% endfor %}
+        </select>
+        <div class="input-group-btn">
+            <a href="" id="add_prof_link" class="btn btn-primary" disabled="disabled"><i class="fa fa-plus"></i></a>
+        </div>
     </div>
-</div>
 {% endset %}
 
 {% set matieresTables %}
-<table class="table" id="matieres">
-    {% for matiere in matieres %}
-        <tr id="{{ matiere.id }}" class="{% if matiere in classe.matieres %}bg-success{% else %}bg-danger{% endif %}" style="cursor: pointer;">
-            <td>{{ matiere.name }}</td>
-        </tr>
-    {% endfor %}
-</table>
+    <table class="table" id="matieres">
+        {% for matiere in matieres %}
+            <tr id="{{ matiere.id }}" class="{% if matiere in classe.matieres %}bg-success{% else %}bg-danger{% endif %}" style="cursor: pointer;">
+                <td>{{ matiere.name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endset %}
 {% set footermatieres %}
-<a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}" id="matieres_link">
-    <button class="btn btn-primary">Enregistrer</button>
-</a>
-
+    <a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}" id="matieres_link">
+        <button class="btn btn-primary">Enregistrer</button>
+    </a>
 {% endset %}
 
 {% block body %}
@@ -67,7 +72,7 @@
             {{ eklerni.block("Liste des Eleves", elevesTable, footereleves, "primary") }}
         </div>
         <div class="col-md-4">
-            {{ eklerni.block("Liste des Enseignants", profsTable, footerprofs, "danger") }}
+            {{ eklerni.block("Liste des Enseignants", profsTable, footerprofs, "primary") }}
         </div>
         <div class="col-md-4">
             {{ eklerni.block("Matières", matieresTables, footermatieres, "primary") }}
@@ -78,13 +83,21 @@
 {% block javascripts %}
     <script type="application/javascript">
         $(document).ready(function () {
+            init();
+        });
+
+        function init() {
+
+            $("#add_prof").off("change");
             $("#add_prof").on("change", function () {
                 if ($(this).val() == "") {
-                    $("#add_prof_link").attr("disabled", "disabled")
+                    $("#add_prof_link").attr("disabled", "disabled");
                 } else {
                     $("#add_prof_link").removeAttr("disabled");
                 }
             });
+
+            $("#add_prof_link").off("click");
             $("#add_prof_link").on("click", function (event) {
                 event.preventDefault();
                 $.ajax({
@@ -92,22 +105,30 @@
                     url: "{{ path("eklerni_back_classe_ajax_add_enseignant", {idClasse:classe.id}) }}",
                     data: { idEnseignant: $("#add_prof").val() }
                 }).success(function () {
-                    $("#profs").append("<tr><td>" + $("#add_prof option:selected").text() + "</td></tr>");
+                    $("#profs").append("<tr id='" + $("#add_prof").val() + "'><td>" +
+                            "<a href=\"\" title=\"Supprimer\" class=\"delete right block\"><button class=\"btn btn-danger btn-xs\"><i class=\"fa fa-times\"></i></button></a>" +
+                            "<span style='margin-left: 5px'>" + $("#add_prof option:selected").text() + "</span></td></tr>");
                     $("#add_prof option:selected").remove();
 
-                    displayMessage("success","Les permissions de <strong>l'Enseignant</strong> pour cette <strong>Classe</strong> ont bien été ajoutées !");
+                    displayMessage("success", "Les permissions de <strong>l'Enseignant</strong> pour cette <strong>Classe</strong> ont bien été ajoutées !");
 
-                    $("#add_prof").value("");
+                    $("#add_prof").val("");
+                    $("#add_prof_link").attr("disabled", "disabled");
+                    init();
                 });
             });
+
+            $("#matieres tr").off("click");
             $("#matieres tr").on("click", function () {
                 $(this).toggleClass("bg-danger");
                 $(this).toggleClass("bg-success");
             });
+
+            $("#matieres_link").off("click");
             $("#matieres_link").on("click", function (event) {
                 event.preventDefault();
                 var matieres = [];
-                $("#matieres tr.bg-success").each(function() {
+                $("#matieres tr.bg-success").each(function () {
                     matieres.push(this.id);
                 });
 
@@ -115,10 +136,32 @@
                     type: "POST",
                     url: "{{ path("eklerni_back_classe_ajax_save_matieres", {idClasse:classe.id}) }}",
                     data: {"matieres": matieres}
-                }).success(function() {
-                    displayMessage("success","L'enregistrement des <strong>Matières</strong> a réussi !");
+                }).success(function () {
+                    displayMessage("success", "L'enregistrement des <strong>Matières</strong> a réussi !");
                 });
             });
-        });
+
+            $("a.delete").off("click");
+            $("a.delete").on("click", function(event) {
+                event.preventDefault();
+                var _this = this;
+                var profs = [];
+                $("#profs tr").each(function () {
+                    if($(_this).parent().parent().attr("id") != this.id) {
+                        profs.push(this.id);
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path("eklerni_back_classe_ajax_delete_enseignant", {idClasse:classe.id}) }}",
+                    data: {"profs": profs}
+                }).success(function () {
+                    displayMessage("success", "La suppression de l'<strong>Enseignant</strong> a réussi !");
+                    $(_this).parent().parent().remove();
+                });
+
+            });
+        }
     </script>
 {% endblock %}

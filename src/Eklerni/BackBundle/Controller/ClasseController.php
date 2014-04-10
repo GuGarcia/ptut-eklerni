@@ -124,6 +124,24 @@ class ClasseController extends Controller
         }
     }
 
+    public function deleteEnseignantClasseAction( Request $request, $idClasse) {
+        if ($request->isXmlHttpRequest()) {
+            $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+            $this->get("eklerni.manager.classe")->clearEnseignants($classe);
+            foreach($request->get("profs") as $idEnseignant) {
+                $prof = $this->get("eklerni.manager.enseignant")->findById($idEnseignant)[0];
+                if(get_class($prof) == "Eklerni\\DatabaseBundle\\Entity\\Enseignant") {
+                    $prof->addClasse($classe);
+                    $this->get("eklerni.manager.enseignant")->save($prof);
+                    $classe->addEnseignant($prof);
+                }
+            }
+            $this->get("eklerni.manager.classe")->save($classe);
+
+            return new Response(json_encode(array($classe)));
+        }
+    }
+
     public function updateAction()
     {
 

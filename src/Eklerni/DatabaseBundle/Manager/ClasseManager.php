@@ -16,4 +16,8 @@ class ClasseManager extends BaseManager{
         $this->repository->clearMatieres($classe);
     }
 
+    public function clearEnseignants(Classe $classe) {
+        $this->repository->clearEnseignants($classe);
+    }
+
 }

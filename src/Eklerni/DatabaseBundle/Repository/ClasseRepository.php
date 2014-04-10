@@ -55,4 +55,12 @@ class ClasseRepository extends EntityRepository implements CASRepositoryInterfac
         $this->_em->flush();
     }
 
+    public function clearEnseignants(Classe $classe)
+    {
+        $this->_em->getConnection()
+            ->prepare("DELETE FROM t_classeEnseignant WHERE classe_id = :id;")
+            ->execute(array("id" => $classe->getId()));
+        $this->_em->flush();
+    }
+
 }
