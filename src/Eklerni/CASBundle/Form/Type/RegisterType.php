@@ -4,6 +4,7 @@ namespace Eklerni\CASBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class RegisterType extends AbstractType
 {
@@ -69,6 +70,13 @@ class RegisterType extends AbstractType
                 )
             )
         );
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'intention' => 'register'
+        ));
     }
 
     /**

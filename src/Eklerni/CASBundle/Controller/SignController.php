@@ -2,6 +2,7 @@
 
 namespace Eklerni\CASBundle\Controller;
 
+use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -13,23 +14,27 @@ class SignController extends Controller
     {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
-        
+
+
+        $enseignant = new Enseignant();
+        $formLogin = $this->createForm("eklerni_login", $enseignant);
+        $error = null;
+
         // get the login error if there is one
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+            $error = $this->get('translator')->trans("login.error");
         } else {
-            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            if ($request->getSession()->get(SecurityContext::AUTHENTICATION_ERROR))
+                $error = $this->get('translator')->trans("login.error");
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
-        
-        $csrfToken = $this->container->has('form.csrf_provider') ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate') : null;
-        
+
+
         return $this->render('EklerniCASBundle:Sign:login.html.twig', array(
-            // last username entered by the user
+            'form' => $formLogin->createView(),
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error' => $error,
-            'csrf_token' => $csrfToken,
-            'title' => $this->get('translator')->trans("title.login")
+            'form_error' => $error,
+            'title' => $this->get('translator')->trans("login.title")
         ));
     }
 
@@ -39,7 +44,7 @@ class SignController extends Controller
         throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
     }
 
-    public function logoutAction(Request $request)
+    public function logoutAction()
     {
         // The security layer will intercept this request
         throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
