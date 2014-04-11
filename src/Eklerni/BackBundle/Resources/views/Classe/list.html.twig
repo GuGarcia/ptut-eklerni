@@ -24,6 +24,8 @@
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
                             colspan="1" aria-label="CSS grade: activate to sort column ascending">Nombre d'Élèves
                         </th>
+                        <th>Outils
+                        </th>
                     </tr>
                     </thead>
                     <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -36,8 +38,16 @@
                             <td class="sorting_1"><a
                                         href="{{ path("eklerni_back_classe_fiche", {idClasse: classe.id}) }}">{{ classe.nom }}</a>
                             </td>
-                            <td class="">{{ classe.eleves|length }}</td>
-
+                            <td class="">
+                                {{ classe.eleves|length }}
+                            </td>
+                            <td>
+                            {% if classe.eleves|length == 0 %}
+                                <a href="{{ path("eklerni_back_classe_create") }}">
+                                    <button class="btn btn-danger btn-xs"><i class="fa fa-minus"></i> Supprimer</button>
+                                </a>
+                            {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -51,10 +61,10 @@
     {% endif %}
 
     <a href="{{ path("eklerni_back_classe_create_ecole") }}">
-        <button class="btn btn-default">Ajouter une Ecole</button>
+        <button class="btn btn-primary"><i class="fa fa-plus"></i> École</button>
     </a>
     <a href="{{ path("eklerni_back_classe_create") }}">
-        <button class="btn btn-default">Ajouter une Classe</button>
+        <button class="btn btn-primary"><i class="fa fa-plus"></i> Classe</button>
     </a>
 {% endblock %}
 
@@ -62,11 +72,11 @@
     <script type="application/javascript">
         $(function () {
             $('#table').dataTable({
-                "bPaginate": true,
+                "bPaginate": false,
                 "bLengthChange": false,
                 "bFilter": false,
                 "bSort": true,
-                "bInfo": true,
+                "bInfo": false,
                 "bAutoWidth": false
             });
         });

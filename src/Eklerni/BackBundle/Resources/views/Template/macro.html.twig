@@ -1,11 +1,11 @@
 {% macro block(title, content, footer, type) %}
-    <div class="box box-{{ type }}">
-        <div class="box-header" data-toggle="tooltip" title="{{ title }}" data-original-title="Header tooltip">
+    <div class="box box-{{ type }} box-solid">
+        <div class="box-header" data-toggle="tooltip" title="{{ title|striptags }}" data-original-title="Header tooltip">
             <h3 class="box-title">{{ title }}</h3>
 
             <div class="box-tools pull-right">
-                <button class="btn btn-{{ type }} btn-xs" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                <button class="btn btn-{{ type }} btn-xs" data-widget="remove"><i class="fa fa-times"></i></button>
+                <button class="btn btn-{{ type }}" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-{{ type }}" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
         </div>
         <div class="box-body">
@@ -13,6 +13,25 @@
         </div>
         <div class="box-footer">
             {{ footer }}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro dataTable(header, content, foot) %}
+    <div class="box-body table-responsive">
+        <div id="table_wrapper" class="dataTables_wrapper form-inline" role="grid">
+            <table id="table" class="table table-bordered table-hover dataTable"
+                   aria-describedby="table_info">
+                <thead>
+                    {{ header }}
+                </thead>
+                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    {{ content }}
+                </tbody>
+                <tfoot>
+                    {{ foot }}
+                </tfoot>
+            </table>
         </div>
     </div>
 {% endmacro %}

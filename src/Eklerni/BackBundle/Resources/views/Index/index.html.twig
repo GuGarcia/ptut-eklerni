@@ -3,10 +3,14 @@
 {% if eleves|length > 0 %}
     {% set elevesTable %}
     <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th>Classe</th>
+        </tr>
         {% for eleve in eleves %}
             <tr>
                 <td><a href="{{ path("eklerni_back_eleve") }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
-                <td>{{ eleve.classe.nom }}</td>
+                <td><a href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}</a></td>
             </tr>
         {% endfor %}
     </table>
@@ -20,6 +24,11 @@
 {% if enseignant.classes|length > 0 %}
     {% set classesTable %}
     <table class="table" id="profs">
+        <tr>
+            <th>Nom</th>
+            <th>Niveau</th>
+            <th>Nb Élève</th>
+        </tr>
         {% for classe in enseignant.classes %}
             <tr>
                 <td>
@@ -27,6 +36,9 @@
                 </td>
                 <td>
                     {{ classe.niveau }}
+                </td>
+                <td>
+                    {{ classe.eleves|length }}
                 </td>
             </tr>
         {% endfor %}
@@ -38,8 +50,8 @@
     {% endset %}
 {% endif %}
 {% set footerclasses %}
-<a href="{{ path("eklerni_back_classe_create") }}" id="add_prof_link" class="btn btn-danger"><i class="fa fa-plus">
-        Ajouter</i></a>
+<a href="{{ path("eklerni_back_classe_create") }}" id="add_prof_link" class="btn btn-danger"><i class="fa fa-plus"> Classe</i></a>
+<a href="{{ path("eklerni_back_classe_create_ecole") }}" id="add_prof_link" class="btn btn-danger"><i class="fa fa-plus"> Ecole</i></a>
 {% endset %}
     {% block body %}
         <div class="row">
