@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class LoginType extends AbstractType
+class ChangePasswordType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -14,8 +14,8 @@ class LoginType extends AbstractType
         $builder->add(
             'username', 'text', array(
                 'label' => 'personne.username',
+                'disabled' => true,
                 'attr' => array(
-                    'autofocus' => 'autofocus',
                     'placeholder' => 'personne.username',
                     'class' => 'form-control'
                 )
@@ -24,10 +24,34 @@ class LoginType extends AbstractType
 
         $builder->add(
             'password', 'password', array(
-                'label' => 'personne.password',
+                'label' => 'personne.password.old',
                 'attr' => array(
+                    'autofocus' => 'autofocus',
                     'placeholder' => "personne.password",
                     'class' => 'form-control'
+                ),
+                'required' => false
+            )
+        );
+
+        $builder->add(
+            'newpassword', 'repeated', array(
+                'type' => 'password',
+                'invalid_message' => 'personne.password.notequal',
+                'required' => false,
+                'first_options' => array(
+                    'label' => 'personne.password.new',
+                    'attr' => array(
+                        'placeholder' => 'personne.password',
+                        'class' => 'form-control'
+                    )
+                ),
+                'second_options' => array(
+                    'label' => 'personne.password.new.retype',
+                    'attr' => array(
+                        'placeholder' => 'personne.password',
+                        'class' => 'form-control'
+                    )
                 )
             )
         );
@@ -45,7 +69,7 @@ class LoginType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'intention' => 'authentication'
+            'intention' => 'password_change'
         ));
     }
 
@@ -54,7 +78,7 @@ class LoginType extends AbstractType
      */
     public function getName()
     {
-        return 'eklerni_login';
+        return 'eklerni_password_change';
     }
 
 }

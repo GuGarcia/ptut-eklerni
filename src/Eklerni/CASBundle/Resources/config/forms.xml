@@ -11,6 +11,12 @@
         <service id="eklerni.form.type.login" class="Eklerni\CASBundle\Form\Type\LoginType">
             <tag name="form.type" alias="eklerni_login"/>
         </service>
+        <service id="eklerni.form.type.profile.changepassword" class="Eklerni\CASBundle\Form\Type\ChangePasswordType">
+            <tag name="form.type" alias="eklerni_password_change"/>
+        </service>
+        <service id="eklerni.form.type.profile.update" class="Eklerni\CASBundle\Form\Type\ProfileType">
+            <tag name="form.type" alias="eklerni_profile_update"/>
+        </service>
     </services>
 
 </container>

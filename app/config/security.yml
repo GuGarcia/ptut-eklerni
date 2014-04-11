@@ -23,7 +23,7 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         cas:
-            pattern:  ^/
+            pattern:  ~
             form_login:
                 login_path: eklerni_cas_login
                 check_path: eklerni_cas_login_check
@@ -39,7 +39,8 @@ security:
             anonymous:  ~
 
     access_control:
+        - { path: ^/cas/profile, allow_if: "has_role('ROLE_ELEVE') or has_role('ROLE_ENSEIGNANT')" }
         - { path: ^/cas, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/front, roles: ROLE_ELEVE }
-        - { path: ^/back, roles: ROLE_ENSEIGNANT }
+        - { path: ^.*/front, roles: ROLE_ELEVE }
+        - { path: ^.*/back, roles: ROLE_ENSEIGNANT }

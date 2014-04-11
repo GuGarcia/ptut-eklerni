@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: GarciaGuillaume
- * Date: 18/03/2014
- * Time: 09:24
- */
 
 namespace Eklerni\DatabaseBundle\Entity;
 
@@ -20,7 +14,8 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"enseignant" = "Enseignant", "eleve" = "Eleve"})
  */
-abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Serializable{
+abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Serializable
+{
 
     /********************
      * ATTRIBUTES
@@ -55,6 +50,13 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
      * @ORM\Column(name="password", type="string", length=88)
      */
     protected $password;
+
+    /**
+     * Variable used to change password
+     *
+     * @var string
+     */
+    protected $newPassword;
 
     /**
      * @var boolean
@@ -129,6 +131,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     public function setDateNaissance($dateNaissance)
     {
         $this->dateNaissance = $dateNaissance;
+
         return $this;
     }
 
@@ -147,6 +150,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     public function setUsername($username)
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -165,6 +169,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     public function setNom($nom)
     {
         $this->nom = $nom;
+
         return $this;
     }
 
@@ -177,17 +182,18 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     }
 
     /**
-     * @param mixed $password
+     * @param string $password
      * @return Personne
      */
     public function setPassword($password)
     {
         $this->password = $password;
+
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPassword()
     {
@@ -195,17 +201,18 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     }
 
     /**
-     * @param mixed $prenom
+     * @param string $prenom
      * @return Personne
      */
     public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
+
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPrenom()
     {
@@ -213,10 +220,31 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     }
 
     /**
+     * @param string $newPassword
+     * @return Personne
+     */
+    public function setNewPassword($newPassword)
+    {
+        $this->newPassword = $newPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewPassword()
+    {
+        return $this->newPassword;
+    }
+
+
+    /**
      * @inheritdoc
      */
     public function eraseCredentials()
-    {}
+    {
+    }
 
     public function isAccountNonExpired()
     {
@@ -265,6 +293,6 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
             $this->password,
             $this->salt,
             $this->isActive
-        ) = unserialize($serialized);
+            ) = unserialize($serialized);
     }
 } 
