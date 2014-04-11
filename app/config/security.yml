@@ -39,6 +39,7 @@ security:
             anonymous:  ~
 
     access_control:
+        - { path: ^/cas/profile, allow_if: "has_role('ROLE_ELEVE') or has_role('ROLE_ENSEIGNANT')" }
         - { path: ^/cas, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^.*/front, roles: ROLE_ELEVE }

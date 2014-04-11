@@ -15,6 +15,7 @@ class RegisterType extends AbstractType
             'username', 'text', array(
                 'label' => 'personne.username',
                 'attr' => array(
+                    'autofocus' => 'autofocus',
                     'placeholder' => 'personne.username',
                     'class' => 'form-control'
                 )
@@ -26,7 +27,7 @@ class RegisterType extends AbstractType
                 'type' => 'password',
                 'invalid_message' => 'personne.password.notequal',
                 'options' => array('required' => true),
-                'first_options'  => array(
+                'first_options' => array(
                     'label' => 'personne.password',
                     'attr' => array(
                         'placeholder' => 'personne.password',
@@ -40,7 +41,8 @@ class RegisterType extends AbstractType
                         'class' => 'form-control'
                     )
                 )
-            ));
+            )
+        );
 
         $builder->add(
             'nom', 'text', array(

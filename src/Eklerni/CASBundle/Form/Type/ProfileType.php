@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class LoginType extends AbstractType
+class ProfileType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -14,8 +14,8 @@ class LoginType extends AbstractType
         $builder->add(
             'username', 'text', array(
                 'label' => 'personne.username',
+                'disabled' => true,
                 'attr' => array(
-                    'autofocus' => 'autofocus',
                     'placeholder' => 'personne.username',
                     'class' => 'form-control'
                 )
@@ -23,14 +23,35 @@ class LoginType extends AbstractType
         );
 
         $builder->add(
-            'password', 'password', array(
-                'label' => 'personne.password',
+            'nom', 'text', array(
+                'label' => 'personne.lastname',
                 'attr' => array(
-                    'placeholder' => "personne.password",
+                    'autofocus' => 'autofocus',
+                    'placeholder' => "personne.lastname",
                     'class' => 'form-control'
                 )
             )
         );
+
+        $builder->add(
+            'prenom', 'text', array(
+                'label' => 'personne.firstname',
+                'attr' => array(
+                    'placeholder' => "personne.firstname",
+                    'class' => 'form-control'
+                )
+            )
+        );
+
+        $builder->add(
+            'dateNaissance', 'date', array(
+            'label' => 'personne.birthdate',
+            'widget' => 'single_text',
+            'format' => 'yyyy-MM-dd',
+            'attr' => array(
+                'class' => 'masked_date form-control',
+            )
+        ));
 
         $builder->add(
             'valider', 'submit', array(
@@ -45,7 +66,7 @@ class LoginType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'intention' => 'authentication'
+            'intention' => 'update_profile'
         ));
     }
 
@@ -54,7 +75,7 @@ class LoginType extends AbstractType
      */
     public function getName()
     {
-        return 'eklerni_login';
+        return 'eklerni_profile_update';
     }
 
 }
