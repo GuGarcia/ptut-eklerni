@@ -1,5 +1,4 @@
 {% extends "EklerniCASBundle:Template:template.html.twig" %}
-{% import 'EklerniCASBundle:Template:macro.form.html.twig' as eklerni_cas %}
 
 {% block stylesheets %}
     <link href="{{ asset('bundles/eklernicas/css/form.css') }}" type="text/css" rel="stylesheet"/>
@@ -8,7 +7,7 @@
 {% block body %}
     <div class="header">{{ title }}</div>
 
-    <form action="{{ path('eklerni_cas_password_change') }}" method="post">
+    <form action="{{ path('eklerni_cas_profile') }}" method="post">
         <div class="body bg-gray">
             {{ eklerni_cas.row(form.username) }}
             {{ eklerni_cas.row(form.nom) }}

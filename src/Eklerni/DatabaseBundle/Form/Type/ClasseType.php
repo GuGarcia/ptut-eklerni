@@ -14,7 +14,11 @@ class ClasseType extends AbstractType
     {
         $builder->add(
             'nom', 'text', array(
-                'label' => 'classe.name'
+                'label' => 'classe.name',
+                'attr' => array(
+                    'placeholder' => "classe.name",
+                    'class' => 'form-control'
+                )
             )
         );
 
@@ -27,28 +31,44 @@ class ClasseType extends AbstractType
                     'CE2' => 'grade.year3',
                     'CM1' => 'grade.year4',
                     'CM2' => 'grade.year5'
+                ),
+                'attr' => array(
+                    'class' => 'form-control'
                 )
             )
         );
         $builder->add(
             'annee', 'integer', array(
-                'label' => 'Année',
-                'data' => date("Y")
+                'label' => 'classe.year',
+                'data' => date("Y"),
+                'attr' => array(
+                    'placeholder' => "classe.year",
+                    'class' => 'form-control'
+                )
             )
         );
 
-        $builder->add('ecole', 'entity', array(
+        $builder->add(
+            'ecole',
+            'entity',
+            array(
                 'label' => 'classe.school',
                 'class' => 'EklerniDatabaseBundle:Ecole',
                 'query_builder' => function (EcoleRepository $er) {
                         return $er->findAll();
-                    },
+                },
+                'attr' => array(
+                    'class' => 'form-control'
+                )
             )
         );
 
         $builder->add(
             'valider', 'submit', array(
-                'label' => "button.validation"
+                'label' => "button.validation",
+                'attr' => array(
+                    'class' => 'btn bg-olive btn-block'
+                )
             )
         );
     }

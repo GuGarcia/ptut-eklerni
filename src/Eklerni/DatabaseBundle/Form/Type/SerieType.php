@@ -18,7 +18,11 @@ class SerieType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add(
             'nom', 'text', array(
-                'label' => 'serie.name'
+                'label' => 'serie.name',
+                'attr' => array(
+                    'placeholder' => "serie.name",
+                    'class' => 'form-control'
+                )
             )
         );
 
@@ -39,12 +43,19 @@ class SerieType extends AbstractType {
             "public", "checkbox", array(
                 'label'     => "serie.public",
                 'required'  => false,
+                'attr' => array(
+                    'placeholder' => "serie.public",
+                    'class' => 'form-control'
+                )
             )
         );
 
         $builder->add(
             'valider', 'submit', array(
-                'label' => "button.validation"
+                'label' => "button.validation",
+                'attr' => array(
+                    'class' => 'btn bg-olive btn-block'
+                )
             )
         );
     }

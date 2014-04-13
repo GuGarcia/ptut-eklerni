@@ -11,7 +11,7 @@
         <div class="navbar-right">
             <ul class="nav navbar-nav">
             {% if app.user %}
-                <li><a href="{{ path("eklerni_back_homepage") }}">{{ app.user.nom }} {{ app.user.prenom }}</a></li>
+                <li><a href="{{ path("eklerni_cas_profile") }}">{{ app.user.nom }} {{ app.user.prenom }}</a></li>
                 <li><a href="{{ path("eklerni_cas_logout") }}" class="fa fa-power-off"> Déconnexion</a></li>
             {% endif %}
             </ul>
