@@ -1,5 +1,7 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
 {% block body %}
-
-{% endblock %}
+    {% for matiere in matieres %}
+        <h2 class="page-header">{{ matiere.name }}</h2>
+    {% endfor %}
+    {% endblock %}

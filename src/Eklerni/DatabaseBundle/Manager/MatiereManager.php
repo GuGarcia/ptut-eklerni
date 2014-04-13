@@ -15,4 +15,8 @@ class MatiereManager extends BaseManager{
     public function findByClasse(Classe $classe) {
         return $this->repository->findByClasse($classe->getId())->getQuery()->getResult();
     }
+
+    public function findAll() {
+        return $this->repository->findAll()->getQuery()->getResult();
+    }
 } 

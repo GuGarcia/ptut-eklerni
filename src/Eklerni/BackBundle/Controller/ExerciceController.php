@@ -2,6 +2,8 @@
 
 namespace Eklerni\BackBundle\Controller;
 
+use Eklerni\DatabaseBundle\Entity\Matiere;
+use Eklerni\DatabaseBundle\Entity\Activite;
 use Eklerni\DatabaseBundle\Entity\Serie;
 use Proxies\__CG__\Eklerni\CASBundle\Entity\Enseignant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,9 +17,15 @@ class ExerciceController extends Controller {
     public function indexAction()
     {
         // Lister matière
+        $matieres = $this->get('eklerni.manager.matiere')->findAll();
+
+        // Lister activité (custom tabs)
+
+        // <h2 class="page-header">Alerts and Callouts</h2>
 
         return $this->render('EklerniBackBundle:Exercice:index.html.twig', array(
-                "title" => "Exercice"
+                "title"     => "Liste des exercices",
+                "matieres"  => $matieres
             )
         );
     }
