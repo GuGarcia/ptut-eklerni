@@ -7,14 +7,14 @@
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <ul id="tabs" class="nav nav-tabs pull-right">
-                        <li class="active">
+                        <li class="tab active">
                             <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">Séries personnelles</a>
                         </li>
-                        <li>
+                        <li class="tab">
                             <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">Séries publiques</a>
                         </li>
                         <li>
-                            <a class="btn btn-primary" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
+                            <a class="btn btn-primary bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
                                 <i class="fa fa-plus"></i>
                                 Série
                             </a>
@@ -48,7 +48,7 @@
 {% block javascripts %}
     <script type="application/javascript">
         $(function () {
-            $('#tabs a').click(function (e) {
+            $('#tabs li.tab').click(function (e) {
                 e.preventDefault();
                 $(this).tab('show');
             });
