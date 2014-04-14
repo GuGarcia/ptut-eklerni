@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2014-04-14T07:15:07Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="6594c446cab9342234aff10f18551fc7fb571518" resname="Ajout d'un Eleve à la Classe : %name%">
+        <source>Ajout d'un Eleve à la Classe : %name%</source>
+        <target>Add a student to the class : %name%</target>
+        <jms:reference-file line="128">BackBundle/Controller/ClasseController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7a7076a79e6b7874566cfd88dfe6ffe510d56b04" resname="Classe %name%">
+        <source>Classe %name%</source>
+        <target>Class %name%</target>
+        <jms:reference-file line="39">BackBundle/Controller/ClasseController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6929a2c5bc8080684fd61cf3ad4dcfcbf803770a" resname="title.accueil">
+        <source>title.accueil</source>
+        <target>Home</target>
+        <jms:reference-file line="22">BackBundle/Controller/IndexController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="de9332a15ad606c47f8158a467a84f9ab9fea368" resname="title.classe">
+        <source>title.classe</source>
+        <target>Class</target>
+        <jms:reference-file line="54">BackBundle/Controller/ClasseController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="cce1745c5f28fbfac817c8b064b28b2a07d814ba" resname="title.create_classe">
+        <source>title.create_classe</source>
+        <target>Class creation</target>
+        <jms:reference-file line="79">BackBundle/Controller/ClasseController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1b7b5ca251e67ed18303f558d16d31aa16971e43" resname="title.create_serie">
+        <source>title.create_serie</source>
+        <target>Serie creation</target>
+        <jms:reference-file line="41">BackBundle/Controller/ExerciceController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="35b8b0a4747e1e0c581fe413a2049c156fa368e4" resname="title.exercice">
+        <source>title.exercice</source>
+        <target>Exercice</target>
+        <jms:reference-file line="20">BackBundle/Controller/ExerciceController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7322645ec280381d3cf90d237d7ae6a2b85ce8e8" resname="title.statistiques">
+        <source>title.statistiques</source>
+        <target>Statistics</target>
+        <jms:reference-file line="14">BackBundle/Controller/StatistiqueController.php</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

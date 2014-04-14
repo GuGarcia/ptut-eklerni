@@ -11,6 +11,6 @@ class StatistiqueController extends Controller{
      */
     public function indexAction()
     {
-        return $this->render('EklerniBackBundle:Statistique:index.html.twig', array("title" => "Statistiques"));
+        return $this->render('EklerniBackBundle:Statistique:index.html.twig', array("title" => $this->get('translator')->trans("title.statistiques")));
     }
 } 

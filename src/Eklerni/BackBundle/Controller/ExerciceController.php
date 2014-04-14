@@ -17,7 +17,7 @@ class ExerciceController extends Controller {
         // Lister matière
 
         return $this->render('EklerniBackBundle:Exercice:index.html.twig', array(
-                "title" => "Exercice"
+                "title" => $this->get('translator')->trans("title.exercice")
             )
         );
     }
@@ -26,8 +26,8 @@ class ExerciceController extends Controller {
         $serie = new Serie();
         /** @var \Eklerni\DatabaseBundle\Entity\Enseignant $enseignant */
         $enseignant = $this->get("security.context")->getToken()->getUser();
-        $form = $this->createForm('eklerni_serie', $serie);
 
+        $form = $this->createForm('eklerni_serie', $serie);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -38,7 +38,7 @@ class ExerciceController extends Controller {
 
         return $this->render('EklerniBackBundle:Exercice:ajouter.html.twig', array(
                 'form'  => $form->createView(),
-                'title' => 'Création d\'une série',
+                'title' => $this->get('translator')->trans("title.create_serie"),
             )
         );
     }
