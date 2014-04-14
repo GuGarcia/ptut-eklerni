@@ -110,6 +110,19 @@ class ClasseController extends Controller
 
         if ($form->isValid()) {
             $eleve->setClasse($classe);
+
+            /** @var \Symfony\Component\Security\Core\Encoder\EncoderFactory $factory */
+            $factory = $this->get('security.encoder_factory');
+
+            $encoder = $factory->getEncoder($eleve);
+            $password = $encoder->encodePassword($eleve->getPassword(), $eleve->getSalt());
+
+            if (!$encoder->isPasswordValid($password, $eleve->getPassword(), $eleve->getSalt())) {
+                throw new \Exception($this->get('translator')->trans('register.encode_error'));
+            } else {
+                $eleve->setPassword($password);
+            }
+
             $this->get("eklerni.manager.eleve")->save($eleve);
 
             return $this->redirect(
