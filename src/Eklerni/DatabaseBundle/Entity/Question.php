@@ -55,7 +55,8 @@ class Question extends BaseEntity {
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Reponse", mappedBy="question")
+     *
+     * @ORM\OneToMany(targetEntity="Reponse", mappedBy="question")
      */
     private $reponses;
 

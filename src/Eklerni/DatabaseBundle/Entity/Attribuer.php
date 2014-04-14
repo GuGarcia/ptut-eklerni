@@ -37,6 +37,7 @@ class Attribuer
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Resultat", mappedBy="attribution")
+     * @ORM\JoinColumn(name="idResultat", referencedColumnName="id")
      */
     private $resultats;
 

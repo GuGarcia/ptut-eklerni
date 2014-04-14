@@ -32,12 +32,14 @@ class Eleve extends Personne {
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Resultat", mappedBy="eleve")
+     * @ORM\JoinColumn(name="idResultat", referencedColumnName="id")
      */
     private $resultats;
 
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Attribuer", mappedBy="eleve")
+     *
      */
     private $listeAttribution;
 
