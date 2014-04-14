@@ -47,6 +47,7 @@ class Reponse extends BaseEntity {
 
     /**
      * @var Question
+     *
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="reponses")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
@@ -54,6 +55,7 @@ class Reponse extends BaseEntity {
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="Resultat", inversedBy="reponses")
      * @ORM\JoinTable(name="t_resultatReponse")
      */
