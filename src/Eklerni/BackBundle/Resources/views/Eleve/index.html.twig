@@ -9,8 +9,8 @@
                 <td>Prénom : {{ eleve.prenom }}</td>
             </tr>
             <tr>
-                <td>Classe : <a
-                            href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}
+                <td>
+                    Classe : <a href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}</a>
                 </td>
             </tr>
             <tr>
