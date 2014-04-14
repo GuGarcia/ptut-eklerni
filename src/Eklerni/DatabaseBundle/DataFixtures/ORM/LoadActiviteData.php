@@ -27,6 +27,8 @@ class LoadActiviteData extends AbstractFixture implements OrderedFixtureInterfac
 
             $manager->persist($activite);
             $manager->flush();
+
+            $this->addReference("Lecture.".$activite->getName(), $activite);
         }
         foreach ($listDictee as $activiteName) {
             $activite = new Activite();
@@ -35,6 +37,8 @@ class LoadActiviteData extends AbstractFixture implements OrderedFixtureInterfac
 
             $manager->persist($activite);
             $manager->flush();
+
+            $this->addReference("Dictée.".$activite->getName(), $activite);
         }
         foreach ($listConjugaison as $activiteName) {
             $activite = new Activite();
@@ -43,6 +47,8 @@ class LoadActiviteData extends AbstractFixture implements OrderedFixtureInterfac
 
             $manager->persist($activite);
             $manager->flush();
+
+            $this->addReference("Conjugaison.".$activite->getName(), $activite);
         }
         foreach ($listMaths as $activiteName) {
             $activite = new Activite();
@@ -51,6 +57,8 @@ class LoadActiviteData extends AbstractFixture implements OrderedFixtureInterfac
 
             $manager->persist($activite);
             $manager->flush();
+
+            $this->addReference("Maths.".$activite->getName(), $activite);
         }
         foreach ($llistCalcul as $activiteName) {
             $activite = new Activite();
@@ -59,8 +67,9 @@ class LoadActiviteData extends AbstractFixture implements OrderedFixtureInterfac
 
             $manager->persist($activite);
             $manager->flush();
-        }
 
+            $this->addReference("Calcul.".$activite->getName(), $activite);
+        }
     }
 
     /**
@@ -68,6 +77,6 @@ class LoadActiviteData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function getOrder()
     {
-        return 2;
+        return 20;
     }
 }
