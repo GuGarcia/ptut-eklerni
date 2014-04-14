@@ -20,8 +20,8 @@ class ExerciceController extends Controller {
         $matieres = $this->get('eklerni.manager.matiere')->findAll();
 
         return $this->render('EklerniBackBundle:Exercice:index.html.twig', array(
-                "title"     => "Liste des exercices",
                 "matieres"  => $matieres,
+                "title" => $this->get('translator')->trans("title.exercice")
             )
         );
     }
@@ -30,8 +30,8 @@ class ExerciceController extends Controller {
         $serie = new Serie();
         /** @var \Eklerni\DatabaseBundle\Entity\Enseignant $enseignant */
         $enseignant = $this->get("security.context")->getToken()->getUser();
-        $form = $this->createForm('eklerni_serie', $serie);
 
+        $form = $this->createForm('eklerni_serie', $serie);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -42,7 +42,7 @@ class ExerciceController extends Controller {
 
         return $this->render('EklerniBackBundle:Exercice:ajouter.html.twig', array(
                 'form'  => $form->createView(),
-                'title' => 'Création d\'une série',
+                'title' => $this->get('translator')->trans("title.create_serie"),
             )
         );
     }

@@ -2,10 +2,11 @@
 
 namespace Eklerni\BackBundle\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Ecole;
 use Eklerni\DatabaseBundle\Entity\Eleve;
+use Eklerni\DatabaseBundle\Entity\Enseignant;
+use Eklerni\DatabaseBundle\Entity\Matiere;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,12 +15,14 @@ class ClasseController extends Controller
 {
     public function indexAction($idClasse)
     {
+        /** @var Classe $classe */
         $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
         $enseignants = $this->get("eklerni.manager.enseignant")->findAll();
-        $i=0;
-        foreach($enseignants as $enseignant) {
-            foreach($classe->getEnseignants() as $prof) {
-                if($enseignant->getId() == $prof->getId()) {
+        $i = 0;
+
+        foreach ($enseignants as $enseignant) {
+            foreach ($classe->getEnseignants() as $prof) {
+                if ($enseignant->getId() == $prof->getId()) {
                     unset($enseignants[$i]);
                     break;
                 }
@@ -28,7 +31,15 @@ class ClasseController extends Controller
         }
         $matieres = $this->get("eklerni.manager.matiere")->findAll();
 
-        return $this->render('EklerniBackBundle:Classe:index.html.twig', array("classe" => $classe, "enseignants" => $enseignants, "title" => "Classe ".$classe->getNom(), "matieres" => $matieres));
+        return $this->render(
+            'EklerniBackBundle:Classe:index.html.twig',
+            array(
+                "classe" => $classe,
+                "enseignants" => $enseignants,
+                "title" => $this->get('translator')->trans("Classe %name%", array("%name%" => $classe->getNom())),
+                "matieres" => $matieres
+            )
+        );
     }
 
     public function listAction()
@@ -36,16 +47,22 @@ class ClasseController extends Controller
         $prof = $this->get('security.context')->getToken()->getUser();
         $classes = $this->get("eklerni.manager.classe")->findByProf($prof);
 
-        return $this->render('EklerniBackBundle:Classe:list.html.twig', array("classes" => $classes, "title" => "Classe"));
+        return $this->render(
+            'EklerniBackBundle:Classe:list.html.twig',
+            array(
+                "classes" => $classes,
+                "title" => $this->get('translator')->trans("title.classe")
+            )
+        );
     }
 
     public function ajouterAction(Request $request)
     {
         $classe = new Classe();
+        /** @var Enseignant $enseignants */
         $enseignant = $this->get("security.context")->getToken()->getUser();
-        $form = $this->createFormBuilder($classe);
-        $this->get("eklerni.form.type.classe")->buildForm($form, array());
-        $form = $form->getForm();
+
+        $form = $this->createForm('eklerni_classe', $classe);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -55,23 +72,31 @@ class ClasseController extends Controller
             $this->get("eklerni.manager.enseignant")->save($enseignant);
             return $this->redirect($this->generateUrl('eklerni_back_classe'));
         } else {
-            return $this->render('EklerniBackBundle:Classe:ajouter.html.twig', array("form" => $form->createView(), "title" => "Création d'une Classe"));
+            return $this->render(
+                'EklerniBackBundle:Classe:ajouter.html.twig',
+                array(
+                    "form" => $form->createView(),
+                    "title" => $this->get('translator')->trans("title.create_classe")
+                )
+            );
         }
     }
 
     public function ajouterEcoleAction(Request $request)
     {
         $ecole = new Ecole();
-        $form = $this->createFormBuilder($ecole);
-        $this->get("eklerni.form.type.ecole")->buildForm($form, array());
-        $form = $form->getForm();
+
+        $form = $this->createForm('eklerni_ecole', $ecole);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $this->get("eklerni.manager.ecole")->save($ecole);
             return $this->redirect($this->generateUrl('eklerni_back_classe'));
         } else {
-            return $this->render('EklerniBackBundle:Classe:ajouter.html.twig', array("form" => $form->createView(), "title" => "Création d'une Ecole"));
+            return $this->render(
+                'EklerniBackBundle:Ecole:ajouter.html.twig',
+                array("form" => $form->createView(), "title" => "Création d'une Ecole")
+            );
         }
     }
 
@@ -79,39 +104,60 @@ class ClasseController extends Controller
     {
         $eleve = new Eleve();
         $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
-        $eleve->setClasse($classe);
-        $form = $this->createFormBuilder($eleve);
-        $this->get("eklerni.form.type.eleve")->buildForm($form, array());
-        $form = $form->getForm();
+
+        $form = $this->createForm('eklerni_eleve', $eleve);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $eleve->setClasse($classe);
             $this->get("eklerni.manager.eleve")->save($eleve);
-            return $this->redirect($this->generateUrl('eklerni_back_classe_fiche', array("idClasse" => $idClasse)));
+
+            return $this->redirect(
+                $this->generateUrl(
+                    'eklerni_back_classe_fiche',
+                    array("idClasse" => $idClasse)
+                )
+            );
         } else {
-            return $this->render('EklerniBackBundle:Classe:ajouter.html.twig', array("form" => $form->createView(), "title" => "Ajout d'un Eleve à la Classe : ".$classe->getNom()));
+            return $this->render(
+                'EklerniBackBundle:Eleve:ajouter.html.twig',
+                array(
+                    "form" => $form->createView(),
+                    "title" => $this->get('translator')->trans("Ajout d'un Eleve à la Classe : %name%", array("%name%" => $classe->getNom()))
+                )
+            );
         }
     }
-    public function ajouterEnseignantAction(Request $request, $idClasse) {
+
+    public function ajouterEnseignantAction(Request $request, $idClasse)
+    {
         if ($request->isXmlHttpRequest()) {
+            /** @var Enseignant $enseignant */
             $enseignant = $this->get("eklerni.manager.enseignant")->findById($request->get("idEnseignant"))[0];
+            /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+
             $enseignant->addClasse($classe);
             $classe->addEnseignant($enseignant);
+
             $this->get("eklerni.manager.classe")->save($classe);
 
             return new Response(json_encode(array()));
         }
     }
 
-    public function saveMatieresAction(Request $request, $idClasse) {
+    public function saveMatieresAction(Request $request, $idClasse)
+    {
         if ($request->isXmlHttpRequest()) {
+            /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
 
             $this->get("eklerni.manager.classe")->clearMatieres($classe);
-            foreach($request->get("matieres") as $idMatiere) {
+            foreach ($request->get("matieres") as $idMatiere) {
+                /** @var Matiere $matiere */
                 $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere)[0];
-                if(get_class($matiere) == "Eklerni\\DatabaseBundle\\Entity\\Matiere") {
+
+                if (get_class($matiere) == "Eklerni\\DatabaseBundle\\Entity\\Matiere") {
                     $classe->getMatieres()->removeElement($matiere);
                     $matiere->addClasse($classe);
                     $this->get("eklerni.manager.matiere")->save($matiere);
@@ -124,13 +170,18 @@ class ClasseController extends Controller
         }
     }
 
-    public function deleteEnseignantClasseAction( Request $request, $idClasse) {
+    public function deleteEnseignantClasseAction(Request $request, $idClasse)
+    {
         if ($request->isXmlHttpRequest()) {
+            /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
             $this->get("eklerni.manager.classe")->clearEnseignants($classe);
-            foreach($request->get("profs") as $idEnseignant) {
+
+            foreach ($request->get("profs") as $idEnseignant) {
+                /** @var Enseignant $prof */
                 $prof = $this->get("eklerni.manager.enseignant")->findById($idEnseignant)[0];
-                if(get_class($prof) == "Eklerni\\DatabaseBundle\\Entity\\Enseignant") {
+
+                if (get_class($prof) == "Eklerni\\DatabaseBundle\\Entity\\Enseignant") {
                     $prof->addClasse($classe);
                     $this->get("eklerni.manager.enseignant")->save($prof);
                     $classe->addEnseignant($prof);

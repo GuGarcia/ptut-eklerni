@@ -18,25 +18,40 @@ class EcoleType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add(
             'nom', 'text', array(
-                'label' => 'ecole.name'
+                'label' => 'ecole.name',
+                'attr' => array(
+                    'placeholder' => "ecole.name",
+                    'class' => 'form-control'
+                )
             )
         );
 
         $builder->add(
             'codePostal', 'text', array(
-                'label' => 'ecole.postcode'
+                'label' => 'ecole.postcode',
+                'attr' => array(
+                    'placeholder' => "ecole.postcode",
+                    'class' => 'form-control'
+                )
             )
         );
 
         $builder->add(
             'ville', 'text', array(
-                'label' => 'ecole.city'
+                'label' => 'ecole.city',
+                'attr' => array(
+                    'placeholder' => "ecole.city",
+                    'class' => 'form-control'
+                )
             )
         );
 
         $builder->add(
             'valider', 'submit', array(
-                'label' => "button.validation"
+                'label' => "button.validation",
+                'attr' => array(
+                    'class' => 'btn bg-olive btn-block'
+                )
             )
         );
     }
