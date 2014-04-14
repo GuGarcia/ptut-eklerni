@@ -18,6 +18,7 @@ class Serie extends BaseEntity
      ********************/
 
     public function __construct() {
+        parent::__construct();
         $this->questions = new ArrayCollection();
         $this->listeAttribution = new ArrayCollection();
         $this->resultats = new ArrayCollection();

@@ -43,6 +43,7 @@ class LoadEnseignantData extends AbstractFixture implements OrderedFixtureInterf
         $manager->persist($user);
         $manager->flush();
 
+        $this->addReference($user->getUsername(), $user);
     }
 
     /**
@@ -50,6 +51,6 @@ class LoadEnseignantData extends AbstractFixture implements OrderedFixtureInterf
      */
     public function getOrder()
     {
-        return 4;
+        return 0;
     }
 }
