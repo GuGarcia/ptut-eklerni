@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Robert-U
- * Date: 20/03/14
- * Time: 10:38
- */
 
 namespace Eklerni\DatabaseBundle\Form\Type;
-
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,11 +23,14 @@ class SerieType extends AbstractType {
             'difficulte', 'choice', array(
                 'label' => "serie.difficulty",
                 'choices' => array(
-                    '1' => 'Niveau 1',
-                    '2' => 'Niveau 2',
-                    '3' => 'Niveau 3',
-                    '4' => 'Niveau 4',
-                    '5' => 'Niveau 5'
+                    '1' => 'difficulte.niveau.1',
+                    '2' => 'difficulte.niveau.2',
+                    '3' => 'difficulte.niveau.3',
+                    '4' => 'difficulte.niveau.4',
+                    '5' => 'difficulte.niveau.5'
+                ),
+                'attr' => array(
+                    'class' => 'form-control'
                 )
             )
         );
@@ -44,7 +40,6 @@ class SerieType extends AbstractType {
                 'label'     => "serie.public",
                 'required'  => false,
                 'attr' => array(
-                    'placeholder' => "serie.public",
                     'class' => 'form-control'
                 )
             )
