@@ -15,10 +15,13 @@
     </parameters>
 
     <services>
-        <service id="eklerni.manager.ecole" class="%manager_ecole.class%">
+        <service id="eklerni.manager.activite" class="%manager_activite.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
         <service id="eklerni.manager.classe" class="%manager_classe.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.ecole" class="%manager_ecole.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
         <service id="eklerni.manager.eleve" class="%manager_eleve.class%">
@@ -28,9 +31,6 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
         <service id="eklerni.manager.matiere" class="%manager_matiere.class%">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-        </service>
-        <service id="eklerni.manager.activite" class="%manager_activite.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
         <service id="eklerni.manager.serie" class="%manager_serie.class%">
