@@ -7,5 +7,8 @@
     <route id="eklerni_back_eleve" pattern="/">
         <default key="_controller">EklerniBackBundle:Eleve:list</default>
     </route>
+    <route id="eklerni_back_eleve_fiche" pattern="/{idEleve}">
+        <default key="_controller">EklerniBackBundle:Eleve:index</default>
+    </route>
 
 </routes>

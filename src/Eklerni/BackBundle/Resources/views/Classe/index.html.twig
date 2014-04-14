@@ -5,7 +5,7 @@
         <table class="table">
             {% for eleve in classe.eleves %}
                 <tr>
-                    <td><a href="{{ path("eklerni_back_eleve") }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
+                    <td><a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
                 </tr>
             {% endfor %}
         </table>

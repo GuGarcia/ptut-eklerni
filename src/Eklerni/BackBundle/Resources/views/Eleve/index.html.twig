@@ -1,5 +1,37 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
-{% block body %}
+        {% set eleveTable %}
+        <table class="table">
+            <tr>
+                <td>Nom : {{ eleve.nom }}</td>
+            </tr>
+            <tr>
+                <td>Prénom : {{ eleve.prenom }}</td>
+            </tr>
+            <tr>
+                <td>Classe : <a
+                            href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}
+                </td>
+            </tr>
+            <tr>
+                <td>Date de Naissance : {{ eleve.dateNaissance|date("d F Y") }}</td>
+            </tr>
+        </table>
+        {% endset %}
+{% set footereleve %}
+    <a href="">
+        <button class="btn btn-primary">Modifier l'Elève</button>
+    </a>
+{% endset %}
 
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            {{ eklerni.block( "Eleve", eleveTable, footereleve, "primary") }}
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
 {% endblock %}

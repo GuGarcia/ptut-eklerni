@@ -8,13 +8,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class EleveController extends Controller{
 
     /**
+     * @param $idEleve
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction($idEleve)
     {
-        return $this->render('EklerniBackBundle:Eleve:index.html.twig', array("title" => "Élève"));
+        $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve)[0];
+        return $this->render('EklerniBackBundle:Eleve:index.html.twig', array("title" => "Élève ".$eleve->getNom()." ".$eleve->getPrenom(), "eleve" => $eleve));
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction() {
         /** @var Enseignant $prof */
         $prof = $this->get('security.context')->getToken()->getUser();

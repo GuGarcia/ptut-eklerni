@@ -35,11 +35,11 @@
                             <td class="">{{ classe.ecole }}</td>
                             <td class="">
                                 {{ classe.niveau }}</td>
-                            <td class="sorting_1"><a
-                                        href="{{ path("eklerni_back_classe_fiche", {idClasse: classe.id}) }}">{{ classe.nom }}</a>
+                            <td class="sorting_1">
+                                <a href="{{ path("eklerni_back_classe_fiche", {idClasse: classe.id}) }}">{{ classe.nom }}</a>
                             </td>
                             <td class="">
-                                {{ classe.eleves|length }}
+                               {{ classe.eleves|length }}
                             </td>
                             <td>
                             {% if classe.eleves|length == 0 %}

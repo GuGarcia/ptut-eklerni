@@ -28,7 +28,7 @@
                         {% for eleve in classe.eleves %}
                             <tr class="odd">
                                 <td class="">{{ eleve.id }}</td>
-                                <td class="">{{ eleve.nom }} {{ eleve.prenom }}</td>
+                                <td class=""> <a href="{{ path("eklerni_back_eleve_fiche", {idEleve: eleve.id}) }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
                             </tr>
                         {% endfor %}
                         {% endset %}
