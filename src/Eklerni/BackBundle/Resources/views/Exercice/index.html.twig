@@ -20,7 +20,7 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
                             {% for serie in activite.series %}
-                                {% if not serie.public %}
+                                {% if not serie.public and serie.enseignant.id == app.user.id %}
                                     {{ serie.nom }} <br>
                                 {% endif %}
                             {% endfor %}
