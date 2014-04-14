@@ -6,21 +6,46 @@
         {% for activite in matiere.activites %}
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs pull-right">
-                        <li class=""><a href="#" data-toggle="tab">Séries privés</a></li>
-                        <li class="active"><a href="#" data-toggle="tab">Séries publiques</a></li>
-                        <li class="pull-left header">{{ activite.name }}</li>
+                    <ul id="tabs" class="nav nav-tabs pull-right">
+                        <li class="active">
+                            <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">Séries personnelles</a>
+                        </li>
+                        <li>
+                            <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">Séries publiques</a>
+                        </li>
+                        <li class="pull-left header">
+                            {{ activite.name }}
+                        </li>
                     </ul>
                     <div class="tab-content">
-                        <!--<div class="tab-pane" id="tab_1-1">
-                            Test
-                        </div>-->
-                        <div class="tab-pane active" id="tab_2-2">
-                            Test
+                        <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
+                            {% for serie in activite.series %}
+                                {% if not serie.public %}
+                                    {{ serie.nom }} <br>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
+                            {% for serie in activite.series %}
+                                {% if serie.public %}
+                                    {{ serie.nom }} <br>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
     {% endfor %}
-    {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="application/javascript">
+        $(function () {
+            $('#tabs a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        });
+    </script>
+{% endblock %}
