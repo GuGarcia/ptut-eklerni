@@ -1,0 +1,52 @@
+{% extends "EklerniBackBundle:Template:template.html.twig" %}
+
+{% set serieTable %}
+<table class="table">
+    {% for serie in seriesProf %}
+        <tr>
+            <button id="{{ serie.id }}">{{ serie.nom }}</button>
+        </tr>
+    {% endfor %}
+</table>
+{% endset %}
+
+{% set serieAttribuer %}
+<h3>Donner un Exercice à une Classe</h3>
+<table class="table">
+    {% for classe in prof.classes %}
+        <tr>
+            <td>{{ classe.nom }}</td>
+        </tr>
+        <tr>
+            <td>Zone de Dépôt</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<h3>Donner un Exercice à un Eleve</h3>
+<table class="table">
+    {% for classe in prof.classes %}
+        {% set background %}{% if loop.index is odd %}bg-danger{% else %}bg-primary{% endif %}{% endset %}
+        <tr class="{{ background }}"><th>Classe : {{ classe.nom }}</th></tr>
+        {% for eleve in classe.eleves %}
+            <tr class="{{ background }}">
+                <td>{{ eleve.nom }} {{ eleve.prenom }}</td>
+            </tr>
+            <tr class="{{ background }}">
+                <td>Zone de Dépôt</td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+</table>
+{% endset %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            {{ eklerni.block("Liste des Séries", serieTable, "", "danger") }}
+        </div>
+        <div class="col-md-8">
+            {{ eklerni.block("Attribution des Exercices", serieAttribuer, "", "primary") }}
+        </div>
+    </div>
+{% endblock %}

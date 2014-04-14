@@ -37,7 +37,7 @@ class SerieRepository extends EntityRepository implements CASRepositoryInterface
     public function findByProf($idProf)
     {
         return $this->_em->createQueryBuilder()
-            ->select("a")
+            ->select("s")
             ->from("EklerniDatabaseBundle:Serie", "s")
             ->innerJoin("s.enseignant", "e")
             ->where("e.id = :id")
