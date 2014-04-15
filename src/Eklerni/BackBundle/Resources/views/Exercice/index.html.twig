@@ -2,46 +2,65 @@
 
 {% block body %}
     {% for matiere in matieres %}
-        <h2 class="page-header">{{ matiere.name }}</h2>
-        {% for activite in matiere.activites %}
-            <div class="col-md-12">
-                <div class="nav-tabs-custom">
-                    <ul id="tabs" class="nav nav-tabs pull-right">
-                        <li class="tab active">
-                            <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">Séries personnelles</a>
-                        </li>
-                        <li class="tab">
-                            <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">Séries publiques</a>
-                        </li>
-                        <li>
-                            <a class="btn btn-primary bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
-                                <i class="fa fa-plus"></i>
-                                Série
-                            </a>
-                        </li>
-                        <li class="pull-left header">
-                            {{ activite.name }}
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
-                            {% for serie in activite.series %}
-                                {% if not serie.public and serie.enseignant.id == app.user.id %}
-                                    {{ serie.nom }} <br>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                        <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
-                            {% for serie in activite.series %}
-                                {% if serie.public %}
-                                    {{ serie.nom }} <br>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
+        <div class="box box-solid box-danger">
+            <div class="box-header">
+                <h3 class="box-title">{{ matiere.name }}</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-danger btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
                 </div>
             </div>
-        {% endfor %}
+            <div class="box-body">
+                {% for activite in matiere.activites %}
+                    <div class="box box-primary">
+                        <div class="nav-tabs-custom">
+                            <ul id="tabs" class="nav nav-tabs pull-right">
+                                <li class="tab active">
+                                    <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">Séries personnelles</a>
+                                </li>
+                                <li class="tab">
+                                    <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">Séries publiques</a>
+                                </li>
+                                <li>
+                                    <a class="btn-sm btn-primary bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
+                                        <i class="fa fa-plus"></i>
+                                        Série
+                                    </a>
+                                </li>
+                                <li class="pull-left header">
+                                    {{ activite.name }}
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
+                                    {% if activite.series is empty %}
+                                        {{ "Il n'y a aucune <b>série personnelle</b> pour cette activité." }}
+                                    {% else %}
+                                        {% for serie in activite.series %}
+                                            {% if not serie.public and serie.enseignant.id == app.user.id %}
+                                                {{ serie.nom }} <br>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
+                                    {% if activite.series is empty %}
+                                        {{ "Il n'y a aucune <b>série publique</b> pour cette activité." }}
+                                    {% else %}
+                                        {% for serie in activite.series %}
+                                            {% if serie.public %}
+                                                {{ serie.nom }} <br>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     {% endfor %}
 {% endblock %}
 
