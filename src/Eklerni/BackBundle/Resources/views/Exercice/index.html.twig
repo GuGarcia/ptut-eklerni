@@ -1,5 +1,9 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
+{% block stylesheets %}
+    <link href="{{ asset('bundles/eklerniback/css/Exercice/index.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
 {% block body %}
     {% for matiere in matieres %}
         <div class="box box-solid box-danger">
@@ -22,37 +26,81 @@
                                 <li class="tab">
                                     <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">Séries publiques</a>
                                 </li>
-                                <li class="pull-left header">
-                                    {{ activite.name }}
-                                </li>
-                                <div class="btn-group">
-                                    <a class="btn-sm bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
+                                <li class="noborder">
+                                    <a class="btn btn-primary btn-xs bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
                                         <i class="fa fa-plus"></i>
                                         Série
                                     </a>
-                                </div>
+                                </li>
+                                <li class="pull-left header">
+                                    {{ activite.name }}
+                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
                                     {% if activite.series is empty %}
                                         {{ "Il n'y a aucune <b>série personnelle</b> pour cette activité." }}
                                     {% else %}
-                                        {% for serie in activite.series %}
-                                            {% if not serie.public and serie.enseignant.id == app.user.id %}
-                                                {{ serie.nom }} <br>
-                                            {% endif %}
-                                        {% endfor %}
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="tdsize">Nom de la série</th>
+                                                    <th class="tdsize">Nombre de questions</th>
+                                                    <th class="tdsize">Outils</th>
+                                                </tr>
+                                                {% for serie in activite.series %}
+                                                    {% if not serie.public and serie.enseignant.id == app.user.id %}
+                                                        <tr>
+                                                            <td class="tdsize">{{ serie.nom }}</td>
+                                                            <td class="tdsize">{{ serie.questions|length }}</td>
+                                                            <td class="tdsize">
+                                                                <a class="btn btn-default btn-xs" href="#">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                    Modifier
+                                                                </a>
+                                                                <a class="btn btn-danger btn-xs" href="#">
+                                                                    <i class="fa fa-minus"></i>
+                                                                    Supprimer
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
                                     {% endif %}
                                 </div>
                                 <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
                                     {% if activite.series is empty %}
                                         {{ "Il n'y a aucune <b>série publique</b> pour cette activité." }}
                                     {% else %}
-                                        {% for serie in activite.series %}
-                                            {% if serie.public %}
-                                                {{ serie.nom }} <br>
-                                            {% endif %}
-                                        {% endfor %}
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="tdsize">Nom de la série</th>
+                                                    <th class="tdsize">Nombre de questions</th>
+                                                    <th class="tdsize">Outils</th>
+                                                </tr>
+                                                {% for serie in activite.series %}
+                                                    {% if serie.public %}
+                                                        <tr>
+                                                            <td class="tdsize">{{ serie.nom }}</td>
+                                                            <td class="tdsize">{{ serie.questions|length }}</td>
+                                                            <td class="tdsize">
+                                                                <a class="btn btn-default btn-xs" href="#">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                    Modifier
+                                                                </a>
+                                                                <a class="btn btn-danger btn-xs" href="#">
+                                                                    <i class="fa fa-minus"></i>
+                                                                    Supprimer
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
                                     {% endif %}
                                 </div>
                             </div>
@@ -71,6 +119,8 @@
                 e.preventDefault();
                 $(this).tab('show');
             });
+
+            $('.noborder').css('border-top-width', '0');
         });
     </script>
 {% endblock %}
