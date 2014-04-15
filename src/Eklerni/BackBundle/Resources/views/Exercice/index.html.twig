@@ -27,7 +27,7 @@
                                     <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">Séries publiques</a>
                                 </li>
                                 <li class="noborder">
-                                    <a class="btn btn-primary btn-xs bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
+                                    <a class="btn btn-primary bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
                                         <i class="fa fa-plus"></i>
                                         Série
                                     </a>
@@ -37,67 +37,80 @@
                                 </li>
                             </ul>
                             <div class="tab-content">
+
+                                {% set seriesPublic = [] %}
+                                {% for serie in activite.series if serie.public %}
+                                    {% set seriesPublic = seriesPublic|merge([serie]) %}
+                                {% endfor %}
+
+                                {% set seriesPerso = [] %}
+                                {% for serie in activite.series %}
+                                    {% if not serie.public and serie.enseignant.id == app.user.id %}
+                                        {% set seriesPerso = seriesPerso|merge([serie]) %}
+                                    {% endif %}
+                                {% endfor %}
+
                                 <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
-                                    {% if activite.series is empty %}
+                                    {% if seriesPerso is empty %}
                                         {{ "Il n'y a aucune <b>série personnelle</b> pour cette activité." }}
                                     {% else %}
                                         <table class="table table-hover">
                                             <tbody>
                                                 <tr>
                                                     <th class="tdsize">Nom de la série</th>
+                                                    <th class="tdsize">Niveau</th>
                                                     <th class="tdsize">Nombre de questions</th>
                                                     <th class="tdsize">Outils</th>
                                                 </tr>
-                                                {% for serie in activite.series %}
-                                                    {% if not serie.public and serie.enseignant.id == app.user.id %}
-                                                        <tr>
-                                                            <td class="tdsize"><a href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">{{ serie.nom }}</a></td>
-                                                            <td class="tdsize">{{ serie.questions|length }}</td>
-                                                            <td class="tdsize">
-                                                                <a class="btn btn-default btn-xs" href="#">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                    Modifier
-                                                                </a>
-                                                                <a class="btn btn-danger btn-xs" href="#">
-                                                                    <i class="fa fa-minus"></i>
-                                                                    Supprimer
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    {% endif %}
+                                                {% for serie in seriesPerso if serie.enseignant.id == app.user.id %}
+                                                    <tr>
+                                                        <td class="tdsize">{{ serie.nom }}</td>
+                                                        <td class="tdsize">{{ serie.difficulte }}</td>
+                                                        <td class="tdsize">{{ serie.questions|length }}</td>
+                                                        <td class="tdsize">
+                                                            <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
+                                                                <i class="fa fa-pencil"></i>
+                                                                Modifier
+                                                            </a>
+                                                            <a class="btn btn-danger btn-xs" href="#">
+                                                                <i class="fa fa-minus"></i>
+                                                                Supprimer
+                                                            </a>
+                                                        </td>
+                                                    </tr>
                                                 {% endfor %}
                                             </tbody>
                                         </table>
                                     {% endif %}
                                 </div>
                                 <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
-                                    {% if activite.series is empty %}
+                                    {% if seriesPublic is empty %}
                                         {{ "Il n'y a aucune <b>série publique</b> pour cette activité." }}
                                     {% else %}
                                         <table class="table table-hover">
                                             <tbody>
                                                 <tr>
                                                     <th class="tdsize">Nom de la série</th>
+                                                    <th class="tdsize">Niveau</th>
                                                     <th class="tdsize">Nombre de questions</th>
                                                     <th class="tdsize">Outils</th>
                                                 </tr>
-                                                {% for serie in activite.series %}
-                                                    {% if serie.public %}
-                                                        <tr>
-                                                            <td class="tdsize"><a href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">{{ serie.nom }}</a></td>
-                                                            <td class="tdsize">{{ serie.questions|length }}</td>
-                                                            <td class="tdsize">
-                                                                <a class="btn btn-default btn-xs" href="#">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                    Modifier
-                                                                </a>
-                                                                <a class="btn btn-danger btn-xs" href="#">
-                                                                    <i class="fa fa-minus"></i>
-                                                                    Supprimer
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    {% endif %}
+                                                {% for serie in seriesPublic %}
+                                                    <tr>
+                                                        <td class="tdsize">{{ serie.nom }}</td>
+                                                        <td class="tdsize">{{ serie.difficulte }}</td>
+                                                        <td class="tdsize">{{ serie.questions|length }}</td>
+                                                        <td class="tdsize">
+                                                            <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
+                                                                <i class="fa fa-pencil"></i>
+                                                                Modifier
+                                                            </a>
+                                                            <a class="btn btn-danger btn-xs" href="#">
+                                                                <i class="fa fa-minus"></i>
+                                                                Supprimer
+                                                            </a>
+                                                        </td>
+                                                    </tr>
                                                 {% endfor %}
                                             </tbody>
                                         </table>
