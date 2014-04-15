@@ -124,7 +124,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     }
 
     /**
-     * @param mixed $dateNaissance
+     * @param \DateTime $dateNaissance
      * @return Personne
      */
 
@@ -136,7 +136,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getDateNaissance()
     {
@@ -144,7 +144,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     }
 
     /**
-     * @param mixed $username
+     * @param string $username
      * @return Personne
      */
     public function setUsername($username)
@@ -155,7 +155,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUsername()
     {

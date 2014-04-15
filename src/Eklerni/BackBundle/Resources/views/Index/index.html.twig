@@ -4,8 +4,8 @@
     {% set elevesTable %}
     <table class="table">
         <tr>
-            <th>Nom</th>
-            <th>Classe</th>
+            <th>{% trans %}personne.name{% endtrans %}</th>
+            <th>{% trans %}classe.name.colon{% endtrans %}</th>
         </tr>
         {% for eleve in eleves %}
             <tr>
@@ -17,7 +17,7 @@
     {% endset %}
 {% else %}
     {% set elevesTable %}
-    Il n'y a pas d'eleve dans cette Classe.
+        {% trans %}classe.no.eleve{% endtrans %}
     {% endset %}
 {% endif %}
 
@@ -25,9 +25,9 @@
     {% set classesTable %}
     <table class="table" id="profs">
         <tr>
-            <th>Nom</th>
-            <th>Niveau</th>
-            <th>Nb Élève</th>
+            <th>{% trans %}classe.name{% endtrans %}</th>
+            <th>{% trans %}classe.level{% endtrans %}</th>
+            <th>{% trans %}classe.eleve.count{% endtrans %}</th>
         </tr>
         {% for classe in enseignant.classes %}
             <tr>
@@ -46,24 +46,22 @@
     {% endset %}
 {% else %}
     {% set classesTable %}
-    Vous n'avez pas de Classe
+        {% trans %}enseignant.no.eleve{% endtrans %}
     {% endset %}
 {% endif %}
 {% set footerclasses %}
-<a href="{{ path("eklerni_back_classe_create") }}" id="add_class_link" class="btn btn-danger"><i class="fa fa-plus"> Classe</i></a>
-<a href="{{ path("eklerni_back_classe_create_ecole") }}" id="add_ecole_link" class="btn btn-danger"><i class="fa fa-plus"> Ecole</i></a>
+<a href="{{ path("eklerni_back_classe_create") }}" id="add_class_link" class="btn btn-danger"><i class="fa fa-plus"> {% trans %}classe.text{% endtrans %}</i></a>
+<a href="{{ path("eklerni_back_classe_create_ecole") }}" id="add_ecole_link" class="btn btn-danger"><i class="fa fa-plus"> {% trans %}ecole.text{% endtrans %}</i></a>
 {% endset %}
     {% block body %}
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 {{ eklerni.block("Liste des Classes", classesTable, footerclasses, "danger") }}
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-5">
                 {{ eklerni.block("Liste des Eleves", elevesTable, "", "primary") }}
-            </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-
             </div>
         </div>
 

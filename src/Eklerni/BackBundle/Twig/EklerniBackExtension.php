@@ -15,9 +15,10 @@ class EklerniBackExtension extends \Twig_Extension
     {
         if ($d instanceof \DateTime) {
             $d = $d->getTimestamp();
+            return strftime($format, $d);
+        } else {
+            return null;
         }
-
-        return strftime($format, $d);
     }
 
     /**
