@@ -12,6 +12,27 @@
     right: 0;
 }
 
+/** DRAG AND DROP **/
+.draggable {
+    z-index: 100;
+    min-width: 150px;
+    text-align: left;
+}
+
+.droppable {
+    min-height: 50px;
+    width: 100%;
+}
+
+/** PAGE Attribution **/
+.matiere {
+
+}
+
+.activite {
+
+}
+
 /** PAGE CLASSE **/
 .delete {
     opacity: 0;

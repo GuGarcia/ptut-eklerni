@@ -1,39 +1,70 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
 {% set serieTable %}
-<table class="table">
-    {% for serie in seriesProf %}
-        <tr>
-            <button id="{{ serie.id }}">{{ serie.nom }}</button>
+<div class="pre-scrollable">
+    <table class="table">
+        {% set tempNameMatiere = seriesProf[0].activite.matiere.name %}
+        <tr class="matiere">
+            <th>{{ tempNameMatiere }}</h4></th>
         </tr>
-    {% endfor %}
-</table>
+        <tr>
+            <td>
+                {% for serie in seriesProf %}
+                {% if tempNameMatiere != serie.activite.matiere.name %}
+                    {% set tempNameMatiere = serie.activite.matiere.name %}
+                    </td>
+                    </tr>
+                    <tr class="matiere">
+                        <th>{{ tempNameMatiere }}</h4></th>
+                    </tr>
+                    <tr>
+                    <td>
+                {% endif %}
+                <div class="btn btn-sm btn-primary draggable {{ serie.activite.matiere.name }}" id="{{ serie.id }}">
+                    <span class="badge">{{ serie.activite.name }}</span>
+                    {{ serie.nom }}
+                </div><br/>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+</div>
 {% endset %}
 
 {% set serieAttribuer %}
-<h3>Donner un Exercice à une Classe</h3>
+<h4>Donner un Exercice à une Classe</h4>
 <table class="table">
     {% for classe in prof.classes %}
         <tr>
             <td>{{ classe.nom }}</td>
         </tr>
         <tr>
-            <td>Zone de Dépôt</td>
+            <td>
+                <div id="{{ classe.id }}"
+                     class="droppable"
+                     info="{% for matiere in classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}"></div>
+            </td>
         </tr>
     {% endfor %}
 </table>
 
-<h3>Donner un Exercice à un Eleve</h3>
+<h4>Donner un Exercice à un Eleve</h4>
 <table class="table">
     {% for classe in prof.classes %}
         {% set background %}{% if loop.index is odd %}bg-danger{% else %}bg-primary{% endif %}{% endset %}
-        <tr class="{{ background }}"><th>Classe : {{ classe.nom }}</th></tr>
+        <tr class="{{ background }}">
+            <th>Classe : {{ classe.nom }}</th>
+        </tr>
         {% for eleve in classe.eleves %}
             <tr class="{{ background }}">
                 <td>{{ eleve.nom }} {{ eleve.prenom }}</td>
             </tr>
             <tr class="{{ background }}">
-                <td>Zone de Dépôt</td>
+                <td>
+                    <div id="{{ eleve.id }}"
+                         class="droppable"
+                         info="{% for matiere in eleve.classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}"></div>
+                </td>
             </tr>
         {% endfor %}
     {% endfor %}
@@ -42,11 +73,78 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-4">
-            {{ eklerni.block("Liste des Séries", serieTable, "", "danger") }}
+        <div id="series" class="col-md-4">
+                {{ eklerni.block("Liste des Séries", serieTable, "", "danger") }}
         </div>
+        <div class="col-lg-4 temp"></div>
         <div class="col-md-8">
             {{ eklerni.block("Attribution des Exercices", serieAttribuer, "", "primary") }}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="application/javascript">
+
+        $(document).ready(function () {
+            $(".draggable").draggable({
+                revert: true,
+                helper: "clone"
+            });
+            $(".droppable").each(function() {
+                var _this = this;
+                $(this).droppable({
+                    activeClass: "ui-state-default",
+                    hoverClass: "ui-state-hover",
+                    accept: $(_this).attr("info"),
+                    drop: function (event, ui) {
+                        $(this).find(".placeholder").remove();
+                        var isExist = false;
+                        var id =  ui.draggable.attr("id");
+                        $(this).children().each(function() {
+                            if(this.id == id) {
+                                isExist = true;
+                                return false;
+                            }
+                        });
+                        if(!isExist) {
+                            $("<div id=\""+ id +"\" class=\"btn btn-default\"></div>").html(ui.draggable.html()).appendTo(this);
+                            //Ajax
+                            displayMessage("success", "L'Exercice a bien été ajouté !")
+                        } else {
+                            displayMessage("warning", "L'Exercice a déjà été donné !")
+                        }
+                    }
+                });
+            });
+        });
+        var paddingSeries = parseInt($("#series").parent().parent().css("padding-top"))
+        var topSeries = $("#series").offset().top - $("header").innerHeight() - paddingSeries;
+        var size = $("#series").outerWidth();
+
+        $(document).on("resize", function() {
+           size = $("#series").outerWidth();
+        });
+
+        $(".temp").hide();
+        //console.log(topSeries, $("#series").offset().top - $("header").innerHeight(), $("header").innerHeight(), paddingSeries);
+        $(window).on("scroll", function () {
+            var windowTop = $(this).scrollTop();$
+            if (topSeries <= windowTop) {
+                $(".temp").show();
+                $("#series").css({
+                    "position": "fixed",
+                    "top": topSeries + paddingSeries,
+                    "width": size
+                })
+            } else {
+                $(".temp").hide();
+                $("#series").css({
+                    "position": "static",
+                    "top": "",
+                    "width": ""
+                })
+            }
+        });
+    </script>
 {% endblock %}
