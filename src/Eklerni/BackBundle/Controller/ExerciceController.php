@@ -53,7 +53,7 @@ class ExerciceController extends Controller
         }
 
         return $this->render(
-            'EklerniBackBundle:Exercice:ajouter.html.twig',
+            'EklerniBackBundle:Exercice:form.html.twig',
             array(
                 'form' => $form->createView(),
                 'title' => $this->get('translator')->trans("title.create_serie"),
@@ -61,8 +61,30 @@ class ExerciceController extends Controller
         );
     }
 
-    public function listerMatiereAction()
+    public function modifierAction(Request $request, $idSerie)
     {
+        /** @var Serie $serie */
+        $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
 
+        if (!$serie) {
+            throw new \Exception($this->get('translator')->trans('serie.notfound'));
+        }
+
+        $form = $this->createForm('eklerni_serie', $serie);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->get('eklerni.manager.serie')->save($serie, true);
+
+            return $this->redirect($this->generateUrl('eklerni_back_exercice'));
+        }
+
+        return $this->render(
+            'EklerniBackBundle:Exercice:form.html.twig',
+            array(
+                'form' => $form->createView(),
+                'title' => $this->get('translator')->trans("title.modify_serie"),
+            )
+        );
     }
 } 

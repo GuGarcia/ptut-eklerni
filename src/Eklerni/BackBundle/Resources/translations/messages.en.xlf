@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-04-15T10:26:58Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2014-04-15T14:30:34Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -118,6 +118,11 @@
         <target>An error happened when addind a student. Please retry.</target>
         <jms:reference-file line="121">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="b821e93227f362b74b0fbe8c21f70a18a4955e1f" resname="serie.notfound">
+        <source>serie.notfound</source>
+        <target state="new">serie.notfound</target>
+        <jms:reference-file line="70">BackBundle/Controller/ExerciceController.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="180ce78e7461646d7daebe14d9a8b057fb412383" resname="sidebar.classes">
         <source>sidebar.classes</source>
         <target>Classes</target>
@@ -172,6 +177,11 @@
         <source>title.exercice</source>
         <target>Exercice</target>
         <jms:reference-file line="24">BackBundle/Controller/ExerciceController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0957b81f1785c9d3f68379d40b5de0dd5b459936" resname="title.modify_serie">
+        <source>title.modify_serie</source>
+        <target state="new">title.modify_serie</target>
+        <jms:reference-file line="86">BackBundle/Controller/ExerciceController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7322645ec280381d3cf90d237d7ae6a2b85ce8e8" resname="title.statistiques">
         <source>title.statistiques</source>
