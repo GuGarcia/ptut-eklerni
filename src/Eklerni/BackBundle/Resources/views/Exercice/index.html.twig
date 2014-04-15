@@ -51,7 +51,7 @@
                                                 {% for serie in activite.series %}
                                                     {% if not serie.public and serie.enseignant.id == app.user.id %}
                                                         <tr>
-                                                            <td class="tdsize">{{ serie.nom }}</td>
+                                                            <td class="tdsize"><a href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">{{ serie.nom }}</a></td>
                                                             <td class="tdsize">{{ serie.questions|length }}</td>
                                                             <td class="tdsize">
                                                                 <a class="btn btn-default btn-xs" href="#">
@@ -84,7 +84,7 @@
                                                 {% for serie in activite.series %}
                                                     {% if serie.public %}
                                                         <tr>
-                                                            <td class="tdsize">{{ serie.nom }}</td>
+                                                            <td class="tdsize"><a href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">{{ serie.nom }}</a></td>
                                                             <td class="tdsize">{{ serie.questions|length }}</td>
                                                             <td class="tdsize">
                                                                 <a class="btn btn-default btn-xs" href="#">
