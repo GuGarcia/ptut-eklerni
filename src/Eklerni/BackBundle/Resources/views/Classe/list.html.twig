@@ -26,6 +26,10 @@
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
                             colspan="1" aria-label="CSS grade: activate to sort column ascending">
+                            {% trans %}classe.year{% endtrans %}
+                        </th>
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
+                            colspan="1" aria-label="CSS grade: activate to sort column ascending">
                             {% trans %}classe.eleve.count{% endtrans %}
                         </th>
                         <th>
@@ -36,20 +40,22 @@
                     <tbody role="alert" aria-live="polite" aria-relevant="all">
                     {% for classe in classes %}
                         <tr class="odd">
-                            <td class="">{{ classe.id }}</td>
-                            <td class="">{{ classe.ecole }}</td>
-                            <td class="">
+                            <td>{{ classe.id }}</td>
+                            <td>{{ classe.ecole }}</td>
+                            <td>
                                 {{ classe.niveau }}</td>
                             <td class="sorting_1">
-                                <a href="{{ path("eklerni_back_classe_fiche", {idClasse: classe.id}) }}">{{ classe.nom }}</a>
+                                <a title="{% trans %}classe.view{% endtrans %}" href="{{ path("eklerni_back_classe_fiche", {idClasse: classe.id}) }}">{{ classe.nom }}</a>
                             </td>
-                            <td class="">
+                            <td>
+                                {{ classe.annee }}
+                            </td>
+                            <td>
                                {{ classe.eleves|length }}
                             </td>
                             <td>
-                            {% if classe.eleves|length == 0 %}
-                                <a href="{{ path("eklerni_back_classe_create") }}" class="btn btn-danger btn-xs"><i class="fa fa-minus"></i> {% trans %}utils.delete{% endtrans %}</a>
-                            {% endif %}
+                                <a href="{{ path("eklerni_back_classe_update", { idClasse: classe.id }) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}</a>
+                                <a href="{{ path("eklerni_back_classe_delete", { idClasse: classe.id }) }}" class="btn btn-danger btn-xs{% if classe.eleves|length > 0 %} disabled{% endif %}"><i class="fa fa-minus"></i> {% trans %}utils.delete{% endtrans %}</a>
                             </td>
                         </tr>
                     {% endfor %}

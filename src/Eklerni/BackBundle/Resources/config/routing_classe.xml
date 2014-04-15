@@ -10,23 +10,36 @@
     <route id="eklerni_back_classe_create" pattern="/ajouter">
         <default key="_controller">EklerniBackBundle:Classe:ajouter</default>
     </route>
+    <route id="eklerni_back_classe_update" pattern="/modifier/{idClasse}">
+        <default key="_controller">EklerniBackBundle:Classe:modifier</default>
+        <requirement key="idClasse">\d+</requirement>
+    </route>
+    <route id="eklerni_back_classe_delete" pattern="/supprimer/{idClasse}">
+        <default key="_controller">EklerniBackBundle:Classe:supprimer</default>
+        <requirement key="idClasse">\d+</requirement>
+    </route>
     <route id="eklerni_back_classe_create_ecole" pattern="/ajouterecole">
         <default key="_controller">EklerniBackBundle:Classe:ajouterEcole</default>
     </route>
     <route id="eklerni_back_classe_fiche" pattern="/{idClasse}">
         <default key="_controller">EklerniBackBundle:Classe:index</default>
+        <requirement key="idClasse">\d+</requirement>
     </route>
     <route id="eklerni_back_classe_create_eleve" pattern="/ajouterEleve/{idClasse}">
         <default key="_controller">EklerniBackBundle:Classe:ajouterEleve</default>
+        <requirement key="idClasse">\d+</requirement>
     </route>
     <route id="eklerni_back_classe_ajax_add_enseignant" pattern="/ajouterEnseignant/{idClasse}">
         <default key="_controller">EklerniBackBundle:Classe:ajouterEnseignant</default>
+        <requirement key="idClasse">\d+</requirement>
     </route>
     <route id="eklerni_back_classe_ajax_delete_enseignant" pattern="/deleteEnseignant/{idClasse}">
         <default key="_controller">EklerniBackBundle:Classe:deleteEnseignantClasse</default>
+        <requirement key="idClasse">\d+</requirement>
     </route>
     <route id="eklerni_back_classe_ajax_save_matieres" pattern="/saveMatieres/{idClasse}">
         <default key="_controller">EklerniBackBundle:Classe:saveMatieres</default>
+        <requirement key="idClasse">\d+</requirement>
     </route>
 
 </routes>
