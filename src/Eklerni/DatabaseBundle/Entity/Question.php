@@ -26,14 +26,14 @@ class Question extends BaseEntity {
     /**
      * @var string
      *
-     * @ORM\Column(name="titre", type="text")
+     * @ORM\Column(name="name", type="text")
      */
     private $label;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mediaUrl", type="text")
+     * @ORM\Column(name="mediaUrl", type="text", nullable=true)
      */
     private $mediaUrl;
 
