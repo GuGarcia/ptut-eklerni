@@ -4,6 +4,7 @@ namespace Eklerni\DatabaseBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
 use Eklerni\DatabaseBundle\Entity\Activite;
+use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Eklerni\DatabaseBundle\Entity\Matiere;
 
 class SerieManager extends BaseManager {
@@ -19,5 +20,10 @@ class SerieManager extends BaseManager {
 
     public function findByMatiere(Matiere $matiere) {
         return $this->repository->findByMatiere($matiere->getId())->getQuery()->getResult();
+    }
+
+    public function findAllOrderByMatiereActiviteByProf(Enseignant $enseignant) {
+        return $this->repository->findAllOrderByMatiereActiviteByProf($enseignant->getId())->getQuery()->getResult();
+
     }
 } 
