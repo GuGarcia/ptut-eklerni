@@ -15,8 +15,9 @@
 /** DRAG AND DROP **/
 .draggable {
     z-index: 100;
-    min-width: 150px;
+    min-width: 120px;
     text-align: left;
+    margin-top: 2px;
 }
 
 .droppable {
