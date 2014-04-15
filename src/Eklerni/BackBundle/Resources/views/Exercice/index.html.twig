@@ -22,15 +22,15 @@
                                 <li class="tab">
                                     <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">Séries publiques</a>
                                 </li>
-                                <li>
-                                    <a class="btn-sm btn-primary bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
-                                        <i class="fa fa-plus"></i>
-                                        Série
-                                    </a>
-                                </li>
                                 <li class="pull-left header">
                                     {{ activite.name }}
                                 </li>
+                                <div class="btn-group">
+                                    <a class="btn-sm bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
+                                        <i class="fa fa-plus"></i>
+                                        Série
+                                    </a>
+                                </div>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
