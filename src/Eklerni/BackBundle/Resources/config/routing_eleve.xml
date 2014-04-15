@@ -9,6 +9,7 @@
     </route>
     <route id="eklerni_back_eleve_fiche" pattern="/{idEleve}">
         <default key="_controller">EklerniBackBundle:Eleve:index</default>
+        <requirement key="idEleve">\d+</requirement>
     </route>
 
 </routes>
