@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-04-14T07:15:48Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2014-04-15T14:31:20Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -11,38 +11,13 @@
         <target>Classe</target>
         <jms:reference-file line="21">Form/Type/EleveType.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="378257878fd787260ca08472c3a6aee60b5f7f3e" resname="Niveau 1">
-        <source>Niveau 1</source>
-        <target>Niveau 1</target>
-        <jms:reference-file line="33">Form/Type/SerieType.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="1713e64f12f083c468b657e206d3585d6fc19327" resname="Niveau 2">
-        <source>Niveau 2</source>
-        <target>Niveau 2</target>
-        <jms:reference-file line="34">Form/Type/SerieType.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="66084ee84c9f2efc9b5764600cba528327960d26" resname="Niveau 3">
-        <source>Niveau 3</source>
-        <target>Niveau 3</target>
-        <jms:reference-file line="35">Form/Type/SerieType.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="32bfec47d1f40554e41b5efb4071dd9ce6e53543" resname="Niveau 4">
-        <source>Niveau 4</source>
-        <target>Niveau 4</target>
-        <jms:reference-file line="36">Form/Type/SerieType.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="60d7db84394a77f1334ccd273ac0382b24eba4bc" resname="Niveau 5">
-        <source>Niveau 5</source>
-        <target>Niveau 5</target>
-        <jms:reference-file line="37">Form/Type/SerieType.php</jms:reference-file>
-      </trans-unit>
       <trans-unit id="774d1c4c5225846103f8d4dfe40639f2e79fa91c" resname="button.validation">
         <source>button.validation</source>
         <target>Submit</target>
         <jms:reference-file line="68">Form/Type/ClasseType.php</jms:reference-file>
         <jms:reference-file line="51">Form/Type/EcoleType.php</jms:reference-file>
         <jms:reference-file line="68">Form/Type/PersonneType.php</jms:reference-file>
-        <jms:reference-file line="55">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="50">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="82427a355e0dbd8be969ba05569a6c0eab2b9d02" resname="classe.grade">
         <source>classe.grade</source>
@@ -65,6 +40,31 @@
         <target>Year</target>
         <jms:reference-file line="42">Form/Type/ClasseType.php</jms:reference-file>
         <jms:reference-file line="45">Form/Type/ClasseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9c63e52db498345c5c710be3320962545c4a3d7b" resname="difficulte.niveau1">
+        <source>difficulte.niveau1</source>
+        <target>Level 1</target>
+        <jms:reference-file line="26">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4b714e17574fe5336216e504af8c9fc0cb7cbe22" resname="difficulte.niveau2">
+        <source>difficulte.niveau2</source>
+        <target>Level 2</target>
+        <jms:reference-file line="27">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f088a0f9365f1a7fd6fc13d13117b99b4b72025f" resname="difficulte.niveau3">
+        <source>difficulte.niveau3</source>
+        <target>Level 3</target>
+        <jms:reference-file line="28">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="76215649a6e6bd2f71dade0b128267dc8e0f5bd7" resname="difficulte.niveau4">
+        <source>difficulte.niveau4</source>
+        <target>Level 4</target>
+        <jms:reference-file line="29">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="40021973d70138f386ab293c643ff1862f2408db" resname="difficulte.niveau5">
+        <source>difficulte.niveau5</source>
+        <target>Level 5</target>
+        <jms:reference-file line="30">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="54fc87a1ba80ffbf0442bca619ddd3b2c1ec7752" resname="ecole.city">
         <source>ecole.city</source>
@@ -138,22 +138,62 @@
         <jms:reference-file line="16">Form/Type/PersonneType.php</jms:reference-file>
         <jms:reference-file line="18">Form/Type/PersonneType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="5d6768bb8996a84a4c24399bcaf26882203d52fe" resname="question.label">
+        <source>question.label</source>
+        <target>Question text</target>
+        <jms:reference-file line="16">Form/Type/QuestionType.php</jms:reference-file>
+        <jms:reference-file line="18">Form/Type/QuestionType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4451cdf861e801242d855059dd58d15d2ea8c4fb" resname="question.media.file">
+        <source>question.media.file</source>
+        <target>Question file</target>
+        <jms:reference-file line="26">Form/Type/QuestionType.php</jms:reference-file>
+        <jms:reference-file line="28">Form/Type/QuestionType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2c6bb50bb8dc76802fa05638d3ed221578799dbf" resname="question.media.type">
+        <source>question.media.type</source>
+        <target>Question file type</target>
+        <jms:reference-file line="36">Form/Type/QuestionType.php</jms:reference-file>
+        <jms:reference-file line="41">Form/Type/QuestionType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="64b37799456e3bb9a952f320c4250a97fa59dc9d" resname="reponse.label">
+        <source>reponse.label</source>
+        <target>Answer text</target>
+        <jms:reference-file line="15">Form/Type/ReponseType.php</jms:reference-file>
+        <jms:reference-file line="17">Form/Type/ReponseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5285ca431d442c1f499e4bcd9a13603031ead940" resname="reponse.media.file">
+        <source>reponse.media.file</source>
+        <target>Answer file</target>
+        <jms:reference-file line="25">Form/Type/ReponseType.php</jms:reference-file>
+        <jms:reference-file line="27">Form/Type/ReponseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6e7fe77fff1a627342ca02a5c3b39b04814b4efe" resname="reponse.media.type">
+        <source>reponse.media.type</source>
+        <target>Answer file type</target>
+        <jms:reference-file line="35">Form/Type/ReponseType.php</jms:reference-file>
+        <jms:reference-file line="40">Form/Type/ReponseType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7c0bde94a3b0e8c74bea079b8d805a4aff1ac909" resname="reponse.valid">
+        <source>reponse.valid</source>
+        <target>Valid answer</target>
+        <jms:reference-file line="48">Form/Type/ReponseType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="78ce876b235da177725c84502e75d328638b265f" resname="serie.difficulty">
         <source>serie.difficulty</source>
         <target>Difficulty</target>
-        <jms:reference-file line="31">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="24">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8da496c977a549044e53e6ad481dcb8ff7359edd" resname="serie.name">
         <source>serie.name</source>
         <target>Name</target>
-        <jms:reference-file line="21">Form/Type/SerieType.php</jms:reference-file>
-        <jms:reference-file line="23">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="14">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="16">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c83cad46bef0cfb578a172d2b5c546f4bfc27980" resname="serie.public">
         <source>serie.public</source>
         <target>Public</target>
-        <jms:reference-file line="44">Form/Type/SerieType.php</jms:reference-file>
-        <jms:reference-file line="47">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="40">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>

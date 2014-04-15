@@ -23,11 +23,11 @@ class SerieType extends AbstractType {
             'difficulte', 'choice', array(
                 'label' => "serie.difficulty",
                 'choices' => array(
-                    '1' => 'difficulte.niveau.1',
-                    '2' => 'difficulte.niveau.2',
-                    '3' => 'difficulte.niveau.3',
-                    '4' => 'difficulte.niveau.4',
-                    '5' => 'difficulte.niveau.5'
+                    '1' => 'difficulte.niveau1',
+                    '2' => 'difficulte.niveau2',
+                    '3' => 'difficulte.niveau3',
+                    '4' => 'difficulte.niveau4',
+                    '5' => 'difficulte.niveau5'
                 ),
                 'attr' => array(
                     'class' => 'form-control'
