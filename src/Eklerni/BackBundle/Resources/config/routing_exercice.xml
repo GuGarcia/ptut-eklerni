@@ -10,7 +10,7 @@
     <route id="eklerni_back_serie_create" pattern="/add/{idActivite}">
         <default key="_controller">EklerniBackBundle:Exercice:ajouter</default>
     </route>
-    <route id="eklerni_back_serie_modify" pattern="/modify/{idActivite}">
+    <route id="eklerni_back_serie_modify" pattern="/modify/{idSerie}">
         <default key="_controller">EklerniBackBundle:Exercice:modifier</default>
     </route>
 </routes>
