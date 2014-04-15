@@ -121,6 +121,20 @@
             });
 
             $('.noborder').css('border-top-width', '0');
+
+            $("[data-widget='collapse']").each(function() {
+                //Find the box parent
+                var box = $(this).parents(".box").first();
+                //Find the body and the footer
+                var bf = box.find(".box-body, .box-footer");
+                if (!box.hasClass("collapsed-box")) {
+                    box.addClass("collapsed-box");
+                    bf.slideUp();
+                } else {
+                    box.removeClass("collapsed-box");
+                    bf.slideDown();
+                }
+            });
         });
     </script>
 {% endblock %}
