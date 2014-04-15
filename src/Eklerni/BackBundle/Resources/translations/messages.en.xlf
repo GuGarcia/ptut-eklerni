@@ -130,13 +130,13 @@
       </trans-unit>
       <trans-unit id="192132981af46aadb5a7c80fe563d3537ad60a4e" resname="serie.difficult">
         <source>serie.difficult</source>
-        <target state="new">serie.difficult</target>
+        <target>Difficulty</target>
         <jms:reference-file line="62">views/Exercice/index.html.twig</jms:reference-file>
         <jms:reference-file line="96">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8da496c977a549044e53e6ad481dcb8ff7359edd" resname="serie.name">
         <source>serie.name</source>
-        <target state="new">serie.name</target>
+        <target>Series</target>
         <jms:reference-file line="32">views/Exercice/index.html.twig</jms:reference-file>
         <jms:reference-file line="61">views/Exercice/index.html.twig</jms:reference-file>
         <jms:reference-file line="95">views/Exercice/index.html.twig</jms:reference-file>
@@ -148,27 +148,27 @@
       </trans-unit>
       <trans-unit id="8dfa3a8ebebb89e75a698fbdd88fd83b655ef46c" resname="serie.notfound.personnal">
         <source>serie.notfound.personnal</source>
-        <target state="new">serie.notfound.personnal</target>
+        <target>No personnal series for this activity.</target>
         <jms:reference-file line="55">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f477b9516496fcb2ba200de7122c8cf298aa5079" resname="serie.notfound.public">
         <source>serie.notfound.public</source>
-        <target state="new">serie.notfound.public</target>
+        <target>No public series for this activity.</target>
         <jms:reference-file line="89">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="825c09991f3ebb32c9d9a37f2cbac2b113fdf77c" resname="serie.personnal">
         <source>serie.personnal</source>
-        <target state="new">serie.personnal</target>
+        <target>Personnal series</target>
         <jms:reference-file line="24">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c83cad46bef0cfb578a172d2b5c546f4bfc27980" resname="serie.public">
         <source>serie.public</source>
-        <target state="new">serie.public</target>
+        <target>Public series</target>
         <jms:reference-file line="27">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="06ac0991e3a21afefb41edd0154f5adce8966c03" resname="serie.questions.number">
         <source>serie.questions.number</source>
-        <target state="new">serie.questions.number</target>
+        <target>Number of questions</target>
         <jms:reference-file line="63">views/Exercice/index.html.twig</jms:reference-file>
         <jms:reference-file line="97">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
