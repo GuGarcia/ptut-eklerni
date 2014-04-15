@@ -82,6 +82,46 @@ class ClasseController extends Controller
         }
     }
 
+    public function modifierAction(Request $request, $idClasse)
+    {
+        /** @var Classe $classe */
+        $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+
+        $form = $this->createForm('eklerni_classe', $classe);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->get("eklerni.manager.classe")->save($classe);
+
+            return $this->redirect($this->generateUrl('eklerni_back_classe'));
+        } else {
+            return $this->render(
+                'EklerniBackBundle:Classe:modifier.html.twig',
+                array(
+                    "form" => $form->createView(),
+                    "title" => $this->get('translator')->trans("title.modify_classe")
+                )
+            );
+        }
+    }
+
+    public function supprimerAction($idClasse)
+    {
+        /** @var Classe $classe */
+        $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+
+        if ($classe->getEleves()->count() > 0) {
+            //todo handle hacker !
+            return;
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($classe);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('eklerni_back_classe'));
+        }
+    }
+
     public function ajouterEcoleAction(Request $request)
     {
         $ecole = new Ecole();
@@ -205,11 +245,4 @@ class ClasseController extends Controller
             return new Response(json_encode(array($classe)));
         }
     }
-
-    public function updateAction()
-    {
-
-    }
-
-
 }

@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-    {% block stylesheets %}{% endblock %}
     {% stylesheets 'css/*' filter="cssrewrite" %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
     {% endstylesheets %}
     <link href="{{ asset("css/eklerni.back.css")}}" type="text/css" rel="stylesheet"/>
+    {% block stylesheets %}{% endblock %}
 </head>
 <body class="skin-black pace-done fixed">
 {% import 'EklerniBackBundle:Template:macro.html.twig' as eklerni %}

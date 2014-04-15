@@ -9,44 +9,53 @@
                     <thead>
                     <tr role="row">
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                            colspan="1" aria-label="Rendering engine: activate to sort column ascending">Id
+                            colspan="1" aria-label="Rendering engine: activate to sort column ascending">
+                            {% trans %}classe.id{% endtrans %}
                         </th>
                         <th class="sorting_desc" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
                             colspan="1" aria-sort="descending" aria-label="Browser: activate to sort column ascending">
-                            Ecole
+                            {% trans %}ecole.text{% endtrans %}
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                            colspan="1" aria-label="Platform(s): activate to sort column ascending">Niveau
+                            colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                            {% trans %}classe.level{% endtrans %}
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                            colspan="1" aria-label="Engine version: activate to sort column ascending">Nom
+                            colspan="1" aria-label="Engine version: activate to sort column ascending">
+                            {% trans %}classe.name{% endtrans %}
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                            colspan="1" aria-label="CSS grade: activate to sort column ascending">Nombre d'Élèves
+                            colspan="1" aria-label="CSS grade: activate to sort column ascending">
+                            {% trans %}classe.year{% endtrans %}
                         </th>
-                        <th>Outils
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
+                            colspan="1" aria-label="CSS grade: activate to sort column ascending">
+                            {% trans %}classe.eleve.count{% endtrans %}
+                        </th>
+                        <th>
+                            {% trans %}utils.tools{% endtrans %}
                         </th>
                     </tr>
                     </thead>
                     <tbody role="alert" aria-live="polite" aria-relevant="all">
                     {% for classe in classes %}
                         <tr class="odd">
-                            <td class="">{{ classe.id }}</td>
-                            <td class="">{{ classe.ecole }}</td>
-                            <td class="">
+                            <td>{{ classe.id }}</td>
+                            <td>{{ classe.ecole }}</td>
+                            <td>
                                 {{ classe.niveau }}</td>
                             <td class="sorting_1">
-                                <a href="{{ path("eklerni_back_classe_fiche", {idClasse: classe.id}) }}">{{ classe.nom }}</a>
+                                <a title="{% trans %}classe.view{% endtrans %}" href="{{ path("eklerni_back_classe_fiche", {idClasse: classe.id}) }}">{{ classe.nom }}</a>
                             </td>
-                            <td class="">
+                            <td>
+                                {{ classe.annee }}
+                            </td>
+                            <td>
                                {{ classe.eleves|length }}
                             </td>
                             <td>
-                            {% if classe.eleves|length == 0 %}
-                                <a href="{{ path("eklerni_back_classe_create") }}">
-                                    <button class="btn btn-danger btn-xs"><i class="fa fa-minus"></i> Supprimer</button>
-                                </a>
-                            {% endif %}
+                                <a href="{{ path("eklerni_back_classe_update", { idClasse: classe.id }) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}</a>
+                                <a href="{{ path("eklerni_back_classe_delete", { idClasse: classe.id }) }}" class="btn btn-danger btn-xs{% if classe.eleves|length > 0 %} disabled{% endif %}"><i class="fa fa-minus"></i> {% trans %}utils.delete{% endtrans %}</a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -57,15 +66,11 @@
             </div>
         </div>
     {% else %}
-        <div class="box-body ">Vous n'avez pas de classe !</div>
+        <div class="box-body ">{% trans %}enseignant.no.classe{% endtrans %}!</div>
     {% endif %}
 
-    <a href="{{ path("eklerni_back_classe_create_ecole") }}">
-        <button class="btn btn-primary"><i class="fa fa-plus"></i> École</button>
-    </a>
-    <a href="{{ path("eklerni_back_classe_create") }}">
-        <button class="btn btn-primary"><i class="fa fa-plus"></i> Classe</button>
-    </a>
+    <a href="{{ path("eklerni_back_classe_create_ecole") }}" class="btn btn-primary"><i class="fa fa-plus"></i> {% trans %}ecole.text{% endtrans %}</a>
+    <a href="{{ path("eklerni_back_classe_create") }}" class="btn btn-primary"><i class="fa fa-plus"></i> {% trans %}classe.text{% endtrans %}</a>
 {% endblock %}
 
 {% block javascripts %}

@@ -1,47 +1,127 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
+{% block stylesheets %}
+    <link href="{{ asset('bundles/eklerniback/css/Exercice/index.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
 {% block body %}
     {% for matiere in matieres %}
-        <h2 class="page-header">{{ matiere.name }}</h2>
-        {% for activite in matiere.activites %}
-            <div class="col-md-12">
-                <div class="nav-tabs-custom">
-                    <ul id="tabs" class="nav nav-tabs pull-right">
-                        <li class="tab active">
-                            <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">Séries personnelles</a>
-                        </li>
-                        <li class="tab">
-                            <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">Séries publiques</a>
-                        </li>
-                        <li>
-                            <a class="btn btn-primary bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
-                                <i class="fa fa-plus"></i>
-                                Série
-                            </a>
-                        </li>
-                        <li class="pull-left header">
-                            {{ activite.name }}
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
-                            {% for serie in activite.series %}
-                                {% if not serie.public and serie.enseignant.id == app.user.id %}
-                                    {{ serie.nom }} <br>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                        <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
-                            {% for serie in activite.series %}
-                                {% if serie.public %}
-                                    {{ serie.nom }} <br>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
+        <div class="box box-solid box-danger">
+            <div class="box-header">
+                <h3 class="box-title">{{ matiere.name }}</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-danger btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
                 </div>
             </div>
-        {% endfor %}
+            <div class="box-body">
+                {% for activite in matiere.activites %}
+                    <div class="box box-primary">
+                        <div class="nav-tabs-custom">
+                            <ul id="tabs" class="nav nav-tabs pull-right">
+                                <li class="tab active">
+                                    <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">Séries personnelles</a>
+                                </li>
+                                <li class="tab">
+                                    <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">Séries publiques</a>
+                                </li>
+                                <li class="noborder">
+                                    <a class="btn btn-primary bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
+                                        <i class="fa fa-plus"></i>
+                                        Série
+                                    </a>
+                                </li>
+                                <li class="pull-left header">
+                                    {{ activite.name }}
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+
+                                {% set seriesPublic = [] %}
+                                {% for serie in activite.series if serie.public %}
+                                    {% set seriesPublic = seriesPublic|merge([serie]) %}
+                                {% endfor %}
+
+                                {% set seriesPerso = [] %}
+                                {% for serie in activite.series %}
+                                    {% if not serie.public and serie.enseignant.id == app.user.id %}
+                                        {% set seriesPerso = seriesPerso|merge([serie]) %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
+                                    {% if seriesPerso is empty %}
+                                        {{ "Il n'y a aucune <b>série personnelle</b> pour cette activité." }}
+                                    {% else %}
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="tdsize">Nom de la série</th>
+                                                    <th class="tdsize">Niveau</th>
+                                                    <th class="tdsize">Nombre de questions</th>
+                                                    <th class="tdsize">Outils</th>
+                                                </tr>
+                                                {% for serie in seriesPerso if serie.enseignant.id == app.user.id %}
+                                                    <tr>
+                                                        <td class="tdsize">{{ serie.nom }}</td>
+                                                        <td class="tdsize">{{ serie.difficulte }}</td>
+                                                        <td class="tdsize">{{ serie.questions|length }}</td>
+                                                        <td class="tdsize">
+                                                            <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
+                                                                <i class="fa fa-pencil"></i>
+                                                                Modifier
+                                                            </a>
+                                                            <a class="btn btn-danger btn-xs" href="#">
+                                                                <i class="fa fa-minus"></i>
+                                                                Supprimer
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    {% endif %}
+                                </div>
+                                <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
+                                    {% if seriesPublic is empty %}
+                                        {{ "Il n'y a aucune <b>série publique</b> pour cette activité." }}
+                                    {% else %}
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="tdsize">Nom de la série</th>
+                                                    <th class="tdsize">Niveau</th>
+                                                    <th class="tdsize">Nombre de questions</th>
+                                                    <th class="tdsize">Outils</th>
+                                                </tr>
+                                                {% for serie in seriesPublic %}
+                                                    <tr>
+                                                        <td class="tdsize">{{ serie.nom }}</td>
+                                                        <td class="tdsize">{{ serie.difficulte }}</td>
+                                                        <td class="tdsize">{{ serie.questions|length }}</td>
+                                                        <td class="tdsize">
+                                                            <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
+                                                                <i class="fa fa-pencil"></i>
+                                                                Modifier
+                                                            </a>
+                                                            <a class="btn btn-danger btn-xs" href="#">
+                                                                <i class="fa fa-minus"></i>
+                                                                Supprimer
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     {% endfor %}
 {% endblock %}
 
@@ -51,6 +131,22 @@
             $('#tabs li.tab').click(function (e) {
                 e.preventDefault();
                 $(this).tab('show');
+            });
+
+            $('.noborder').css('border-top-width', '0');
+
+            $("[data-widget='collapse']").each(function() {
+                //Find the box parent
+                var box = $(this).parents(".box").first();
+                //Find the body and the footer
+                var bf = box.find(".box-body, .box-footer");
+                if (!box.hasClass("collapsed-box")) {
+                    box.addClass("collapsed-box");
+                    bf.slideUp();
+                } else {
+                    box.removeClass("collapsed-box");
+                    bf.slideDown();
+                }
             });
         });
     </script>

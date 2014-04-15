@@ -4,11 +4,11 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAS - {{ title }}</title>
-    {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {% stylesheets 'css/*' filter="cssrewrite" %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
     {% endstylesheets %}
+    {% block stylesheets %}{% endblock %}
 </head>
 {% import 'EklerniCASBundle:Template:macro.form.html.twig' as eklerni_cas %}
 <body class="bg-black">

@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Media
  * @package Eklerni\DatabaseBundle\Entity
  * @ORM\Table(name="t_media")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Eklerni\DatabaseBundle\Repository\MediaRepository")
  */
 class Media extends BaseEntity {
 

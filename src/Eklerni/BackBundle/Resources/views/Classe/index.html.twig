@@ -16,9 +16,7 @@
     {% endset %}
 {% endif %}
 {% set footereleves %}
-    <a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}">
-        <button class="btn btn-primary">Ajouter un Elève</button>
-    </a>
+    <a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}" class="btn btn-primary">{% trans %}btn.eleve.add{% endtrans %}</a>
 {% endset %}
 
 {% set profsTable %}
@@ -61,9 +59,7 @@
     </table>
 {% endset %}
 {% set footermatieres %}
-    <a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}" id="matieres_link">
-        <button class="btn btn-primary">Enregistrer</button>
-    </a>
+    <a href="{{ path("eklerni_back_classe_create_eleve", {idClasse:classe.id}) }}" id="matieres_link" class="btn btn-primary">{% trans %}utils.save{% endtrans %}</a>
 {% endset %}
 
 {% block body %}

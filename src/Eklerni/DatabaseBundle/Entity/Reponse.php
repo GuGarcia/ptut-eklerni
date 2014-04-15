@@ -19,14 +19,14 @@ class Reponse extends BaseEntity {
     /**
      * @var string
      *
-     * @ORM\Column(name="titre", type="text")
+     * @ORM\Column(name="name", type="text")
      */
     private $label;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mediaUrl", type="text")
+     * @ORM\Column(name="mediaUrl", type="text", nullable=true)
      */
     private $mediaUrl;
 
@@ -49,7 +49,7 @@ class Reponse extends BaseEntity {
      * @var Question
      *
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="reponses")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idQuestion", referencedColumnName="id")
      */
     private $question;
 
