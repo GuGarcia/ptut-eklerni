@@ -244,18 +244,20 @@ class ClasseController extends Controller
 
             if ($classe) {
                 $this->get("eklerni.manager.classe")->clearMatieres($classe);
-                foreach ($request->get("matieres") as $idMatiere) {
-                    /** @var Matiere $matiere */
-                    $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere)[0];
+                if ($request->get("matieres")) {
+                    foreach ($request->get("matieres") as $idMatiere) {
+                        /** @var Matiere $matiere */
+                        $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere)[0];
 
-                    if (get_class($matiere) == "Eklerni\\DatabaseBundle\\Entity\\Matiere") {
-                        $classe->getMatieres()->removeElement($matiere);
-                        $matiere->addClasse($classe);
-                        $this->get("eklerni.manager.matiere")->save($matiere);
-                        $classe->addMatiere($matiere);
+                        if (get_class($matiere) == "Eklerni\\DatabaseBundle\\Entity\\Matiere") {
+                            $classe->getMatieres()->removeElement($matiere);
+                            $matiere->addClasse($classe);
+                            $this->get("eklerni.manager.matiere")->save($matiere);
+                            $classe->addMatiere($matiere);
+                        }
                     }
+                    $this->get("eklerni.manager.classe")->save($classe);
                 }
-                $this->get("eklerni.manager.classe")->save($classe);
 
                 return new Response(
                     json_encode(
