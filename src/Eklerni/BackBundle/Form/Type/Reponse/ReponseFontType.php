@@ -1,17 +1,19 @@
 <?php
 
-namespace Eklerni\DatabaseBundle\Form\Type;
+namespace Eklerni\BackBundle\Form\Type;
 
 use Eklerni\DatabaseBundle\Repository\MediaRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ReponseType extends AbstractType
+class ReponseFontType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            'label', 'text', array(
+            'label',
+            'text',
+            array(
                 'label' => 'reponse.label',
                 'attr' => array(
                     'placeholder' => "reponse.label",
@@ -21,21 +23,15 @@ class ReponseType extends AbstractType
         );
 
         $builder->add(
-            'mediaUrl', 'file', array(
-                'label' => 'reponse.media.file',
-                'attr' => array(
-                    'placeholder' => "reponse.media.file",
-                    'class' => 'form-control'
-                )
-            )
-        );
-
-        $builder->add(
-            'media', 'entity', array(
+            'media',
+            'entity',
+            array(
                 'label' => 'reponse.media.type',
                 'query_builder' => function (MediaRepository $er) {
                         return $er->findAll();
                     },
+                'data' => 'font',
+                'disabled' => true,
                 'attr' => array(
                     'placeholder' => "reponse.media.type",
                     'class' => 'form-control'
@@ -44,9 +40,11 @@ class ReponseType extends AbstractType
         );
 
         $builder->add(
-            "valid", "checkbox", array(
-                'label'     => "reponse.valid",
-                'required'  => false,
+            "valid",
+            "checkbox",
+            array(
+                'label' => "reponse.valid",
+                'required' => false,
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -59,6 +57,6 @@ class ReponseType extends AbstractType
      */
     public function getName()
     {
-        return 'eklerni_reponse';
+        return 'eklerni_reponse_font';
     }
 } 

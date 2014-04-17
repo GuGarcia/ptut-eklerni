@@ -1,16 +1,19 @@
 <?php
 
-namespace Eklerni\DatabaseBundle\Form\Type;
+namespace Eklerni\BackBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SerieType extends AbstractType {
-
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+class SerieType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->add(
-            'nom', 'text', array(
+            'nom',
+            'text',
+            array(
                 'label' => 'serie.name',
                 'attr' => array(
                     'placeholder' => "serie.name",
@@ -20,7 +23,9 @@ class SerieType extends AbstractType {
         );
 
         $builder->add(
-            'difficulte', 'choice', array(
+            'difficulte',
+            'choice',
+            array(
                 'label' => "serie.difficulty",
                 'choices' => array(
                     '1' => 'difficulte.niveau1',
@@ -36,9 +41,11 @@ class SerieType extends AbstractType {
         );
 
         $builder->add(
-            "public", "checkbox", array(
-                'label'     => "serie.public",
-                'required'  => false,
+            "public",
+            "checkbox",
+            array(
+                'label' => "serie.public",
+                'required' => false,
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -46,7 +53,9 @@ class SerieType extends AbstractType {
         );
 
         $builder->add(
-            'valider', 'submit', array(
+            'valider',
+            'submit',
+            array(
                 'label' => "button.validation",
                 'attr' => array(
                     'class' => 'btn bg-olive btn-block'
@@ -58,13 +67,17 @@ class SerieType extends AbstractType {
     /**
      * @inheritdoc
      */
-    public function getName() {
+    public function getName()
+    {
         return 'eklerni_serie';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => 'Eklerni\DatabaseBundle\Entity\Serie',
-        ));
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Eklerni\DatabaseBundle\Entity\Serie',
+            )
+        );
     }
 } 
