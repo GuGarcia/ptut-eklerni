@@ -47,6 +47,12 @@ class Attribuer
      */
     private $dateAttribution;
 
+    /**
+     * @var boolean
+     * @ORM\Column(name="isActive", type="boolean")
+     */
+    private $isActive;
+
     /********************
      * CONSTRUCTORS
      ********************/
@@ -62,10 +68,12 @@ class Attribuer
 
     /**
      * @param \DateTime $dateAttribution
+     * @return Attribuer
      */
     public function setDateAttribution($dateAttribution)
     {
         $this->dateAttribution = $dateAttribution;
+        return $this;
     }
 
     /**
@@ -78,10 +86,12 @@ class Attribuer
 
     /**
      * @param \Eklerni\DatabaseBundle\Entity\Eleve $eleve
+     * @return Attribuer
      */
     public function setEleve($eleve)
     {
         $this->eleve = $eleve;
+        return $this;
     }
 
     /**
@@ -94,10 +104,12 @@ class Attribuer
 
     /**
      * @param ArrayCollection $resultats
+     * @return Attribuer
      */
     public function setResultats($resultats)
     {
         $this->resultats = $resultats;
+        return $this;
     }
 
     /**
@@ -110,10 +122,12 @@ class Attribuer
 
     /**
      * @param mixed $serie
+     * @return Attribuer
      */
     public function setSerie($serie)
     {
         $this->serie = $serie;
+        return $this;
     }
 
     /**
@@ -123,4 +137,23 @@ class Attribuer
     {
         return $this->serie;
     }
+
+    /**
+     * @param boolean $isActive
+     * @return Attribuer
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
 }
