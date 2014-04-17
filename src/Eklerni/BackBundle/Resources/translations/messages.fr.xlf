@@ -65,7 +65,7 @@
       </trans-unit>
       <trans-unit id="3c0d38b79f55fa292d4d89ae1fa3f70f08e60281" resname="classe.list">
         <source>classe.list</source>
-        <target state="new">classe.list</target>
+        <target>Liste des classes</target>
         <jms:reference-file line="60">views/Index/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c72eab01165e5f9f7c867ef919ec97802aa7cfbf" resname="classe.name">
@@ -110,7 +110,7 @@
       </trans-unit>
       <trans-unit id="a05487467cc142ff796e07b112c098cf03bc6e78" resname="eleve.list">
         <source>eleve.list</source>
-        <target state="new">eleve.list</target>
+        <target>Liste des élèves</target>
         <jms:reference-file line="69">views/Classe/index.html.twig</jms:reference-file>
         <jms:reference-file line="64">views/Index/index.html.twig</jms:reference-file>
       </trans-unit>

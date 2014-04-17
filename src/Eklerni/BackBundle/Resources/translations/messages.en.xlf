@@ -48,13 +48,13 @@
       </trans-unit>
       <trans-unit id="1ca900835ae43df338bd3261baffa4351d2418aa" resname="classe.eleve.count">
         <source>classe.eleve.count</source>
-        <target>Students number</target>
+        <target>Number of pupils</target>
         <jms:reference-file line="33">views/Classe/list.html.twig</jms:reference-file>
         <jms:reference-file line="30">views/Index/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4500ca400cc409eee21b2b9df6955a9fd682bb07" resname="classe.id">
         <source>classe.id</source>
-        <target>Id</target>
+        <target>ID</target>
         <jms:reference-file line="13">views/Classe/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="558ce82ff786a78c18db9178d9850372b6d022ab" resname="classe.level">
@@ -65,7 +65,7 @@
       </trans-unit>
       <trans-unit id="3c0d38b79f55fa292d4d89ae1fa3f70f08e60281" resname="classe.list">
         <source>classe.list</source>
-        <target state="new">classe.list</target>
+        <target>Classrooms list</target>
         <jms:reference-file line="60">views/Index/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c72eab01165e5f9f7c867ef919ec97802aa7cfbf" resname="classe.name">
@@ -86,7 +86,7 @@
       </trans-unit>
       <trans-unit id="9585ba58aa51cb71eef4f6dfadd2c9e819908f35" resname="classe.text">
         <source>classe.text</source>
-        <target>Class</target>
+        <target>Classroom</target>
         <jms:reference-file line="73">views/Classe/list.html.twig</jms:reference-file>
         <jms:reference-file line="8">views/Index/index.html.twig</jms:reference-file>
         <jms:reference-file line="53">views/Index/index.html.twig</jms:reference-file>
@@ -110,7 +110,7 @@
       </trans-unit>
       <trans-unit id="a05487467cc142ff796e07b112c098cf03bc6e78" resname="eleve.list">
         <source>eleve.list</source>
-        <target state="new">eleve.list</target>
+        <target>Pupils list</target>
         <jms:reference-file line="69">views/Classe/index.html.twig</jms:reference-file>
         <jms:reference-file line="64">views/Index/index.html.twig</jms:reference-file>
       </trans-unit>
@@ -205,7 +205,7 @@
       </trans-unit>
       <trans-unit id="180ce78e7461646d7daebe14d9a8b057fb412383" resname="sidebar.classes">
         <source>sidebar.classes</source>
-        <target>Classes</target>
+        <target>Classrooms</target>
         <jms:reference-file line="6">views/Template/sidebar.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2209e7f3321f56bc77e6b98691cc83f7694c895b" resname="sidebar.exercices">
@@ -230,7 +230,7 @@
       </trans-unit>
       <trans-unit id="ac8a9fed1914ddbba4c1640419920db6b7f53040" resname="sidebar.students">
         <source>sidebar.students</source>
-        <target>Students</target>
+        <target>Pupils</target>
         <jms:reference-file line="11">views/Template/sidebar.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6929a2c5bc8080684fd61cf3ad4dcfcbf803770a" resname="title.accueil">
@@ -245,12 +245,12 @@
       </trans-unit>
       <trans-unit id="cce1745c5f28fbfac817c8b064b28b2a07d814ba" resname="title.create_classe">
         <source>title.create_classe</source>
-        <target>Class creation</target>
+        <target>New classroom</target>
         <jms:reference-file line="79">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1b7b5ca251e67ed18303f558d16d31aa16971e43" resname="title.create_serie">
         <source>title.create_serie</source>
-        <target>Serie creation</target>
+        <target>New series</target>
         <jms:reference-file line="59">BackBundle/Controller/ExerciceController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="35b8b0a4747e1e0c581fe413a2049c156fa368e4" resname="title.exercice">
