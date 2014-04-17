@@ -11,14 +11,14 @@
             <td>
                 {% for serie in seriesProf %}
                 {% if tempNameMatiere != serie.activite.matiere.name %}
-                    {% set tempNameMatiere = serie.activite.matiere.name %}
-                    </td>
-                    </tr>
-                    <tr class="matiere">
-                        <th>{{ tempNameMatiere }}</h4></th>
-                    </tr>
-                    <tr>
-                    <td>
+                {% set tempNameMatiere = serie.activite.matiere.name %}
+            </td>
+        </tr>
+        <tr class="matiere">
+            <th>{{ tempNameMatiere }}</h4></th>
+        </tr>
+        <tr>
+            <td>
                 {% endif %}
                 <div class="btn btn-sm btn-primary draggable {{ serie.activite.matiere.name }}" id="{{ serie.id }}">
                     <span class="badge">{{ serie.activite.name }}</span>
@@ -32,53 +32,63 @@
 {% endset %}
 
 {% set serieAttribuer %}
-<h4>Donner un Exercice à une Classe</h4>
-<table class="table">
-    {% for classe in prof.classes %}
-        <tr>
-            <td>{{ classe.nom }}</td>
-        </tr>
-        <tr>
-            <td>
-                <div id="{{ classe.id }}"
-                     class="droppable"
-                     info="{% for matiere in classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}"></div>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
-
-<h4>Donner un Exercice à un Eleve</h4>
-<table class="table">
-    {% for classe in prof.classes %}
-        {% set background %}{% if loop.index is odd %}bg-danger{% else %}bg-primary{% endif %}{% endset %}
-        <tr class="{{ background }}">
-            <th>Classe : {{ classe.nom }}</th>
-        </tr>
-        {% for eleve in classe.eleves %}
-            <tr class="{{ background }}">
-                <td>{{ eleve.nom }} {{ eleve.prenom }}</td>
+<h3>Donner un Exercice à une Classe</h3>
+<div class="nav-tabs-custom">
+    <table class="table attribution classe">
+        {% for classe in prof.classes %}
+            <tr>
+                <td>{{ classe.nom }}</td>
             </tr>
-            <tr class="{{ background }}">
+            <tr>
                 <td>
-                    <div id="{{ eleve.id }}"
-                         class="droppable"
-                         info="{% for matiere in eleve.classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}"></div>
+                    <div id="classe-{{ classe.id }}"
+                         class="droppable classe-{{ classe.id }}"
+                         info="{% for matiere in classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}"></div>
                 </td>
             </tr>
         {% endfor %}
-    {% endfor %}
-</table>
+    </table>
+</div>
+
+<h3>Donner un Exercice à un Eleve</h3>
+{% for classe in prof.classes %}
+    {% set background %}{% if loop.index is odd %}danger{% else %}primary{% endif %}{% endset %}
+    <div id="{{ classe.id }}" class="box box-{{ background }}">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="pull-left header">Classe : {{ classe.nom }}</li>
+            </ul>
+            <table class="table attribution eleve">
+                {% for eleve in classe.eleves %}
+                    <tr>
+                        <td>{{ eleve.nom }} {{ eleve.prenom }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="{{ eleve.id }}"
+                                 class="droppable eleve-{{ eleve.id }}"
+                                 info="{% for matiere in eleve.classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}"></div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endfor %}
+{% endset %}
+
+{% set trashcontent %}
+<div id="trash"></div>
 {% endset %}
 
 {% block body %}
     <div class="row">
         <div id="series" class="col-md-4">
-                {{ eklerni.block("Liste des Séries", serieTable, "", "danger") }}
+            {{ eklerni.block("Liste des Séries", serieTable, "", "primary") }}
+            {{ eklerni.block("Corbeille", trashcontent, "", "danger") }}
         </div>
-        <div class="col-lg-4 temp"></div>
         <div class="col-md-8">
-            {{ eklerni.block("Attribution des Exercices", serieAttribuer, "", "primary") }}
+            {{ eklerni.block("Attribution des Exercices", serieAttribuer, "", "success") }}
         </div>
     </div>
 {% endblock %}
@@ -87,64 +97,168 @@
     <script type="application/javascript">
 
         $(document).ready(function () {
+            init();
             $(".draggable").draggable({
                 revert: true,
                 helper: "clone"
             });
-            $(".droppable").each(function() {
+
+            /** Drop for Classe **/
+            $(".classe .droppable").each(function () {
                 var _this = this;
                 $(this).droppable({
                     activeClass: "ui-state-default",
                     hoverClass: "ui-state-hover",
                     accept: $(_this).attr("info"),
                     drop: function (event, ui) {
-                        $(this).find(".placeholder").remove();
+
+                        var _this = this;
                         var isExist = false;
-                        var id =  ui.draggable.attr("id");
-                        $(this).children().each(function() {
-                            if(this.id == id) {
+                        var id = ui.draggable.attr("id");
+
+                        $(this).find(".placeholder").remove();
+                        $(this).children().each(function () {
+                            if (this.id == id) {
                                 isExist = true;
                                 return false;
                             }
                         });
-                        if(!isExist) {
-                            $("<div id=\""+ id +"\" class=\"btn btn-default\"></div>").html(ui.draggable.html()).appendTo(this);
-                            //Ajax
-                            displayMessage("success", "L'Exercice a bien été ajouté !")
+                        if (!isExist) {
+                            //Ajax addSerieClasse
+                            var idClasse = this.id.split("-");
+                            idClasse = idClasse[idClasse.length-1];
+                            var idSerie = id;
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ path("eklerni_back_attribution_ajax_addSerieClasse") }}",
+                                data: {"idClasse": idClasse, "idSerie": idSerie}
+                            }).success(function () {
+                                $("<div id=\"" + id + "\" class=\"btn btn-default draggable-delete\"></div>").html(ui.draggable.html()).appendTo(_this);
+                                displayMessage("success", "L'Exercice a bien été ajouté !");
+                                init();
+                            });
                         } else {
-                            displayMessage("warning", "L'Exercice a déjà été donné !")
+                            displayMessage("warning", "L'Exercice a déjà été donné !");
                         }
                     }
                 });
             });
-        });
-        var paddingSeries = parseInt($("#series").parent().parent().css("padding-top"))
-        var topSeries = $("#series").offset().top - $("header").innerHeight() - paddingSeries;
-        var size = $("#series").outerWidth();
 
-        $(document).on("resize", function() {
-           size = $("#series").outerWidth();
+            /** Drop for Eleve **/
+            $(".eleve .droppable").each(function () {
+                var _this = this;
+                $(this).droppable({
+                    activeClass: "ui-state-default",
+                    hoverClass: "ui-state-hover",
+                    accept: $(_this).attr("info"),
+                    drop: function (event, ui) {
+                        var _this = this;
+                        var isExist = false;
+                        var isExistInClasse = false;
+                        var id = ui.draggable.attr("id");
+                        var classe = $(this).parent().parent().parent().parent().parent().parent();
+
+                        console.log("idSerie", id);
+                        $("#classe-" + classe.attr("id")).children().each(function () {
+                            if (this.id == id) {
+                                isExistInClasse = true;
+                                return false;
+                            }
+                        });
+
+                        $(this).find(".placeholder").remove();
+                        $(this).children().each(function () {
+                            if (this.id == id) {
+                                isExist = true;
+                                return false;
+                            }
+                        });
+                        if (isExist) {
+                            displayMessage("warning", "L'Exercice a déjà été donné !");
+                        } else if (isExistInClasse) {
+                            displayMessage("warning", "L'Exercice a déjà été donné à la Classe !");
+                        } else {
+                            //Ajax addSerieEleve
+                            var idEleve = this.id;
+                            var idSerie = id;
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ path("eklerni_back_attribution_ajax_addSerieEleve") }}",
+                                data: {"idEleve": idEleve, "idSerie": idSerie}
+                            }).success(function () {
+                                $("<div id=\"" + id + "\" class=\"btn btn-default draggable-delete\"></div>").html(ui.draggable.html()).appendTo(_this);
+                                displayMessage("success", "L'Exercice a bien été ajouté !");
+                                init();
+                            });
+                        }
+                    }
+                });
+            });
+
+            $("#trash").droppable({
+                activeClass: "ui-state-default",
+                hoverClass: "ui-state-hover",
+                accept: ".draggable-delete.btn-default",
+                drop: function (event, ui) {
+                    //Ajax deleteSerie
+                    ui.draggable["context"].remove();
+                    displayMessage("success", "L'Exercice a bien été supprimé !");
+                }
+            });
+
+            var paddingSeries = parseInt($("#series").parent().parent().css("padding-top"));
+            var topSeries = $("#series").offset().top - $("header").innerHeight() - paddingSeries;
+            var size = $("#series").outerWidth();
+
+            $(document).on("resize", function () {
+                size = $("#series").outerWidth();
+            });
+
+            //console.log(topSeries, $("#series").offset().top - $("header").innerHeight(), $("header").innerHeight(), paddingSeries);
+            $(window).on("scroll", function () {
+                var windowTop = $(this).scrollTop();
+                $
+                if (topSeries <= windowTop) {
+                    $("#series").css({
+                        "position": "relative",
+                        "top": windowTop - topSeries
+                    })
+                } else {
+                    $("#series").css({
+                        "position": "static",
+                        "top": ""
+                    })
+                }
+            });
         });
 
-        $(".temp").hide();
-        //console.log(topSeries, $("#series").offset().top - $("header").innerHeight(), $("header").innerHeight(), paddingSeries);
-        $(window).on("scroll", function () {
-            var windowTop = $(this).scrollTop();$
-            if (topSeries <= windowTop) {
-                $(".temp").show();
-                $("#series").css({
-                    "position": "fixed",
-                    "top": topSeries + paddingSeries,
-                    "width": size
-                })
-            } else {
-                $(".temp").hide();
-                $("#series").css({
-                    "position": "static",
-                    "top": "",
-                    "width": ""
-                })
-            }
-        });
+        function init() {
+            $(".attribution .draggable-delete").unbind("draginit dragstart drag dragend");
+            $(".attribution .btn-default.draggable-delete").draggable({
+                revert: true,
+                start: function () {
+                    $(".attribution .draggable-delete").off("click");
+                },
+                stop: function () {
+                    init();
+                }
+            });
+            $(".attribution .draggable-delete").off("click");
+            $(".attribution .draggable-delete").on("click", function () {
+                $(this).toggleClass("btn-success btn-default");
+
+                if ($(this).hasClass("btn-success")) {
+                    //Ajax ActiverAttribution
+
+                    displayMessage("success", "L'Exercice a bien été activé !")
+                } else if ($(this).hasClass("btn-default")) {
+                    //Ajax DesactiverAttribution
+
+                    displayMessage("success", "L'Exercice a bien été désactivé !")
+                }
+                init();
+            });
+
+        }
     </script>
 {% endblock %}
