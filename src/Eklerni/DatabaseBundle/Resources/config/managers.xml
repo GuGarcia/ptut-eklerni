@@ -36,6 +36,9 @@
         <service id="eklerni.manager.serie" class="%manager_serie.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
+        <service id="eklerni.manager.attribuer" class="%manager_attribuer.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
 
     </services>
 </container>

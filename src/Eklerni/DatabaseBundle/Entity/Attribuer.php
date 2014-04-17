@@ -53,6 +53,12 @@ class Attribuer
      */
     private $isActive;
 
+    /**
+     * @var boolean
+     * @ORM\Column(name="isClasse", type="boolean")
+     */
+    private $isClasse;
+
     /********************
      * CONSTRUCTORS
      ********************/
