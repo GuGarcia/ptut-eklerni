@@ -87,14 +87,16 @@
 
             $('.deleteClassBtn').on('click', function(event){
                 event.preventDefault();
+                var _this = this;
 
                 $.ajax({
                     type: "POST",
-                    url: $(this).attr("href")
+                    url: $(_this).attr("href"),
+                    dataType: "json"
                 }).success(function (data) {
-                    console.log(data);
                     if (data.success) {
                         displayMessage("success", data.message);
+                        $(_this).parent().parent().remove();
                     } else {
                         displayMessage("danger", data.message);
                     }
