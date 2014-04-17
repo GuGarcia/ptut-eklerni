@@ -1,6 +1,6 @@
 <?php
 
-namespace Eklerni\BackBundle\Form\Type;
+namespace Eklerni\BackBundle\Form\Type\Reponse;
 
 use Eklerni\DatabaseBundle\Repository\MediaRepository;
 use Symfony\Component\Form\AbstractType;
@@ -26,6 +26,8 @@ class ReponseFontType extends AbstractType
             'media',
             'entity',
             array(
+                'class' => "EklerniDatabaseBundle:Media",
+                'property' => 'media',
                 'label' => 'reponse.media.type',
                 'query_builder' => function (MediaRepository $er) {
                         return $er->findAll();
@@ -48,6 +50,17 @@ class ReponseFontType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control'
                 )
+            )
+        );
+
+        $builder->add(
+            'delete',
+            'button',
+            array(
+                'attr' => array(
+                    'class' => 'deleteReponse',
+                    'label' => 'utils.delete'
+                ),
             )
         );
     }

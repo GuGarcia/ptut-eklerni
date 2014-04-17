@@ -1,0 +1,87 @@
+{% extends "EklerniBackBundle:Template:template.html.twig" %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <h3>{{ form.questions.vars.label }}</h3>
+    <div id="questions" data-prototype="{{ form_widget(form.questions.vars.prototype)|e }}">
+        {% for question in form.questions %}
+            <div class="question">
+                {% if question.label is defined %}
+                    {{ form_row(question.label) }}
+                {% endif %}
+                {% if question.mediaUrl is defined %}
+                    {{ form_row(question.mediaUrl) }}
+                {% endif %}
+                {{ form_row(question.media) }}
+                {{ form_row(question.delete) }}
+                <div class="reponses">
+                    {% for reponse in question.reponses %}
+                        <div class="reponse">
+                            {% if reponse.label is defined %}
+                                {{ form_row(reponse.label) }}
+                            {% endif %}
+                            {% if reponse.mediaUrl is defined %}
+                                {{ form_row(reponse.mediaUrl) }}
+                            {% endif %}
+                            {{ form_row(reponse.media) }}
+                            {{ form_row(reponse.delete) }}
+                        </div>
+                    {% endfor %}
+                    <span class="reponse_prototype hidden" data-prototype="{{ form_widget(form.questions.reponses.vars.prototype)|e }}"></span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="application/javascript">
+        $(function () {
+            var $collectionHolder;
+
+            // setup an "add a tag" link
+            var $addQuestionLink = $('<a href="#" class="add_question_link">Add a Question</a>');
+
+            jQuery(document).ready(function() {
+                // Get the ul that holds the collection of tags
+                $collectionHolder = $('#questions');
+
+                // add the "add a tag" anchor and li to the tags ul
+                $collectionHolder.append($addQuestionLink);
+
+                // count the current form inputs we have (e.g. 2), use that as the new
+                // index when inserting a new item (e.g. 2)
+                $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+                $addQuestionLink.on('click', function(e) {
+                    // prevent the link from creating a "#" on the URL
+                    e.preventDefault();
+
+                    // add a new tag form (see next code block)
+                    addTagForm($collectionHolder);
+                });
+            });
+
+            function addTagForm($collectionHolder) {
+                // Get the data-prototype explained earlier
+                var prototype = $collectionHolder.data('prototype');
+
+                // get the new index
+                var index = $collectionHolder.data('index');
+
+                // Replace '__name__' in the prototype's HTML to
+                // instead be a number based on how many items we have
+                var newQuestion = prototype.replace(/__questions__/g, index);
+
+                // increase the index with one for the next item
+                $collectionHolder.data('index', index + 1);
+
+                // Display the form in the page in an li, before the "Add a tag" link li
+                var $newQuestionRow = $('<div></div>').attr('classe', 'question').append(newQuestion);
+                $('.add_question_link').after($newQuestionRow);
+            }
+        });
+    </script>
+{% endblock %}

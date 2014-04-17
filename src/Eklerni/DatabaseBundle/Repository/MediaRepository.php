@@ -1,10 +1,10 @@
 <?php
 
-
 namespace Eklerni\DatabaseBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
 
-class MediaRepository implements CASRepositoryInterface
+class MediaRepository extends EntityRepository implements CASRepositoryInterface
 {
 
     /**
