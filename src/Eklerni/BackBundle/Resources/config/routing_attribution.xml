@@ -7,4 +7,15 @@
     <route id="eklerni_back_attribution" pattern="/">
         <default key="_controller">EklerniBackBundle:Attribution:index</default>
     </route>
+    <route id="eklerni_back_attribution_ajax_addSerieEleve" pattern="/addSerieEleve">
+        <default key="_controller">EklerniBackBundle:Attribution:addSerieEleve</default>
+    </route>
+    <route id="eklerni_back_attribution_ajax_addSerieClasse" pattern="/addSerieClasse">
+        <default key="_controller">EklerniBackBundle:Attribution:addSerieClasse</default>
+    </route>
+    <route id="eklerni_back_attribution_ajax_activerAttribution" pattern="/activerAttribution">
+        <default key="_controller">EklerniBackBundle:Attribution:activerAttribution</default>
+    </route>
+
+
 </routes>

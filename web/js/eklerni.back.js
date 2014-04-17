@@ -5,8 +5,6 @@ function displayMessage(type, content) {
         $(div).addClass("alert-" + type).append(button).append(content)
     );
     var message = $($("#messages").children()[0]);
-    console.log($(message).outerHeight());
-    console.log($(message));
 
     $($("#messages .alert")[0]).css({
         "opacity": "0",
