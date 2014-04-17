@@ -65,13 +65,22 @@
 {% block body %}
     <div class="row">
         <div class="col-md-4">
-            {{ eklerni.block("Liste des Eleves", elevesTable, footereleves, "primary") }}
+            {% set eleveList %}
+                {% trans %}eleve.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(eleveList, elevesTable, footereleves, "primary") }}
         </div>
         <div class="col-md-4">
-            {{ eklerni.block("Liste des Enseignants", profsTable, footerprofs, "primary") }}
+            {% set enseignantList %}
+                {% trans %}enseignant.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(enseignantList, profsTable, footerprofs, "primary") }}
         </div>
         <div class="col-md-4">
-            {{ eklerni.block("Matières", matieresTables, footermatieres, "primary") }}
+            {% set matiereText %}
+                {% trans %}matiere.text{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(matiereText, matieresTables, footermatieres, "primary") }}
         </div>
     </div>
 {% endblock %}

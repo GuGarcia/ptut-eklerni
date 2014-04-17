@@ -5,7 +5,7 @@
     <table class="table">
         <tr>
             <th>{% trans %}personne.name{% endtrans %}</th>
-            <th>{% trans %}classe.name.colon{% endtrans %}</th>
+            <th>{% trans %}classe.text{% endtrans %}</th>
         </tr>
         {% for eleve in eleves %}
             <tr>
@@ -55,13 +55,19 @@
 {% endset %}
     {% block body %}
         <div class="row">
-            <div class="col-md-5">
-                {{ eklerni.block("Liste des Classes", classesTable, footerclasses, "danger") }}
+            <div class="col-md-4">
+                {% set classList %}
+                    {% trans %}classe.list{% endtrans %}
+                {% endset %}
+                {{ eklerni.block(classList, classesTable, footerclasses, "danger") }}
+                {% set eleveList %}
+                    {% trans %}eleve.list{% endtrans %}
+                {% endset %}
+                {{ eklerni.block(eleveList, elevesTable, "", "primary") }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
             </div>
-            <div class="col-md-5">
-                {{ eklerni.block("Liste des Eleves", elevesTable, "", "primary") }}
+            <div class="col-md-4">
             </div>
         </div>
 

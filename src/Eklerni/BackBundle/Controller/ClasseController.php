@@ -105,21 +105,37 @@ class ClasseController extends Controller
         }
     }
 
-    public function supprimerAction($idClasse)
+    public function supprimerAction(Request $request, $idClasse)
     {
-        /** @var Classe $classe */
-        $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+        if ($request->isXmlHttpRequest()) {
+            /** @var Classe $classe */
+            $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
 
-        if ($classe->getEleves()->count() > 0) {
-            //todo handle hacker !
-            return;
-        } else {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($classe);
-            $em->flush();
+            if ($classe) {
+                if ($classe->getEleves()->count() == 0) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->remove($classe);
+                    $em->flush();
 
-            return $this->redirect($this->generateUrl('eklerni_back_classe'));
+                    return new Response(
+                        json_encode(
+                            array(
+                                "success" => true,
+                                'message' => $this->get('translator')->trans('classe.delete.success')
+                            )
+                        )
+                    );
+                }
+            }
         }
+        return new Response(
+            json_encode(
+                array(
+                    "success" => false,
+                    'message' => $this->get('translator')->trans('classe.delete.fail')
+                )
+            )
+        );
     }
 
     public function ajouterEcoleAction(Request $request)
@@ -143,6 +159,7 @@ class ClasseController extends Controller
     public function ajouterEleveAction(Request $request, $idClasse)
     {
         $eleve = new Eleve();
+        /** @var Classe $classe */
         $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
 
         $form = $this->createForm('eklerni_eleve', $eleve);
@@ -176,7 +193,10 @@ class ClasseController extends Controller
                 'EklerniBackBundle:Eleve:ajouter.html.twig',
                 array(
                     "form" => $form->createView(),
-                    "title" => $this->get('translator')->trans("Ajout d'un Eleve à la Classe : %name%", array("%name%" => $classe->getNom()))
+                    "title" => $this->get('translator')->trans(
+                            "Ajout d'un Eleve à la Classe : %name%",
+                            array("%name%" => $classe->getNom())
+                        )
                 )
             );
         }
