@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-04-17T09:54:05Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2014-04-17T08:52:18Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -8,7 +8,7 @@
     <body>
       <trans-unit id="6594c446cab9342234aff10f18551fc7fb571518" resname="Ajout d'un Eleve à la Classe : %name%">
         <source>Ajout d'un Eleve à la Classe : %name%</source>
-        <target>Ajout d'un Eleve à la Classe : %name%</target>
+        <target>Ajout d'un élève à la classe : %name%</target>
         <jms:reference-file line="196">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7a7076a79e6b7874566cfd88dfe6ffe510d56b04" resname="Classe %name%">
@@ -33,17 +33,37 @@
       </trans-unit>
       <trans-unit id="81454b2db51ad4ba24b4043b14ed1caedd384099" resname="btn.navigation.toogle">
         <source>btn.navigation.toogle</source>
-        <target>Afficher/Masquer la navigation</target>
+        <target>Afficher/masquer la navigation</target>
         <jms:reference-file line="4">views/Template/header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7250682128b995ff43613b46d4b2fc887d1ef1bb" resname="classe.add.enseignant.fail">
+        <source>classe.add.enseignant.fail</source>
+        <target>Une erreur est survenue lors de la liaison de l'enseignant à la classe.</target>
+        <jms:reference-file line="233">BackBundle/Controller/ClasseController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ad5e4a173855b9a9980d0a4db6d937c4d4672cb4" resname="classe.add.enseignant.success">
+        <source>classe.add.enseignant.success</source>
+        <target>L'enseignant a été lié à la classe avec succès.</target>
+        <jms:reference-file line="223">BackBundle/Controller/ClasseController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7c6df226579b4486f64e548f6d2f59d26138d274" resname="classe.delete.enseignant.fail">
+        <source>classe.delete.enseignant.fail</source>
+        <target>Une erreur est survenue lors de l'ajout des permissions à l'enseignant.</target>
+        <jms:reference-file line="315">BackBundle/Controller/ClasseController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="77f1b7f5f665499b5e0a398e5c7c924dc2a00caa" resname="classe.delete.enseignant.success">
+        <source>classe.delete.enseignant.success</source>
+        <target>Les permissions de l'enseignant ont bien été retirées.</target>
+        <jms:reference-file line="305">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7ff81f8a9d430d40907cc722565386a2ee1682da" resname="classe.delete.fail">
         <source>classe.delete.fail</source>
-        <target state="new">classe.delete.fail</target>
+        <target>Une erreur est survenue lors de la suppression de la classe.</target>
         <jms:reference-file line="135">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f1c4c6865efa6a77947510cc853c17f5afbf5730" resname="classe.delete.success">
         <source>classe.delete.success</source>
-        <target state="new">classe.delete.success</target>
+        <target>La classe a été supprimée avec succès.</target>
         <jms:reference-file line="124">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1ca900835ae43df338bd3261baffa4351d2418aa" resname="classe.eleve.count">
@@ -54,7 +74,7 @@
       </trans-unit>
       <trans-unit id="4500ca400cc409eee21b2b9df6955a9fd682bb07" resname="classe.id">
         <source>classe.id</source>
-        <target>Id</target>
+        <target>ID</target>
         <jms:reference-file line="13">views/Classe/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="558ce82ff786a78c18db9178d9850372b6d022ab" resname="classe.level">
@@ -81,8 +101,18 @@
       </trans-unit>
       <trans-unit id="1c4b312ee7041ef5c3db9a5f7da477b7eb45f3e3" resname="classe.no.eleve">
         <source>classe.no.eleve</source>
-        <target>Cette classe n'a pas d'élève.</target>
+        <target>Cette classe ne contient pas d'élèves.</target>
         <jms:reference-file line="20">views/Index/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ad1c821a40b80356aca9d5c5b3ee29ee13344f19" resname="classe.save.matiere.fail">
+        <source>classe.save.matiere.fail</source>
+        <target>Une erreur est survenue lors de l'ajout de la matière à la classe.</target>
+        <jms:reference-file line="274">BackBundle/Controller/ClasseController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="033eede977e408bfb04617b733bfa227ab502038" resname="classe.save.matiere.success">
+        <source>classe.save.matiere.success</source>
+        <target>La matière a été ajoutée à la classe avec succés.</target>
+        <jms:reference-file line="264">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9585ba58aa51cb71eef4f6dfadd2c9e819908f35" resname="classe.text">
         <source>classe.text</source>
@@ -116,7 +146,7 @@
       </trans-unit>
       <trans-unit id="94a1ce6d7b441c38985d75f7d27d5db690c7d320" resname="enseignant.list">
         <source>enseignant.list</source>
-        <target state="new">enseignant.list</target>
+        <target>Liste des enseignants</target>
         <jms:reference-file line="75">views/Classe/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1d486af2530e6d22b269878094712d46268dd685" resname="enseignant.no.classe">
@@ -131,7 +161,7 @@
       </trans-unit>
       <trans-unit id="f09b8632346a322789bca4be9d4708109beb9767" resname="matiere.text">
         <source>matiere.text</source>
-        <target state="new">matiere.text</target>
+        <target>Matière</target>
         <jms:reference-file line="81">views/Classe/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="26f471b24f2f379e97a1d1143297ba32ef3b8a21" resname="personne.birthdate.colon">
@@ -174,7 +204,7 @@
       </trans-unit>
       <trans-unit id="b821e93227f362b74b0fbe8c21f70a18a4955e1f" resname="serie.notfound">
         <source>serie.notfound</source>
-        <target>serie.notfound</target>
+        <target>Série introuvable.</target>
         <jms:reference-file line="70">BackBundle/Controller/ExerciceController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8dfa3a8ebebb89e75a698fbdd88fd83b655ef46c" resname="serie.notfound.personnal">
@@ -236,36 +266,36 @@
       <trans-unit id="6929a2c5bc8080684fd61cf3ad4dcfcbf803770a" resname="title.accueil">
         <source>title.accueil</source>
         <target>Accueil</target>
-        <jms:reference-file line="22">BackBundle/Controller/IndexController.php</jms:reference-file>
+        <jms:reference-file line="21">BackBundle/Controller/IndexController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="de9332a15ad606c47f8158a467a84f9ab9fea368" resname="title.classe">
         <source>title.classe</source>
-        <target>Classe</target>
+        <target>Classes</target>
         <jms:reference-file line="54">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cce1745c5f28fbfac817c8b064b28b2a07d814ba" resname="title.create_classe">
         <source>title.create_classe</source>
-        <target>Création d'une classe</target>
+        <target>Ajouter une classe</target>
         <jms:reference-file line="79">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1b7b5ca251e67ed18303f558d16d31aa16971e43" resname="title.create_serie">
         <source>title.create_serie</source>
-        <target>Création d'une série</target>
+        <target>Ajouter une série</target>
         <jms:reference-file line="59">BackBundle/Controller/ExerciceController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="35b8b0a4747e1e0c581fe413a2049c156fa368e4" resname="title.exercice">
         <source>title.exercice</source>
-        <target>Exercice</target>
+        <target>Exercices</target>
         <jms:reference-file line="24">BackBundle/Controller/ExerciceController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="708da5a12bf57a3f76c471b92e855d25fd164afb" resname="title.modify_classe">
         <source>title.modify_classe</source>
-        <target>title.modify_classe</target>
+        <target>Modifier une classe</target>
         <jms:reference-file line="102">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0957b81f1785c9d3f68379d40b5de0dd5b459936" resname="title.modify_serie">
         <source>title.modify_serie</source>
-        <target>title.modify_serie</target>
+        <target>Modifier une série</target>
         <jms:reference-file line="86">BackBundle/Controller/ExerciceController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7322645ec280381d3cf90d237d7ae6a2b85ce8e8" resname="title.statistiques">
@@ -275,7 +305,7 @@
       </trans-unit>
       <trans-unit id="82863178c7eab8e0d8de641c10c32e465c06a0f7" resname="url.modify.eleve">
         <source>url.modify.eleve</source>
-        <target>Modifier l'élève</target>
+        <target>Modifier un élève</target>
         <jms:reference-file line="22">views/Eleve/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c26dcb36bc0effc689eb5fe3cbd6a93ce9af0190" resname="utils.delete">
