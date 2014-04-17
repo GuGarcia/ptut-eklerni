@@ -1,23 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Robert-U
- * Date: 20/03/14
- * Time: 10:33
- */
 
-namespace Eklerni\DatabaseBundle\Form\Type;
-
+namespace Eklerni\BackBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class EcoleType extends AbstractType {
+class EcoleType extends AbstractType
+{
 
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->add(
-            'nom', 'text', array(
+            'nom',
+            'text',
+            array(
                 'label' => 'ecole.name',
                 'attr' => array(
                     'placeholder' => "ecole.name",
@@ -27,7 +24,9 @@ class EcoleType extends AbstractType {
         );
 
         $builder->add(
-            'codePostal', 'text', array(
+            'codePostal',
+            'text',
+            array(
                 'label' => 'ecole.postcode',
                 'attr' => array(
                     'placeholder' => "ecole.postcode",
@@ -37,7 +36,9 @@ class EcoleType extends AbstractType {
         );
 
         $builder->add(
-            'ville', 'text', array(
+            'ville',
+            'text',
+            array(
                 'label' => 'ecole.city',
                 'attr' => array(
                     'placeholder' => "ecole.city",
@@ -47,7 +48,9 @@ class EcoleType extends AbstractType {
         );
 
         $builder->add(
-            'valider', 'submit', array(
+            'valider',
+            'submit',
+            array(
                 'label' => "button.validation",
                 'attr' => array(
                     'class' => 'btn bg-olive btn-block'
@@ -59,13 +62,17 @@ class EcoleType extends AbstractType {
     /**
      * @inheritdoc
      */
-    public function getName() {
+    public function getName()
+    {
         return 'eklerni_ecole';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => 'Eklerni\DatabaseBundle\Entity\Ecole',
-        ));
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Eklerni\DatabaseBundle\Entity\Ecole',
+            )
+        );
     }
 }

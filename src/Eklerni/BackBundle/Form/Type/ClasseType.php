@@ -1,64 +1,64 @@
 <?php
 
-namespace Eklerni\DatabaseBundle\Form\Type;
+namespace Eklerni\BackBundle\Form\Type;
 
+use Eklerni\DatabaseBundle\Repository\EcoleRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PersonneType extends AbstractType
+class ClasseType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            'username', 'text', array(
-                'label' => 'personne.username',
-                'attr' => array(
-                    'placeholder' => 'personne.username',
-                    'class' => 'form-control'
-                )
-            )
-        );
-
-        $builder->add(
-            'password', 'password', array(
-                'label' => 'personne.password',
-                'attr' => array(
-                    'placeholder' => "personne.password",
-                    'class' => 'form-control'
-                )
-            )
-        );
-
-        $builder->add(
             'nom', 'text', array(
-                'label' => 'personne.lastname',
+                'label' => 'classe.name',
                 'attr' => array(
-                    'placeholder' => "personne.lastname",
+                    'placeholder' => "classe.name",
                     'class' => 'form-control'
                 )
             )
         );
 
         $builder->add(
-            'prenom', 'text', array(
-                'label' => 'personne.firstname',
+            'niveau', 'choice', array(
+                'label' => 'classe.grade',
+                'choices' => array(
+                    'CP' => 'grade.year1',
+                    'CE1' => 'grade.year2',
+                    'CE2' => 'grade.year3',
+                    'CM1' => 'grade.year4',
+                    'CM2' => 'grade.year5'
+                ),
                 'attr' => array(
-                    'placeholder' => "personne.firstname",
+                    'class' => 'form-control'
+                )
+            )
+        );
+        $builder->add(
+            'annee', 'integer', array(
+                'label' => 'classe.year',
+                'data' => date("Y"),
+                'attr' => array(
+                    'placeholder' => "classe.year",
                     'class' => 'form-control'
                 )
             )
         );
 
         $builder->add(
-            'dateNaissance', 'date', array(
-                'label' => "personne.birthdate",
-                'input'  => 'datetime',
-                'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy',
+            'ecole',
+            'entity',
+            array(
+                'label' => 'classe.school',
+                'class' => 'EklerniDatabaseBundle:Ecole',
+                'query_builder' => function (EcoleRepository $er) {
+                        return $er->findAll();
+                },
                 'attr' => array(
-                    'class' => 'form-control masked_date'
+                    'class' => 'form-control'
                 )
             )
         );
@@ -78,14 +78,13 @@ class PersonneType extends AbstractType
      */
     public function getName()
     {
-        return 'eklerni_personne';
+        return 'eklerni_classe';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-                'inherit_data' => true
-            ));
+            'data_class' => 'Eklerni\DatabaseBundle\Entity\Classe',
+        ));
     }
-
-}
+} 
