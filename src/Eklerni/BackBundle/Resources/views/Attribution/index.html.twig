@@ -43,7 +43,19 @@
                 <td>
                     <div id="classe-{{ classe.id }}"
                          class="droppable classe-{{ classe.id }}"
-                         info="{% for matiere in classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}"></div>
+                         info="{% for matiere in classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}">
+                        {#
+                        {% set attributions = attributionClasses[classe.id] %}
+                        {% for attribution in attributions %}
+                            {% set serie = attribution.serie %}
+                            <div class="btn btn-sm btn-{% if attribution.isActive %}success{% else %}default{% endif %} draggable {{ serie.activite.matiere.name }}"
+                                 id="{{ serie.id }}">
+                                <span class="badge">{{ serie.activite.name }}</span>
+                                {{ serie.nom }}
+                            </div>
+                        {% endfor %}
+                       #}
+                    </div>
                 </td>
             </tr>
         {% endfor %}
@@ -65,9 +77,18 @@
                     </tr>
                     <tr>
                         <td>
-                            <div id="{{ eleve.id }}"
-                                 class="droppable eleve-{{ eleve.id }}"
-                                 info="{% for matiere in eleve.classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}"></div>
+                            <div id="eleve-{{ eleve.id }}"
+                                 class="droppable eleve"
+                                 info="{% for matiere in eleve.classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}">
+                                {% for attribution in eleve.listeAttribution %}
+                                    {% set serie = attribution.serie %}
+                                    <div class="btn btn-sm btn-{% if attribution.isActive %}success{% else %}default{% endif %} draggable {{ serie.activite.matiere.name }}"
+                                         id="{{ serie.id }}">
+                                        <span class="badge">{{ serie.activite.name }}</span>
+                                        {{ serie.nom }}
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}
@@ -114,26 +135,25 @@
 
                         var _this = this;
                         var isExist = false;
-                        var id = ui.draggable.attr("id");
+                        var idSerie = ui.draggable.attr("id");
+                        var idClasse = this.id.split("-");
+                        idClasse = idClasse[idClasse.length - 1];
 
                         $(this).find(".placeholder").remove();
                         $(this).children().each(function () {
-                            if (this.id == id) {
+                            if (this.id == idSerie) {
                                 isExist = true;
                                 return false;
                             }
                         });
                         if (!isExist) {
                             //Ajax addSerieClasse
-                            var idClasse = this.id.split("-");
-                            idClasse = idClasse[idClasse.length-1];
-                            var idSerie = id;
                             $.ajax({
                                 type: "POST",
                                 url: "{{ path("eklerni_back_attribution_ajax_addSerieClasse") }}",
                                 data: {"idClasse": idClasse, "idSerie": idSerie}
                             }).success(function () {
-                                $("<div id=\"" + id + "\" class=\"btn btn-default draggable-delete\"></div>").html(ui.draggable.html()).appendTo(_this);
+                                $("<div id=\"" + idSerie + "\" class=\"btn btn-default draggable-delete\"></div>").html(ui.draggable.html()).appendTo(_this);
                                 displayMessage("success", "L'Exercice a bien été ajouté !");
                                 init();
                             });
@@ -155,12 +175,13 @@
                         var _this = this;
                         var isExist = false;
                         var isExistInClasse = false;
-                        var id = ui.draggable.attr("id");
+                        var idSerie = ui.draggable.attr("id");
+                        var idEleve = this.id.split("-");
+                        idEleve = idEleve[idEleve.length - 1];
                         var classe = $(this).parent().parent().parent().parent().parent().parent();
 
-                        console.log("idSerie", id);
                         $("#classe-" + classe.attr("id")).children().each(function () {
-                            if (this.id == id) {
+                            if (this.id == idSerie) {
                                 isExistInClasse = true;
                                 return false;
                             }
@@ -168,7 +189,7 @@
 
                         $(this).find(".placeholder").remove();
                         $(this).children().each(function () {
-                            if (this.id == id) {
+                            if (this.id == idSerie) {
                                 isExist = true;
                                 return false;
                             }
@@ -179,14 +200,12 @@
                             displayMessage("warning", "L'Exercice a déjà été donné à la Classe !");
                         } else {
                             //Ajax addSerieEleve
-                            var idEleve = this.id;
-                            var idSerie = id;
                             $.ajax({
                                 type: "POST",
                                 url: "{{ path("eklerni_back_attribution_ajax_addSerieEleve") }}",
                                 data: {"idEleve": idEleve, "idSerie": idSerie}
                             }).success(function () {
-                                $("<div id=\"" + id + "\" class=\"btn btn-default draggable-delete\"></div>").html(ui.draggable.html()).appendTo(_this);
+                                $("<div id=\"" + idSerie + "\" class=\"btn btn-default draggable-delete\"></div>").html(ui.draggable.html()).appendTo(_this);
                                 displayMessage("success", "L'Exercice a bien été ajouté !");
                                 init();
                             });
@@ -247,14 +266,31 @@
             $(".attribution .draggable-delete").on("click", function () {
                 $(this).toggleClass("btn-success btn-default");
 
+                var tab = this.id.split("-");
+                var type = tab[0];
+                var id = tab[1];
+
+                var idSerie = this.id;
                 if ($(this).hasClass("btn-success")) {
                     //Ajax ActiverAttribution
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path("eklerni_back_attribution_ajax_activerAttribution") }}",
+                        data: {"idSerie": idSerie, "active": true, "type:": type, "id": id}
+                    }).success(function () {
+                        displayMessage("success", "L'Exercice a bien été activé !");
+                    });
 
-                    displayMessage("success", "L'Exercice a bien été activé !")
                 } else if ($(this).hasClass("btn-default")) {
                     //Ajax DesactiverAttribution
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path("eklerni_back_attribution_ajax_activerAttribution") }}",
+                        data: {"idSerie": idSerie, "active": false, "type:": type, "id": id}
+                    }).success(function () {
+                        displayMessage("success", "L'Exercice a bien été désactivé !");
+                    });
 
-                    displayMessage("success", "L'Exercice a bien été désactivé !")
                 }
                 init();
             });
