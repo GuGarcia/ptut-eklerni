@@ -5,7 +5,7 @@
     <table class="table">
         <tr>
             <th>{% trans %}personne.name{% endtrans %}</th>
-            <th>{% trans %}classe.name.colon{% endtrans %}</th>
+            <th>{% trans %}classe.text{% endtrans %}</th>
         </tr>
         {% for eleve in eleves %}
             <tr>
@@ -50,18 +50,24 @@
     {% endset %}
 {% endif %}
 {% set footerclasses %}
-<a href="{{ path("eklerni_back_classe_create") }}" id="add_class_link" class="btn btn-danger"><i class="fa fa-plus"> {% trans %}classe.text{% endtrans %}</i></a>
-<a href="{{ path("eklerni_back_classe_create_ecole") }}" id="add_ecole_link" class="btn btn-danger"><i class="fa fa-plus"> {% trans %}ecole.text{% endtrans %}</i></a>
+<a href="{{ path("eklerni_back_classe_create") }}" id="add_class_link" class="btn btn-danger"><i class="fa fa-plus"></i> {% trans %}classe.text{% endtrans %}</a>
+<a href="{{ path("eklerni_back_classe_create_ecole") }}" id="add_ecole_link" class="btn btn-danger"><i class="fa fa-plus"></i> {% trans %}ecole.text{% endtrans %}</a>
 {% endset %}
     {% block body %}
         <div class="row">
-            <div class="col-md-5">
-                {{ eklerni.block("Liste des Classes", classesTable, footerclasses, "danger") }}
+            <div class="col-md-4">
+                {% set classList %}
+                    {% trans %}classe.list{% endtrans %}
+                {% endset %}
+                {{ eklerni.block(classList, classesTable, footerclasses, "danger") }}
+                {% set eleveList %}
+                    {% trans %}eleve.list{% endtrans %}
+                {% endset %}
+                {{ eklerni.block(eleveList, elevesTable, "", "primary") }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
             </div>
-            <div class="col-md-5">
-                {{ eklerni.block("Liste des Eleves", elevesTable, "", "primary") }}
+            <div class="col-md-4">
             </div>
         </div>
 

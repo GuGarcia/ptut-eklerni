@@ -12,7 +12,7 @@
             <ul class="nav navbar-nav">
             {% if app.user %}
                 <li><a href="{{ path("eklerni_cas_profile") }}">{{ app.user.nom }} {{ app.user.prenom }}</a></li>
-                <li><a href="{{ path("eklerni_cas_logout") }}" class="fa fa-power-off"> {% trans %}btn.logout{% endtrans %}</a></li>
+                <li><a href="{{ path("eklerni_cas_logout") }}"><i class="fa fa-power-off"></i> {% trans %}btn.logout{% endtrans %}</a></li>
             {% endif %}
             </ul>
         </div>

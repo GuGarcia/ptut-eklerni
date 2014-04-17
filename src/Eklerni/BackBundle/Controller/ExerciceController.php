@@ -6,6 +6,7 @@ use Eklerni\DatabaseBundle\Entity\Activite;
 use Eklerni\DatabaseBundle\Entity\Serie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ExerciceController extends Controller
 {
@@ -84,6 +85,45 @@ class ExerciceController extends Controller
             array(
                 'form' => $form->createView(),
                 'title' => $this->get('translator')->trans("title.modify_serie"),
+            )
+        );
+    }
+
+    public function supprimerAction(Request $request, $idSerie)
+    {
+        if ($request->isXmlHttpRequest()) {
+            /** @var Serie $serie */
+            $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
+
+            /** @var Enseignant $enseignants */
+            $enseignant = $this->get("security.context")->getToken()->getUser();
+
+            if ($serie) {
+                if ($serie->getListeAttribution()->count() == 0 and
+                    $serie->getResultats()->count() == 0 and $serie->getEnseignant() == $enseignant) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->remove($serie);
+                    $em->flush();
+
+                    return new Response(
+                        json_encode(
+                            array(
+                                "success" => true,
+                                "message" => $this->get('translator')->trans('serie.delete.success')
+                            )
+                        )
+                    );
+                }
+            }
+        }
+
+        // TODO vérifier que les questions sont supprimées s'il y en a
+        return new Response(
+            json_encode(
+                array(
+                    "success" => false,
+                    "message" => $this->get('translator')->trans('serie.delete.fail')
+                )
             )
         );
     }

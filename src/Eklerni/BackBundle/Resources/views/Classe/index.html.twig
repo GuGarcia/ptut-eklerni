@@ -65,13 +65,22 @@
 {% block body %}
     <div class="row">
         <div class="col-md-4">
-            {{ eklerni.block("Liste des Eleves", elevesTable, footereleves, "primary") }}
+            {% set eleveList %}
+                {% trans %}eleve.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(eleveList, elevesTable, footereleves, "primary") }}
         </div>
         <div class="col-md-4">
-            {{ eklerni.block("Liste des Enseignants", profsTable, footerprofs, "primary") }}
+            {% set enseignantList %}
+                {% trans %}enseignant.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(enseignantList, profsTable, footerprofs, "primary") }}
         </div>
         <div class="col-md-4">
-            {{ eklerni.block("Matières", matieresTables, footermatieres, "primary") }}
+            {% set matiereText %}
+                {% trans %}matiere.text{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(matiereText, matieresTables, footermatieres, "primary") }}
         </div>
     </div>
 {% endblock %}
@@ -96,21 +105,28 @@
             $("#add_prof_link").off("click");
             $("#add_prof_link").on("click", function (event) {
                 event.preventDefault();
+                var _this = this;
+
                 $.ajax({
                     type: "POST",
                     url: "{{ path("eklerni_back_classe_ajax_add_enseignant", {idClasse:classe.id}) }}",
-                    data: { idEnseignant: $("#add_prof").val() }
-                }).success(function () {
-                    $("#profs").append("<tr id='" + $("#add_prof").val() + "'><td>" +
-                            "<a href=\"\" title=\"Supprimer\" class=\"delete right block\"><button class=\"btn btn-danger btn-xs\"><i class=\"fa fa-times\"></i></button></a>" +
-                            "<span style='margin-left: 5px'>" + $("#add_prof option:selected").text() + "</span></td></tr>");
-                    $("#add_prof option:selected").remove();
+                    data: { idEnseignant: $("#add_prof").val() },
+                    dataType: "json"
+                }).success(function (data) {
+                    if (data.success) {
+                        $("#profs").append("<tr id='" + $("#add_prof").val() + "'><td>" +
+                                "<a href=\"\" title=\"Supprimer\" class=\"delete right block\"><button class=\"btn btn-danger btn-xs\"><i class=\"fa fa-times\"></i></button></a>" +
+                                "<span style='margin-left: 5px'>" + $("#add_prof option:selected").text() + "</span></td></tr>");
+                        $("#add_prof option:selected").remove();
 
-                    displayMessage("success", "Les permissions de <strong>l'Enseignant</strong> pour cette <strong>Classe</strong> ont bien été ajoutées !");
+                        displayMessage("success", data.message);
 
-                    $("#add_prof").val("");
-                    $("#add_prof_link").attr("disabled", "disabled");
-                    init();
+                        $("#add_prof").val("");
+                        $("#add_prof_link").attr("disabled", "disabled");
+                        init();
+                    } else {
+                        displayMessage("danger", data.message);
+                    }
                 });
             });
 
@@ -130,10 +146,15 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ path("eklerni_back_classe_ajax_save_matieres", {idClasse:classe.id}) }}",
-                    data: {"matieres": matieres}
-                }).success(function () {
-                    displayMessage("success", "L'enregistrement des <strong>Matières</strong> a réussi !");
+                    url: "{{ path("eklerni_back_classe_ajax_save_matieres", {idClasse: classe.id}) }}",
+                    data: {"matieres": matieres},
+                    dataType: "json"
+                }).success(function (data) {
+                    if (data.success) {
+                        displayMessage("success", data.message);
+                    } else {
+                        displayMessage("danger", data.message);
+                    }
                 });
             });
 
@@ -150,11 +171,16 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ path("eklerni_back_classe_ajax_delete_enseignant", {idClasse:classe.id}) }}",
-                    data: {"profs": profs}
-                }).success(function () {
-                    displayMessage("success", "La suppression de l'<strong>Enseignant</strong> a réussi !");
-                    $(_this).parent().parent().remove();
+                    url: "{{ path("eklerni_back_classe_ajax_delete_enseignant", {idClasse: classe.id}) }}",
+                    data: {"profs": profs},
+                    dataType: "json"
+                }).success(function (data) {
+                    if (data.success) {
+                        displayMessage("success", data.message);
+                        $(_this).parent().parent().remove();
+                    } else {
+                        displayMessage("danger", data.message);
+                    }
                 });
 
             });

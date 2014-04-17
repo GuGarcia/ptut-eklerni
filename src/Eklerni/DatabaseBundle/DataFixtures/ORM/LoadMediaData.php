@@ -14,7 +14,7 @@ class LoadMediaData extends AbstractFixture implements OrderedFixtureInterface
      */
     function load(ObjectManager $manager)
     {
-        $listMedia = array("text", "audio", "video", "image");
+        $listMedia = array("text", "audio", "video", "image", "font");
 
         foreach ($listMedia as $mediaName) {
             $media = new Media();

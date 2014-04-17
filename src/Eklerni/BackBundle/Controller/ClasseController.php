@@ -105,21 +105,37 @@ class ClasseController extends Controller
         }
     }
 
-    public function supprimerAction($idClasse)
+    public function supprimerAction(Request $request, $idClasse)
     {
-        /** @var Classe $classe */
-        $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+        if ($request->isXmlHttpRequest()) {
+            /** @var Classe $classe */
+            $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
 
-        if ($classe->getEleves()->count() > 0) {
-            //todo handle hacker !
-            return;
-        } else {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($classe);
-            $em->flush();
+            if ($classe) {
+                if ($classe->getEleves()->count() == 0) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->remove($classe);
+                    $em->flush();
 
-            return $this->redirect($this->generateUrl('eklerni_back_classe'));
+                    return new Response(
+                        json_encode(
+                            array(
+                                "success" => true,
+                                'message' => $this->get('translator')->trans('classe.delete.success')
+                            )
+                        )
+                    );
+                }
+            }
         }
+        return new Response(
+            json_encode(
+                array(
+                    "success" => false,
+                    'message' => $this->get('translator')->trans('classe.delete.fail')
+                )
+            )
+        );
     }
 
     public function ajouterEcoleAction(Request $request)
@@ -143,6 +159,7 @@ class ClasseController extends Controller
     public function ajouterEleveAction(Request $request, $idClasse)
     {
         $eleve = new Eleve();
+        /** @var Classe $classe */
         $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
 
         $form = $this->createForm('eklerni_eleve', $eleve);
@@ -176,7 +193,10 @@ class ClasseController extends Controller
                 'EklerniBackBundle:Eleve:ajouter.html.twig',
                 array(
                     "form" => $form->createView(),
-                    "title" => $this->get('translator')->trans("Ajout d'un Eleve à la Classe : %name%", array("%name%" => $classe->getNom()))
+                    "title" => $this->get('translator')->trans(
+                            "Ajout d'un Eleve à la Classe : %name%",
+                            array("%name%" => $classe->getNom())
+                        )
                 )
             );
         }
@@ -190,13 +210,30 @@ class ClasseController extends Controller
             /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
 
-            $enseignant->addClasse($classe);
-            $classe->addEnseignant($enseignant);
+            if ($classe) {
+                $enseignant->addClasse($classe);
+                $classe->addEnseignant($enseignant);
 
-            $this->get("eklerni.manager.classe")->save($classe);
+                $this->get("eklerni.manager.classe")->save($classe);
 
-            return new Response(json_encode(array()));
+                return new Response(
+                    json_encode(
+                        array(
+                            "success" => true,
+                            'message' => $this->get('translator')->trans('classe.add.enseignant.success')
+                        )
+                    )
+                );
+            }
         }
+        return new Response(
+            json_encode(
+                array(
+                    "success" => false,
+                    'message' => $this->get('translator')->trans('classe.add.enseignant.fail')
+                )
+            )
+        );
     }
 
     public function saveMatieresAction(Request $request, $idClasse)
@@ -205,22 +242,41 @@ class ClasseController extends Controller
             /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
 
-            $this->get("eklerni.manager.classe")->clearMatieres($classe);
-            foreach ($request->get("matieres") as $idMatiere) {
-                /** @var Matiere $matiere */
-                $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere)[0];
+            if ($classe) {
+                $this->get("eklerni.manager.classe")->clearMatieres($classe);
+                if ($request->get("matieres")) {
+                    foreach ($request->get("matieres") as $idMatiere) {
+                        /** @var Matiere $matiere */
+                        $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere)[0];
 
-                if (get_class($matiere) == "Eklerni\\DatabaseBundle\\Entity\\Matiere") {
-                    $classe->getMatieres()->removeElement($matiere);
-                    $matiere->addClasse($classe);
-                    $this->get("eklerni.manager.matiere")->save($matiere);
-                    $classe->addMatiere($matiere);
+                        if (get_class($matiere) == "Eklerni\\DatabaseBundle\\Entity\\Matiere") {
+                            $classe->getMatieres()->removeElement($matiere);
+                            $matiere->addClasse($classe);
+                            $this->get("eklerni.manager.matiere")->save($matiere);
+                            $classe->addMatiere($matiere);
+                        }
+                    }
+                    $this->get("eklerni.manager.classe")->save($classe);
                 }
-            }
-            $this->get("eklerni.manager.classe")->save($classe);
 
-            return new Response(json_encode(array($classe)));
+                return new Response(
+                    json_encode(
+                        array(
+                            "success" => true,
+                            'message' => $this->get('translator')->trans('classe.save.matiere.success')
+                        )
+                    )
+                );
+            }
         }
+        return new Response(
+            json_encode(
+                array(
+                    "success" => false,
+                    'message' => $this->get('translator')->trans('classe.save.matiere.fail')
+                )
+            )
+        );
     }
 
     public function deleteEnseignantClasseAction(Request $request, $idClasse)
@@ -228,21 +284,39 @@ class ClasseController extends Controller
         if ($request->isXmlHttpRequest()) {
             /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
-            $this->get("eklerni.manager.classe")->clearEnseignants($classe);
 
-            foreach ($request->get("profs") as $idEnseignant) {
-                /** @var Enseignant $prof */
-                $prof = $this->get("eklerni.manager.enseignant")->findById($idEnseignant)[0];
+            if ($classe) {
+                $this->get("eklerni.manager.classe")->clearEnseignants($classe);
 
-                if (get_class($prof) == "Eklerni\\DatabaseBundle\\Entity\\Enseignant") {
-                    $prof->addClasse($classe);
-                    $this->get("eklerni.manager.enseignant")->save($prof);
-                    $classe->addEnseignant($prof);
+                foreach ($request->get("profs") as $idEnseignant) {
+                    /** @var Enseignant $prof */
+                    $prof = $this->get("eklerni.manager.enseignant")->findById($idEnseignant)[0];
+
+                    if (get_class($prof) == "Eklerni\\DatabaseBundle\\Entity\\Enseignant") {
+                        $prof->addClasse($classe);
+                        $this->get("eklerni.manager.enseignant")->save($prof);
+                        $classe->addEnseignant($prof);
+                    }
                 }
-            }
-            $this->get("eklerni.manager.classe")->save($classe);
+                $this->get("eklerni.manager.classe")->save($classe);
 
-            return new Response(json_encode(array($classe)));
+                return new Response(
+                    json_encode(
+                        array(
+                            "success" => true,
+                            'message' => $this->get('translator')->trans('classe.delete.enseignant.success')
+                        )
+                    )
+                );
+            }
         }
+        return new Response(
+            json_encode(
+                array(
+                    "success" => false,
+                    'message' => $this->get('translator')->trans('classe.delete.enseignant.fail')
+                )
+            )
+        );
     }
 }
