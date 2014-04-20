@@ -32,6 +32,7 @@ class LoadEnseignantData extends AbstractFixture implements OrderedFixtureInterf
         $user->setUsername('admin');
         $user->setNom("admin");
         $user->setPrenom("admin");
+        $user->setIsDirecteur(true);
 
         /** @var BasePasswordEncoder $encoder */
         $encoder = $this->container

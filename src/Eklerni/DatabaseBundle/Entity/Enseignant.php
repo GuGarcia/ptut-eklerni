@@ -27,6 +27,7 @@ class Enseignant extends Personne
         parent::__construct();
         $this->classes = new ArrayCollection();
         $this->series = new ArrayCollection();
+        $this->isDirecteur = false;
     }
 
     /********************
@@ -45,6 +46,12 @@ class Enseignant extends Personne
      * @ORM\OneToMany(targetEntity="Serie", mappedBy="enseignant")
      */
     private $series;
+    
+    /**
+     * @var bool
+     * @ORM\Column(name="isDirecteur", type="boolean", nullable=false)
+     */
+    private $isDirecteur;
 
     /********************
      * GETTERS AND SETTERS
@@ -52,7 +59,7 @@ class Enseignant extends Personne
 
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection $classes
-     * @return Enseignant
+     * @return \Eklerni\DatabaseBundle\Entity\Enseignant
      */
     public function setClasses($classes)
     {
@@ -70,7 +77,7 @@ class Enseignant extends Personne
 
     /**
      * @param Classe $c
-     * @return Enseignant
+     * @return \Eklerni\DatabaseBundle\Entity\Enseignant
      */
     public function addClasse(Classe $c) {
         $this->classes->add($c);
@@ -79,7 +86,7 @@ class Enseignant extends Personne
 
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection $series
-     * @return Enseignant
+     * @return \Eklerni\DatabaseBundle\Entity\Enseignant
      */
     public function setSeries($series)
     {
@@ -97,19 +104,38 @@ class Enseignant extends Personne
 
     /**
      * @param Serie $s
-     * @return Enseignant $this
+     * @return \Eklerni\DatabaseBundle\Entity\Enseignant $this
      */
     public function addSerie(Serie $s) {
         $this->series->add($s);
         return $this;
     }
+    
+    /**
+     * @return bool
+     */
+    public function getIsDirecteur() {
+        return $this->isDirecteur;
+    }
 
+    /**
+     * @param bool $isDirecteur
+     * @return \Eklerni\DatabaseBundle\Entity\Enseignant
+     */
+    public function setIsDirecteur($isDirecteur) {
+        $this->isDirecteur = $isDirecteur;
+        return $this;
+    }
 
     /**
      * @inheritdoc
      */
     public function getRoles()
     {
-        return array('ROLE_ENSEIGNANT');
+        if ($this->isDirecteur) {
+            return array('ROLE_DIRECTEUR');
+        } else {
+            return array('ROLE_ENSEIGNANT');
+        }
     }
 }

@@ -25,12 +25,9 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface{
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-        if ($this->security->isGranted('ROLE_ENSEIGNANT'))
-        {
+        if ($this->security->isGranted('ROLE_DIRECTEUR') || $this->security->isGranted('ROLE_ENSEIGNANT')) {
             $response = new RedirectResponse($this->router->generate('eklerni_back_homepage'));
-        }
-        elseif ($this->security->isGranted('ROLE_ELEVE'))
-        {
+        } elseif ($this->security->isGranted('ROLE_ELEVE')) {
             $response = new RedirectResponse($this->router->generate('eklerni_front_homepage'));
         }
 

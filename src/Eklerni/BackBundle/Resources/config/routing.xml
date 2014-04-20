@@ -8,9 +8,10 @@
         <default key="_controller">EklerniBackBundle:Index:index</default>
     </route>
 
+    <import resource="@EklerniBackBundle/Resources/config/routing_attribution.xml" prefix="/attribution" />
     <import resource="@EklerniBackBundle/Resources/config/routing_classe.xml" prefix="/classe" />
+    <import resource="@EklerniBackBundle/Resources/config/routing_direction.xml" prefix="/direction" />
+    <import resource="@EklerniBackBundle/Resources/config/routing_eleve.xml" prefix="/eleves" />
     <import resource="@EklerniBackBundle/Resources/config/routing_exercice.xml" prefix="/exercices" />
     <import resource="@EklerniBackBundle/Resources/config/routing_statistique.xml" prefix="/statistiques" />
-    <import resource="@EklerniBackBundle/Resources/config/routing_eleve.xml" prefix="/eleves" />
-    <import resource="@EklerniBackBundle/Resources/config/routing_attribution.xml" prefix="/attribution" />
 </routes>

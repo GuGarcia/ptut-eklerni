@@ -8,6 +8,7 @@ security:
     role_hierarchy:
         ROLE_ELEVE:       ROLE_ELEVE
         ROLE_ENSEIGNANT:  [ROLE_ENSEIGNANT, ROLE_ELEVE]
+        ROLE_DIRECTEUR: [ROLE_DIRECTEUR, ROLE_ENSEIGNANT, ROLE_ELEVE]
 
     providers:
         chain_provider:
@@ -39,8 +40,9 @@ security:
             anonymous:  ~
 
     access_control:
-        - { path: ^/cas/profile, allow_if: "has_role('ROLE_ELEVE') or has_role('ROLE_ENSEIGNANT')" }
+        - { path: ^/cas/profile, allow_if: "has_role('ROLE_ELEVE') or has_role('ROLE_ENSEIGNANT') or has_role('ROLE_DIRECTEUR')" }
         - { path: ^/cas, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^.*/front, roles: ROLE_ELEVE }
+        - { path: ^.*/back/direction, roles: ROLE_DIRECTEUR }
         - { path: ^.*/back, roles: ROLE_ENSEIGNANT }
