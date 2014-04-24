@@ -138,24 +138,6 @@ class ClasseController extends Controller
         );
     }
 
-    public function ajouterEcoleAction(Request $request)
-    {
-        $ecole = new Ecole();
-
-        $form = $this->createForm('eklerni_ecole', $ecole);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $this->get("eklerni.manager.ecole")->save($ecole);
-            return $this->redirect($this->generateUrl('eklerni_back_classe'));
-        } else {
-            return $this->render(
-                'EklerniBackBundle:Ecole:ajouter.html.twig',
-                array("form" => $form->createView(), "title" => "Création d'une Ecole")
-            );
-        }
-    }
-
     public function ajouterEleveAction(Request $request, $idClasse)
     {
         $eleve = new Eleve();

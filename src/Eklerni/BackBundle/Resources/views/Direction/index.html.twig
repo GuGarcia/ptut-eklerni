@@ -1,0 +1,77 @@
+{% extends "EklerniBackBundle:Template:template.html.twig" %}
+
+{% if ecoles|length > 0 %}
+    {% set ecolesTable %}
+    <table class="table">
+        <tr>
+            <th>{% trans %}ecole.name{% endtrans %}</th>
+            <th>{% trans %}ecole.city{% endtrans %}</th>
+            <th>{% trans %}ecole.postcode{% endtrans %}</th>
+            <th>{% trans %}ecole.classe.count{% endtrans %}</th>
+        </tr>
+        {% for ecole in ecoles %}
+            <tr>
+                <td><a href="#">{{ ecole.nom }}</a></td>
+                <td>{{ ecole.ville }}</td>
+                <td>{{ ecole.codePostal }}</td>
+                <td>{{ ecole.classes.count }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endset %}
+{% else %}
+    {% set ecolesTable %}
+        {% trans %}no.ecole{% endtrans %}
+    {% endset %}
+{% endif %}
+
+{% if enseignants|length > 0 %}
+    {% set enseignantsTable %}
+    <table class="table" id="profs">
+        <tr>
+            <th>{% trans %}personne.username{% endtrans %}</th>
+            <th>{% trans %}personne.name{% endtrans %}</th>
+            <th>{% trans %}personne.classe.count{% endtrans %}</th>
+        </tr>
+        {% for enseignant in enseignants %}
+            <tr>
+                <td>
+                    <a href="#">{{ enseignant.username }}</a>
+                </td>
+                <td>
+                    {{ enseignant.nom ~ " " ~ enseignant.prenom }}
+                </td>
+                <td>
+                    {{ enseignant.classes|length }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endset %}
+{% else %}
+    {% set enseignantsTable %}
+        {% trans %}no.enseignant{% endtrans %}
+    {% endset %}
+{% endif %}
+{% set footerclasses %}
+<a href="{{ path("eklerni_back_direction_create_ecole") }}" id="add_ecole_link" class="btn btn-danger"><i class="fa fa-plus"></i> {% trans %}ecole.text{% endtrans %}</a>
+{% endset %}
+    {% block body %}
+        <div class="row">
+            <div class="col-md-4">
+                {% set ecoleList %}
+                    {% trans %}ecole.list{% endtrans %}
+                {% endset %}
+                {{ eklerni.block(ecoleList, ecolesTable, footerclasses, "danger") }}
+                {% set enseignantList %}
+                    {% trans %}enseignant.list{% endtrans %}
+                {% endset %}
+                {{ eklerni.block(enseignantList, enseignantsTable, "", "primary") }}
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+
+    {% endblock %}
