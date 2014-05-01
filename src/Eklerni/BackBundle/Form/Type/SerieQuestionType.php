@@ -36,6 +36,17 @@ class SerieQuestionType extends AbstractType
                 'by_reference' => false
             )
         );
+
+        $builder->add(
+            'valider',
+            'submit',
+            array(
+                'label' => "button.validation",
+                'attr' => array(
+                    'class' => 'btn bg-olive btn-block'
+                )
+            )
+        );
     }
 
     /**

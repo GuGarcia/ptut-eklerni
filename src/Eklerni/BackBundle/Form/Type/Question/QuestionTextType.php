@@ -47,6 +47,17 @@ class QuestionTextType extends AbstractType
             )
         );
 
+        $builder->add(
+            'addreponse',
+            "button",
+            array(
+                'attr' => array(
+                    'class' => 'addReponse',
+                    'label' => 'reponse.add'
+                ),
+            )
+        );
+        
         $reponseMediaType = "Eklerni\\BackBundle\\Form\\Type\\Reponse\\Reponse" . $this->_reponseMedia . "Type";
         $builder->add(
             'reponses',

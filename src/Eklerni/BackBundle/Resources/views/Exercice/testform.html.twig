@@ -16,6 +16,7 @@
                 {{ form_row(question.media) }}
                 {{ form_row(question.delete) }}
                 <div class="reponses">
+                    {{ form_row(question.addreponse) }}
                     {% for reponse in question.reponses %}
                         <div class="reponse">
                             {% if reponse.label is defined %}
@@ -33,54 +34,55 @@
             </div>
         {% endfor %}
     </div>
+    {{ form_row(form.valider) }}
     {{ form_end(form) }}
 {% endblock %}
 
 {% block javascripts %}
     <script type="application/javascript">
-        $(function () {
-            var $collectionHolder;
+        $(document).ready(function(){
+            var questionCollectionHolder = $('#questions');
+            var addQuestionLink = $('<a href="#" class="add_question_link">Add a Question</a>');
 
-            // setup an "add a tag" link
-            var $addQuestionLink = $('<a href="#" class="add_question_link">Add a Question</a>');
+            // Remove Title
+            $("#eklerni_seriequestion_questions").parent().remove();
+            
+            // Add Question Link
+            questionCollectionHolder.append(addQuestionLink);
+            addQuestionLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
 
-            jQuery(document).ready(function() {
-                // Get the ul that holds the collection of tags
-                $collectionHolder = $('#questions');
-
-                // add the "add a tag" anchor and li to the tags ul
-                $collectionHolder.append($addQuestionLink);
-
-                // count the current form inputs we have (e.g. 2), use that as the new
-                // index when inserting a new item (e.g. 2)
-                $collectionHolder.data('index', $collectionHolder.find(':input').length);
-
-                $addQuestionLink.on('click', function(e) {
-                    // prevent the link from creating a "#" on the URL
-                    e.preventDefault();
-
-                    // add a new tag form (see next code block)
-                    addTagForm($collectionHolder);
-                });
+                // add a new tag form (see next code block)
+                addQuestionForm();
             });
+            
+            questionCollectionHolder.data('index', questionCollectionHolder.find(':input').length);
+            
 
-            function addTagForm($collectionHolder) {
-                // Get the data-prototype explained earlier
-                var prototype = $collectionHolder.data('prototype');
+            function addQuestionForm() {
+                var prototype = questionCollectionHolder.data('prototype');
 
-                // get the new index
-                var index = $collectionHolder.data('index');
+                var index = questionCollectionHolder.data('index');
 
-                // Replace '__name__' in the prototype's HTML to
-                // instead be a number based on how many items we have
-                var newQuestion = prototype.replace(/__questions__/g, index);
+                var newQuestion = prototype.replace(/__question__/g, index);
+                questionCollectionHolder.data('index', index + 1);
 
-                // increase the index with one for the next item
-                $collectionHolder.data('index', index + 1);
-
-                // Display the form in the page in an li, before the "Add a tag" link li
                 var $newQuestionRow = $('<div></div>').attr('classe', 'question').append(newQuestion);
-                $('.add_question_link').after($newQuestionRow);
+                questionCollectionHolder.append($newQuestionRow);
+                $('.addReponse').last().on("click", function(){
+                    addReponseForm($(this));
+                });
+            }
+            
+            function addReponseForm(addBtn)
+            {
+                console.log(addBtn.attr('id'));
+                var reponseCollectionHolder = $("#" + addBtn.attr('id').replace(/addreponse/g, "reponses"));
+                console.log(reponseCollectionHolder);
+                
+                var newReponse = reponseCollectionHolder.data('prototype').replace(/__reponse__/g, 0);
+                reponseCollectionHolder.parent().append(newReponse);
             }
         });
     </script>
