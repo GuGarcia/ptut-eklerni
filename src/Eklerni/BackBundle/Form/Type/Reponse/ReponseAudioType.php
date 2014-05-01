@@ -30,7 +30,7 @@ class ReponseAudioType extends AbstractType
                 'property' => 'media',
                 'label' => 'reponse.media.type',
                 'query_builder' => function (MediaRepository $er) {
-                        return $er->findAll();
+                        return $er->findByMedia('audio');
                     },
                 'data' => 'audio',
                 'disabled' => true,

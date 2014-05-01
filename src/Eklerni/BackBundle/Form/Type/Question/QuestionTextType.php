@@ -37,7 +37,7 @@ class QuestionTextType extends AbstractType
                 'property' => 'media',
                 'label' => 'question.media.type',
                 'query_builder' => function (MediaRepository $er) {
-                        return $er->findAll();
+                        return $er->findByMedia("text");
                     },
                 'data' => 'text',
                 'disabled' => true,

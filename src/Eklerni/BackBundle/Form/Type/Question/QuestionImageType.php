@@ -36,7 +36,7 @@ class QuestionImageType extends AbstractType
                 'property' => 'media',
                 'label' => 'question.media.type',
                 'query_builder' => function (MediaRepository $er) {
-                        return $er->findAll();
+                        return $er->findByMedia("image");
                     },
                 'data' => 'image',
                 'disabled' => true,

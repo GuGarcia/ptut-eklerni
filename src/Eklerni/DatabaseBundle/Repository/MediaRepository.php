@@ -29,6 +29,15 @@ class MediaRepository extends EntityRepository implements CASRepositoryInterface
             ->where("m.id = :id")
             ->setParameter("id", $id);
     }
+    
+    public function findByMedia($media)
+    {
+        return $this->_em->createQueryBuilder()
+            ->select("m")
+            ->from("EklerniDatabaseBundle:Media", "m")
+            ->where("m.media = :media")
+            ->setParameter("media", $media);
+    }
 
     /**
      * @param $idProf integer

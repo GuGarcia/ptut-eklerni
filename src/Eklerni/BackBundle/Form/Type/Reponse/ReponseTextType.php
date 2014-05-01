@@ -30,7 +30,7 @@ class ReponseTextType extends AbstractType
                 'property' => 'media',
                 'label' => 'reponse.media.type',
                 'query_builder' => function (MediaRepository $er) {
-                        return $er->findAll();
+                        return $er->findByMedia('text');
                     },
                 'data' => 'text',
                 'disabled' => true,

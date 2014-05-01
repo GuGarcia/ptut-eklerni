@@ -11,6 +11,7 @@
         <parameter key="manager_eleve.class">Eklerni\DatabaseBundle\Manager\EleveManager</parameter>
         <parameter key="manager_enseignant.class">Eklerni\DatabaseBundle\Manager\EnseignantManager</parameter>
         <parameter key="manager_matiere.class">Eklerni\DatabaseBundle\Manager\MatiereManager</parameter>
+        <parameter key="manager_media.class">Eklerni\DatabaseBundle\Manager\MediaManager</parameter>
         <parameter key="manager_serie.class">Eklerni\DatabaseBundle\Manager\SerieManager</parameter>
 
     </parameters>
@@ -35,6 +36,9 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
         <service id="eklerni.manager.matiere" class="%manager_matiere.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.media" class="%manager_media.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
         <service id="eklerni.manager.serie" class="%manager_serie.class%">
