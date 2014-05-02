@@ -219,5 +219,3 @@ class Serie extends BaseEntity
 
 
 }
-
-?>

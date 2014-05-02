@@ -5,22 +5,24 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="eklerni.form.type.ecole" class="Eklerni\BackBundle\Form\Type\EcoleType">
-            <tag name="form.type" alias="eklerni_ecole"/>
+        <service id="eklerni.form.type.activite" class="Eklerni\BackBundle\Form\Type\ActiviteType">
+            <tag name="form.type" alias="eklerni_activite"/>
         </service>
         <service id="eklerni.form.type.classe" class="Eklerni\BackBundle\Form\Type\ClasseType">
             <tag name="form.type" alias="eklerni_classe"/>
         </service>
-        <service id="eklerni.form.type.enseignant" class="Eklerni\BackBundle\Form\Type\EnseignantType">
-            <tag name="form.type" alias="eklerni_enseignant"/>
+        <service id="eklerni.form.type.ecole" class="Eklerni\BackBundle\Form\Type\EcoleType">
+            <tag name="form.type" alias="eklerni_ecole"/>
         </service>
         <service id="eklerni.form.type.eleve" class="Eklerni\BackBundle\Form\Type\EleveType">
             <tag name="form.type" alias="eklerni_eleve"/>
         </service>
+        <service id="eklerni.form.type.enseignant" class="Eklerni\BackBundle\Form\Type\EnseignantType">
+            <tag name="form.type" alias="eklerni_enseignant"/>
+        </service>
         <service id="eklerni.form.type.serie" class="Eklerni\BackBundle\Form\Type\SerieType">
             <tag name="form.type" alias="eklerni_serie"/>
         </service>
-
         <service id="eklerni.form.type.seriequestion" class="Eklerni\BackBundle\Form\Type\SerieQuestionType">
             <tag name="form.type" alias="eklerni_seriequestion"/>
         </service>

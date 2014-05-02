@@ -5,6 +5,7 @@ namespace Eklerni\BackBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Eklerni\DatabaseBundle\Repository\MediaRepository;
 
 class SerieType extends AbstractType
 {
