@@ -1,17 +1,12 @@
 <?php
 
 namespace Eklerni\BackBundle\Form\Type;
-/*
- * 
-            {{ eklerni.row(form.questionMedia) }}
-            {{ eklerni.row(form.reponseMedia) }}
-
- */
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Eklerni\DatabaseBundle\Repository\MediaRepository;
+use Eklerni\DatabaseBundle\Repository\MatiereRepository;
 
 class ActiviteType extends AbstractType
 {
@@ -24,6 +19,24 @@ class ActiviteType extends AbstractType
                 'label' => 'activite.name',
                 'attr' => array(
                     'placeholder' => "activite.name",
+                    'class' => 'form-control'
+                )
+            )
+        );
+        
+        $builder->add(
+            'matiere',
+            'entity',
+            array(
+                'label' => 'activite.matiere',
+                'disabled' => true,
+                'mapped' => false,
+                'property' => 'name',
+                'class' => 'EklerniDatabaseBundle:Matiere',
+                'query_builder' => function (MatiereRepository $cr) {
+                        return $cr->findAll();
+                },
+                'attr' => array(
                     'class' => 'form-control'
                 )
             )
@@ -51,6 +64,9 @@ class ActiviteType extends AbstractType
                 'query_builder' => function (MediaRepository $cr) {
                         return $cr->findAll();
                 },
+                'attr' => array(
+                    'class' => 'form-control'
+                )
             )
         );
         
@@ -64,6 +80,9 @@ class ActiviteType extends AbstractType
                 'query_builder' => function (MediaRepository $cr) {
                         return $cr->findAll();
                 },
+                'attr' => array(
+                    'class' => 'form-control'
+                )
             )
         );
 

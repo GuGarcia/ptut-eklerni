@@ -20,6 +20,9 @@
         <service id="eklerni.form.type.enseignant" class="Eklerni\BackBundle\Form\Type\EnseignantType">
             <tag name="form.type" alias="eklerni_enseignant"/>
         </service>
+        <service id="eklerni.form.type.matiere" class="Eklerni\BackBundle\Form\Type\MatiereType">
+            <tag name="form.type" alias="eklerni_matiere"/>
+        </service>
         <service id="eklerni.form.type.serie" class="Eklerni\BackBundle\Form\Type\SerieType">
             <tag name="form.type" alias="eklerni_serie"/>
         </service>

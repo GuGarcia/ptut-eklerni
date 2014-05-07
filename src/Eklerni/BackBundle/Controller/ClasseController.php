@@ -3,7 +3,6 @@
 namespace Eklerni\BackBundle\Controller;
 
 use Eklerni\DatabaseBundle\Entity\Classe;
-use Eklerni\DatabaseBundle\Entity\Ecole;
 use Eklerni\DatabaseBundle\Entity\Eleve;
 use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Eklerni\DatabaseBundle\Entity\Matiere;

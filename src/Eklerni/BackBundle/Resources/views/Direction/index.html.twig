@@ -11,7 +11,7 @@
         </tr>
         {% for ecole in ecoles %}
             <tr>
-                <td><a href="#">{{ ecole.nom }}</a></td>
+                <td><a href="{{ path('eklerni_back_direction_update_ecole', {idEcole: ecole.id}) }}">{{ ecole.nom }}</a></td>
                 <td>{{ ecole.ville }}</td>
                 <td>{{ ecole.codePostal }}</td>
                 <td>{{ ecole.classes.count }}</td>
@@ -53,12 +53,56 @@
         {% trans %}no.enseignant{% endtrans %}
     {% endset %}
 {% endif %}
+
+
+{% if matieres|length > 0 %}
+    {% set matieresTable %}
+    <table class="table" id="matieres">
+        <tr>
+            <th>{% trans %}matiere.name{% endtrans %}</th>
+            <th>{% trans %}activite.name{% endtrans %}</th>
+            <th>{% trans %}utils.tools{% endtrans %}</th>
+        </tr>
+        {% for matiere in matieres %}
+            <tr>
+                <td>
+                    <a href="{{ path('eklerni_back_matiere_update', { idMatiere: matiere.id}) }}">{{ matiere.name }}</a>
+                </td>
+                <td></td>
+                <td>
+                    <span>tools</span>
+                </td>
+            </tr>
+            {% for activite in matiere.activites %}
+                <tr>
+                    <td></td>
+                    <td>
+                        <a href="{{ path('eklerni_back_activite_update', { idActivite: activite.id}) }}">{{ activite.name }}</a>
+                    </td>
+                    <td>
+                        <span>tools</span>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+    {% endset %}
+{% else %}
+    {% set matieresTable %}
+        {% trans %}no.matiere{% endtrans %}
+    {% endset %}
+{% endif %}
+
+
 {% set footerclasses %}
-<a href="{{ path("eklerni_back_direction_create_ecole") }}" id="add_ecole_link" class="btn btn-danger"><i class="fa fa-plus"></i> {% trans %}ecole.text{% endtrans %}</a>
+    <a href="{{ path("eklerni_back_direction_create_ecole") }}" id="add_ecole_link" class="btn btn-danger">
+        <i class="fa fa-plus"></i> {% trans %}ecole.text{% endtrans %}
+    </a>
 {% endset %}
+
     {% block body %}
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 {% set ecoleList %}
                     {% trans %}ecole.list{% endtrans %}
                 {% endset %}
@@ -68,9 +112,13 @@
                 {% endset %}
                 {{ eklerni.block(enseignantList, enseignantsTable, "", "primary") }}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
+                {% set matiereList %}
+                    {% trans %}matiere.list{% endtrans %}
+                {% endset %}
+                {{ eklerni.block(matiereList, matieresTable, "", "primary") }}
             </div>
         </div>
 
