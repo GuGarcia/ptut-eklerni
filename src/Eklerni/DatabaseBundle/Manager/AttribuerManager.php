@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Eklerni\DatabaseBundle\Manager;
-
 
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;

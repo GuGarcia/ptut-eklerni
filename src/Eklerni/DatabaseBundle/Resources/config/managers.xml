@@ -11,6 +11,7 @@
         <parameter key="manager_matiere.class">Eklerni\DatabaseBundle\Manager\MatiereManager</parameter>
         <parameter key="manager_activite.class">Eklerni\DatabaseBundle\Manager\ActiviteManager</parameter>
         <parameter key="manager_serie.class">Eklerni\DatabaseBundle\Manager\SerieManager</parameter>
+        <parameter key="manager_attribuer.class">Eklerni\DatabaseBundle\Manager\AttribuerManager</parameter>
 
     </parameters>
 

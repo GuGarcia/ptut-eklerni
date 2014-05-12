@@ -162,4 +162,22 @@ class Attribuer
         return $this->isActive;
     }
 
+    /**
+     * @param boolean $isClasse
+     */
+    public function setIsClasse($isClasse)
+    {
+        $this->isClasse = $isClasse;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsClasse()
+    {
+        return $this->isClasse;
+    }
+
+
+
 }
