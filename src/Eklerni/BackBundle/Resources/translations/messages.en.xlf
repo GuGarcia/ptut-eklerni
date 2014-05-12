@@ -563,7 +563,7 @@
       </trans-unit>
       <trans-unit id="06ac0991e3a21afefb41edd0154f5adce8966c03" resname="serie.questions.number">
         <source>serie.questions.number</source>
-        <target>Number of questions</target>
+        <target>Questions</target>
         <jms:reference-file line="62">views/Exercice/index.html.twig</jms:reference-file>
         <jms:reference-file line="95">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>

@@ -23,6 +23,34 @@ class SerieType extends AbstractType
         );
 
         $builder->add(
+            'description',
+            'text',
+            array(
+                'label' => 'serie.description',
+                'attr' => array(
+                    'placeholder' => "serie.description",
+                    'class' => 'form-control'
+                )
+            )
+        );
+
+        $builder->add(
+            'niveau', 'choice', array(
+                'label' => 'serie.level',
+                'choices' => array(
+                    'CP'  => 'grade.year1',
+                    'CE1' => 'grade.year2',
+                    'CE2' => 'grade.year3',
+                    'CM1' => 'grade.year4',
+                    'CM2' => 'grade.year5'
+                ),
+                'attr' => array(
+                    'class' => 'form-control'
+                )
+            )
+        );
+
+        $builder->add(
             'difficulte',
             'choice',
             array(
