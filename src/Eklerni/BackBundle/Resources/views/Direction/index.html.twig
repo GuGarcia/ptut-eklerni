@@ -64,23 +64,41 @@
             <th>{% trans %}utils.tools{% endtrans %}</th>
         </tr>
         {% for matiere in matieres %}
-            <tr>
+            <tr class="bg-gray">
                 <td>
-                    <a href="{{ path('eklerni_back_matiere_update', { idMatiere: matiere.id}) }}">{{ matiere.name }}</a>
+                    {{ matiere.name }}
                 </td>
                 <td></td>
                 <td>
-                    <span>tools</span>
+                    <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_matiere_update', { idMatiere: matiere.id }) }}">
+                        <i class="fa fa-pencil"></i>
+                        {% trans %}utils.modify{% endtrans %}
+                    </a>
+                    {% if matiere.activites.count == 0 %}
+                    <a class="btn btn-danger btn-xs deleteMatiereBtn" href="{{ path('eklerni_back_matiere_ajax_delete', { idMatiere: matiere.id }) }}">
+                        <i class="fa fa-minus"></i>
+                        {% trans %}utils.delete{% endtrans %}
+                    </a>
+                    {% endif %}
                 </td>
             </tr>
             {% for activite in matiere.activites %}
                 <tr>
                     <td></td>
                     <td>
-                        <a href="{{ path('eklerni_back_activite_update', { idActivite: activite.id}) }}">{{ activite.name }}</a>
+                        {{ activite.name }}
                     </td>
                     <td>
-                        <span>tools</span>
+                        <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_activite_update', { idActivite: activite.id }) }}">
+                            <i class="fa fa-pencil"></i>
+                            {% trans %}utils.modify{% endtrans %}
+                        </a>
+                        {% if activite.series.count == 0 %}
+                            <a class="btn btn-danger btn-xs deleteActiviteBtn" href="{{ path('eklerni_back_activite_ajax_delete', { idActivite: activite.id }) }}">
+                                <i class="fa fa-minus"></i>
+                                {% trans %}utils.delete{% endtrans %}
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
@@ -102,7 +120,7 @@
 
     {% block body %}
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 {% set ecoleList %}
                     {% trans %}ecole.list{% endtrans %}
                 {% endset %}
@@ -112,9 +130,7 @@
                 {% endset %}
                 {{ eklerni.block(enseignantList, enseignantsTable, "", "primary") }}
             </div>
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
                 {% set matiereList %}
                     {% trans %}matiere.list{% endtrans %}
                 {% endset %}
@@ -123,3 +139,46 @@
         </div>
 
     {% endblock %}
+
+
+{% block javascripts %}
+    <script type="application/javascript">
+        $(function () {
+            $('.deleteMatiereBtn').on('click', function(event) {
+                event.preventDefault();
+                var _this = this;
+
+                $.ajax({
+                    type: "POST",
+                    url: $(_this).attr("href"),
+                    dataType: "json"
+                }).success(function (data) {
+                    if (data.success) {
+                        displayMessage("success", data.message);
+                        $(_this).parent().parent().remove();
+                    } else {
+                        displayMessage("danger", data.message);
+                    }
+                });
+            });
+
+            $('.deleteActiviteBtn').on('click', function(event) {
+                event.preventDefault();
+                var _this = this;
+
+                $.ajax({
+                    type: "POST",
+                    url: $(_this).attr("href"),
+                    dataType: "json"
+                }).success(function (data) {
+                    if (data.success) {
+                        displayMessage("success", data.message);
+                        $(_this).parent().parent().remove();
+                    } else {
+                        displayMessage("danger", data.message);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

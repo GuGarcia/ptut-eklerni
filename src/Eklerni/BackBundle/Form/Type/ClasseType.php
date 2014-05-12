@@ -24,9 +24,9 @@ class ClasseType extends AbstractType
 
         $builder->add(
             'niveau', 'choice', array(
-                'label' => 'classe.grade',
+                'label' => 'classe.level',
                 'choices' => array(
-                    'CP' => 'grade.year1',
+                    'CP'  => 'grade.year1',
                     'CE1' => 'grade.year2',
                     'CE2' => 'grade.year3',
                     'CM1' => 'grade.year4',
@@ -54,7 +54,7 @@ class ClasseType extends AbstractType
             'ecole',
             'entity',
             array(
-                'label' => 'classe.school',
+                'label' => 'ecole.text',
                 'class' => 'EklerniDatabaseBundle:Ecole',
                 'query_builder' => function (EcoleRepository $er) {
                         return $er->findAll();

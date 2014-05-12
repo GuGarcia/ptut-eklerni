@@ -23,7 +23,7 @@ class EleveType extends AbstractType
             'classe',
             'entity',
             array(
-                'label' => 'Classe',
+                'label' => 'classe.text',
                 'class' => 'EklerniDatabaseBundle:Classe',
                 'property' => 'fullName',
                 'query_builder' => function (ClasseRepository $cr) {

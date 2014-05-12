@@ -126,7 +126,7 @@
 {% block javascripts %}
     <script type="application/javascript">
         $(function () {
-            $('#tabs li.tab').click(function (e) {
+            $('#tabs li.tab').on('click', function (e) {
                 e.preventDefault();
                 $(this).tab('show');
             });
@@ -146,23 +146,23 @@
                     bf.slideDown();
                 }
             });
-        });
 
-        $('.deleteSerieBtn').on('click', function(event) {
-            event.preventDefault();
-            var _this = this;
+            $('.deleteSerieBtn').on('click', function(event) {
+                event.preventDefault();
+                var _this = this;
 
-            $.ajax({
-                type: "POST",
-                url: $(_this).attr("href"),
-                dataType: "json"
-            }).success(function (data) {
-                if (data.success) {
-                    displayMessage("success", data.message);
-                    $(_this).parent().parent().remove();
-                } else {
-                    displayMessage("danger", data.message);
-                }
+                $.ajax({
+                    type: "POST",
+                    url: $(_this).attr("href"),
+                    dataType: "json"
+                }).success(function (data) {
+                    if (data.success) {
+                        displayMessage("success", data.message);
+                        $(_this).parent().parent().remove();
+                    } else {
+                        displayMessage("danger", data.message);
+                    }
+                });
             });
         });
     </script>

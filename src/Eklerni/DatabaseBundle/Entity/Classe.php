@@ -62,7 +62,7 @@ class Classe extends BaseEntity
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Matiere", mappedBy="classes", cascade={"remove", "persist"})
+     * @ORM\ManyToMany(targetEntity="Matiere", mappedBy="classes")
      * @ORM\JoinTable(name="t_classeMatiere")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
