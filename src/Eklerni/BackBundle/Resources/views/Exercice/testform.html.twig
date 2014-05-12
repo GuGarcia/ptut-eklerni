@@ -56,7 +56,7 @@
             });
 
             // TODO onLoad Enable remove question & reponse
-            questionCollectionHolder.data('index', $('#questions').children('div').length);
+            questionCollectionHolder.data('index', questionCollectionHolder.children('div').length);
             
 
             function addQuestionForm() {
@@ -69,32 +69,30 @@
 
                 var $newQuestionRow = $('<div></div>').attr('classe', 'question').append(newQuestion);
                 questionCollectionHolder.append($newQuestionRow);
-                $('.addReponse').last().on("click", function(){
+
+                $newQuestionRow.find(".deleteQuestion").on("click", function(){
+                    $(this).parent().parent().parent().remove();
+                });
+                $newQuestionRow.find(".addReponse").on("click", function(){
                     addReponseForm($(this));
                 });
-                // TODO addReponse
-                // TODO RemoveQuestion
             }
             
             function addReponseForm(addBtn) {
-                console.log(addBtn.attr('id'));
                 var reponseCollectionHolder = $("#" + addBtn.attr('id').replace(/addreponse/g, "reponses"));
-                console.log(reponseCollectionHolder);
 
-                var index = reponseCollectionHolder.parent().children('div').length - 1;
+                var index = reponseCollectionHolder.data('index');
+                if (typeof index === "undefined")
+                    index = 0;
 
-                var newReponse = reponseCollectionHolder.data('prototype').replace(/__reponse__/g, index);
+                var newReponse = $(reponseCollectionHolder.data('prototype').replace(/__reponse__/g, index));
+                reponseCollectionHolder.data('index', index + 1);
+
                 reponseCollectionHolder.parent().append(newReponse);
 
-                // TODO RemoveReponse
-            }
-
-            function removeQuestionForm() {
-
-            }
-
-            function removeReponseForm() {
-
+                newReponse.find(".deleteReponse").on("click", function(){
+                    $(this).parent().parent().parent().remove();
+                });
             }
         });
     </script>
