@@ -9,10 +9,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ActiviteController extends Controller
 {
-    public function ajouterAction(Request $request)
+    public function ajouterAction(Request $request, $idMatiere)
     {
+        /** @var Matiere $matiere */
+        $matiere = $this->get('eklerni.manager.matiere')->findById($idMatiere)[0];
+
         /** @var Activite $activite */
         $activite = new Activite();
+
+        if (!$matiere) {
+        }
+        $activite->setMatiere($matiere);
 
         $form = $this->createForm('eklerni_activite', $activite);
         $form->handleRequest($request);

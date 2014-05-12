@@ -4,8 +4,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="eklerni_back_activite_create" pattern="/ajouter">
+    <route id="eklerni_back_activite_create" pattern="/ajouter/{idMatiere}">
         <default key="_controller">EklerniBackBundle:Activite:ajouter</default>
+        <requirement key="idMatiere">\d+</requirement>
     </route>
     <route id="eklerni_back_activite_update" pattern="/modifier/{idActivite}">
         <default key="_controller">EklerniBackBundle:Activite:modifier</default>

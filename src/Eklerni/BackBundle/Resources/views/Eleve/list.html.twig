@@ -3,52 +3,75 @@
 {% block body %}
     {% if classes|length > 0 %}
         <div class="row">
-
             <div class="col-md-12">
                 {% set titleBlock = "" %}
                 {% set contentBlock = "" %}
                 {% for classe in classes %}
                     {% set titleBlock %}
-                    {{ classe.nom }}
+                        {{ classe.nom }}
                     {% endset %}
 
                     {% set contentBlock %}
-                    {% if classe.eleves|length > 0 %}
-                        {% set header %}
-                        <tr role="row">
-                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                                colspan="1" aria-label="Rendering engine: activate to sort column ascending">Id
-                            </th>
-                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                                colspan="1" aria-label="Rendering engine: activate to sort column ascending">Nom
-                            </th>
-                        </tr>
-                        {% endset %}
-                        {% set content %}
-                        {% for eleve in classe.eleves %}
-                            <tr class="odd">
-                                <td class="">{{ eleve.id }}</td>
-                                <td class=""> <a href="{{ path("eklerni_back_eleve_fiche", {idEleve: eleve.id}) }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
+                        {% if classe.eleves|length > 0 %}
+                            {% set header %}
+                            <tr role="row">
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
+                                    colspan="1" aria-label="Rendering engine: activate to sort column ascending">Nom
+                                </th>
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
+                                    colspan="1" aria-label="Rendering engine: activate to sort column ascending">Date de naissance
+                                </th>
+                                <th>
+                                    {% trans %}utils.tools{% endtrans %}
+                                </th>
                             </tr>
-                        {% endfor %}
-                        {% endset %}
+                            {% endset %}
+                            {% set content %}
+                                {% for eleve in classe.eleves %}
+                                    <tr class="odd">
+                                        <td class="">
+                                            <a href="{{ path("eklerni_back_eleve_fiche", {idEleve: eleve.id}) }}">
+                                                {{ eleve.nom }} {{ eleve.prenom }}
+                                            </a>
+                                        </td>
+                                        <td class="">
+                                            {{ eleve.dateNaissance|datelocale() }}
+                                        </td>
+                                        <td class="">
+                                            <a href="{{ path("eklerni_back_eleve_modifier", {idEleve: eleve.id}) }}" class="btn btn-default btn-xs">
+                                                <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
+                                            </a>
+                                            <a href="#" class="deleteClassBtn btn btn-danger btn-xs disabled">
+                                                <i class="fa fa-minus"></i> {% trans %}utils.delete{% endtrans %}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endset %}
 
-                        {{ eklerni.dataTable(header, content, "") }}
-                    {% else %}
-                        Il n'y a pas d'élève dans cette Classe !
-                    {% endif %}
+                            {{ eklerni.dataTable(header, content, "") }}
+                        {% else %}
+                            Il n'y a pas d'élève dans cette Classe !
+                        {% endif %}
+
+                    {% endset %}
+                    {% set footerBlock %}
+                        <a href="{{ path("eklerni_back_classe_create_eleve", {idClasse: classe.id}) }}" class="btn btn-primary">
+                            {% trans %}btn.eleve.add{% endtrans %}
+                        </a>
                     {% endset %}
                     {% if loop.index is odd %}
-                        {{ eklerni.block(titleBlock, contentBlock, "", "danger") }}
+                        {{ eklerni.block(titleBlock, contentBlock, footerBlock, "danger") }}
                     {% else %}
-                        {{ eklerni.block(titleBlock, contentBlock, "", "warning") }}
+                        {{ eklerni.block(titleBlock, contentBlock, footerBlock, "primary") }}
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
     {% else %}
-        <div class="box-body ">Vous n'avez pas de classe et donc pas d'élève !</div>
+        <div class="box-body">Vous n'avez pas de classe et donc pas d'élève !</div>
     {% endif %}
+
 {% endblock %}
 
 {% block javascripts %}

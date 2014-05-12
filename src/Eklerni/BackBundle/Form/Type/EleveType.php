@@ -19,7 +19,7 @@ class EleveType extends AbstractType
             )
         );
 
-        $builder->add(
+        /*$builder->add(
             'classe',
             'entity',
             array(
@@ -27,10 +27,13 @@ class EleveType extends AbstractType
                 'class' => 'EklerniDatabaseBundle:Classe',
                 'property' => 'fullName',
                 'query_builder' => function (ClasseRepository $cr) {
-                        return $cr->findAll();
-                    },
+                    return $cr->findAll();
+                },
+                'attr' => array(
+                    'class' => 'form-control'
+                )
             )
-        );
+        );*/
     }
 
     /**

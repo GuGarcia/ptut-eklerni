@@ -147,7 +147,7 @@
       </trans-unit>
       <trans-unit id="cd5786c7f9429597684c08b12a6152c31093d1a5" resname="classe.name.colon">
         <source>classe.name.colon</source>
-        <target>Nom :</target>
+        <target>Classe :</target>
         <jms:reference-file line="13">views/Eleve/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1c4b312ee7041ef5c3db9a5f7da477b7eb45f3e3" resname="classe.no.eleve">
@@ -363,7 +363,7 @@
       </trans-unit>
       <trans-unit id="cabfc89b410cf586ba1db2ba956f90c10a247506" resname="personne.firstname.colon">
         <source>personne.firstname.colon</source>
-        <target>Nom :</target>
+        <target>Prénom :</target>
         <jms:reference-file line="9">views/Eleve/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4a104c4ba318e9811d346898f27eb55278b865c2" resname="personne.lastname">
@@ -374,7 +374,7 @@
       </trans-unit>
       <trans-unit id="f37672c11ceeac6f20d6efe0dc94b6a38f1a7d8b" resname="personne.lastname.colon">
         <source>personne.lastname.colon</source>
-        <target>Prénom :</target>
+        <target>Nom :</target>
         <jms:reference-file line="6">views/Eleve/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ee8060a7560c1041e5cd8ec9d0e3862016d499ab" resname="personne.name">

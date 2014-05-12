@@ -2,12 +2,12 @@
 
 {% block body %}
     <form action="" method="post">
-        <div class="body">
-            {{ eklerni.row(form.name) }}
-            {{ eklerni.row(form.matiere) }}
-            {{ eklerni.row(form.description) }}
-            {{ eklerni.row(form.questionMedia) }}
-            {{ eklerni.row(form.reponseMedia) }}
+        <div class="body bg-gray">
+            {{ eklerni.row(form.eleve.username) }}
+            {{ eklerni.row(form.eleve.password) }}
+            {{ eklerni.row(form.eleve.nom) }}
+            {{ eklerni.row(form.eleve.prenom) }}
+            {{ eklerni.row(form.eleve.dateNaissance) }}
             {{ form_widget(form._token) }}
         </div>
         {% if form_error is defined and form_error is not null %}
@@ -16,7 +16,7 @@
             </div>
         {% endif %}
         <div class="footer">
-            {{ eklerni.submit(form.valider) }}
+            {{ eklerni.submit(form.eleve.valider) }}
         </div>
     </form>
 {% endblock %}
