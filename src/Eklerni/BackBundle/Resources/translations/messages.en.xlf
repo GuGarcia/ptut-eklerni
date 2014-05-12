@@ -147,7 +147,7 @@
       </trans-unit>
       <trans-unit id="cd5786c7f9429597684c08b12a6152c31093d1a5" resname="classe.name.colon">
         <source>classe.name.colon</source>
-        <target>Name :</target>
+        <target>Classroom :</target>
         <jms:reference-file line="13">views/Eleve/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1c4b312ee7041ef5c3db9a5f7da477b7eb45f3e3" resname="classe.no.eleve">

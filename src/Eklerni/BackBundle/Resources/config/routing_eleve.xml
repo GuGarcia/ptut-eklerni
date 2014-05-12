@@ -11,5 +11,9 @@
         <default key="_controller">EklerniBackBundle:Eleve:index</default>
         <requirement key="idEleve">\d+</requirement>
     </route>
+    <route id="eklerni_back_eleve_modifier" pattern="/modifier/{idEleve}">
+        <default key="_controller">EklerniBackBundle:Eleve:modifier</default>
+        <requirement key="idEleve">\d+</requirement>
+    </route>
 
 </routes>
