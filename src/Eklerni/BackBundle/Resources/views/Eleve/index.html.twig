@@ -19,7 +19,7 @@
         </table>
         {% endset %}
 {% set footereleve %}
-    <a href="" class="btn btn-primary">{% trans %}url.modify.eleve{% endtrans %}</a>
+    <a href="{{ path ("eklerni_back_eleve_modifier", {idEleve:eleve.id}) }}" class="btn btn-primary">{% trans %}url.modify.eleve{% endtrans %}</a>
 {% endset %}
 
 {% block body %}
