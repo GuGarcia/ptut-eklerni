@@ -70,6 +70,9 @@
                 </td>
                 <td></td>
                 <td>
+                    <a href="{{ path("eklerni_back_activite_create", { idMatiere: matiere.id }) }}" class="btn btn-xs btn-primary add_activite_link">
+                        <i class="fa fa-plus"></i> {% trans %}matiere.add_activite{% endtrans %}
+                    </a>
                     <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_matiere_update', { idMatiere: matiere.id }) }}">
                         <i class="fa fa-pencil"></i>
                         {% trans %}utils.modify{% endtrans %}
@@ -114,6 +117,12 @@
     </a>
 {% endset %}
 
+{% set footermatieres %}
+    <a href="{{ path("eklerni_back_matiere_create") }}" id="add_matiere_link" class="btn btn-primary">
+        <i class="fa fa-plus"></i> {% trans %}matiere.text{% endtrans %}
+    </a>
+{% endset %}
+
     {% block body %}
         <div class="row">
             <div class="col-md-6">
@@ -130,7 +139,7 @@
                 {% set matiereList %}
                     {% trans %}matiere.list{% endtrans %}
                 {% endset %}
-                {{ eklerni.block(matiereList, matieresTable, "", "primary") }}
+                {{ eklerni.block(matiereList, matieresTable, footermatieres, "primary") }}
             </div>
         </div>
 
