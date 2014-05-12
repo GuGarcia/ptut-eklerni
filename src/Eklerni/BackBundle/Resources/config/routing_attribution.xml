@@ -16,6 +16,9 @@
     <route id="eklerni_back_attribution_ajax_activerAttribution" pattern="/activerAttribution">
         <default key="_controller">EklerniBackBundle:Attribution:activerAttribution</default>
     </route>
+    <route id="eklerni_back_attribution_ajax_deleteAttribution" pattern="/deleteAttribution">
+        <default key="_controller">EklerniBackBundle:Attribution:deleteAttribution</default>
+    </route>
 
 
 </routes>

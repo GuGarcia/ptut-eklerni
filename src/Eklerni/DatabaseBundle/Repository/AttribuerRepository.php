@@ -33,28 +33,4 @@ class AttribuerRepository extends EntityRepository {
 
     }
 
-    public function findByClasse($idClasse)
-    {
-        return $this->_em->createQueryBuilder()
-            ->select("a")
-            ->from("EklerniDatabaseBundle:Attribuer", "a")
-            ->innerJoin("a.eleve", "e")
-            ->innerJoin("e.classe", "c")
-            ->where("c.id = :idClasse")
-            ->setParameter("idClasse", $idClasse);
-
-    }
-
-    public function findById($idEleve, $idSerie) {
-
-        return $this->_em->createQueryBuilder()
-            ->select("a")
-            ->from("EklerniDatabaseBundle:Attribuer", "a")
-            ->where("a.idEleve = :idEleve")
-            ->andWhere("a.idSerie = :idSerie")
-            ->setParameters(array(
-                "idSerie" => $idSerie,
-                "idEleve" => $idEleve
-            ));
-    }
 } 

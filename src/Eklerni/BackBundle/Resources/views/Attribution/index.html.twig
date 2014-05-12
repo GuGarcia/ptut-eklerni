@@ -44,17 +44,17 @@
                     <div id="classe-{{ classe.id }}"
                          class="droppable classe-{{ classe.id }}"
                          info="{% for matiere in classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}">
-                        {#
+
                         {% set attributions = attributionClasses[classe.id] %}
                         {% for attribution in attributions %}
                             {% set serie = attribution.serie %}
-                            <div class="btn btn-sm btn-{% if attribution.isActive %}success{% else %}default{% endif %} draggable {{ serie.activite.matiere.name }}"
+                            <div class="btn btn-sm btn-{% if attribution.isActive %}success{% else %}default{% endif %} draggable-delete {{ serie.activite.matiere.name }}"
                                  id="{{ serie.id }}">
                                 <span class="badge">{{ serie.activite.name }}</span>
                                 {{ serie.nom }}
                             </div>
                         {% endfor %}
-                       #}
+
                     </div>
                 </td>
             </tr>
@@ -81,12 +81,14 @@
                                  class="droppable eleve"
                                  info="{% for matiere in eleve.classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}">
                                 {% for attribution in eleve.listeAttribution %}
-                                    {% set serie = attribution.serie %}
-                                    <div class="btn btn-sm btn-{% if attribution.isActive %}success{% else %}default{% endif %} draggable {{ serie.activite.matiere.name }}"
-                                         id="{{ serie.id }}">
-                                        <span class="badge">{{ serie.activite.name }}</span>
-                                        {{ serie.nom }}
-                                    </div>
+                                    {% if attribution.isClasse == false %}
+                                        {% set serie = attribution.serie %}
+                                        <div class="btn btn-sm btn-{% if attribution.isActive %}success{% else %}default{% endif %} draggable-delete {{ serie.activite.matiere.name }}"
+                                             id="{{ serie.id }}">
+                                            <span class="badge">{{ serie.activite.name }}</span>
+                                            {{ serie.nom }}
+                                        </div>
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         </td>
@@ -116,7 +118,7 @@
 
 {% block javascripts %}
     <script type="application/javascript">
-
+    var dropParentElementRemove = null;
         $(document).ready(function () {
             init();
             $(".draggable").draggable({
@@ -214,14 +216,32 @@
                 });
             });
 
+            /** Delete to Trash **/
             $("#trash").droppable({
                 activeClass: "ui-state-default",
                 hoverClass: "ui-state-hover",
                 accept: ".draggable-delete.btn-default",
                 drop: function (event, ui) {
                     //Ajax deleteSerie
-                    ui.draggable["context"].remove();
-                    displayMessage("success", "L'Exercice a bien été supprimé !");
+                    var infos = dropParentElementRemove.attr("id").split("-");
+                    //console.log(infos);
+                    var postData = {};
+                    postData.idSerie = ui.draggable.attr("id");
+                    if(infos[0] == "classe") {
+                        postData.idClasse = infos[1];
+                    } else if (infos[0] == "eleve") {
+                        postData.idEleve = infos[1];
+                    }
+                    //console.log(postData);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path("eklerni_back_attribution_ajax_deleteAttribution") }}",
+                        data: postData
+                    }).success(function () {
+                        ui.draggable["context"].remove();
+                        displayMessage("success", "L'Exercice a bien été supprimé !");
+                    });
                 }
             });
 
@@ -253,10 +273,12 @@
 
         function init() {
             $(".attribution .draggable-delete").unbind("draginit dragstart drag dragend");
-            $(".attribution .btn-default.draggable-delete").draggable({
+            $(".attribution .draggable-delete").draggable({
                 revert: true,
                 start: function () {
                     $(".attribution .draggable-delete").off("click");
+                    dropParentElementRemove = $(this).parent();
+                    //console.log(dropParentElementRemove.attr("id"));
                 },
                 stop: function () {
                     init();
@@ -266,31 +288,33 @@
             $(".attribution .draggable-delete").on("click", function () {
                 $(this).toggleClass("btn-success btn-default");
 
-                var tab = this.id.split("-");
-                var type = tab[0];
-                var id = tab[1];
+                var tab = $(this).parent().attr("id").split("-");
+                var myData = {};
+                myData.idSerie = this.id;
+                myData.type = tab[0];
+                myData.idType = tab[1];
 
-                var idSerie = this.id;
                 if ($(this).hasClass("btn-success")) {
+                    myData.active = true;
                     //Ajax ActiverAttribution
                     $.ajax({
                         type: "POST",
                         url: "{{ path("eklerni_back_attribution_ajax_activerAttribution") }}",
-                        data: {"idSerie": idSerie, "active": true, "type:": type, "id": id}
+                        data: myData
                     }).success(function () {
                         displayMessage("success", "L'Exercice a bien été activé !");
                     });
 
                 } else if ($(this).hasClass("btn-default")) {
+                    myData.active = false;
                     //Ajax DesactiverAttribution
                     $.ajax({
                         type: "POST",
                         url: "{{ path("eklerni_back_attribution_ajax_activerAttribution") }}",
-                        data: {"idSerie": idSerie, "active": false, "type:": type, "id": id}
+                        data: myData
                     }).success(function () {
                         displayMessage("success", "L'Exercice a bien été désactivé !");
                     });
-
                 }
                 init();
             });

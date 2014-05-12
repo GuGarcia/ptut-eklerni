@@ -2,11 +2,14 @@
 
 namespace Eklerni\DatabaseBundle\Manager;
 
+use Doctrine\ORM\EntityManager;
+use Eklerni\DatabaseBundle\Entity\BaseEntity;
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;
 use Eklerni\DatabaseBundle\Entity\Serie;
 
-class AttribuerManager {
+class AttribuerManager
+{
 
     /**
      * @var EntityManager
@@ -20,6 +23,7 @@ class AttribuerManager {
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
+        $this->repository = $em->getRepository("EklerniDatabaseBundle:Attribuer");
     }
 
     /**
@@ -48,11 +52,29 @@ class AttribuerManager {
 
     public function findByClasse(Classe $classe)
     {
-        return $this->repository->findByClasse($classe->getId())->getQuery()->getResult();
+        $query = $this->repository->createQueryBuilder("p")
+            ->select("a")->distinct()
+            ->from("EklerniDatabaseBundle:Attribuer", "a")
+            ->innerJoin("a.eleve", "e")
+            ->innerJoin("e.classe", "c")
+            ->where("c.id = :idClasse and a.isClasse = 1")
+            ->groupBy("a.serie")
+            ->setParameter("idClasse", $classe->getId());
+        return $query->getQuery()->getResult();
     }
 
-    public function findById(Eleve $eleve, Serie $serie) {
-        return $this->repository->findById($eleve->getId(), $serie->getId())->getQuery()->getResult();
+    public function findById(Eleve $eleve, Serie $serie)
+    {
+         $query = $this->repository->createQueryBuilder("p")
+            ->select("a")
+            ->from("EklerniDatabaseBundle:Attribuer", "a")
+            ->where("a.eleve = :idEleve")
+            ->andWhere("a.serie = :idSerie")
+            ->setParameters(array(
+                "idSerie" => $serie->getId(),
+                "idEleve" => $eleve->getId()
+            ));
+        return $query->getQuery()->getResult();
     }
 
 //  public function findByIdClasseSerie(Classe $classe, Serie $serie) {
