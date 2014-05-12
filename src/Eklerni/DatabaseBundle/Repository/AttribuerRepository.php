@@ -15,12 +15,13 @@ class AttribuerRepository extends EntityRepository {
 
     public function findByEleve($idEleve)
     {
+        echo "repo";
         return $this->_em->createQueryBuilder()
             ->select("a")
             ->from("EklerniDatabaseBundle:Attribuer", "a")
-            ->where("a.idEleve = :idEleve")
-            ->setParameter("idSerie", $idEleve );
-
+            ->innerJoin("a.eleve", "e")
+            ->where("e.id = :idEleve")
+            ->setParameter("idEleve", $idEleve );
     }
 
     public function findBySerie($idSerie)
@@ -30,7 +31,6 @@ class AttribuerRepository extends EntityRepository {
             ->from("EklerniDatabaseBundle:Attribuer", "a")
             ->where("a.idSerie = :idSerie")
             ->setParameter("idSerie", $idSerie );
-
     }
 
 } 

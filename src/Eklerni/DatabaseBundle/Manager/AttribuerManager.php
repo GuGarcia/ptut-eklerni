@@ -3,6 +3,7 @@
 namespace Eklerni\DatabaseBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Eklerni\DatabaseBundle\Entity\BaseEntity;
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;
@@ -41,8 +42,14 @@ class AttribuerManager
 
     public function findByEleve(Eleve $eleve)
     {
-        return $this->repository->findByEleve($eleve->getId())->getQuery()->getResult();
+        //return $this->repository->findByEleve($eleve->getId())->getQuery()->getResult();
 
+        return $this->repository->createQueryBuilder("p")
+            ->select("a")
+            ->from("EklerniDatabaseBundle:Attribuer", "a")
+            ->innerJoin("a.eleve", "e")
+            ->where("e.id = :idEleve")
+            ->setParameter("idEleve", $eleve->getId() )->getQuery()->getResult();
     }
 
     public function findBySerie(Serie $serie)

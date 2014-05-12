@@ -127,7 +127,7 @@ class Attribuer
     }
 
     /**
-     * @param mixed $serie
+     * @param Serie $serie
      * @return Attribuer
      */
     public function setSerie($serie)
@@ -137,7 +137,7 @@ class Attribuer
     }
 
     /**
-     * @return mixed
+     * @return Serie
      */
     public function getSerie()
     {

@@ -1,0 +1,68 @@
+{% extends "EklerniBackBundle:Template:template.html.twig" %}
+
+{% set classesTable %}
+    {% for classe in classes %}
+        <div id="classe-{{ classe.id }}" class="btn btn-default btn-block view">{{ classe.nom }}</div>
+    {% endfor %}
+{% endset %}
+
+{% set eleveTable %}
+<div class="box-group" id="accordion">
+    {% for classe in classes %}
+        <div class="panel box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}">
+                        {{ classe.nom }}
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse{{ loop.index }}" class="panel-collapse collapse in">
+                <div class="box-body">
+                    {% for eleve in classe.eleves %}
+                        <div id="eleve-{{ eleve.id }}" class="btn btn-default btn-block view">{{ eleve.prenom }} {{ eleve.nom }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endset %}
+
+{% set view %}
+<div id='view'></div>
+{% endset %}
+
+{% block body %}
+    <div class="row">
+        <div id="series" class="col-md-3">
+            {{ eklerni.block("Liste des classes", classesTable, "", "primary") }}
+            {{ eklerni.block("Liste des élèves", eleveTable, "", "primary") }}
+        </div>
+        <div class="col-md-9">
+            {{ eklerni.block("Vue Tablette", view, "", "primary") }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="application/javascript">
+        $(document).ready(function() {
+            $(".view").click("on", function(){
+                var tab = $(this).attr("id").split("-");
+                var myData = {};
+                myData.type = tab[0];
+                myData.idType = tab[1];
+                console.log(myData);
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path("eklerni_back_tablet_view") }}",
+                    data: myData
+                }).success(function (response) {
+                    $("#view").html(response);
+                });
+            });
+        });
+    </script>
+{% endblock %}

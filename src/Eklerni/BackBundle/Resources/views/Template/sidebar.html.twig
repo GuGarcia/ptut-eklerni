@@ -6,17 +6,17 @@
                     <i class="fa fa-cloud"></i><span>{% trans %}sidebar.classes{% endtrans %}</span>
                 </a>
             </li>
-            <li class="bg-purple">
+            <li class="bg-orange">
                 <a href="{{ path("eklerni_back_eleve") }}">
                     <i class="fa fa-male"></i><span>{% trans %}sidebar.students{% endtrans %}</span>
                 </a>
             </li>
-            <li class="bg-maroon">
+            <li class="bg-yellow">
                 <a href="{{ path("eklerni_back_exercice") }}">
                     <i class="fa fa-list"></i><span>{% trans %}sidebar.exercices{% endtrans %}</span>
                 </a>
             </li>
-            <li class="bg-yellow">
+            <li class="bg-green">
                 <a href="{{ path("eklerni_back_attribution") }}">
                     <i class="fa fa-sitemap"></i><span>{% trans %}sidebar.exercices.attribute{% endtrans %}</span>
                 </a>
@@ -27,17 +27,22 @@
                 </a>
             </li>
             {% if is_granted('ROLE_DIRECTEUR') %}
-            <li class="bg-blue">
+            <li class="bg-navy">
                 <a href="{{ path("eklerni_back_direction") }}">
                     <i class="fa fa-briefcase"></i><span>{% trans %}sidebar.direction{% endtrans %}</span>
                 </a>
             </li>
             {% endif %}
-            <li class="bg-green">
+            <li class="bg-purple">
+                <a href="{{ path("eklerni_back_tablet") }}">
+                    <i class="fa fa-tablet"></i><span>{% trans %}sidebar.tablet{% endtrans %}</span>
+                </a>
+            </li>
+            <!--<li class="bg-green">
                 <a href="{{ path("eklerni_front_homepage") }}">
                     <i class="fa fa-undo"></i><span>{% trans %}sidebar.gotofront{% endtrans %}</span>
                 </a>
-            </li>
+            </li>-->
         </ul>
         <div id="messages"></div>
     </section>

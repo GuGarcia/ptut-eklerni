@@ -17,4 +17,5 @@
     <import resource="@EklerniBackBundle/Resources/config/routing_exercice.xml" prefix="/exercices" />
     <import resource="@EklerniBackBundle/Resources/config/routing_matiere.xml" prefix="/matiere" />
     <import resource="@EklerniBackBundle/Resources/config/routing_statistique.xml" prefix="/statistiques" />
+    <import resource="@EklerniBackBundle/Resources/config/routing_tablet.xml" prefix="/tablet" />
 </routes>

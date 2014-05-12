@@ -1,0 +1,13 @@
+{% for matiere in matieres %}
+    <h3>{{ matiere.name }}</h3>
+    {% for activite in matiere.activites %}
+        <h5>{{ activite.name }}</h5>
+        {% if attributions[activite.id] is defined %}
+            {% for attribution in attributions[activite.id] %}
+                <div class="btn btn-sm btn-default">
+                    {{ attribution.serie.nom }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}
