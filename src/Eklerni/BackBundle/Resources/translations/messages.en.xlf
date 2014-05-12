@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-05-07T15:59:19Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2014-05-12T13:05:56Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -11,11 +11,6 @@
         <target>Add a pupil to the classroom : %name%</target>
         <jms:reference-file line="177">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="3c38412a945a02353319af9c2a9e61bdbb30060b" resname="Classe">
-        <source>Classe</source>
-        <target>Classe</target>
-        <jms:reference-file line="26">Form/Type/EleveType.php</jms:reference-file>
-      </trans-unit>
       <trans-unit id="7a7076a79e6b7874566cfd88dfe6ffe510d56b04" resname="Classe %name%">
         <source>Classe %name%</source>
         <target>Classroom %name%</target>
@@ -23,28 +18,28 @@
       </trans-unit>
       <trans-unit id="9cca0f78e0270ec86570d0ee9b9945ccffe2efe3" resname="activite.delete.fail">
         <source>activite.delete.fail</source>
-        <target state="new">activite.delete.fail</target>
-        <jms:reference-file line="83">BackBundle/Controller/ActiviteController.php</jms:reference-file>
+        <target>activite.delete.fail</target>
+        <jms:reference-file line="90">BackBundle/Controller/ActiviteController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="dfee454b125056f92166b557ac23887476a1b2e3" resname="activite.delete.success">
         <source>activite.delete.success</source>
-        <target state="new">activite.delete.success</target>
-        <jms:reference-file line="72">BackBundle/Controller/ActiviteController.php</jms:reference-file>
+        <target>activite.delete.success</target>
+        <jms:reference-file line="79">BackBundle/Controller/ActiviteController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4af8c9b027767f16140fbcda369eb283da011652" resname="activite.description">
         <source>activite.description</source>
-        <target state="new">activite.description</target>
+        <target>activite.description</target>
         <jms:reference-file line="49">Form/Type/ActiviteType.php</jms:reference-file>
         <jms:reference-file line="51">Form/Type/ActiviteType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ec41cf9dc1b446ec7fb46524c97457a3c9fa5a75" resname="activite.matiere">
         <source>activite.matiere</source>
-        <target state="new">activite.matiere</target>
+        <target>activite.matiere</target>
         <jms:reference-file line="31">Form/Type/ActiviteType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="005cbbd214fc0abf543b330013ded5706d81235e" resname="activite.name">
         <source>activite.name</source>
-        <target state="new">activite.name</target>
+        <target>activite.name</target>
         <jms:reference-file line="19">Form/Type/ActiviteType.php</jms:reference-file>
         <jms:reference-file line="21">Form/Type/ActiviteType.php</jms:reference-file>
         <jms:reference-file line="63">views/Direction/index.html.twig</jms:reference-file>
@@ -58,6 +53,7 @@
         <source>btn.eleve.add</source>
         <target>Add a pupil</target>
         <jms:reference-file line="19">views/Classe/index.html.twig</jms:reference-file>
+        <jms:reference-file line="60">views/Eleve/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="83082a2eb57842cfcaafd523bfd7b98a4c59fdca" resname="btn.logout">
         <source>btn.logout</source>
@@ -78,7 +74,7 @@
         <jms:reference-file line="29">Form/Type/MatiereType.php</jms:reference-file>
         <jms:reference-file line="80">Form/Type/PersonneType.php</jms:reference-file>
         <jms:reference-file line="44">Form/Type/SerieQuestionType.php</jms:reference-file>
-        <jms:reference-file line="59">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="87">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7250682128b995ff43613b46d4b2fc887d1ef1bb" resname="classe.add.enseignant.fail">
         <source>classe.add.enseignant.fail</source>
@@ -113,23 +109,14 @@
       <trans-unit id="1ca900835ae43df338bd3261baffa4351d2418aa" resname="classe.eleve.count">
         <source>classe.eleve.count</source>
         <target>Number of pupils</target>
-        <jms:reference-file line="33">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="25">views/Classe/list.html.twig</jms:reference-file>
         <jms:reference-file line="30">views/Index/index.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="82427a355e0dbd8be969ba05569a6c0eab2b9d02" resname="classe.grade">
-        <source>classe.grade</source>
-        <target>classe.grade</target>
-        <jms:reference-file line="27">Form/Type/ClasseType.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="4500ca400cc409eee21b2b9df6955a9fd682bb07" resname="classe.id">
-        <source>classe.id</source>
-        <target>ID</target>
-        <jms:reference-file line="13">views/Classe/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="558ce82ff786a78c18db9178d9850372b6d022ab" resname="classe.level">
         <source>classe.level</source>
         <target>Grade</target>
-        <jms:reference-file line="21">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="27">Form/Type/ClasseType.php</jms:reference-file>
+        <jms:reference-file line="17">views/Classe/list.html.twig</jms:reference-file>
         <jms:reference-file line="29">views/Index/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3c0d38b79f55fa292d4d89ae1fa3f70f08e60281" resname="classe.list">
@@ -142,7 +129,7 @@
         <target>Name</target>
         <jms:reference-file line="17">Form/Type/ClasseType.php</jms:reference-file>
         <jms:reference-file line="19">Form/Type/ClasseType.php</jms:reference-file>
-        <jms:reference-file line="25">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="13">views/Classe/list.html.twig</jms:reference-file>
         <jms:reference-file line="28">views/Index/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cd5786c7f9429597684c08b12a6152c31093d1a5" resname="classe.name.colon">
@@ -165,54 +152,49 @@
         <target>Subject successfully added to the classroom.</target>
         <jms:reference-file line="247">BackBundle/Controller/ClasseController.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="02df9b5656f7da33430ff320f307bc40db8d07b6" resname="classe.school">
-        <source>classe.school</source>
-        <target>classe.school</target>
-        <jms:reference-file line="57">Form/Type/ClasseType.php</jms:reference-file>
-      </trans-unit>
       <trans-unit id="9585ba58aa51cb71eef4f6dfadd2c9e819908f35" resname="classe.text">
         <source>classe.text</source>
         <target>Classroom</target>
-        <jms:reference-file line="72">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="68">views/Classe/list.html.twig</jms:reference-file>
         <jms:reference-file line="8">views/Index/index.html.twig</jms:reference-file>
         <jms:reference-file line="53">views/Index/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="854f32181635802087f5839b4c8140c80ebf25f6" resname="classe.view">
         <source>classe.view</source>
         <target>Classroom profil</target>
-        <jms:reference-file line="48">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="40">views/Classe/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ed1fbbda49f99332bba6d16f2f33913ba0a959fc" resname="classe.year">
         <source>classe.year</source>
         <target>Year</target>
         <jms:reference-file line="44">Form/Type/ClasseType.php</jms:reference-file>
         <jms:reference-file line="47">Form/Type/ClasseType.php</jms:reference-file>
-        <jms:reference-file line="29">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="21">views/Classe/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9c63e52db498345c5c710be3320962545c4a3d7b" resname="difficulte.niveau1">
         <source>difficulte.niveau1</source>
         <target>difficulte.niveau1</target>
-        <jms:reference-file line="31">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="59">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4b714e17574fe5336216e504af8c9fc0cb7cbe22" resname="difficulte.niveau2">
         <source>difficulte.niveau2</source>
         <target>difficulte.niveau2</target>
-        <jms:reference-file line="32">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="60">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f088a0f9365f1a7fd6fc13d13117b99b4b72025f" resname="difficulte.niveau3">
         <source>difficulte.niveau3</source>
         <target>difficulte.niveau3</target>
-        <jms:reference-file line="33">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="61">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="76215649a6e6bd2f71dade0b128267dc8e0f5bd7" resname="difficulte.niveau4">
         <source>difficulte.niveau4</source>
         <target>difficulte.niveau4</target>
-        <jms:reference-file line="34">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="62">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="40021973d70138f386ab293c643ff1862f2408db" resname="difficulte.niveau5">
         <source>difficulte.niveau5</source>
         <target>difficulte.niveau5</target>
-        <jms:reference-file line="35">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="63">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="54fc87a1ba80ffbf0442bca619ddd3b2c1ec7752" resname="ecole.city">
         <source>ecole.city</source>
@@ -229,7 +211,7 @@
       <trans-unit id="09d193e92830b2870de766708c1768f4b206ef0f" resname="ecole.list">
         <source>ecole.list</source>
         <target>ecole.list</target>
-        <jms:reference-file line="107">views/Direction/index.html.twig</jms:reference-file>
+        <jms:reference-file line="130">views/Direction/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="82f59f133355e967eb96258009c2fb58f516c01c" resname="ecole.name">
         <source>ecole.name</source>
@@ -248,8 +230,9 @@
       <trans-unit id="7abda406913ee9e36567f248cb3984a82929f836" resname="ecole.text">
         <source>ecole.text</source>
         <target>School</target>
-        <jms:reference-file line="17">views/Classe/list.html.twig</jms:reference-file>
-        <jms:reference-file line="99">views/Direction/index.html.twig</jms:reference-file>
+        <jms:reference-file line="57">Form/Type/ClasseType.php</jms:reference-file>
+        <jms:reference-file line="29">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="116">views/Direction/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a05487467cc142ff796e07b112c098cf03bc6e78" resname="eleve.list">
         <source>eleve.list</source>
@@ -261,12 +244,12 @@
         <source>enseignant.list</source>
         <target>Teachers' list</target>
         <jms:reference-file line="75">views/Classe/index.html.twig</jms:reference-file>
-        <jms:reference-file line="111">views/Direction/index.html.twig</jms:reference-file>
+        <jms:reference-file line="134">views/Direction/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1d486af2530e6d22b269878094712d46268dd685" resname="enseignant.no.classe">
         <source>enseignant.no.classe</source>
         <target>You have no classrooms</target>
-        <jms:reference-file line="69">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="65">views/Classe/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5a89f8b6a877aa65ceec3994d304ba830cd795a2" resname="enseignant.no.eleve">
         <source>enseignant.no.eleve</source>
@@ -277,45 +260,55 @@
         <source>grade.year1</source>
         <target>grade.year1</target>
         <jms:reference-file line="29">Form/Type/ClasseType.php</jms:reference-file>
+        <jms:reference-file line="41">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d50b21b26cc8e50e51b68a0e833590679d728c04" resname="grade.year2">
         <source>grade.year2</source>
         <target>grade.year2</target>
         <jms:reference-file line="30">Form/Type/ClasseType.php</jms:reference-file>
+        <jms:reference-file line="42">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a80ef49dbab6c68907681cdf033d7f99d76580b6" resname="grade.year3">
         <source>grade.year3</source>
         <target>grade.year3</target>
         <jms:reference-file line="31">Form/Type/ClasseType.php</jms:reference-file>
+        <jms:reference-file line="43">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9b3c17d894ca813a2e9de856c5a8b4ba7be8083a" resname="grade.year4">
         <source>grade.year4</source>
         <target>grade.year4</target>
         <jms:reference-file line="32">Form/Type/ClasseType.php</jms:reference-file>
+        <jms:reference-file line="44">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2d5851f7e3e290db938bbff5efdd653d1610d022" resname="grade.year5">
         <source>grade.year5</source>
         <target>grade.year5</target>
         <jms:reference-file line="33">Form/Type/ClasseType.php</jms:reference-file>
+        <jms:reference-file line="45">Form/Type/SerieType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b907e3df16ac6231902748f2ad3953eae73d5ec1" resname="matiere.add_activite">
+        <source>matiere.add_activite</source>
+        <target>matiere.add_activite</target>
+        <jms:reference-file line="74">views/Direction/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5639ca872edcd830ad4eb57f92315e94e846298b" resname="matiere.delete.fail">
         <source>matiere.delete.fail</source>
-        <target state="new">matiere.delete.fail</target>
+        <target>matiere.delete.fail</target>
         <jms:reference-file line="83">BackBundle/Controller/MatiereController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f114812ab7b79689f3772f3fae40d09fbf085a75" resname="matiere.delete.success">
         <source>matiere.delete.success</source>
-        <target state="new">matiere.delete.success</target>
+        <target>matiere.delete.success</target>
         <jms:reference-file line="72">BackBundle/Controller/MatiereController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c619ecb85f52e8726583e7643f8f4c3b5ce6c269" resname="matiere.list">
         <source>matiere.list</source>
-        <target state="new">matiere.list</target>
-        <jms:reference-file line="119">views/Direction/index.html.twig</jms:reference-file>
+        <target>matiere.list</target>
+        <jms:reference-file line="140">views/Direction/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="fc0fb372cdca554a1ba756be6d0703c03b9c5568" resname="matiere.name">
         <source>matiere.name</source>
-        <target state="new">matiere.name</target>
+        <target>matiere.name</target>
         <jms:reference-file line="17">Form/Type/MatiereType.php</jms:reference-file>
         <jms:reference-file line="19">Form/Type/MatiereType.php</jms:reference-file>
         <jms:reference-file line="62">views/Direction/index.html.twig</jms:reference-file>
@@ -324,6 +317,7 @@
         <source>matiere.text</source>
         <target>School subject</target>
         <jms:reference-file line="81">views/Classe/index.html.twig</jms:reference-file>
+        <jms:reference-file line="122">views/Direction/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="86f01d895605a368280123cf22e56e24cc892b32" resname="no.ecole">
         <source>no.ecole</source>
@@ -337,8 +331,13 @@
       </trans-unit>
       <trans-unit id="fba7149e019e6421ee79208ba917f07297b8953c" resname="no.matiere">
         <source>no.matiere</source>
-        <target state="new">no.matiere</target>
-        <jms:reference-file line="92">views/Direction/index.html.twig</jms:reference-file>
+        <target>no.matiere</target>
+        <jms:reference-file line="109">views/Direction/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="05bc001b3c0ef85743d1c8e9a348ec7c7671a5c1" resname="password_change.encode_error">
+        <source>password_change.encode_error</source>
+        <target>password_change.encode_error</target>
+        <jms:reference-file line="50">BackBundle/Controller/EleveController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="449ccad1fdacdac68c92290a48cd3c8705165b91" resname="personne.birthdate">
         <source>personne.birthdate</source>
@@ -406,7 +405,7 @@
       </trans-unit>
       <trans-unit id="d8928cd2d738a733231d303d3f85ce52e50deca4" resname="question.media">
         <source>question.media</source>
-        <target state="new">question.media</target>
+        <target>question.media</target>
         <jms:reference-file line="61">Form/Type/ActiviteType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="922a8af4f67835a8f4317dfe3b87f6bfdbb3f659" resname="question.media.file.audio">
@@ -440,7 +439,7 @@
       </trans-unit>
       <trans-unit id="c8f83cbf2db09807dd592e2bd40fb3f0a3350a69" resname="reponse.add">
         <source>reponse.add</source>
-        <target state="new">reponse.add</target>
+        <target>reponse.add</target>
         <jms:reference-file line="55">Type/Question/QuestionAudioType.php</jms:reference-file>
         <jms:reference-file line="57">Type/Question/QuestionFontType.php</jms:reference-file>
         <jms:reference-file line="55">Type/Question/QuestionImageType.php</jms:reference-file>
@@ -457,7 +456,7 @@
       </trans-unit>
       <trans-unit id="178f955d8ae281dc1e9a15e22862a75a81002d9e" resname="reponse.media">
         <source>reponse.media</source>
-        <target state="new">reponse.media</target>
+        <target>reponse.media</target>
         <jms:reference-file line="77">Form/Type/ActiviteType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="5285ca431d442c1f499e4bcd9a13603031ead940" resname="reponse.media.file">
@@ -515,16 +514,32 @@
         <target>serie.delete.success</target>
         <jms:reference-file line="113">BackBundle/Controller/ExerciceController.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="192132981af46aadb5a7c80fe563d3537ad60a4e" resname="serie.difficult">
-        <source>serie.difficult</source>
-        <target>Difficulty</target>
-        <jms:reference-file line="61">views/Exercice/index.html.twig</jms:reference-file>
-        <jms:reference-file line="94">views/Exercice/index.html.twig</jms:reference-file>
+      <trans-unit id="a7e199c56cefec6c72d1429b76fcb21a01c42ba4" resname="serie.description">
+        <source>serie.description</source>
+        <target>serie.description</target>
+        <jms:reference-file line="29">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="31">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="63">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="108">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="78ce876b235da177725c84502e75d328638b265f" resname="serie.difficulty">
         <source>serie.difficulty</source>
         <target>serie.difficulty</target>
-        <jms:reference-file line="29">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="57">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="65">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="110">views/Exercice/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c9c6ff561c8054c51337a30e15a92f83f6f7f422" resname="serie.enseignant">
+        <source>serie.enseignant</source>
+        <target>serie.enseignant</target>
+        <jms:reference-file line="112">views/Exercice/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8b6189c2b63d63d73ce86e1bcb4b4cd71aadac29" resname="serie.level">
+        <source>serie.level</source>
+        <target>serie.level</target>
+        <jms:reference-file line="39">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="64">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="109">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8da496c977a549044e53e6ad481dcb8ff7359edd" resname="serie.name">
         <source>serie.name</source>
@@ -532,8 +547,8 @@
         <jms:reference-file line="17">Form/Type/SerieType.php</jms:reference-file>
         <jms:reference-file line="19">Form/Type/SerieType.php</jms:reference-file>
         <jms:reference-file line="32">views/Exercice/index.html.twig</jms:reference-file>
-        <jms:reference-file line="60">views/Exercice/index.html.twig</jms:reference-file>
-        <jms:reference-file line="93">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="62">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="107">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b821e93227f362b74b0fbe8c21f70a18a4955e1f" resname="serie.notfound">
         <source>serie.notfound</source>
@@ -543,12 +558,12 @@
       <trans-unit id="8dfa3a8ebebb89e75a698fbdd88fd83b655ef46c" resname="serie.notfound.personnal">
         <source>serie.notfound.personnal</source>
         <target>No personnal series for this activity.</target>
-        <jms:reference-file line="55">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="57">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f477b9516496fcb2ba200de7122c8cf298aa5079" resname="serie.notfound.public">
         <source>serie.notfound.public</source>
         <target>No public series for this activity.</target>
-        <jms:reference-file line="88">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="102">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="825c09991f3ebb32c9d9a37f2cbac2b113fdf77c" resname="serie.personnal">
         <source>serie.personnal</source>
@@ -558,14 +573,19 @@
       <trans-unit id="c83cad46bef0cfb578a172d2b5c546f4bfc27980" resname="serie.public">
         <source>serie.public</source>
         <target>Public series</target>
-        <jms:reference-file line="47">Form/Type/SerieType.php</jms:reference-file>
+        <jms:reference-file line="75">Form/Type/SerieType.php</jms:reference-file>
         <jms:reference-file line="27">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="06ac0991e3a21afefb41edd0154f5adce8966c03" resname="serie.questions.number">
         <source>serie.questions.number</source>
-        <target>Number of questions</target>
-        <jms:reference-file line="62">views/Exercice/index.html.twig</jms:reference-file>
-        <jms:reference-file line="95">views/Exercice/index.html.twig</jms:reference-file>
+        <target>Questions</target>
+        <jms:reference-file line="66">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="111">views/Exercice/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b8644cf148d21b667cefbb1a386360f15f2b5e28" resname="serie.statut">
+        <source>serie.statut</source>
+        <target>serie.statut</target>
+        <jms:reference-file line="67">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="180ce78e7461646d7daebe14d9a8b057fb412383" resname="sidebar.classes">
         <source>sidebar.classes</source>
@@ -574,8 +594,8 @@
       </trans-unit>
       <trans-unit id="2e3a531921e1c7463b9cbdcacf084ba1ab57cb2c" resname="sidebar.direction">
         <source>sidebar.direction</source>
-        <target>sidebar.direction</target>
-        <jms:reference-file line="31">views/Template/sidebar.html.twig</jms:reference-file>
+        <target>Direction</target>
+        <jms:reference-file line="32">views/Template/sidebar.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2209e7f3321f56bc77e6b98691cc83f7694c895b" resname="sidebar.exercices">
         <source>sidebar.exercices</source>
@@ -590,7 +610,7 @@
       <trans-unit id="07e1a4ac0e7321dc2b442a03355207e53d625acd" resname="sidebar.gotofront">
         <source>sidebar.gotofront</source>
         <target>Go to pupil view</target>
-        <jms:reference-file line="36">views/Template/sidebar.html.twig</jms:reference-file>
+        <jms:reference-file line="38">views/Template/sidebar.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="063306b9f223934e176f25486d791b411ea54f37" resname="sidebar.statistics">
         <source>sidebar.statistics</source>
@@ -614,8 +634,8 @@
       </trans-unit>
       <trans-unit id="26363756d673352dbb9cfb00fb19b43a7554da88" resname="title.create_activite">
         <source>title.create_activite</source>
-        <target state="new">title.create_activite</target>
-        <jms:reference-file line="28">BackBundle/Controller/ActiviteController.php</jms:reference-file>
+        <target>title.create_activite</target>
+        <jms:reference-file line="35">BackBundle/Controller/ActiviteController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cce1745c5f28fbfac817c8b064b28b2a07d814ba" resname="title.create_classe">
         <source>title.create_classe</source>
@@ -629,7 +649,7 @@
       </trans-unit>
       <trans-unit id="39fe00df0d58c44f7fd7135dafb2673482b078f6" resname="title.create_matiere">
         <source>title.create_matiere</source>
-        <target state="new">title.create_matiere</target>
+        <target>title.create_matiere</target>
         <jms:reference-file line="28">BackBundle/Controller/MatiereController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1b7b5ca251e67ed18303f558d16d31aa16971e43" resname="title.create_serie">
@@ -649,8 +669,8 @@
       </trans-unit>
       <trans-unit id="b756cb78488307553108e70b7fb34a689247c0f5" resname="title.modify_activite">
         <source>title.modify_activite</source>
-        <target state="new">title.modify_activite</target>
-        <jms:reference-file line="50">BackBundle/Controller/ActiviteController.php</jms:reference-file>
+        <target>title.modify_activite</target>
+        <jms:reference-file line="57">BackBundle/Controller/ActiviteController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="708da5a12bf57a3f76c471b92e855d25fd164afb" resname="title.modify_classe">
         <source>title.modify_classe</source>
@@ -659,12 +679,17 @@
       </trans-unit>
       <trans-unit id="d3ffeffab4f4d3e6fca580e75abab6596dadaeb0" resname="title.modify_ecole">
         <source>title.modify_ecole</source>
-        <target state="new">title.modify_ecole</target>
+        <target>title.modify_ecole</target>
         <jms:reference-file line="45">BackBundle/Controller/EcoleController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="81a81a94823fcc58801067b2c00e698b462d96c0" resname="title.modify_eleve">
+        <source>title.modify_eleve</source>
+        <target>title.modify_eleve</target>
+        <jms:reference-file line="64">BackBundle/Controller/EleveController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a47253b7567defccbdca508b444b29f18cac3f5d" resname="title.modify_matiere">
         <source>title.modify_matiere</source>
-        <target state="new">title.modify_matiere</target>
+        <target>title.modify_matiere</target>
         <jms:reference-file line="50">BackBundle/Controller/MatiereController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0957b81f1785c9d3f68379d40b5de0dd5b459936" resname="title.modify_serie">
@@ -696,15 +721,21 @@
         <jms:reference-file line="62">Type/Reponse/ReponseImageType.php</jms:reference-file>
         <jms:reference-file line="62">Type/Reponse/ReponseTextType.php</jms:reference-file>
         <jms:reference-file line="62">Type/Reponse/ReponseVideoType.php</jms:reference-file>
-        <jms:reference-file line="58">views/Classe/list.html.twig</jms:reference-file>
-        <jms:reference-file line="77">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="54">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="82">views/Direction/index.html.twig</jms:reference-file>
+        <jms:reference-file line="99">views/Direction/index.html.twig</jms:reference-file>
+        <jms:reference-file line="45">views/Eleve/list.html.twig</jms:reference-file>
+        <jms:reference-file line="91">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="695dab1af1c61d897bcca2f40429a5aebc99a798" resname="utils.modify">
         <source>utils.modify</source>
         <target>Edit</target>
-        <jms:reference-file line="57">views/Classe/list.html.twig</jms:reference-file>
-        <jms:reference-file line="73">views/Exercice/index.html.twig</jms:reference-file>
-        <jms:reference-file line="107">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="53">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="78">views/Direction/index.html.twig</jms:reference-file>
+        <jms:reference-file line="95">views/Direction/index.html.twig</jms:reference-file>
+        <jms:reference-file line="42">views/Eleve/list.html.twig</jms:reference-file>
+        <jms:reference-file line="87">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="127">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6a3ceea9ab3a7d5e3ccb36a0fe1d7289a92836a2" resname="utils.save">
         <source>utils.save</source>
@@ -714,10 +745,11 @@
       <trans-unit id="96bcd37fdba8dac10fe5c03675dee21a86d4929c" resname="utils.tools">
         <source>utils.tools</source>
         <target>Tools</target>
-        <jms:reference-file line="36">views/Classe/list.html.twig</jms:reference-file>
+        <jms:reference-file line="32">views/Classe/list.html.twig</jms:reference-file>
         <jms:reference-file line="64">views/Direction/index.html.twig</jms:reference-file>
-        <jms:reference-file line="63">views/Exercice/index.html.twig</jms:reference-file>
-        <jms:reference-file line="96">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="25">views/Eleve/list.html.twig</jms:reference-file>
+        <jms:reference-file line="68">views/Exercice/index.html.twig</jms:reference-file>
+        <jms:reference-file line="113">views/Exercice/index.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>

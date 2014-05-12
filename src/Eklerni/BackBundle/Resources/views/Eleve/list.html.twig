@@ -57,7 +57,7 @@
                     {% endset %}
                     {% set footerBlock %}
                         <a href="{{ path("eklerni_back_classe_create_eleve", {idClasse: classe.id}) }}" class="btn btn-primary">
-                            {% trans %}btn.eleve.add{% endtrans %}
+                            <i class="fa fa-plus"></i> {% trans %}btn.eleve.add{% endtrans %}
                         </a>
                     {% endset %}
                     {% if loop.index is odd %}

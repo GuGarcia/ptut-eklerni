@@ -4,6 +4,8 @@
     <form action="" method="post">
         <div class="body bg-gray">
             {{ eklerni.row(form.nom) }}
+            {{ eklerni.row(form.description) }}
+            {{ eklerni.row(form.niveau) }}
             {{ eklerni.row(form.difficulte) }}
             {{ eklerni.row(form.public) }}
             {{ form_widget(form._token) }}

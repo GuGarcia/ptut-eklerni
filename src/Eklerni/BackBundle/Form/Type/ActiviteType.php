@@ -25,24 +25,6 @@ class ActiviteType extends AbstractType
         );
         
         $builder->add(
-            'matiere',
-            'entity',
-            array(
-                'label' => 'activite.matiere',
-                'disabled' => true,
-                'mapped' => false,
-                'property' => 'name',
-                'class' => 'EklerniDatabaseBundle:Matiere',
-                'query_builder' => function (MatiereRepository $cr) {
-                        return $cr->findAll();
-                },
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-            )
-        );
-        
-        $builder->add(
             'description',
             'textarea',
             array(

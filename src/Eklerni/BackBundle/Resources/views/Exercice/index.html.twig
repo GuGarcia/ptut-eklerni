@@ -39,13 +39,15 @@
                             <div class="tab-content">
 
                                 {% set seriesPublic = [] %}
-                                {% for serie in activite.series if serie.public %}
-                                    {% set seriesPublic = seriesPublic|merge([serie]) %}
+                                {% for serie in activite.series %}
+                                    {% if serie.public and serie.enseignant.id != app.user.id %}
+                                        {% set seriesPublic = seriesPublic|merge([serie]) %}
+                                    {% endif %}
                                 {% endfor %}
 
                                 {% set seriesPerso = [] %}
                                 {% for serie in activite.series %}
-                                    {% if not serie.public and serie.enseignant.id == app.user.id %}
+                                    {% if serie.enseignant.id %}
                                         {% set seriesPerso = seriesPerso|merge([serie]) %}
                                     {% endif %}
                                 {% endfor %}
@@ -58,15 +60,27 @@
                                             <tbody>
                                                 <tr>
                                                     <th class="tdsize">{% trans %}serie.name{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.difficult{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}serie.description{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}serie.level{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}serie.difficulty{% endtrans %}</th>
                                                     <th class="tdsize">{% trans %}serie.questions.number{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}serie.statut{% endtrans %}</th>
                                                     <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
                                                 </tr>
                                                 {% for serie in seriesPerso if serie.enseignant.id == app.user.id %}
                                                     <tr>
                                                         <td class="tdsize">{{ serie.nom }}</td>
+                                                        <td class="tdsize">{{ serie.description }}</td>
+                                                        <td class="tdsize">{{ serie.niveau }}</td>
                                                         <td class="tdsize">{{ serie.difficulte }}</td>
                                                         <td class="tdsize">{{ serie.questions|length }}</td>
+                                                        <td class="tdsize">
+                                                            {% if serie.public %}
+                                                                <span class="badge">Publique</span>
+                                                            {% else %}
+                                                                <span class="badge">Privée</span>
+                                                            {% endif %}
+                                                        </td>
                                                         <td class="tdsize">
                                                             <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
                                                                 <i class="fa fa-pencil"></i>
@@ -91,15 +105,21 @@
                                             <tbody>
                                                 <tr>
                                                     <th class="tdsize">{% trans %}serie.name{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.difficult{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}serie.description{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}serie.level{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}serie.difficulty{% endtrans %}</th>
                                                     <th class="tdsize">{% trans %}serie.questions.number{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}serie.enseignant{% endtrans %}</th>
                                                     <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
                                                 </tr>
                                                 {% for serie in seriesPublic %}
                                                     <tr>
                                                         <td class="tdsize">{{ serie.nom }}</td>
+                                                        <td class="tdsize">{{ serie.description }}</td>
+                                                        <td class="tdsize">{{ serie.niveau }}</td>
                                                         <td class="tdsize">{{ serie.difficulte }}</td>
                                                         <td class="tdsize">{{ serie.questions|length }}</td>
+                                                        <td class="tdsize">{{ serie.enseignant.nom ~ ' ' ~ serie.enseignant.prenom }}</td>
                                                         <td class="tdsize">
                                                             {% if serie.enseignant.id == app.user.id %}
                                                                 <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">

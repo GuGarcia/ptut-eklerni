@@ -29,7 +29,7 @@
                             {{ form_row(reponse.delete) }}
                         </div>
                     {% endfor %}
-                    <span class="reponse_prototype hidden" data-prototype="{{ form_widget(form.questions.reponses.vars.prototype)|e }}"></span>
+                    <span class="reponse_prototype hidden" data-prototype="{{ form_widget(question.reponses.vars.prototype)|e }}"></span>
                 </div>
             </div>
         {% endfor %}
@@ -48,16 +48,15 @@
             $("#eklerni_seriequestion_questions").parent().remove();
             
             // Add Question Link
-            questionCollectionHolder.append(addQuestionLink);
+            questionCollectionHolder.prepend(addQuestionLink);
             addQuestionLink.on('click', function(e) {
-                // prevent the link from creating a "#" on the URL
                 e.preventDefault();
 
-                // add a new tag form (see next code block)
                 addQuestionForm();
             });
-            
-            questionCollectionHolder.data('index', questionCollectionHolder.find(':input').length);
+
+            // TODO onLoad Enable remove question & reponse
+            questionCollectionHolder.data('index', $('#questions').children('div').length);
             
 
             function addQuestionForm() {
@@ -73,16 +72,29 @@
                 $('.addReponse').last().on("click", function(){
                     addReponseForm($(this));
                 });
+                // TODO addReponse
+                // TODO RemoveQuestion
             }
             
-            function addReponseForm(addBtn)
-            {
+            function addReponseForm(addBtn) {
                 console.log(addBtn.attr('id'));
                 var reponseCollectionHolder = $("#" + addBtn.attr('id').replace(/addreponse/g, "reponses"));
                 console.log(reponseCollectionHolder);
-                
-                var newReponse = reponseCollectionHolder.data('prototype').replace(/__reponse__/g, 0);
+
+                var index = reponseCollectionHolder.parent().children('div').length - 1;
+
+                var newReponse = reponseCollectionHolder.data('prototype').replace(/__reponse__/g, index);
                 reponseCollectionHolder.parent().append(newReponse);
+
+                // TODO RemoveReponse
+            }
+
+            function removeQuestionForm() {
+
+            }
+
+            function removeReponseForm() {
+
             }
         });
     </script>
