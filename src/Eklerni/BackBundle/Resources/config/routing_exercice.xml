@@ -19,4 +19,7 @@
         <default key="_controller">EklerniBackBundle:Exercice:supprimer</default>
         <requirement key="idSerie">\d+</requirement>
     </route>
+    <route id="eklerni_back_serie_test" pattern="/test">
+        <default key="_controller">EklerniBackBundle:Exercice:test</default>
+    </route>
 </routes>

@@ -1,10 +1,10 @@
 <?php
 
-
 namespace Eklerni\DatabaseBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
 
-class MediaRepository implements CASRepositoryInterface
+class MediaRepository extends EntityRepository implements CASRepositoryInterface
 {
 
     /**
@@ -28,6 +28,15 @@ class MediaRepository implements CASRepositoryInterface
             ->from("EklerniDatabaseBundle:Media", "m")
             ->where("m.id = :id")
             ->setParameter("id", $id);
+    }
+    
+    public function findByMedia($media)
+    {
+        return $this->_em->createQueryBuilder()
+            ->select("m")
+            ->from("EklerniDatabaseBundle:Media", "m")
+            ->where("m.media = :media")
+            ->setParameter("media", $media);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Eklerni\BackBundle\Controller;
 
+use Eklerni\BackBundle\Form\Type\SerieQuestionType;
 use Eklerni\DatabaseBundle\Entity\Activite;
 use Eklerni\DatabaseBundle\Entity\Serie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -124,6 +125,25 @@ class ExerciceController extends Controller
                     "success" => false,
                     "message" => $this->get('translator')->trans('serie.delete.fail')
                 )
+            )
+        );
+    }
+
+    public function testAction(Request $request)
+    {
+        $form = $this->createForm(new SerieQuestionType("Text", "Audio"));
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+        }
+
+        return $this->render(
+            'EklerniBackBundle:Exercice:testform.html.twig',
+            array(
+                'form' => $form->createView(),
+                'title' => $this->get('translator')->trans("title.modify_serie"),
             )
         );
     }

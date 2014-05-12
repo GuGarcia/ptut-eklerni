@@ -1,0 +1,89 @@
+{% extends "EklerniBackBundle:Template:template.html.twig" %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <h3>{{ form.questions.vars.label }}</h3>
+    <div id="questions" data-prototype="{{ form_widget(form.questions.vars.prototype)|e }}">
+        {% for question in form.questions %}
+            <div class="question">
+                {% if question.label is defined %}
+                    {{ form_row(question.label) }}
+                {% endif %}
+                {% if question.mediaUrl is defined %}
+                    {{ form_row(question.mediaUrl) }}
+                {% endif %}
+                {{ form_row(question.media) }}
+                {{ form_row(question.delete) }}
+                <div class="reponses">
+                    {{ form_row(question.addreponse) }}
+                    {% for reponse in question.reponses %}
+                        <div class="reponse">
+                            {% if reponse.label is defined %}
+                                {{ form_row(reponse.label) }}
+                            {% endif %}
+                            {% if reponse.mediaUrl is defined %}
+                                {{ form_row(reponse.mediaUrl) }}
+                            {% endif %}
+                            {{ form_row(reponse.media) }}
+                            {{ form_row(reponse.delete) }}
+                        </div>
+                    {% endfor %}
+                    <span class="reponse_prototype hidden" data-prototype="{{ form_widget(form.questions.reponses.vars.prototype)|e }}"></span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {{ form_row(form.valider) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="application/javascript">
+        $(document).ready(function(){
+            var questionCollectionHolder = $('#questions');
+            var addQuestionLink = $('<a href="#" class="add_question_link">Add a Question</a>');
+
+            // Remove Title
+            $("#eklerni_seriequestion_questions").parent().remove();
+            
+            // Add Question Link
+            questionCollectionHolder.append(addQuestionLink);
+            addQuestionLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addQuestionForm();
+            });
+            
+            questionCollectionHolder.data('index', questionCollectionHolder.find(':input').length);
+            
+
+            function addQuestionForm() {
+                var prototype = questionCollectionHolder.data('prototype');
+
+                var index = questionCollectionHolder.data('index');
+
+                var newQuestion = prototype.replace(/__question__/g, index);
+                questionCollectionHolder.data('index', index + 1);
+
+                var $newQuestionRow = $('<div></div>').attr('classe', 'question').append(newQuestion);
+                questionCollectionHolder.append($newQuestionRow);
+                $('.addReponse').last().on("click", function(){
+                    addReponseForm($(this));
+                });
+            }
+            
+            function addReponseForm(addBtn)
+            {
+                console.log(addBtn.attr('id'));
+                var reponseCollectionHolder = $("#" + addBtn.attr('id').replace(/addreponse/g, "reponses"));
+                console.log(reponseCollectionHolder);
+                
+                var newReponse = reponseCollectionHolder.data('prototype').replace(/__reponse__/g, 0);
+                reponseCollectionHolder.parent().append(newReponse);
+            }
+        });
+    </script>
+{% endblock %}

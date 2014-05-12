@@ -1,6 +1,6 @@
 <?php
 
-namespace Eklerni\BackBundle\Form\Type;
+namespace Eklerni\BackBundle\Form\Type\Question;
 
 use Eklerni\DatabaseBundle\Repository\MediaRepository;
 use Symfony\Component\Form\AbstractType;
@@ -32,9 +32,11 @@ class QuestionImageType extends AbstractType
             'media',
             'entity',
             array(
+                'class' => "EklerniDatabaseBundle:Media",
+                'property' => 'media',
                 'label' => 'question.media.type',
                 'query_builder' => function (MediaRepository $er) {
-                        return $er->findAll();
+                        return $er->findByMedia("image");
                     },
                 'data' => 'image',
                 'disabled' => true,
@@ -44,15 +46,38 @@ class QuestionImageType extends AbstractType
             )
         );
 
-        $reponseMediaType = "Reponse" . $this->_questionMedia . "Type";
+        $builder->add(
+            'addreponse',
+            "button",
+            array(
+                'attr' => array(
+                    'class' => 'addReponse',
+                    'label' => 'reponse.add'
+                ),
+            )
+        );
+
+        $reponseMediaType = "Eklerni\\BackBundle\\Form\\Type\\Reponse\\Reponse" . $this->_reponseMedia. "Type";
         $builder->add(
             'reponses',
             'collection',
             array(
-                'type' => new $reponseMediaType($this->_reponseMedia),
+                'type' => new $reponseMediaType(),
+                'prototype_name' => '__reponse__',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false
+            )
+        );
+
+        $builder->add(
+            'delete',
+            'button',
+            array(
+                'attr' => array(
+                    'class' => 'deleteQuestion',
+                    'label' => 'utils.delete'
+                ),
             )
         );
     }

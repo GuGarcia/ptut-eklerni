@@ -38,7 +38,9 @@ class ClasseType extends AbstractType
             )
         );
         $builder->add(
-            'annee', 'integer', array(
+            'annee',
+            'integer',
+            array(
                 'label' => 'classe.year',
                 'data' => date("Y"),
                 'attr' => array(
@@ -64,7 +66,9 @@ class ClasseType extends AbstractType
         );
 
         $builder->add(
-            'valider', 'submit', array(
+            'valider',
+            'submit',
+            array(
                 'label' => "button.validation",
                 'attr' => array(
                     'class' => 'btn bg-olive btn-block'

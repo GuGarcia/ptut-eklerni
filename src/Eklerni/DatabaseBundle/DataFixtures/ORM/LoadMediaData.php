@@ -22,6 +22,8 @@ class LoadMediaData extends AbstractFixture implements OrderedFixtureInterface
 
             $manager->persist($media);
             $manager->flush();
+            
+            $this->addReference("Media.".$mediaName, $media);
         }
 
     }
@@ -31,6 +33,6 @@ class LoadMediaData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 40;
+        return 0;
     }
 }
