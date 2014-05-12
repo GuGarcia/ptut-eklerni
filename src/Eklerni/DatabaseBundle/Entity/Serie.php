@@ -35,6 +35,19 @@ class Serie extends BaseEntity
     private $nom;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
+    /**
+     * Type: CP,CE1,CE2,CM1,CM2
+     * @var string
+     * @ORM\Column(name="niveau", type="string", length=20)
+     */
+    private $niveau;
+
+    /**
      * @var integer
      * @ORM\Column(type="integer")
      */
@@ -186,11 +199,45 @@ class Serie extends BaseEntity
     }
 
     /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $niveau
+     */
+    public function setNiveau($niveau)
+    {
+        $this->niveau = $niveau;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNiveau()
+    {
+        return $this->niveau;
+    }
+
+    /**
      * @param boolean $public
      */
     public function setPublic($public)
     {
         $this->public = $public;
+        return $this;
     }
 
     /**

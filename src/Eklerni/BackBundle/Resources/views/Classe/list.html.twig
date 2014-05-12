@@ -50,7 +50,7 @@
                             </td>
                             <td>{{ classe.ecole }}</td>
                             <td>
-                                <a href="{{ path("eklerni_back_classe_update", { idClasse: classe.id }) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}</a>
+                                <a href="{{ path("eklerni_back_classe_update", { idClasse: classe.id }) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}</a>
                                 <a href="{{ path("eklerni_back_classe_ajax_delete", { idClasse: classe.id }) }}" class="deleteClassBtn btn btn-danger btn-xs{% if classe.eleves|length > 0 %} disabled{% endif %}"><i class="fa fa-minus"></i> {% trans %}utils.delete{% endtrans %}</a>
                             </td>
                         </tr>
