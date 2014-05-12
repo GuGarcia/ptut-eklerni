@@ -74,12 +74,10 @@
                         <i class="fa fa-pencil"></i>
                         {% trans %}utils.modify{% endtrans %}
                     </a>
-                    {% if matiere.activites.count == 0 %}
-                    <a class="btn btn-danger btn-xs deleteMatiereBtn" href="{{ path('eklerni_back_matiere_ajax_delete', { idMatiere: matiere.id }) }}">
+                    <a class="btn btn-danger btn-xs deleteMatiereBtn{% if matiere.activites|length > 0 %} disabled{% endif %}" href="{{ path('eklerni_back_matiere_ajax_delete', { idMatiere: matiere.id }) }}">
                         <i class="fa fa-minus"></i>
                         {% trans %}utils.delete{% endtrans %}
                     </a>
-                    {% endif %}
                 </td>
             </tr>
             {% for activite in matiere.activites %}
@@ -93,12 +91,10 @@
                             <i class="fa fa-pencil"></i>
                             {% trans %}utils.modify{% endtrans %}
                         </a>
-                        {% if activite.series.count == 0 %}
-                            <a class="btn btn-danger btn-xs deleteActiviteBtn" href="{{ path('eklerni_back_activite_ajax_delete', { idActivite: activite.id }) }}">
-                                <i class="fa fa-minus"></i>
-                                {% trans %}utils.delete{% endtrans %}
-                            </a>
-                        {% endif %}
+                        <a class="btn btn-danger btn-xs deleteActiviteBtn{% if activite.series|length > 0 %} disabled{% endif %}" href="{{ path('eklerni_back_activite_ajax_delete', { idActivite: activite.id }) }}">
+                            <i class="fa fa-minus"></i>
+                            {% trans %}utils.delete{% endtrans %}
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
