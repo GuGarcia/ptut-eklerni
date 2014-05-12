@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: GV
- * Date: 18/03/14
- * Time: 09:24
- */
 
 namespace Eklerni\DatabaseBundle\Entity;
 

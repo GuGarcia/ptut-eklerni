@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="eklerni_back_activite_create" pattern="/ajouter">
+        <default key="_controller">EklerniBackBundle:Activite:ajouter</default>
+    </route>
+    <route id="eklerni_back_activite_update" pattern="/modifier/{idActivite}">
+        <default key="_controller">EklerniBackBundle:Activite:modifier</default>
+        <requirement key="idActivite">\d+</requirement>
+    </route>
+    <route id="eklerni_back_activite_ajax_delete" pattern="/supprimer/{idActivite}">
+        <default key="_controller">EklerniBackBundle:Activite:supprimer</default>
+        <requirement key="idActivite">\d+</requirement>
+        <requirement key="_method">POST</requirement>
+        <option key="i18n">false</option>
+    </route>
+</routes>

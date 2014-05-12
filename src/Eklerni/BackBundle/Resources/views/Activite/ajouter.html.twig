@@ -1,0 +1,22 @@
+{% extends "EklerniBackBundle:Template:template.html.twig" %}
+
+{% block body %}
+    <form action="{{ path('eklerni_back_activite_create') }}" method="post">
+        <div class="body">
+            {{ eklerni.row(form.name) }}
+            {{ eklerni.row(form.matiere) }}
+            {{ eklerni.row(form.description) }}
+            {{ eklerni.row(form.questionMedia) }}
+            {{ eklerni.row(form.reponseMedia) }}
+            {{ form_widget(form._token) }}
+        </div>
+        {% if form_error is defined and form_error is not null %}
+            <div class="callout callout-danger">
+                <h4>{{ form_error }}</h4>
+            </div>
+        {% endif %}
+        <div class="footer">
+            {{ eklerni.submit(form.valider) }}
+        </div>
+    </form>
+{% endblock %}

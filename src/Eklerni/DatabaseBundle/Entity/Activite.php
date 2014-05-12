@@ -41,6 +41,20 @@ class Activite extends BaseEntity {
      * @ORM\JoinColumn(name="idMatiere", referencedColumnName="id")
      */
     private $matiere;
+    
+    /**
+     * @var Media
+     * @ORM\ManyToOne(targetEntity="Media")
+     * @ORM\JoinColumn(name="questionMedia", referencedColumnName="id")
+     */
+    private $questionMedia;
+    
+    /**
+     * @var Media
+     * @ORM\ManyToOne(targetEntity="Media")
+     * @ORM\JoinColumn(name="reponseMedia", referencedColumnName="id")
+     */
+    private $reponseMedia;
 
     /********************
      * GETTERS AND SETTERS
@@ -109,7 +123,42 @@ class Activite extends BaseEntity {
     {
         return $this->description;
     }
+    
+    /**
+     * @return Media
+     */
+    public function getQuestionMedia()
+    {
+        return $this->questionMedia;
+    }
 
+    /**
+     * @return Media
+     */
+    public function getReponseMedia()
+    {
+        return $this->reponseMedia;
+    }
+
+    /**
+     * @param \Eklerni\DatabaseBundle\Entity\Media $questionMedia
+     * @return \Eklerni\DatabaseBundle\Entity\Activite
+     */
+    public function setQuestionMedia(Media $questionMedia)
+    {
+        $this->questionMedia = $questionMedia;
+        
+        return $this;
+    }
+
+    /**
+     * @param \Eklerni\DatabaseBundle\Entity\Media $reponseMedia
+     * @return \Eklerni\DatabaseBundle\Entity\Activite
+     */
+    public function setReponseMedia(Media $reponseMedia)
+    {
+        $this->reponseMedia = $reponseMedia;
+        
+        return $this;
+    }
 }
-
-?>

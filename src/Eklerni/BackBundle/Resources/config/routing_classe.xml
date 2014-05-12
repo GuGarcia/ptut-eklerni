@@ -14,9 +14,6 @@
         <default key="_controller">EklerniBackBundle:Classe:modifier</default>
         <requirement key="idClasse">\d+</requirement>
     </route>
-    <route id="eklerni_back_classe_create_ecole" pattern="/ajouterecole">
-        <default key="_controller">EklerniBackBundle:Classe:ajouterEcole</default>
-    </route>
     <route id="eklerni_back_classe_fiche" pattern="/{idClasse}">
         <default key="_controller">EklerniBackBundle:Classe:index</default>
         <requirement key="idClasse">\d+</requirement>
