@@ -14,11 +14,11 @@
                     {{ form_row(question.mediaUrl) }}
                 {% endif %}
                 {{ form_row(question.media) }}
-                {{ form_row(question.delete) }}
-                <div class="reponses">
-                    {{ form_row(question.addreponse) }}
+                {{ form_row(question.addreponse) }}
+                <div>
+                    <div id="eklerni_seriequestion_questions_{{ question.vars.name }}_reponses" data-prototype="{{ form_widget(question.reponses.vars.prototype)|e }}"></div>
                     {% for reponse in question.reponses %}
-                        <div class="reponse">
+                        <div>
                             {% if reponse.label is defined %}
                                 {{ form_row(reponse.label) }}
                             {% endif %}
@@ -29,8 +29,8 @@
                             {{ form_row(reponse.delete) }}
                         </div>
                     {% endfor %}
-                    <span class="reponse_prototype hidden" data-prototype="{{ form_widget(question.reponses.vars.prototype)|e }}"></span>
                 </div>
+                {{ form_row(question.delete) }}
             </div>
         {% endfor %}
     </div>
@@ -55,7 +55,16 @@
                 addQuestionForm();
             });
 
-            // TODO onLoad Enable remove question & reponse
+            $(".deleteQuestion").on("click", function(){
+                $(this).closest(".question").remove();
+            });
+            $(".deleteReponse").on("click", function(){
+                console.log("deleteR origin", $(this));
+                $(this).parent().parent().remove();
+            });
+            $(".addReponse").on("click", function(){
+                addReponseForm($(this));
+            });
             questionCollectionHolder.data('index', questionCollectionHolder.children('div').length);
             
 
@@ -67,11 +76,11 @@
                 var newQuestion = prototype.replace(/__question__/g, index);
                 questionCollectionHolder.data('index', index + 1);
 
-                var $newQuestionRow = $('<div></div>').attr('classe', 'question').append(newQuestion);
+                var $newQuestionRow = $('<div></div>').attr('class', 'question').append(newQuestion);
                 questionCollectionHolder.append($newQuestionRow);
 
                 $newQuestionRow.find(".deleteQuestion").on("click", function(){
-                    $(this).parent().parent().parent().remove();
+                    $(this).closest(".question").remove();
                 });
                 $newQuestionRow.find(".addReponse").on("click", function(){
                     addReponseForm($(this));
@@ -91,7 +100,8 @@
                 reponseCollectionHolder.parent().append(newReponse);
 
                 newReponse.find(".deleteReponse").on("click", function(){
-                    $(this).parent().parent().parent().remove();
+                    console.log("deleteR new", $(this));
+                    $(this).parent().parent().remove();
                 });
             }
         });
