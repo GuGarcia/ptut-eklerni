@@ -3,6 +3,7 @@
 namespace Eklerni\BackBundle\Controller;
 
 use Eklerni\DatabaseBundle\Entity\Activite;
+use Eklerni\DatabaseBundle\Entity\Matiere;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
