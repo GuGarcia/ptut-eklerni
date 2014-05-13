@@ -4,7 +4,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="eklerni_rest_homepage" pattern="/hello/{name}">
-        <default key="_controller">EklerniRESTBundle:Default:index</default>
+    <route id="eklerni_rest_exercice" pattern="/exercice/{idEleve}">
+        <default key="_controller">EklerniRESTBundle:Index:exercices</default>
+        <requirement key="idClasse">\d+</requirement>
+    </route>
+    <route id="eklerni_rest_users" pattern="/users/">
+        <default key="_controller">EklerniRESTBundle:Index:users</default>
     </route>
 </routes>
