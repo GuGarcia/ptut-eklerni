@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Attribuer
  * @package Eklerni\DatabaseBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Eklerni\DatabaseBundle\Repository\AttribuerRepository")
  * @ORM\Table(name="t_attribuer")
  */
 class Attribuer

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Resultat
  * @package Eklerni\DatabaseBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Eklerni\DatabaseBundle\Repository\ResultatRepository")
  * @ORM\Table(name="t_resultat")
  */
 class Resultat extends BaseEntity {
@@ -23,6 +23,12 @@ class Resultat extends BaseEntity {
      * @ORM\Column(name="isTest", type="boolean")
      */
     private $isTest;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="note", type="integer")
+     */
+    private $note;
 
     /**
      * @var Eleve
@@ -136,6 +142,24 @@ class Resultat extends BaseEntity {
     public function getReponses()
     {
         return $this->reponses;
+    }
+
+    /**
+     * @param int $note
+     * @return Resultat
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 
 

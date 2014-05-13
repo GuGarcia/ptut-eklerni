@@ -4,6 +4,7 @@ namespace Eklerni\RESTBundle\Controller;
 
 use Eklerni\DatabaseBundle\Entity\Attribuer;
 use Eklerni\DatabaseBundle\Entity\Personne;
+use Eklerni\DatabaseBundle\Entity\Resultat;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -111,6 +112,27 @@ class IndexController extends Controller
                 $array[$personne->getId()] = $temp;
             }
         }
+    }
+
+    public function generateResultatAction($nb = 1) {
+        $eleves = $this->get('eklerni.manager.eleve')->findAll();
+        for($i=0;$i<$nb;$i++) {
+            shuffle($eleves);
+            /** @var Attribuer $attribution */
+            $attributions = $this->get('eklerni.manager.attribuer')->findByEleve($eleves[0]);
+            shuffle($attributions);
+            $attribution = $attributions[0];
+            $resultat = new Resultat();
+            $resultat->setEleve($eleves[0]);
+            $resultat->setSerie($attribution->getSerie());
+            $resultat->setAttribution($attribution);
+            $resultat->setNote(rand(0,100));
+            $resultat->setIsTest((rand(0,1) > 0.5)?false:true);
+
+            $this->get('eklerni.manager.resultat')->save($resultat);
+            sleep(1);
+        }
+        return new Response();
     }
 
 }

@@ -15,7 +15,12 @@ class EleveController extends Controller{
     public function indexAction($idEleve)
     {
         $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve)[0];
-        return $this->render('EklerniBackBundle:Eleve:index.html.twig', array("title" => "Élève ".$eleve->getNom()." ".$eleve->getPrenom(), "eleve" => $eleve));
+        $resultats = $this->get('eklerni.manager.resultat')->findByEleve($eleve, 10, array("champs" => "dateCreation", "order" => "desc"));
+        return $this->render('EklerniBackBundle:Eleve:index.html.twig', array(
+            "title" => "Élève ".$eleve->getNom()." ".$eleve->getPrenom(),
+            "eleve" => $eleve,
+            "resultats" => $resultats
+        ));
     }
 
     /**

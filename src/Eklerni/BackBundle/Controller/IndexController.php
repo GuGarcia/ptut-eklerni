@@ -14,6 +14,7 @@ class IndexController extends Controller
         $enseignant = $this->get("eklerni.manager.enseignant")->findById($this->get("security.context")->getToken()->getUser()->getId())[0];
         $eleves = $this->get("eklerni.manager.eleve")->findByProf($enseignant);
         $classes = $this->get("eklerni.manager.classe")->findByProf($enseignant);
+        $resultats = $this->get('eklerni.manager.resultat')->findByProf($enseignant,10,array("champs" => "dateCreation", "order" => "desc"));
 
         return $this->render(
             'EklerniBackBundle:Index:index.html.twig',
@@ -22,6 +23,7 @@ class IndexController extends Controller
                 "eleves" => $eleves,
                 "enseignant" => $enseignant,
                 "classes" => $classes,
+                "resultats" => $resultats
             )
         );
     }

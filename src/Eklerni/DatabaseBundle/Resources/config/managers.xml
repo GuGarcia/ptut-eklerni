@@ -14,6 +14,7 @@
         <parameter key="manager_media.class">Eklerni\DatabaseBundle\Manager\MediaManager</parameter>
         <parameter key="manager_serie.class">Eklerni\DatabaseBundle\Manager\SerieManager</parameter>
         <parameter key="manager_attribuer.class">Eklerni\DatabaseBundle\Manager\AttribuerManager</parameter>
+        <parameter key="manager_resultat.class">Eklerni\DatabaseBundle\Manager\ResultatManager</parameter>
 
     </parameters>
 
@@ -43,6 +44,9 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
         <service id="eklerni.manager.serie" class="%manager_serie.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="eklerni.manager.resultat" class="%manager_resultat.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 

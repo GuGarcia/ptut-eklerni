@@ -9,15 +9,19 @@
         </tr>
         {% for eleve in eleves %}
             <tr>
-                <td><a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">{{ eleve.nom ~ " " ~ eleve.prenom }}</a></td>
-                <td><a href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}</a></td>
+                <td>
+                    <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">{{ eleve.nom ~ " " ~ eleve.prenom }}</a>
+                </td>
+                <td>
+                    <a href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}</a>
+                </td>
             </tr>
         {% endfor %}
     </table>
     {% endset %}
 {% else %}
     {% set elevesTable %}
-        {% trans %}classe.no.eleve{% endtrans %}
+    {% trans %}classe.no.eleve{% endtrans %}
     {% endset %}
 {% endif %}
 
@@ -46,28 +50,87 @@
     {% endset %}
 {% else %}
     {% set classesTable %}
-        {% trans %}enseignant.no.eleve{% endtrans %}
+    {% trans %}enseignant.no.eleve{% endtrans %}
     {% endset %}
 {% endif %}
-{% set footerclasses %}
-<a href="{{ path("eklerni_back_classe_create") }}" id="add_class_link" class="btn btn-danger"><i class="fa fa-plus"></i> {% trans %}classe.text{% endtrans %}</a>
-{% endset %}
-    {% block body %}
-        <div class="row">
-            <div class="col-md-4">
-                {% set classList %}
-                    {% trans %}classe.list{% endtrans %}
-                {% endset %}
-                {{ eklerni.block(classList, classesTable, footerclasses, "danger") }}
-                {% set eleveList %}
-                    {% trans %}eleve.list{% endtrans %}
-                {% endset %}
-                {{ eklerni.block(eleveList, elevesTable, "", "primary") }}
-            </div>
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4">
-            </div>
-        </div>
 
-    {% endblock %}
+
+{% set footerclasses %}
+<a href="{{ path("eklerni_back_classe_create") }}" id="add_class_link" class="btn btn-danger"><i
+            class="fa fa-plus"></i> {% trans %}classe.text{% endtrans %}</a>
+{% endset %}
+
+{% if resultats|length > 0 %}
+    {# TODO Trad #}
+    {% set resultatbody %}
+    <table class="table table-bordered">
+        <tr>
+            <th>Classe</th>
+            <th>Nom</th>
+            <th>Série</th>
+            <th class="col-md-6"></th>
+            <th>note</th>
+        </tr>
+        {% for resultat in resultats %}
+            {% if resultat.note < 25 %}
+                {% set typebar = "danger" %}
+                {% set typecolor = "red" %}
+            {% elseif resultat.note < 50 %}
+                {% set typebar = "warning" %}
+                {% set typecolor = "orange" %}
+            {% elseif resultat.note < 75 %}
+                {% set typebar = "primary" %}
+                {% set typecolor = "light-blue" %}
+            {% else %}
+                {% set typebar = "success" %}
+                {% set typecolor = "green" %}
+            {% endif %}
+            <tr>
+                <td>
+                    <a href="{{ path("eklerni_back_classe_fiche", {idClasse:resultat.eleve.classe.id}) }}">
+                    {{ resultat.eleve.classe.nom }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:resultat.eleve.id}) }}">
+                        {{ resultat.eleve.prenom }} {{ resultat.eleve.nom }}
+                    </a>
+                </td>
+                {# TODO Lien Série #}
+                <td>{{ resultat.serie.nom }}</td>
+                <td>
+                    <div class="progress xs">
+                        <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ resultat.note }}%;"></div>
+                    </div>
+                </td>
+                <td>
+                    <span class="badge bg-{{ typecolor }}">{{ resultat.note }}%</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endset %}
+{% else %}
+    {% set resultatbody %}
+    Il n'y a pas de résutlat disponnible.
+    {% endset %}
+{% endif %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            {% set classList %}
+            {% trans %}classe.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(classList, classesTable, footerclasses, "danger") }}
+            {% set eleveList %}
+            {% trans %}eleve.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(eleveList, elevesTable, "", "primary") }}
+        </div>
+        <div class="col-md-8">
+            {{ eklerni.block("Liste des Derniers Résultats", resultatbody, "", "primary") }}
+        </div>
+    </div>
+
+{% endblock %}

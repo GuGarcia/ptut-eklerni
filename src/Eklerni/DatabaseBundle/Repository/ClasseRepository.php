@@ -2,7 +2,6 @@
 
 namespace Eklerni\DatabaseBundle\Repository;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 use Eklerni\DatabaseBundle\Entity\Classe;
 

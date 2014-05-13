@@ -22,14 +22,58 @@
     <a href="{{ path ("eklerni_back_eleve_modifier", {idEleve:eleve.id}) }}" class="btn btn-primary">{% trans %}url.modify.eleve{% endtrans %}</a>
 {% endset %}
 
+
+{% if resultats|length > 0 %}
+    {# TODO Trad #}
+    {% set resultatbody %}
+    <table class="table table-bordered">
+        <tr>
+            <th>Série</th>
+            <th class="col-md-6"></th>
+            <th>note</th>
+        </tr>
+        {% for resultat in resultats %}
+            {% if resultat.note < 25 %}
+                {% set typebar = "danger" %}
+                {% set typecolor = "red" %}
+            {% elseif resultat.note < 50 %}
+                {% set typebar = "warning" %}
+                {% set typecolor = "orange" %}
+            {% elseif resultat.note < 75 %}
+                {% set typebar = "primary" %}
+                {% set typecolor = "light-blue" %}
+            {% else %}
+                {% set typebar = "success" %}
+                {% set typecolor = "green" %}
+            {% endif %}
+            <tr>
+                {# TODO Lien Série #}
+                <td>{{ resultat.serie.nom }}</td>
+                <td>
+                    <div class="progress xs">
+                        <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ resultat.note }}%;"></div>
+                    </div>
+                </td>
+                <td>
+                    <span class="badge bg-{{ typecolor }}">{{ resultat.note }}%</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endset %}
+{% else %}
+    {% set resultatbody %}
+    Il n'y a pas de résutlat disponnible.
+    {% endset %}
+{% endif %}
+
 {% block body %}
     <div class="row">
         <div class="col-md-4">
             {{ eklerni.block( "Eleve", eleveTable, footereleve, "primary") }}
         </div>
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-8">
+            {{ eklerni.block("Liste des Derniers Résultats", resultatbody, "", "primary") }}
         </div>
     </div>
 {% endblock %}
