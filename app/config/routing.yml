@@ -20,3 +20,7 @@ eklerni_front:
 eklerni_back:
     resource: "@EklerniBackBundle/Resources/config/routing.xml"
     prefix:   /back/
+
+eklerni_rest:
+    resource: "@EklerniRESTBundle/Resources/config/routing.xml"
+    prefix:   /rest/
