@@ -33,7 +33,7 @@ class ReponseFontType extends AbstractType
                 'query_builder' => function (MediaRepository $er) {
                         return $er->findByMedia('font');
                     },
-                'disabled' => true,
+                'read_only' => true,
                 'attr' => array(
                     'placeholder' => "reponse.media.type",
                     'class' => 'form-control'

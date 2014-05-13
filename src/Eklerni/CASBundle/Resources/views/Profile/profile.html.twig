@@ -7,12 +7,14 @@
 {% block body %}
     <div class="header">{{ title }}</div>
 
-    <form action="{{ path('eklerni_cas_profile') }}" method="post">
+    <form action="{{ path('eklerni_cas_profile') }}" enctype='multipart/form-data' method="post">
         <div class="body bg-gray">
             {{ eklerni_cas.row(form.username) }}
             {{ eklerni_cas.row(form.nom) }}
             {{ eklerni_cas.row(form.prenom) }}
+            {{ eklerni_cas.row(form.email) }}
             {{ eklerni_cas.row(form.dateNaissance) }}
+            {{ eklerni_cas.row(form.file) }}
             {{ form_widget(form._token) }}
         </div>
         <div class="footer">

@@ -39,7 +39,7 @@ class QuestionImageType extends AbstractType
                 'query_builder' => function (MediaRepository $er) {
                         return $er->findByMedia("image");
                     },
-                'disabled' => true,
+                'read_only' => true,
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -51,9 +51,9 @@ class QuestionImageType extends AbstractType
             "button",
             array(
                 'attr' => array(
-                    'class' => 'addReponse',
-                    'label' => 'reponse.add'
+                    'class' => 'addReponse'
                 ),
+                'label' => 'reponse.add'
             )
         );
 

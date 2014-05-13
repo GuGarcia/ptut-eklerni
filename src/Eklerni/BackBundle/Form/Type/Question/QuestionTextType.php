@@ -40,7 +40,7 @@ class QuestionTextType extends AbstractType
                 'query_builder' => function (MediaRepository $er) {
                         return $er->findByMedia("text");
                     },
-                'disabled' => true,
+                'read_only' => true,
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -52,8 +52,7 @@ class QuestionTextType extends AbstractType
             "button",
             array(
                 'attr' => array(
-                    'class' => 'addReponse',
-                    'label' => 'reponse.add'
+                    'class' => 'addReponse'
                 ),
                 'label' => 'reponse.add'
             )

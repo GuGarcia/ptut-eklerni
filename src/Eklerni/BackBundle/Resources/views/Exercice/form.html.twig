@@ -9,7 +9,7 @@
             {{ eklerni.row(form.difficulte) }}
             {{ eklerni.row(form.public) }}
             {{ form_widget(form._token) }}
-            <h3>{{ form.questions.vars.label }}</h3>
+            <h3>{{ form.questions.vars.label|trans() }}</h3>
             <div id="questions" data-prototype="{{ form_widget(form.questions.vars.prototype)|e }}" data-index="{{ form.questions.count }}">
                 {% for question in form.questions %}
                     <div class="question">
