@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+        <route id="eklerni_back_enseignant_create" pattern="/ajouter">
+            <default key="_controller">EklerniBackBundle:Enseignant:ajouter</default>
+        </route>
+        <route id="eklerni_back_enseignant_update" pattern="/idEnseignant">
+            <default key="_controller">EklerniBackBundle:Enseignant:modifier</default>
+        </route>
+</routes>

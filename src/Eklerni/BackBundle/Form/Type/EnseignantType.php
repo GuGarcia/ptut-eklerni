@@ -18,17 +18,30 @@ class EnseignantType extends AbstractType
                 'data_class' => 'Eklerni\DatabaseBundle\Entity\Enseignant'
             )
         );
+
+        $builder->add(
+            "isDirecteur",
+            "checkbox",
+            array(
+                'label' => "enseignant.isDirecteur",
+                'required' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                )
+            )
+        );
+
         /*
-                $builder->add(
-                    'classes', 'entity', array(
-                        'label' => 'Classe',
-                        'property' => 'fullName',
-                        'class' => 'EklerniDatabaseBundle:Classe',
-                        'query_builder' => function (ClasseRepository $cr) {
-                                return $cr->findAll();
-                            },
-                    )
-                );*/
+        $builder->add(
+            'classes', 'entity', array(
+                'label' => 'Classe',
+                'property' => 'fullName',
+                'class' => 'EklerniDatabaseBundle:Classe',
+                'query_builder' => function (ClasseRepository $cr) {
+                        return $cr->findAll();
+                    },
+            )
+        );*/
     }
 
     /**

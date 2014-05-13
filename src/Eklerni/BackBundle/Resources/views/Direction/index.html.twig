@@ -36,7 +36,7 @@
         {% for enseignant in enseignants %}
             <tr>
                 <td>
-                    <a href="#">{{ enseignant.username }}</a>
+                    {{ enseignant.username }}
                 </td>
                 <td>
                     {{ enseignant.nom ~ " " ~ enseignant.prenom }}
@@ -117,9 +117,17 @@
     </a>
 {% endset %}
 
+
+
 {% set footermatieres %}
     <a href="{{ path("eklerni_back_matiere_create") }}" id="add_matiere_link" class="btn btn-primary">
         <i class="fa fa-plus"></i> {% trans %}matiere.text{% endtrans %}
+    </a>
+{% endset %}
+
+{% set footerenseignants %}
+    <a href="{{ path("eklerni_back_enseignant_create") }}" id="add_enseignant_link" class="btn btn-primary">
+        <i class="fa fa-plus"></i> {% trans %}enseignant.text{% endtrans %}
     </a>
 {% endset %}
 
@@ -133,7 +141,7 @@
                 {% set enseignantList %}
                     {% trans %}enseignant.list{% endtrans %}
                 {% endset %}
-                {{ eklerni.block(enseignantList, enseignantsTable, "", "primary") }}
+                {{ eklerni.block(enseignantList, enseignantsTable, footerenseignants, "primary") }}
             </div>
             <div class="col-md-6">
                 {% set matiereList %}

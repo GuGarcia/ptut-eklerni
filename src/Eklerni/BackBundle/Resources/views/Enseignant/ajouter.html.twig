@@ -1,0 +1,22 @@
+{% extends "EklerniBackBundle:Template:template.html.twig" %}
+
+{% block body %}
+    <form action="" method="post">
+        <div class="body bg-gray">
+            {{ eklerni.row(form.enseignant.username) }}
+            {{ eklerni.row(form.enseignant.password) }}
+            {{ eklerni.row(form.enseignant.nom) }}
+            {{ eklerni.row(form.enseignant.prenom) }}
+            {{ eklerni.row(form.isDirecteur) }}
+            {{ form_widget(form._token) }}
+        </div>
+        {% if form_error is defined and form_error is not null %}
+            <div class="callout callout-danger">
+                <h4>{{ form_error }}</h4>
+            </div>
+        {% endif %}
+        <div class="footer">
+            {{ eklerni.submit(form.enseignant.valider) }}
+        </div>
+    </form>
+{% endblock %}
