@@ -6,6 +6,7 @@ use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SignController extends Controller
 {
@@ -14,7 +15,18 @@ class SignController extends Controller
     {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
+        $securityContext = $this->container->get('security.context');
 
+
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            if ($securityContext->isGranted('ROLE_DIRECTEUR') || $securityContext->isGranted('ROLE_ENSEIGNANT')) {
+                $response = new RedirectResponse($this->generateUrl('eklerni_back_homepage'));
+            } elseif ($securityContext->isGranted('ROLE_ELEVE')) {
+                $response = new RedirectResponse($this->generateUrl('eklerni_front_homepage'));
+            }
+
+            return $response;
+        }
 
         $enseignant = new Enseignant();
         $formLogin = $this->createForm("eklerni_login", $enseignant);
@@ -24,8 +36,9 @@ class SignController extends Controller
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $this->get('translator')->trans("login.error");
         } else {
-            if ($request->getSession()->get(SecurityContext::AUTHENTICATION_ERROR))
+            if ($request->getSession()->get(SecurityContext::AUTHENTICATION_ERROR)) {
                 $error = $this->get('translator')->trans("login.error");
+            }
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
 
