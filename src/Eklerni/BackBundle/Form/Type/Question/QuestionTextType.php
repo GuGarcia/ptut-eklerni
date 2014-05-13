@@ -5,6 +5,7 @@ namespace Eklerni\BackBundle\Form\Type\Question;
 use Eklerni\DatabaseBundle\Repository\MediaRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class QuestionTextType extends AbstractType
 {
@@ -39,7 +40,6 @@ class QuestionTextType extends AbstractType
                 'query_builder' => function (MediaRepository $er) {
                         return $er->findByMedia("text");
                     },
-                'data' => 'text',
                 'disabled' => true,
                 'attr' => array(
                     'class' => 'form-control'
@@ -55,6 +55,7 @@ class QuestionTextType extends AbstractType
                     'class' => 'addReponse',
                     'label' => 'reponse.add'
                 ),
+                'label' => 'reponse.add'
             )
         );
         
@@ -90,5 +91,14 @@ class QuestionTextType extends AbstractType
     public function getName()
     {
         return 'eklerni_question_text';
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Eklerni\DatabaseBundle\Entity\Question',
+            )
+        );
     }
 }

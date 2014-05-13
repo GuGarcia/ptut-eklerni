@@ -26,9 +26,6 @@
         <service id="eklerni.form.type.serie" class="Eklerni\BackBundle\Form\Type\SerieType">
             <tag name="form.type" alias="eklerni_serie"/>
         </service>
-        <service id="eklerni.form.type.seriequestion" class="Eklerni\BackBundle\Form\Type\SerieQuestionType">
-            <tag name="form.type" alias="eklerni_seriequestion"/>
-        </service>
     </services>
 
 </container>

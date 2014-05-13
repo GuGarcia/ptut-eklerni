@@ -36,7 +36,7 @@ class Serie extends BaseEntity
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -62,7 +62,7 @@ class Serie extends BaseEntity
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Question", mappedBy="serie")
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="serie", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $questions;
 
@@ -171,6 +171,10 @@ class Serie extends BaseEntity
      */
     public function setQuestions($questions)
     {
+        /** @var Question $question */
+        foreach($questions as $question) {
+            $question->setSerie($this);
+        }
         $this->questions = $questions;
     }
 
@@ -183,11 +187,37 @@ class Serie extends BaseEntity
     }
 
     /**
+     * @param Question $question
+     */
+    public function addQuestion(Question $question)
+    {
+        $question->setSerie($this);
+
+        if (!$this->questions->contains($question)) {
+            $this->questions->add($question);
+        }
+    }
+
+    /**
+     * @param Question $question
+     * @return Serie
+     */
+    public function removeQuestion(Question $question)
+    {
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
+        }
+    }
+
+    /**
      * @param string $nom
+     * @return Serie
      */
     public function setNom($nom)
     {
         $this->nom = $nom;
+
+        return $this;
     }
 
     /**
@@ -200,10 +230,13 @@ class Serie extends BaseEntity
 
     /**
      * @param string $description
+     * @return Serie
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -216,10 +249,12 @@ class Serie extends BaseEntity
 
     /**
      * @param string $niveau
+     * @return Serie
      */
     public function setNiveau($niveau)
     {
         $this->niveau = $niveau;
+
         return $this;
     }
 
@@ -233,10 +268,12 @@ class Serie extends BaseEntity
 
     /**
      * @param boolean $public
+     * @return Serie
      */
     public function setPublic($public)
     {
         $this->public = $public;
+
         return $this;
     }
 

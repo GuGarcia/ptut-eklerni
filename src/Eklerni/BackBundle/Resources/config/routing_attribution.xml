@@ -9,16 +9,18 @@
     </route>
     <route id="eklerni_back_attribution_ajax_addSerieEleve" pattern="/addSerieEleve">
         <default key="_controller">EklerniBackBundle:Attribution:addSerieEleve</default>
+        <option key="i18n">false</option>
     </route>
     <route id="eklerni_back_attribution_ajax_addSerieClasse" pattern="/addSerieClasse">
         <default key="_controller">EklerniBackBundle:Attribution:addSerieClasse</default>
+        <option key="i18n">false</option>
     </route>
     <route id="eklerni_back_attribution_ajax_activerAttribution" pattern="/activerAttribution">
         <default key="_controller">EklerniBackBundle:Attribution:activerAttribution</default>
+        <option key="i18n">false</option>
     </route>
     <route id="eklerni_back_attribution_ajax_deleteAttribution" pattern="/deleteAttribution">
         <default key="_controller">EklerniBackBundle:Attribution:deleteAttribution</default>
+        <option key="i18n">false</option>
     </route>
-
-
 </routes>

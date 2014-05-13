@@ -2,8 +2,9 @@
 
 namespace Eklerni\BackBundle\Controller;
 
-use Eklerni\BackBundle\Form\Type\SerieQuestionType;
+use Eklerni\BackBundle\Form\Type\SerieType;
 use Eklerni\DatabaseBundle\Entity\Activite;
+use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Eklerni\DatabaseBundle\Entity\Serie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,7 @@ class ExerciceController extends Controller
      */
     public function indexAction()
     {
-        // Lister matière
+        // Liste des matières
         $matieres = $this->get('eklerni.manager.matiere')->findAll();
 
         return $this->render(
@@ -39,10 +40,15 @@ class ExerciceController extends Controller
         }
 
         $serie = new Serie();
-        /** @var \Eklerni\DatabaseBundle\Entity\Enseignant $enseignant */
+        /** @var Enseignant $enseignant */
         $enseignant = $this->get("security.context")->getToken()->getUser();
 
-        $form = $this->createForm('eklerni_serie', $serie);
+        $form = $this->createForm(
+            new SerieType(
+                ucfirst($activite->getQuestionMedia()->getMedia()),
+                ucfirst($activite->getReponseMedia()->getMedia())
+            ), $serie
+        );
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -72,7 +78,12 @@ class ExerciceController extends Controller
             throw new \Exception($this->get('translator')->trans('serie.notfound'));
         }
 
-        $form = $this->createForm('eklerni_serie', $serie);
+        $form = $this->createForm(
+            new SerieType(
+                ucfirst($serie->getActivite()->getQuestionMedia()->getMedia()),
+                ucfirst($serie->getActivite()->getReponseMedia()->getMedia())
+            ), $serie
+        );
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -118,32 +129,12 @@ class ExerciceController extends Controller
             }
         }
 
-        // TODO vérifier que les questions sont supprimées s'il y en a
         return new Response(
             json_encode(
                 array(
                     "success" => false,
                     "message" => $this->get('translator')->trans('serie.delete.fail')
                 )
-            )
-        );
-    }
-
-    public function testAction(Request $request)
-    {
-        $form = $this->createForm(new SerieQuestionType("Text", "Audio"));
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-
-        }
-
-        return $this->render(
-            'EklerniBackBundle:Exercice:testform.html.twig',
-            array(
-                'form' => $form->createView(),
-                'title' => $this->get('translator')->trans("title.modify_serie"),
             )
         );
     }
