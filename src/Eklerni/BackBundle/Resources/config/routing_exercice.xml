@@ -19,4 +19,8 @@
         <default key="_controller">EklerniBackBundle:Exercice:supprimer</default>
         <requirement key="idSerie">\d+</requirement>
     </route>
+    <route id="eklerni_back_serie_duplicate" pattern="/duplicate/{idSerie}">
+        <default key="_controller">EklerniBackBundle:Exercice:dupliquer</default>
+        <requirement key="idSerie">\d+</requirement>
+    </route>
 </routes>

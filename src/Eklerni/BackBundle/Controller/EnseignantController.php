@@ -20,9 +20,9 @@ class EnseignantController extends Controller
             $factory = $this->get('security.encoder_factory');
 
             $encoder = $factory->getEncoder($enseignant);
-            $password = $encoder->encodePassword($enseignant->getNewPassword(), $enseignant->getSalt());
+            $password = $encoder->encodePassword($enseignant->getPassword(), $enseignant->getSalt());
 
-            if (!$encoder->isPasswordValid($password, $enseignant->getNewPassword(), $enseignant->getSalt())) {
+            if (!$encoder->isPasswordValid($password, $enseignant->getPassword(), $enseignant->getSalt())) {
                 $formError = $this->get('translator')->trans('password_change.encode_error');
             } else {
                 $enseignant->setPassword($password);

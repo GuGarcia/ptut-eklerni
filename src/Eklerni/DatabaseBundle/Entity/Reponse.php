@@ -3,6 +3,7 @@
 namespace Eklerni\DatabaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\BrowserKit\Response;
 
 /**
  * Class Reponse
@@ -65,7 +66,7 @@ class Reponse extends BaseEntity {
      * GETTERS AND SETTERS
      ********************/
 
-    /**
+     /**
      * @param string $label
      *
      * @return Reponse
@@ -177,6 +178,18 @@ class Reponse extends BaseEntity {
         return $this->resultats;
     }
 
+    /**
+     * @return Reponse
+     */
+    public function duplicate()
+    {
+        $reponse = new Reponse();
 
+        $reponse->setLabel($this->label);
+        $reponse->setMedia($this->media);
+        $reponse->setMediaUrl($this->mediaUrl);
+        $reponse->valid($this->valid);
 
+        return $reponse;
+    }
 }

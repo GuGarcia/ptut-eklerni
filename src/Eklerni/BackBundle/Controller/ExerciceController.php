@@ -138,4 +138,35 @@ class ExerciceController extends Controller
             )
         );
     }
-} 
+
+    public function dupliquerAction(Request $request, $idSerie)
+    {
+        if ($request->isXmlHttpRequest()) {
+            /** @var Serie $serie */
+            $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
+
+            $newSerie = $serie->duplicate();
+            $newSerie->setEnseignant($this->get("security.context")->getToken()->getUser());
+
+            $this->get('eklerni.manager.serie')->save($newSerie);
+
+            return new Response(
+                json_encode(
+                    array(
+                        "success" => true,
+                        "message" => $this->get('translator')->trans('serie.duplicate.success')
+                    )
+                )
+            );
+        }
+
+        return new Response(
+            json_encode(
+                array(
+                    "success" => false,
+                    "message" => $this->get('translator')->trans('serie.duplicate.fail')
+                )
+            )
+        );
+    }
+}
