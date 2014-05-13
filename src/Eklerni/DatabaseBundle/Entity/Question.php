@@ -11,8 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="t_question")
  * @ORM\Entity
  */
-class Question extends BaseEntity {
+class Question extends BaseEntity
+{
+    /********************
+     * CONSTRUCTORS
+     ********************/
 
+    public function __construct() {
+        parent::__construct();
+        $this->reponses = new ArrayCollection();
+    }
     /********************
      * ATTRIBUTES
      ********************/
@@ -50,7 +58,7 @@ class Question extends BaseEntity {
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Reponse", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="Reponse", mappedBy="question", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $reponses;
 
@@ -143,6 +151,10 @@ class Question extends BaseEntity {
      */
     public function setReponses($reponses)
     {
+        /** @var Reponse $reponse */
+        foreach ($reponses as $reponse) {
+            $reponse->setQuestion($this);
+        }
         $this->reponses = $reponses;
     }
 
@@ -152,6 +164,28 @@ class Question extends BaseEntity {
     public function getReponses()
     {
         return $this->reponses;
+    }
+
+    /**
+     * @param Reponse $reponse
+     */
+    public function addReponse(Reponse $reponse)
+    {
+        $reponse->setQuestion($this);
+
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses->add($reponse);
+        }
+    }
+
+    /**
+     * @param Reponse $reponse
+     */
+    public function removeReponse(Reponse $reponse)
+    {
+        if ($this->reponses->contains($reponse)) {
+            $this->reponses->removeElement($reponse);
+        }
     }
 
 }
