@@ -5,6 +5,7 @@ namespace Eklerni\BackBundle\Form\Type\Reponse;
 use Eklerni\DatabaseBundle\Repository\MediaRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ReponseAudioType extends AbstractType
 {
@@ -16,7 +17,7 @@ class ReponseAudioType extends AbstractType
             array(
                 'label' => 'reponse.media.file.audio',
                 'attr' => array(
-                    'placeholder' => "reponse.media.file",
+                    'placeholder' => "reponse.media.file.audio",
                     'class' => 'form-control'
                 )
             )
@@ -32,7 +33,6 @@ class ReponseAudioType extends AbstractType
                 'query_builder' => function (MediaRepository $er) {
                         return $er->findByMedia('audio');
                     },
-                'data' => 'audio',
                 'disabled' => true,
                 'attr' => array(
                     'placeholder' => "reponse.media.type",
@@ -72,4 +72,13 @@ class ReponseAudioType extends AbstractType
     {
         return 'eklerni_reponse_audio';
     }
-} 
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Eklerni\DatabaseBundle\Entity\Reponse',
+            )
+        );
+    }
+}

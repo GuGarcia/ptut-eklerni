@@ -5,6 +5,7 @@ namespace Eklerni\BackBundle\Form\Type\Question;
 use Eklerni\DatabaseBundle\Repository\MediaRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class QuestionVideoType extends AbstractType
 {
@@ -38,7 +39,6 @@ class QuestionVideoType extends AbstractType
                 'query_builder' => function (MediaRepository $er) {
                         return $er->findByMedia("video");
                     },
-                'data' => 'video',
                 'disabled' => true,
                 'attr' => array(
                     'class' => 'form-control'
@@ -89,5 +89,14 @@ class QuestionVideoType extends AbstractType
     public function getName()
     {
         return 'eklerni_question_video';
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Eklerni\DatabaseBundle\Entity\Question',
+            )
+        );
     }
 }

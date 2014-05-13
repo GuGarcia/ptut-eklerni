@@ -8,6 +8,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SerieType extends AbstractType
 {
+    private $_questionMedia;
+    private $_reponseMedia;
+
+    /**
+     * @param string $questionMedia
+     * @param string $reponseMedia
+     */
+    public function __construct($questionMedia, $reponseMedia)
+    {
+        $this->_questionMedia = $questionMedia;
+        $this->_reponseMedia = $reponseMedia;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
@@ -24,13 +40,14 @@ class SerieType extends AbstractType
 
         $builder->add(
             'description',
-            'text',
+            'textarea',
             array(
                 'label' => 'serie.description',
                 'attr' => array(
                     'placeholder' => "serie.description",
                     'class' => 'form-control'
-                )
+                ),
+                'required' => false
             )
         );
 
@@ -77,6 +94,18 @@ class SerieType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control'
                 )
+            )
+        );
+
+        $questionMediaType = "Eklerni\\BackBundle\\Form\\Type\\Question\\Question" . $this->_questionMedia . "Type";
+        $builder->add(
+            'questions', 'collection', array(
+                'type' => new $questionMediaType($this->_reponseMedia),
+                'prototype_name' => '__question__',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => "questions.text"
             )
         );
 

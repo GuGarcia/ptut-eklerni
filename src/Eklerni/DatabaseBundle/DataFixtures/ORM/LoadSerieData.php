@@ -44,6 +44,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Lecture.Syllabes"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic) {
                 $serie->setPublic(true);
@@ -64,6 +66,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Lecture.Mots"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -84,6 +88,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Lecture.Phrases"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -104,6 +110,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Dictée.Syllabes"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -124,6 +132,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Dictée.Mots"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -144,6 +154,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Conjugaison.Présent"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -164,6 +176,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Conjugaison.Imparfait"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -184,6 +198,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Maths.Compter"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -204,6 +220,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Maths.Lire"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -224,6 +242,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Maths.Ranger"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -244,6 +264,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Calcul.Additions"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -264,6 +286,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Calcul.Soustractions"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -284,6 +308,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Calcul.Divers"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
@@ -304,6 +330,8 @@ class LoadSerieData extends AbstractFixture implements OrderedFixtureInterface
             $serie->setActivite($this->getReference("Calcul.Multiplications"));
             $serie->setDifficulte(1);
             $serie->setEnseignant($this->getReference("admin"));
+            $serie->setDifficulte(3);
+            $serie->setNiveau("CE1");
 
             if ($isPublic == true) {
                 $serie->setPublic(true);
