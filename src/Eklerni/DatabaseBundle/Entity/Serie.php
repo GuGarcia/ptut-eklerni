@@ -301,5 +301,26 @@ class Serie extends BaseEntity
         return $this->listeAttribution;
     }
 
+    /**
+     * @return Serie
+     */
+    public function duplicate()
+    {
+        $serie = new Serie();
 
+        $serie->setNom($this->nom);
+        $serie->setDescription($this->description);
+        $serie->setNiveau($this->niveau);
+        $serie->setDifficulte($this->difficulte);
+        $serie->setActivite($this->activite);
+        $serie->setPublic(false);
+
+        foreach ($this->questions as $question) {
+            $newQuestion = $question->duplicate();
+            $newQuestion->setSerie($serie);
+            $serie->questions->add($newQuestion);
+        }
+
+        return $serie;
+    }
 }

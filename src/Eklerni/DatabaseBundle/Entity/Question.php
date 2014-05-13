@@ -66,7 +66,7 @@ class Question extends BaseEntity
      * GETTERS AND SETTERS
      ********************/
 
-    /**
+     /**
      * @param string $label
      *
      * @return Question
@@ -188,4 +188,23 @@ class Question extends BaseEntity
         }
     }
 
+    /**
+     * @return Question
+     */
+    public function duplicate()
+    {
+        $question = new Question();
+
+        $question->setLabel($this->label);
+        $question->setMedia($this->media);
+        $question->setMediaUrl($this->mediaUrl);
+
+        foreach($this->reponses as $reponse) {
+            $newReponse = $reponse->duplicate();
+            $newReponse->setQuestion($question);
+            $question->reponses->add($newReponse);
+        }
+
+        return $question;
+    }
 }

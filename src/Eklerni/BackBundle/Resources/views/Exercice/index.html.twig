@@ -47,7 +47,7 @@
 
                                 {% set seriesPerso = [] %}
                                 {% for serie in activite.series %}
-                                    {% if serie.enseignant.id %}
+                                    {% if serie.enseignant.id == app.user.id %}
                                         {% set seriesPerso = seriesPerso|merge([serie]) %}
                                     {% endif %}
                                 {% endfor %}
@@ -82,13 +82,16 @@
                                                             {% endif %}
                                                         </td>
                                                         <td class="tdsize">
-                                                            <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
+                                                            <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}" title="{% trans %}utils.modify{% endtrans %}">
                                                                 <i class="fa fa-pencil"></i>
-                                                                {% trans %}utils.modify{% endtrans %}
                                                             </a>
-                                                            <a class="btn btn-danger btn-xs deleteSerieBtn" href="{{ path('eklerni_back_serie_delete', { idSerie: serie.id }) }}">
-                                                                <i class="fa fa-minus"></i>
-                                                                {% trans %}utils.delete{% endtrans %}
+
+                                                            <a class="btn btn-default btn-xs duplicateSerieBtn" href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}" title="{% trans %}utils.duplicate{% endtrans %}">
+                                                                <i class="fa fa-copy"></i>
+                                                            </a>
+
+                                                            <a class="btn btn-danger btn-xs deleteSerieBtn{% if serie.resultats is not empty %} disabled{% endif %}" href="{{ path('eklerni_back_serie_delete', { idSerie: serie.id }) }}" title="{% trans %}utils.delete{% endtrans %}">
+                                                                <i class="fa fa-times"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -121,12 +124,9 @@
                                                         <td class="tdsize">{{ serie.questions|length }}</td>
                                                         <td class="tdsize">{{ serie.enseignant.nom ~ ' ' ~ serie.enseignant.prenom }}</td>
                                                         <td class="tdsize">
-                                                            {% if serie.enseignant.id == app.user.id %}
-                                                                <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                    {% trans %}utils.modify{% endtrans %}
-                                                                </a>
-                                                            {% endif %}
+                                                            <a class="btn btn-default btn-xs duplicateSerieBtn" href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}" title="{% trans %}utils.duplicate{% endtrans %}">
+                                                                <i class="fa fa-copy"></i>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
@@ -179,6 +179,24 @@
                     if (data.success) {
                         displayMessage("success", data.message);
                         $(_this).parent().parent().remove();
+                    } else {
+                        displayMessage("danger", data.message);
+                    }
+                });
+            });
+
+            $('.duplicateSerieBtn').on('click', function(event) {
+                event.preventDefault();
+                var _this = this;
+
+                $.ajax({
+                    type: "POST",
+                    url: $(_this).attr("href"),
+                    dataType: "json"
+                }).success(function (data) {
+                    if (data.success) {
+                        displayMessage("success", data.message);
+                        //$(_this).parent().parent().remove();
                     } else {
                         displayMessage("danger", data.message);
                     }
