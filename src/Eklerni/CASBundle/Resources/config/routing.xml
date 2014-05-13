@@ -16,10 +16,6 @@
         <default key="_controller">EklerniCASBundle:Sign:logout</default>
         <option key="i18n">false</option>
     </route>
-    <route id="eklerni_cas_register" pattern="/register">
-        <default key="_controller">EklerniCASBundle:Register:register</default>
-        <option key="i18n">false</option>
-    </route>
     <route id="eklerni_cas_profile" pattern="/profile/update">
         <default key="_controller">EklerniCASBundle:Profile:updateProfile</default>
         <option key="i18n">false</option>
