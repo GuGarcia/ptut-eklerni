@@ -51,9 +51,9 @@ class QuestionVideoType extends AbstractType
             "button",
             array(
                 'attr' => array(
-                    'class' => 'addReponse',
-                    'label' => 'reponse.add'
+                    'class' => 'addReponse'
                 ),
+                'label' => 'reponse.add'
             )
         );
 
