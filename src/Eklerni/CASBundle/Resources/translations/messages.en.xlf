@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-04-14T07:15:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2014-05-13T15:46:42Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -11,19 +11,18 @@
         <target>Submit</target>
         <jms:reference-file line="61">Form/Type/ChangePasswordType.php</jms:reference-file>
         <jms:reference-file line="37">Form/Type/LoginType.php</jms:reference-file>
-        <jms:reference-file line="58">Form/Type/ProfileType.php</jms:reference-file>
-        <jms:reference-file line="69">Form/Type/RegisterType.php</jms:reference-file>
+        <jms:reference-file line="86">Form/Type/ProfileType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="84fb4024c64f2e5e7dea46547f6a7ca307714402" resname="login.error">
         <source>login.error</source>
         <target>Incorrect username or password.</target>
-        <jms:reference-file line="25">CASBundle/Controller/SignController.php</jms:reference-file>
-        <jms:reference-file line="28">CASBundle/Controller/SignController.php</jms:reference-file>
+        <jms:reference-file line="37">CASBundle/Controller/SignController.php</jms:reference-file>
+        <jms:reference-file line="40">CASBundle/Controller/SignController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="309a2f78631c80427d2f343b30060329f0ab4de8" resname="login.title">
         <source>login.title</source>
         <target>Login</target>
-        <jms:reference-file line="37">CASBundle/Controller/SignController.php</jms:reference-file>
+        <jms:reference-file line="50">CASBundle/Controller/SignController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="05bc001b3c0ef85743d1c8e9a348ec7c7671a5c1" resname="password_change.encode_error">
         <source>password_change.encode_error</source>
@@ -38,23 +37,25 @@
       <trans-unit id="449ccad1fdacdac68c92290a48cd3c8705165b91" resname="personne.birthdate">
         <source>personne.birthdate</source>
         <target>Birthdate</target>
-        <jms:reference-file line="48">Form/Type/ProfileType.php</jms:reference-file>
+        <jms:reference-file line="63">Form/Type/ProfileType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0488b609ae44f7d0d4e1bc4b2ff0661dd637c9bb" resname="personne.firstname">
         <source>personne.firstname</source>
         <target>First name</target>
         <jms:reference-file line="38">Form/Type/ProfileType.php</jms:reference-file>
         <jms:reference-file line="40">Form/Type/ProfileType.php</jms:reference-file>
-        <jms:reference-file line="59">Form/Type/RegisterType.php</jms:reference-file>
-        <jms:reference-file line="61">Form/Type/RegisterType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4a104c4ba318e9811d346898f27eb55278b865c2" resname="personne.lastname">
         <source>personne.lastname</source>
         <target>Last name</target>
         <jms:reference-file line="27">Form/Type/ProfileType.php</jms:reference-file>
         <jms:reference-file line="30">Form/Type/ProfileType.php</jms:reference-file>
-        <jms:reference-file line="49">Form/Type/RegisterType.php</jms:reference-file>
-        <jms:reference-file line="51">Form/Type/RegisterType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a80d787e7aaf0b9fedde561393c1964b9ee5d953" resname="personne.mail">
+        <source>personne.mail</source>
+        <target>Email</target>
+        <jms:reference-file line="51">Form/Type/ProfileType.php</jms:reference-file>
+        <jms:reference-file line="53">Form/Type/ProfileType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7d8dba4c1f2c08b7a70f1940fe8ccddd58b3c3e3" resname="personne.password">
         <source>personne.password</source>
@@ -64,9 +65,6 @@
         <jms:reference-file line="52">Form/Type/ChangePasswordType.php</jms:reference-file>
         <jms:reference-file line="27">Form/Type/LoginType.php</jms:reference-file>
         <jms:reference-file line="29">Form/Type/LoginType.php</jms:reference-file>
-        <jms:reference-file line="31">Form/Type/RegisterType.php</jms:reference-file>
-        <jms:reference-file line="33">Form/Type/RegisterType.php</jms:reference-file>
-        <jms:reference-file line="40">Form/Type/RegisterType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1f00bce8bc8a5d10ba530d978a763347dc40cd03" resname="personne.password.new">
         <source>personne.password.new</source>
@@ -83,10 +81,10 @@
         <target>Current password</target>
         <jms:reference-file line="27">Form/Type/ChangePasswordType.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="885e8aff1c5130d5e415da1126754aa4ae54e2b2" resname="personne.password.retype">
-        <source>personne.password.retype</source>
-        <target>Confirm your password</target>
-        <jms:reference-file line="38">Form/Type/RegisterType.php</jms:reference-file>
+      <trans-unit id="86ae231d2ac92a1b87986a9928bc22a295e79b42" resname="personne.picture">
+        <source>personne.picture</source>
+        <target>Picture</target>
+        <jms:reference-file line="77">Form/Type/ProfileType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="defdc2857a7b125365c9e25c10c59fdb8fb41650" resname="personne.username">
         <source>personne.username</source>
@@ -97,13 +95,6 @@
         <jms:reference-file line="19">Form/Type/LoginType.php</jms:reference-file>
         <jms:reference-file line="16">Form/Type/ProfileType.php</jms:reference-file>
         <jms:reference-file line="19">Form/Type/ProfileType.php</jms:reference-file>
-        <jms:reference-file line="16">Form/Type/RegisterType.php</jms:reference-file>
-        <jms:reference-file line="19">Form/Type/RegisterType.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="8909d551ff3e6d50620021cb3698e568c08bdbb4" resname="register.encode_error">
-        <source>register.encode_error</source>
-        <target>An error happends during the registration, please retry.</target>
-        <jms:reference-file line="28">CASBundle/Controller/RegisterController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a6f9b4b59adea3f90353b4effd277d8d9287d43f" resname="title.password_change">
         <source>title.password_change</source>
@@ -114,11 +105,6 @@
         <source>title.profile</source>
         <target>Profile</target>
         <jms:reference-file line="70">CASBundle/Controller/ProfileController.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="4c2cd30d7761e7175fe4c3333cd29fcb9071f0ef" resname="title.registration">
-        <source>title.registration</source>
-        <target>Registration</target>
-        <jms:reference-file line="40">CASBundle/Controller/RegisterController.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>

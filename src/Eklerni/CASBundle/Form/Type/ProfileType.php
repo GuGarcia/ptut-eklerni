@@ -44,14 +44,43 @@ class ProfileType extends AbstractType
         );
 
         $builder->add(
-            'dateNaissance', 'date', array(
-            'label' => 'personne.birthdate',
-            'widget' => 'single_text',
-            'format' => 'yyyy-MM-dd',
-            'attr' => array(
-                'class' => 'masked_date form-control',
+            'email',
+            'email',
+            array(
+                'max_length' => 255,
+                'label' => 'personne.mail',
+                'attr' => array(
+                    'placeholder' => "personne.mail",
+                    'class' => 'form-control'
+                )
             )
-        ));
+        );
+
+        $builder->add(
+            'dateNaissance',
+            'date',
+            array(
+                'label' => 'personne.birthdate',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'attr' => array(
+                    'class' => 'masked_date form-control',
+                ),
+                'required' => false
+            )
+        );
+
+        $builder->add(
+            'file',
+            'file',
+            array(
+                'label' => 'personne.picture',
+                'attr' => array(
+                    'class' => 'form-control'
+                ),
+                'required' => false
+            )
+        );
 
         $builder->add(
             'valider', 'submit', array(

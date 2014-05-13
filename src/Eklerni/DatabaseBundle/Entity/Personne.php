@@ -4,6 +4,8 @@ namespace Eklerni\DatabaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Personne
@@ -16,6 +18,17 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  */
 abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Serializable
 {
+
+    /********************
+     * CONSTRUCTORS
+     ********************/
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->isActive = true;
+        $this->salt = md5(uniqid(null, true));
+    }
 
     /********************
      * ATTRIBUTES
@@ -70,14 +83,23 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
      */
     protected $dateNaissance;
 
+    /**
+     * @var string
+     * @ORM\Column(name="picture", type="string", length=20, nullable=true)
+     */
+    protected $picture;
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->isActive = true;
-        $this->salt = md5(uniqid(null, true));
-    }
+    /**
+     * @var string
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     */
+    protected $email;
 
+    /**
+     * @var UploadedFile
+     * @Assert\File(maxSize="1M")
+     */
+    private $file;
 
 
     /********************
@@ -236,6 +258,96 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     public function getNewPassword()
     {
         return $this->newPassword;
+    }
+
+    /**
+     * @param string $email
+     * @return Personne
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $picture
+     * @return Personne
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->getRelativeImage().$this->picture;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRelativeImage()
+    {
+        return __DIR__.'/../../../web/profile/';
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function upload()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        // use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and then the
+        // target filename to move to
+        $this->getFile()->move(
+            $this->getRelativeImage(),
+            $this->id . "." . $this->getFile()->getClientOriginalExtension()
+        );
+
+        // set the path property to the filename where you've saved the file
+        $this->picture = $this->id . "." . $this->getFile()->getClientOriginalExtension();
+
+        // clean up the file property as you won't need it anymore
+        $this->file = null;
     }
 
 

@@ -60,6 +60,8 @@ class ProfileController extends Controller
         $formProfile->handleRequest($request);
 
         if ($formProfile->isValid()) {
+            $enseignant->upload();
+
             $this->get('eklerni.manager.enseignant')->save($enseignant, true);
 
             return $this->redirect($this->generateUrl('eklerni_back_homepage'));
