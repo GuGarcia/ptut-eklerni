@@ -7,7 +7,9 @@ use Doctrine\ORM\EntityRepository;
 
 class ResultatRepository extends EntityRepository implements CASRepositoryInterface {
 
-
+    /**
+     * @return array|\Doctrine\ORM\QueryBuilder|mixed
+     */
     public function findAll() {
         return $this->_em->createQueryBuilder()
             ->select("r")

@@ -14,7 +14,7 @@ class StatistiqueController extends Controller{
      */
     public function indexAction(Request $request)
     {
-
+        //TODO datedebut use calandar
         $form = $this->createForm(
             new ResultatType(
                 $this->get('security.context')->getToken()->getUser()
@@ -22,29 +22,36 @@ class StatistiqueController extends Controller{
         );
         $form->handleRequest($request);
         $resultats = null;
+        $moyennes = null;
+        $typemoyenne = null;
+        $typerecherche = null;
         if ($form->isValid()) {
-           /* if($form->get("eleve")) {
-                $condition['eleve'] = $form->get('eleve')->;
+            $data = $form->getData();
+            $resultats = $this->get('eklerni.manager.resultat')->findResults($data, $data["limit"], array());
+            if($data["moyenne"]) {
+                $typemoyenne = $data["moyenne"];
+                $temp_resultat = array();
+                $moyennes = array();
+                foreach($resultats as $result) {
+                    $temp_resultat[] = $result[0];
+                    $moyennes[$result[0]->getId()] = round($result[1]);
+                }
+                $resultats = $temp_resultat;
             }
-            if($form->get("matiere")) {
-                $condition['matiere'] = $form->get('matiere');
-            }
-            if($form->get("activite")) {
-                $condition['activite'] = $form->get('activite');
-            }
-            if($form->get("serie")) {
-                $condition['serie'] = $form->get('serie');
-            }*/
-            $resultats = $this->get('eklerni.manager.resultat')->findResults($form->getData(), 10);
-
+            if($data["matiere"]) {$typerecherche = "1";}
+            if($data["activite"]) {$typerecherche = "2";}
+            if($data["serie"]) {$typerecherche = "3";}
         }
 
         return $this->render(
             'EklerniBackBundle:Statistique:index.html.twig',
             array(
-                'title' => $this->get('translator')->trans("title.Statistiques"),
+                'title' => $this->get('translator')->trans("title.statistiques"),
                 'form' => $form->createView(),
-                'resultats' => $resultats
+                'resultats' => $resultats,
+                "moyennes" => $moyennes,
+                "typemoyenne" => $typemoyenne,
+                "typerecherche" => $typerecherche
             )
         );
     }

@@ -10,17 +10,20 @@ namespace Eklerni\BackBundle\Form\Type;
 
 use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Eklerni\DatabaseBundle\Repository\ActiviteRepository;
+use Eklerni\DatabaseBundle\Repository\ClasseRepository;
 use Eklerni\DatabaseBundle\Repository\EleveRepository;
 use Eklerni\DatabaseBundle\Repository\MatiereRepository;
 use Eklerni\DatabaseBundle\Repository\SerieRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ResultatType extends AbstractType {
+class ResultatType extends AbstractType
+{
 
     private $enseignant;
 
-    public function __construct(Enseignant $enseignant) {
+    public function __construct(Enseignant $enseignant)
+    {
         $this->enseignant = $enseignant;
     }
 
@@ -63,6 +66,24 @@ class ResultatType extends AbstractType {
         );
 
         $builder->add(
+            'classe',
+            'entity',
+            array(
+                'label' => 'classe.text',
+                'class' => 'EklerniDatabaseBundle:Classe',
+                'query_builder' => function (ClasseRepository $er) {
+                        return $er->findByProf($this->enseignant);
+                    },
+                'attr' => array(
+                    'class' => 'form-control'
+                ),
+                'property' => "nom",
+                'empty_value' => 'Choisissez une classe',
+                'required' => false,
+            )
+        );
+
+        $builder->add(
             'activite',
             'entity',
             array(
@@ -74,7 +95,7 @@ class ResultatType extends AbstractType {
                 'attr' => array(
                     'class' => 'form-control'
                 ),
-                'property' => "name",
+                'property' => "parent",
                 'empty_value' => 'Choisissez une activite',
                 'required' => false,
             )
@@ -92,11 +113,72 @@ class ResultatType extends AbstractType {
                 'attr' => array(
                     'class' => 'form-control'
                 ),
-                'property' => "nom",
+                'property' => "parent",
                 'empty_value' => 'Choisissez une serie',
                 'required' => false,
             )
         );
+
+        $builder->add(
+            'limit',
+            'integer',
+            array(
+                'label' => 'limit.text',
+                'data' => 10,
+                'attr' => array(
+                    'class' => 'form-control'
+                ),
+            )
+        );
+
+        $builder->add(
+            'datedebut',
+            'text',
+            array(
+                'label' => 'datedebut.text',
+                'attr' => array(
+                    'class' => 'form-control'
+                ),
+            )
+        );
+
+        $builder->add(
+            'tri',
+            'integer',
+            array(
+                'label' => 'limit.text',
+                'data' => 10,
+                'attr' => array(
+                    'class' => 'form-control'
+                ),
+            )
+        );
+
+        $builder->add(
+            "moyenne",
+            "choice",
+            array(
+                'choices' => array(
+                    "" => 'aucun',
+                    'eleve' => 'Par Eleve',
+                    'classe' => 'Par Classe'
+                ),
+                'label' => "moyenne.text",
+                'required' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                )
+            )
+        );
+        $builder->add('gender', 'choice', array(
+            'choices' => array(
+                'm' => 'Male',
+                'f' => 'Female'
+            ),
+            'required' => false,
+            'empty_value' => 'Choose your gender',
+            'empty_data' => null
+        ));
 
         $builder->add(
             'valider',

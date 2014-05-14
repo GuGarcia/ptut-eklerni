@@ -13,7 +13,8 @@ class MatiereRepository extends EntityRepository implements CASRepositoryInterfa
     {
         return $this->_em->createQueryBuilder()
             ->select("m")
-            ->from("EklerniDatabaseBundle:Matiere", "m");
+            ->from("EklerniDatabaseBundle:Matiere", "m")
+            ->orderBy('m.name');
     }
 
     /**
@@ -41,7 +42,8 @@ class MatiereRepository extends EntityRepository implements CASRepositoryInterfa
             ->innerJoin("m.classes","c")
             ->innerJoin("c.enseignants","e")
             ->where("e.id = :id")
-            ->setParameter("id", $idProf);
+            ->setParameter("id", $idProf)
+            ->orderBy('m.name');
     }
 
     public function findByClasse($idClasse) {

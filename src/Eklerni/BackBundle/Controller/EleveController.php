@@ -2,6 +2,8 @@
 
 namespace Eklerni\BackBundle\Controller;
 
+
+use Eklerni\DatabaseBundle\Entity\Eleve;
 use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

@@ -161,4 +161,11 @@ class Activite extends BaseEntity {
         
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getParent() {
+        return $this->getMatiere()->getName()." => ".$this->name;
+    }
 }

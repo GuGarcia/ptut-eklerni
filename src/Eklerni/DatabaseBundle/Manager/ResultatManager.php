@@ -6,6 +6,7 @@ namespace Eklerni\DatabaseBundle\Manager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Eklerni\DatabaseBundle\Entity\Activite;
+use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;
 use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Eklerni\DatabaseBundle\Entity\Matiere;
@@ -65,12 +66,30 @@ class ResultatManager extends BaseManager
         return $query->getQuery()->getResult();
     }
 
-
+    /**
+     * @param array $condition
+     * @param null $limit
+     * @param array $orderby
+     * @return array
+     */
     public function findResults(array $condition = array(), $limit = null, array $orderby = array())
     {
         /** @var QueryBuilder $query */
-        $query = $this->repository->findAll();
 
+        $query = $this->repository->createQueryBuilder("y");
+        /**
+         * SELECT
+         */
+        if (isset($condition["moyenne"]) && count($condition["moyenne"])) {
+            $query->select("r, avg(r.note)");
+        } else {
+            $query->select("r");
+        }
+
+        $query->from("EklerniDatabaseBundle:Resultat", "r");
+        /**
+         * JOIN
+         */
         /** @var Serie $serie */
         if (isset($condition["serie"]) && $serie = $condition['serie']) {
             $query->innerJoin("r.serie", "s")
@@ -85,6 +104,17 @@ class ResultatManager extends BaseManager
                 ->setParameter("ideleve", $eleve->getId());
         }
 
+        /** @var Classe $classe */
+        if (isset($condition["classe"]) && $classe = $condition['classe']) {
+            if (!isset($condition["eleve"])) {
+                $query->innerJoin("r.eleve", "e");
+            }
+            $query->innerJoin("e.classe", "c")
+                ->andWhere("c.id = :idclasse")
+                ->setParameter("idclasse", $classe->getId());
+
+        }
+
         /** @var Activite $activite */
         if (isset($condition["activite"]) && $activite = $condition['activite']) {
             if (!isset($condition["serie"])) {
@@ -97,7 +127,7 @@ class ResultatManager extends BaseManager
 
         /** @var Matiere $matiere */
         if (isset($condition["matiere"]) && $matiere = $condition['matiere']) {
-            if (!isset($condition["serie"])) {
+            if (!isset($condition["serie"]) && !isset($condition["activite"])) {
                 $query->innerJoin("r.serie", "s");
             }
             if (!isset($condition["activite"])) {
@@ -118,6 +148,27 @@ class ResultatManager extends BaseManager
                 ->setParameter("idenseignant", $enseignant->getId());
         }
 
+        /**
+         * GROUP BY
+         */
+        if ($condition["moyenne"] == "eleve") {
+            if (!isset($condition["eleve"]) && !isset($condition["classe"])) {
+                $query->innerJoin("r.eleve", "e");
+            }
+            if (!isset($condition["classe"])) {
+
+                $query->innerJoin("e.classe", "c");
+            }
+            $query->groupBy("e.id");
+        } else if ($condition["moyenne"] == "classe") {
+            if (!isset($condition["eleve"]) && !isset($condition["classe"])) {
+                $query->innerJoin("r.eleve", "e");
+            }
+            if (!isset($condition["classe"])) {
+                $query->innerJoin("e.classe", "c");
+            }
+            $query->groupBy("c.id");
+        }
 
         if ($limit) {
             $query->setMaxResults($limit);

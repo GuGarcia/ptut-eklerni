@@ -14,7 +14,10 @@ class SerieRepository extends EntityRepository implements CASRepositoryInterface
     {
         return $this->_em->createQueryBuilder()
             ->select("s")
-            ->from("EklerniDatabaseBundle:Serie", "s");
+            ->from("EklerniDatabaseBundle:Serie", "s")
+            ->innerJoin("s.activite", 'a')
+            ->innerJoin("a.matiere", 'm')
+            ->orderBy('m.name, a.name, s.nom');
     }
 
     /**
@@ -40,8 +43,11 @@ class SerieRepository extends EntityRepository implements CASRepositoryInterface
             ->select("s")
             ->from("EklerniDatabaseBundle:Serie", "s")
             ->innerJoin("s.enseignant", "e")
+            ->innerJoin("s.activite", 'a')
+            ->innerJoin("a.matiere", 'm')
             ->where("e.id = :id")
-            ->setParameter("id", $idProf);
+            ->setParameter("id", $idProf)
+            ->orderBy('m.name, a.name, s.nom');
     }
 
     public function findByActivite($idActivite)

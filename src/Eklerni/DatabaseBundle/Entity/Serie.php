@@ -323,4 +323,11 @@ class Serie extends BaseEntity
 
         return $serie;
     }
+
+    /**
+     * @return string
+     */
+    public function getParent() {
+        return $this->getActivite()->getMatiere()->getName()." => ".$this->getActivite()->getName()." => ".$this->nom;
+    }
 }

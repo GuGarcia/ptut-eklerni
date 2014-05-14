@@ -4,56 +4,115 @@
 {% if resultats|length > 0 %}
     {# TODO Trad #}
     {% set resultatbody %}
-    <table class="table table-bordered">
-        <tr>
-            <th>Classe</th>
-            <th>Nom</th>
-            <th>Matière</th>
-            <th>Activité</th>
-            <th>Série</th>
-            <th class="col-md-6"></th>
-            <th>note</th>
-        </tr>
-        {% for resultat in resultats %}
-            {% if resultat.note < 25 %}
-                {% set typebar = "danger" %}
-                {% set typecolor = "red" %}
-            {% elseif resultat.note < 50 %}
-                {% set typebar = "warning" %}
-                {% set typecolor = "orange" %}
-            {% elseif resultat.note < 75 %}
-                {% set typebar = "primary" %}
-                {% set typecolor = "light-blue" %}
-            {% else %}
-                {% set typebar = "success" %}
-                {% set typecolor = "green" %}
-            {% endif %}
-            <tr>
-                <td>
-                    <a href="{{ path("eklerni_back_classe_fiche", {idClasse:resultat.eleve.classe.id}) }}">
-                        {{ resultat.eleve.classe.nom }}
-                    </a>
-                </td>
-                <td>
-                    <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:resultat.eleve.id}) }}">
-                        {{ resultat.eleve.prenom }} {{ resultat.eleve.nom }}
-                    </a>
-                </td>
-                {# TODO Lien Série #}
-                <td>{{ resultat.serie.activite.matiere.name }}</td>
-                <td>{{ resultat.serie.activite.name }}</td>
-                <td>{{ resultat.serie.nom }}</td>
-                <td>
-                    <div class="progress xs">
-                        <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ resultat.note }}%;"></div>
-                    </div>
-                </td>
-                <td>
-                    <span class="badge bg-{{ typecolor }}">{{ resultat.note }}%</span>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="box-body table-responsive">
+
+        <div id="table_wrapper" class="dataTables_wrapper form-inline" role="grid">
+            <table id="table" class="table table-bordered table-hover dataTable" aria-describedby="table_info">
+                <thead>
+                <tr role="row">
+                    <th>Classe</th>
+                    {% if moyennes != null and typemoyenne == "classe" %}
+
+                    {% elseif moyennes != null and typemoyenne == "eleve" %}
+                        <th>Nom</th>
+                        {% if typerecherche >= 1 %}
+                            <th>Matière</th>
+                        {% endif %}
+                        {% if typerecherche >= 2 %}
+                            <th>Activité</th>
+                        {% endif %}
+                        {% if typerecherche >= 3 %}
+                            <th>Série</th>
+                        {% endif %}
+                    {% else %}
+                        <th>Nom</th>
+                        <th>Matière</th>
+                        <th>Activité</th>
+                        <th>Série</th>
+                    {% endif %}
+                    <th class="col-md-4"></th>
+                    <th>note</th>
+                </tr>
+                </thead>
+                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                {% for resultat in resultats %}
+                    {% if moyennes != null %}
+                        {% set note = moyennes[resultat.id] %}
+                    {% else %}
+                        {% set note = resultat.note %}
+                    {% endif %}
+                    {% if note < 25 %}
+                        {% set typebar = "danger" %}
+                        {% set typecolor = "red" %}
+                    {% elseif note < 50 %}
+                        {% set typebar = "warning" %}
+                        {% set typecolor = "orange" %}
+                    {% elseif note < 75 %}
+                        {% set typebar = "primary" %}
+                        {% set typecolor = "light-blue" %}
+                    {% else %}
+                        {% set typebar = "success" %}
+                        {% set typecolor = "green" %}
+                    {% endif %}
+                    <tr>
+                        <!-- CLASSE -->
+                        <td>
+                            <a href="{{ path("eklerni_back_classe_fiche", {idClasse:resultat.eleve.classe.id}) }}">
+                                {{ resultat.eleve.classe.nom }}
+                            </a>
+                        </td>
+
+                        {% if moyennes != null and typemoyenne == "classe" %}
+
+                        {% elseif moyennes != null and typemoyenne == "eleve" %}
+                            <!-- ELEVE -->
+                            <td>
+                                <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:resultat.eleve.id}) }}">
+                                    {{ resultat.eleve.prenom }} {{ resultat.eleve.nom }}
+                                </a>
+                            </td>
+                            {% if typerecherche >= 1 %}
+                                <!-- MATIERE -->
+                                {# TODO Lien Série #}
+                                <td>{{ resultat.serie.activite.matiere.name }}</td>
+                            {% endif %}
+                            {% if typerecherche >= 2 %}
+                                <!-- ACTIVITE -->
+                                <td>{{ resultat.serie.activite.name }}</td>
+                            {% endif %}
+                            {% if typerecherche >= 3 %}
+                                <!-- NOM -->
+                                <td>{{ resultat.serie.nom }}</td>
+                            {% endif %}
+                        {% else %}
+                            <!-- ELEVE -->
+                            <td>
+                                <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:resultat.eleve.id}) }}">
+                                    {{ resultat.eleve.prenom }} {{ resultat.eleve.nom }}
+                                </a>
+                            </td>
+                            <!-- MATIERE -->
+                            {# TODO Lien Série #}
+                            <td>{{ resultat.serie.activite.matiere.name }}</td>
+                            <!-- ACTIVITE -->
+                            <td>{{ resultat.serie.activite.name }}</td>
+                            <!-- NOM -->
+                            <td>{{ resultat.serie.nom }}</td>
+                        {% endif %}
+                        <td>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ note }}%;"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge bg-{{ typecolor }}">{{ note }}%</span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
     {% endset %}
 {% else %}
     {% set resultatbody %}
@@ -65,11 +124,16 @@
     {% set formbody %}
     <form action="" method="post">
         <div class="body">
+            {{ eklerni.row(form.classe) }}
             {{ eklerni.row(form.eleve) }}
             {{ eklerni.row(form.matiere) }}
             {{ eklerni.row(form.activite) }}
             {{ eklerni.row(form.serie) }}
-            {{ eklerni.row(form._token) }}
+            {{ eklerni.row(form.limit) }}
+            {{ eklerni.row(form.moyenne) }}
+            {{ eklerni.row(form.datedebut) }}
+
+            {{ form_widget(form._token) }}
         </div>
         <div class="footer">
             {{ eklerni.submit(form.valider) }}
@@ -78,11 +142,29 @@
     {% endset %}
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             {{ eklerni.block("Générateur de Satistiques", formbody, "", "primary") }}
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             {{ eklerni.block("Liste des Résultats", resultatbody, "", "primary") }}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="application/javascript">
+        $(function () {
+
+            $('#table').dataTable({
+                "bSort": true
+                /*"columnDefs": [
+                    {
+                        "targets": [5],
+                        "orderable": false,
+                        "searchable": false
+                    }
+                ]*/
+            });
+        });
+    </script>
 {% endblock %}
