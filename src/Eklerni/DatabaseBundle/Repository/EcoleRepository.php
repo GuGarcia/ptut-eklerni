@@ -39,7 +39,7 @@ class EcoleRepository extends EntityRepository implements CASRepositoryInterface
             ->select("e")
             ->from("EklerniDatabaseBundle:Ecole", "e")
             ->innerJoin("e.classes","c")
-            ->innerJoin("c.enseignant","p")
+            ->innerJoin("c.enseignants","p")
             ->where("p.id = :id")
             ->setParameter("id", $idProf);
     }

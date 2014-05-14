@@ -41,7 +41,7 @@ class ActiviteRepository extends EntityRepository implements CASRepositoryInterf
             ->from("EklerniDatabaseBundle:Activite", "a")
             ->innerJoin("a.matiere", "m")
             ->innerJoin("m.classes", "c")
-            ->innerJoin("c.enseignant", "e")
+            ->innerJoin("c.enseignants", "e")
             ->where("e.id = :id")
             ->setParameter("id", $idProf);
     }

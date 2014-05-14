@@ -407,4 +407,8 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
             $this->isActive
             ) = unserialize($serialized);
     }
+
+    public function getFullName() {
+        return $this->nom . " " . $this->getPrenom();
+    }
 } 

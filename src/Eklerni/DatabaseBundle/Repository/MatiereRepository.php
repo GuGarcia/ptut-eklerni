@@ -39,7 +39,7 @@ class MatiereRepository extends EntityRepository implements CASRepositoryInterfa
             ->select("m")
             ->from("EklerniDatabaseBundle:Matiere", "m")
             ->innerJoin("m.classes","c")
-            ->innerJoin("c.enseignant","e")
+            ->innerJoin("c.enseignants","e")
             ->where("e.id = :id")
             ->setParameter("id", $idProf);
     }
