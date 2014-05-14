@@ -151,7 +151,7 @@ class ResultatManager extends BaseManager
         /**
          * GROUP BY
          */
-        if ($condition["moyenne"] == "eleve") {
+        if (isset($condition["moyenne"]) && $condition["moyenne"] == "eleve") {
             if (!isset($condition["eleve"]) && !isset($condition["classe"])) {
                 $query->innerJoin("r.eleve", "e");
             }
@@ -160,7 +160,7 @@ class ResultatManager extends BaseManager
                 $query->innerJoin("e.classe", "c");
             }
             $query->groupBy("e.id");
-        } else if ($condition["moyenne"] == "classe") {
+        } else if (isset($condition["moyenne"]) && $condition["moyenne"] == "classe") {
             if (!isset($condition["eleve"]) && !isset($condition["classe"])) {
                 $query->innerJoin("r.eleve", "e");
             }
