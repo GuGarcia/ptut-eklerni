@@ -76,8 +76,6 @@ class SerieType extends AbstractType
                     '1' => 'difficulte.niveau1',
                     '2' => 'difficulte.niveau2',
                     '3' => 'difficulte.niveau3',
-                    '4' => 'difficulte.niveau4',
-                    '5' => 'difficulte.niveau5'
                 ),
                 'attr' => array(
                     'class' => 'form-control'

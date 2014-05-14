@@ -167,17 +167,17 @@
       </trans-unit>
       <trans-unit id="9c63e52db498345c5c710be3320962545c4a3d7b" resname="difficulte.niveau1">
         <source>difficulte.niveau1</source>
-        <target>Level 1</target>
+        <target>Easy</target>
         <jms:reference-file line="76">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4b714e17574fe5336216e504af8c9fc0cb7cbe22" resname="difficulte.niveau2">
         <source>difficulte.niveau2</source>
-        <target>Level 2</target>
+        <target>Medium</target>
         <jms:reference-file line="77">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f088a0f9365f1a7fd6fc13d13117b99b4b72025f" resname="difficulte.niveau3">
         <source>difficulte.niveau3</source>
-        <target>Level 3</target>
+        <target>Hard</target>
         <jms:reference-file line="78">Form/Type/SerieType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="76215649a6e6bd2f71dade0b128267dc8e0f5bd7" resname="difficulte.niveau4">
