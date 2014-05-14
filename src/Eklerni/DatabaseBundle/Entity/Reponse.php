@@ -188,7 +188,7 @@ class Reponse extends BaseEntity {
         $reponse->setLabel($this->label);
         $reponse->setMedia($this->media);
         $reponse->setMediaUrl($this->mediaUrl);
-        $reponse->valid($this->valid);
+        $reponse->setValid($this->valid);
 
         return $reponse;
     }
