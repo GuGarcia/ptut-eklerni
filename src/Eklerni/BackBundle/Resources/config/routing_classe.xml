@@ -18,10 +18,6 @@
         <default key="_controller">EklerniBackBundle:Classe:index</default>
         <requirement key="idClasse">\d+</requirement>
     </route>
-    <route id="eklerni_back_classe_create_eleve" pattern="/ajouterEleve/{idClasse}">
-        <default key="_controller">EklerniBackBundle:Classe:ajouterEleve</default>
-        <requirement key="idClasse">\d+</requirement>
-    </route>
     <route id="eklerni_back_classe_ajax_delete" pattern="/supprimer/{idClasse}">
         <default key="_controller">EklerniBackBundle:Classe:supprimer</default>
         <requirement key="idClasse">\d+</requirement>

@@ -11,6 +11,7 @@
         <div class="navbar-right">
             <ul class="nav navbar-nav">
             {% if app.user %}
+                <li><img alt="{% trans %}personne.picture{% endtrans %}" class="img-circle img-header" src="{{ asset(app.user.picture) }}"></li>
                 <li><a href="{{ path("eklerni_cas_profile") }}">{{ app.user.nom }} {{ app.user.prenom }}</a></li>
                 <li><a href="{{ path("eklerni_cas_logout") }}"><i class="fa fa-power-off"></i> {% trans %}btn.logout{% endtrans %}</a></li>
             {% endif %}

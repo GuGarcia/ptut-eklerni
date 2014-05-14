@@ -295,15 +295,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
      */
     public function getPicture()
     {
-        return $this->getRelativeImage().$this->picture;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRelativeImage()
-    {
-        return __DIR__.'/../../../web/profile/';
+        return 'bundles/eklernicas/profile/'.$this->picture;
     }
 
     /**
@@ -339,7 +331,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
         // move takes the target directory and then the
         // target filename to move to
         $this->getFile()->move(
-            $this->getRelativeImage(),
+            __DIR__.'/../../../../web/bundles/eklernicas/profile/',
             $this->id . "." . $this->getFile()->getClientOriginalExtension()
         );
 

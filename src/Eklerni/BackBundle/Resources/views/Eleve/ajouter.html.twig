@@ -1,12 +1,15 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
 {% block body %}
-    <form action="" method="post">
+    <form action="" enctype='multipart/form-data' method="post">
         <div class="body bg-gray">
             {{ eklerni.row(form.eleve.username) }}
             {{ eklerni.row(form.eleve.password) }}
             {{ eklerni.row(form.eleve.nom) }}
             {{ eklerni.row(form.eleve.prenom) }}
+            {{ eklerni.row(form.eleve.email) }}
+            {{ eklerni.row(form.eleve.dateNaissance) }}
+            {{ eklerni.row(form.eleve.file) }}
             {{ form_widget(form._token) }}
         </div>
         {% if form_error is defined and form_error is not null %}
