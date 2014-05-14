@@ -8,13 +8,20 @@
             <th>{% trans %}ecole.city{% endtrans %}</th>
             <th>{% trans %}ecole.postcode{% endtrans %}</th>
             <th>{% trans %}ecole.classe.count{% endtrans %}</th>
+            <th>{% trans %}utils.tools{% endtrans %}</th>
         </tr>
         {% for ecole in ecoles %}
             <tr>
-                <td><a href="{{ path('eklerni_back_direction_update_ecole', {idEcole: ecole.id}) }}">{{ ecole.nom }}</a></td>
+                <td>{{ ecole.nom }}</td>
                 <td>{{ ecole.ville }}</td>
                 <td>{{ ecole.codePostal }}</td>
                 <td>{{ ecole.classes.count }}</td>
+                <td>
+                    <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_direction_update_ecole', { idEcole: ecole.id }) }}">
+                        <i class="fa fa-pencil"></i>
+                        {% trans %}utils.modify{% endtrans %}
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
