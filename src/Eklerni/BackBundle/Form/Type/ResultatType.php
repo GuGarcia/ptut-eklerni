@@ -139,6 +139,7 @@ class ResultatType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control'
                 ),
+                'required' => false,
             )
         );
 
