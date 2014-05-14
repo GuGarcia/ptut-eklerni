@@ -137,52 +137,6 @@ class ClasseController extends Controller
         );
     }
 
-    public function ajouterEleveAction(Request $request, $idClasse)
-    {
-        $eleve = new Eleve();
-        /** @var Classe $classe */
-        $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
-
-        $form = $this->createForm('eklerni_eleve', $eleve);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $eleve->setClasse($classe);
-
-            /** @var \Symfony\Component\Security\Core\Encoder\EncoderFactory $factory */
-            $factory = $this->get('security.encoder_factory');
-
-            $encoder = $factory->getEncoder($eleve);
-            $password = $encoder->encodePassword($eleve->getPassword(), $eleve->getSalt());
-
-            if (!$encoder->isPasswordValid($password, $eleve->getPassword(), $eleve->getSalt())) {
-                throw new \Exception($this->get('translator')->trans('register.encode_error'));
-            } else {
-                $eleve->setPassword($password);
-            }
-
-            $this->get("eklerni.manager.eleve")->save($eleve);
-
-            return $this->redirect(
-                $this->generateUrl(
-                    'eklerni_back_classe_fiche',
-                    array("idClasse" => $idClasse)
-                )
-            );
-        } else {
-            return $this->render(
-                'EklerniBackBundle:Eleve:ajouter.html.twig',
-                array(
-                    "form" => $form->createView(),
-                    "title" => $this->get('translator')->trans(
-                            "Ajout d'un Eleve à la Classe : %name%",
-                            array("%name%" => $classe->getNom())
-                        )
-                )
-            );
-        }
-    }
-
     public function ajouterEnseignantAction(Request $request, $idClasse)
     {
         if ($request->isXmlHttpRequest()) {

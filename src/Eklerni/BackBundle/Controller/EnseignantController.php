@@ -28,6 +28,7 @@ class EnseignantController extends Controller
                 $enseignant->setPassword($password);
             }
 
+            $enseignant->upload();
             $this->get("eklerni.manager.enseignant")->save($enseignant);
 
             return $this->redirect(

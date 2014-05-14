@@ -60,6 +60,19 @@ class PersonneType extends AbstractType
         );
 
         $builder->add(
+            'email',
+            'email',
+            array(
+                'max_length' => 255,
+                'label' => 'personne.mail',
+                'attr' => array(
+                    'placeholder' => "personne.mail",
+                    'class' => 'form-control'
+                )
+            )
+        );
+
+        $builder->add(
             'dateNaissance',
             'date',
             array(
@@ -69,7 +82,20 @@ class PersonneType extends AbstractType
                 'format' => 'dd/MM/yyyy',
                 'attr' => array(
                     'class' => 'form-control masked_date'
-                )
+                ),
+                'required' => false
+            )
+        );
+
+        $builder->add(
+            'file',
+            'file',
+            array(
+                'label' => 'personne.picture',
+                'attr' => array(
+                    'class' => 'form-control'
+                ),
+                'required' => false
             )
         );
 

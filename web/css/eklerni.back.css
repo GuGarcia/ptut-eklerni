@@ -1,3 +1,8 @@
+/** HEADER **/
+.img-header {
+    width: auto;
+    height: 45px;
+}
 /** MESSAGES BOX **/
 #messages .alert {
     padding: 5px;

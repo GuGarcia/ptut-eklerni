@@ -40,7 +40,7 @@
 
                                 {% set seriesPublic = [] %}
                                 {% for serie in activite.series %}
-                                    {% if serie.public and serie.enseignant.id != app.user.id %}
+                                    {% if serie.public %}
                                         {% set seriesPublic = seriesPublic|merge([serie]) %}
                                     {% endif %}
                                 {% endfor %}
@@ -72,26 +72,34 @@
                                                         <td class="tdsize">{{ serie.nom }}</td>
                                                         <td class="tdsize">{{ serie.description }}</td>
                                                         <td class="tdsize">{{ serie.niveau }}</td>
-                                                        <td class="tdsize">{{ serie.difficulte }}</td>
+                                                        <td class="tdsize">
+                                                            {% if serie.difficulte == 1 %}
+                                                                <span class="badge bg-green">Facile</span>
+                                                            {% elseif serie.difficulte == 2 %}
+                                                                <span class="badge bg-orange">Moyen</span>
+                                                            {% elseif serie.difficulte == 3 %}
+                                                                <span class="badge bg-red">Difficile</span>
+                                                            {% endif %}
+                                                        </td>
                                                         <td class="tdsize">{{ serie.questions|length }}</td>
                                                         <td class="tdsize">
                                                             {% if serie.public %}
-                                                                <span class="badge">Publique</span>
+                                                                <span class="badge bg-blue">Publique</span>
                                                             {% else %}
-                                                                <span class="badge">Privée</span>
+                                                                <span class="badge bg-red">Privée</span>
                                                             {% endif %}
                                                         </td>
                                                         <td class="tdsize">
-                                                            <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}" title="{% trans %}utils.modify{% endtrans %}">
-                                                                <i class="fa fa-pencil"></i>
+                                                            <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
+                                                                <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
                                                             </a>
 
-                                                            <a class="btn btn-default btn-xs duplicateSerieBtn" href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}" title="{% trans %}utils.duplicate{% endtrans %}">
-                                                                <i class="fa fa-copy"></i>
+                                                            <a class="btn btn-default btn-xs duplicateSerieBtn" href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}">
+                                                                <i class="fa fa-copy"></i> {% trans %}utils.duplicate{% endtrans %}
                                                             </a>
 
-                                                            <a class="btn btn-danger btn-xs deleteSerieBtn{% if serie.resultats is not empty %} disabled{% endif %}" href="{{ path('eklerni_back_serie_delete', { idSerie: serie.id }) }}" title="{% trans %}utils.delete{% endtrans %}">
-                                                                <i class="fa fa-times"></i>
+                                                            <a class="btn btn-danger btn-xs deleteSerieBtn{% if serie.resultats is not empty %} disabled{% endif %}" href="{{ path('eklerni_back_serie_delete', { idSerie: serie.id }) }}" >
+                                                                <i class="fa fa-times"></i> {% trans %}utils.delete{% endtrans %}
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -120,12 +128,33 @@
                                                         <td class="tdsize">{{ serie.nom }}</td>
                                                         <td class="tdsize">{{ serie.description }}</td>
                                                         <td class="tdsize">{{ serie.niveau }}</td>
-                                                        <td class="tdsize">{{ serie.difficulte }}</td>
-                                                        <td class="tdsize">{{ serie.questions|length }}</td>
-                                                        <td class="tdsize">{{ serie.enseignant.nom ~ ' ' ~ serie.enseignant.prenom }}</td>
                                                         <td class="tdsize">
-                                                            <a class="btn btn-default btn-xs duplicateSerieBtn" href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}" title="{% trans %}utils.duplicate{% endtrans %}">
-                                                                <i class="fa fa-copy"></i>
+                                                            {% if serie.difficulte == 1 %}
+                                                                <span class="badge bg-green">Facile</span>
+                                                            {% elseif serie.difficulte == 2 %}
+                                                                <span class="badge bg-orange">Moyen</span>
+                                                            {% elseif serie.difficulte == 3 %}
+                                                                <span class="badge bg-red">Difficile</span>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td class="tdsize">{{ serie.questions|length }}</td>
+                                                        <td class="tdsize">
+                                                            {% if serie.enseignant.id == app.user.id %}
+                                                                <span class="badge">
+                                                                    {{ serie.enseignant.nom ~ ' ' ~ serie.enseignant.prenom }}
+                                                                </span>
+                                                            {% else %}
+                                                                {{ serie.enseignant.nom ~ ' ' ~ serie.enseignant.prenom }}
+                                                            {% endif %}
+                                                        </td>
+                                                        <td class="tdsize">
+                                                            {% if serie.enseignant.id == app.user.id %}
+                                                                <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
+                                                                    <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
+                                                                </a>
+                                                            {% endif %}
+                                                            <a class="btn btn-default btn-xs duplicateSerieBtn" href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}" title="">
+                                                                <i class="fa fa-copy"></i> {% trans %}utils.duplicate{% endtrans %}
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -196,7 +225,6 @@
                 }).success(function (data) {
                     if (data.success) {
                         displayMessage("success", data.message);
-                        //$(_this).parent().parent().remove();
                     } else {
                         displayMessage("danger", data.message);
                     }
