@@ -8,6 +8,12 @@ use Doctrine\ORM\EntityRepository;
 class ResultatRepository extends EntityRepository implements CASRepositoryInterface {
 
 
+    public function findAll() {
+        return $this->_em->createQueryBuilder()
+            ->select("r")
+            ->from("EklerniDatabaseBundle:Resultat", "r");
+    }
+
     /**
      * @param $id integer
      * @return mixed
@@ -16,7 +22,9 @@ class ResultatRepository extends EntityRepository implements CASRepositoryInterf
     {
         return $this->_em->createQueryBuilder()
             ->select("r")
-            ->from("EklerniDatabaseBundle:Resultat", "r");
+            ->from("EklerniDatabaseBundle:Resultat", "r")
+            ->where("r.id = :id")
+            ->setParameter("id", $id);
     }
 
     /**
