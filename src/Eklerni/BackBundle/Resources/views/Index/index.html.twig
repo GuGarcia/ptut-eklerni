@@ -88,7 +88,7 @@
             <tr>
                 <td>
                     <a href="{{ path("eklerni_back_classe_fiche", {idClasse:resultat.eleve.classe.id}) }}">
-                    {{ resultat.eleve.classe.nom }}
+                        {{ resultat.eleve.classe.nom }}
                     </a>
                 </td>
                 <td>
@@ -97,7 +97,11 @@
                     </a>
                 </td>
                 {# TODO Lien Série #}
-                <td>{{ resultat.serie.nom }}</td>
+                <td>
+                    <a href="{{ path("eklerni_back_serie_fiche", {idSerie:resultat.serie.id}) }}">
+                        {{ resultat.serie.nom }}
+                    </a>
+                </td>
                 <td>
                     <div class="progress xs">
                         <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ resultat.note }}%;"></div>

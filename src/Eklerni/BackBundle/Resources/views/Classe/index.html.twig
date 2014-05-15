@@ -2,85 +2,175 @@
 
 {% if classe.eleves|length > 0 %}
     {% set elevesTable %}
-        <table class="table">
-            {% for eleve in classe.eleves %}
-                <tr>
-                    <td><a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
-                </tr>
-            {% endfor %}
-        </table>
+    <table class="table">
+        {% for eleve in classe.eleves %}
+            <tr>
+                <td><a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
     {% endset %}
 {% else %}
     {% set elevesTable %}
-        Il n'y a pas d'eleve dans cette Classe.
+    Il n'y a pas d'eleve dans cette Classe.
     {% endset %}
 {% endif %}
 {% set footereleves %}
-    <a href="{{ path("eklerni_back_eleve_ajouter", {idClasse:classe.id}) }}" class="btn btn-primary">{% trans %}btn.eleve.add{% endtrans %}</a>
+<a href="{{ path("eklerni_back_eleve_ajouter", {idClasse:classe.id}) }}" class="btn btn-primary">{% trans %}btn.eleve.add{% endtrans %}</a>
 {% endset %}
 
 {% set profsTable %}
-    <table class="table" id="profs">
-        {% for prof in classe.enseignants %}
-            <tr id="{{ prof.id }}">
-                <td>
-                    {% if prof.id != app.user.id %}
-                        <a href="" title="Supprimer" class="delete right block"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-                        <span>{{ prof.nom }} {{ prof.prenom }}</span>
-                    {% else %}
-                        <span style="margin-left: 24px;">{{ prof.nom }} {{ prof.prenom }}</span>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+<table class="table" id="profs">
+    {% for prof in classe.enseignants %}
+        <tr id="{{ prof.id }}">
+            <td>
+                {% if prof.id != app.user.id %}
+                    <a href="" title="Supprimer" class="delete right block">
+                        <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+                    </a>
+                    <span>{{ prof.nom }} {{ prof.prenom }}</span>
+                {% else %}
+                    <span style="margin-left: 24px;">{{ prof.nom }} {{ prof.prenom }}</span>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 {% endset %}
 {% set footerprofs %}
-    <div class="input-group">
-        <select id="add_prof" class="form-control">
-            <option value=""></option>
-            {% for prof in enseignants %}
-                <option value="{{ prof.id }}">{{ prof.nom }} {{ prof.prenom }}</option>
-            {% endfor %}
-        </select>
-        <div class="input-group-btn">
-            <a href="" id="add_prof_link" class="btn btn-primary" disabled="disabled"><i class="fa fa-plus"></i></a>
-        </div>
+<div class="input-group">
+    <select id="add_prof" class="form-control">
+        <option value=""></option>
+        {% for prof in enseignants %}
+            <option value="{{ prof.id }}">{{ prof.nom }} {{ prof.prenom }}</option>
+        {% endfor %}
+    </select>
+
+    <div class="input-group-btn">
+        <a href="" id="add_prof_link" class="btn btn-primary" disabled="disabled"><i class="fa fa-plus"></i></a>
     </div>
+</div>
 {% endset %}
 
 {% set matieresTables %}
-    <table class="table" id="matieres">
-        {% for matiere in matieres %}
-            <tr id="{{ matiere.id }}" class="{% if matiere in classe.matieres %}bg-success{% else %}bg-danger{% endif %}" style="cursor: pointer;">
-                <td>{{ matiere.name }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+<table class="table" id="matieres">
+    {% for matiere in matieres %}
+        <tr id="{{ matiere.id }}" class="{% if matiere in classe.matieres %}bg-success{% else %}bg-danger{% endif %}" style="cursor: pointer;">
+            <td>{{ matiere.name }}</td>
+        </tr>
+    {% endfor %}
+</table>
 {% endset %}
 {% set footermatieres %}
-    <a href="#" id="matieres_link" class="btn btn-primary">{% trans %}utils.save{% endtrans %}</a>
+<a href="#" id="matieres_link" class="btn btn-primary">{% trans %}utils.save{% endtrans %}</a>
+{% endset %}
+
+{% set worstsBody %}
+<table class="table table-bordered">
+    <tr>
+        <th>Nom</th>
+        <th class="col-md-6"></th>
+        <th>note</th>
+    </tr>
+    {% for resultat in worsts %}
+        {% set note = resultat["note"] %}
+        {% set eleve = resultat[0].eleve %}
+        {% if note < 25 %}
+            {% set typebar = "danger" %}
+            {% set typecolor = "red" %}
+        {% elseif note < 50 %}
+            {% set typebar = "warning" %}
+            {% set typecolor = "orange" %}
+        {% elseif note < 75 %}
+            {% set typebar = "primary" %}
+            {% set typecolor = "light-blue" %}
+        {% else %}
+            {% set typebar = "success" %}
+            {% set typecolor = "green" %}
+        {% endif %}
+        <tr>
+            <td>
+                <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">
+                    {{ eleve.prenom }} {{ eleve.nom }}
+                </a>
+            </td>
+            <td>
+                <div class="progress xs">
+                    <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ note|number_format }}%;"></div>
+                </div>
+            </td>
+            <td>
+                <span class="badge bg-{{ typecolor }}">{{ note|number_format }}%</span>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endset %}
+{% set bestsBody %}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Nom</th>
+        <th class="col-md-6"></th>
+        <th>note</th>
+    </tr>
+    {% for resultat in bests %}
+        {% set note = resultat["note"] %}
+        {% set eleve = resultat[0].eleve %}
+        {% if note < 25 %}
+            {% set typebar = "danger" %}
+            {% set typecolor = "red" %}
+        {% elseif note < 50 %}
+            {% set typebar = "warning" %}
+            {% set typecolor = "orange" %}
+        {% elseif note < 75 %}
+            {% set typebar = "primary" %}
+            {% set typecolor = "light-blue" %}
+        {% else %}
+            {% set typebar = "success" %}
+            {% set typecolor = "green" %}
+        {% endif %}
+        <tr>
+            <td>
+                <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">
+                    {{ eleve.prenom }} {{ eleve.nom }}
+                </a>
+            </td>
+            <td>
+                <div class="progress xs">
+                    <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ note|number_format }}%;"></div>
+                </div>
+            </td>
+            <td>
+                <span class="badge bg-{{ typecolor }}">{{ note|number_format }}%</span>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 {% endset %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-4">
             {% set eleveList %}
-                {% trans %}eleve.list{% endtrans %}
+            {% trans %}eleve.list{% endtrans %}
             {% endset %}
             {{ eklerni.block(eleveList, elevesTable, footereleves, "primary") }}
         </div>
         <div class="col-md-4">
             {% set enseignantList %}
-                {% trans %}enseignant.list{% endtrans %}
+            {% trans %}enseignant.list{% endtrans %}
             {% endset %}
             {{ eklerni.block(enseignantList, profsTable, footerprofs, "primary") }}
-        </div>
-        <div class="col-md-4">
             {% set matiereText %}
-                {% trans %}matiere.text{% endtrans %}
+            {% trans %}matiere.text{% endtrans %}
             {% endset %}
             {{ eklerni.block(matiereText, matieresTables, footermatieres, "primary") }}
+        </div>
+        <div class="col-md-4">
+            {{ eklerni.block("Liste des Meilleurs Élèves", bestsBody, "", "success") }}
+            {{ eklerni.block("Liste des moins bons Élèves", worstsBody, "", "danger") }}
+
         </div>
     </div>
 {% endblock %}
@@ -159,12 +249,12 @@
             });
 
             $("a.delete").off("click");
-            $("a.delete").on("click", function(event) {
+            $("a.delete").on("click", function (event) {
                 event.preventDefault();
                 var _this = this;
                 var profs = [];
                 $("#profs tr").each(function () {
-                    if($(_this).parent().parent().attr("id") != this.id) {
+                    if ($(_this).parent().parent().attr("id") != this.id) {
                         profs.push(this.id);
                     }
                 });

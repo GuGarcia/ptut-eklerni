@@ -30,13 +30,39 @@ class ClasseController extends Controller
         }
         $matieres = $this->get("eklerni.manager.matiere")->findAll();
 
+        $bests = $this->get('eklerni.manager.resultat')->findResults(
+            array(
+                "classe" => $classe,
+                "moyenne" => "eleve"
+            ),
+            3,
+            array(
+                "champs" => "note",
+                "order" => "desc"
+            )
+        );
+
+        $worsts = $this->get('eklerni.manager.resultat')->findResults(
+            array(
+                "classe" => $classe,
+                "moyenne" => "eleve"
+            ),
+            5,
+            array(
+                "champs" => "note",
+                "order" => "asc"
+            )
+        );
+
         return $this->render(
             'EklerniBackBundle:Classe:index.html.twig',
             array(
                 "classe" => $classe,
                 "enseignants" => $enseignants,
                 "title" => $this->get('translator')->trans("Classe %name%", array("%name%" => $classe->getNom())),
-                "matieres" => $matieres
+                "matieres" => $matieres,
+                "bests" => $bests,
+                "worsts" => $worsts
             )
         );
     }

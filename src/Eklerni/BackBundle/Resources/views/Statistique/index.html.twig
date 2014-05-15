@@ -10,28 +10,23 @@
             <table id="table" class="table table-bordered table-hover dataTable" aria-describedby="table_info">
                 <thead>
                 <tr role="row">
-                    <th>Classe</th>
-                    {% if moyennes != null and typemoyenne == "classe" %}
-
-                    {% elseif moyennes != null and typemoyenne == "eleve" %}
-                        <th>Nom</th>
-                        {% if typerecherche >= 1 %}
-                            <th>Matière</th>
-                        {% endif %}
-                        {% if typerecherche >= 2 %}
-                            <th>Activité</th>
-                        {% endif %}
-                        {% if typerecherche >= 3 %}
-                            <th>Série</th>
-                        {% endif %}
-                    {% else %}
-                        <th>Nom</th>
-                        <th>Matière</th>
-                        <th>Activité</th>
-                        <th>Série</th>
+                    {% if ( typechoisi >= 1 or typechoisi == null ) or moyennes == null %}
+                        <th>{% trans %}classe.text{% endtrans %}</th>
+                    {% endif %}
+                    {% if (typechoisi >= 2 or typechoisi == null ) or moyennes == null %}
+                        <th>{% trans %}eleve.text{% endtrans %}</th>
+                    {% endif %}
+                    {% if typerecherche >= 1 %}
+                        <th>{% trans %}matiere.text{% endtrans %}</th>
+                    {% endif %}
+                    {% if typerecherche >= 2 or moyennes == null %}
+                        <th>{% trans %}activite.text{% endtrans %}</th>
+                    {% endif %}
+                    {% if typerecherche >= 3 or moyennes == null %}
+                        <th>{% trans %}serie.text{% endtrans %}</th>
                     {% endif %}
                     <th class="col-md-4 hidden-xs"></th>
-                    <th>note</th>
+                    <th>{% trans %}note.text{% endtrans %}</th>
                 </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -55,49 +50,38 @@
                         {% set typecolor = "green" %}
                     {% endif %}
                     <tr>
-                        <!-- CLASSE -->
-                        <td>
-                            <a href="{{ path("eklerni_back_classe_fiche", {idClasse:resultat.eleve.classe.id}) }}">
-                                {{ resultat.eleve.classe.nom }}
-                            </a>
-                        </td>
-
-                        {% if moyennes != null and typemoyenne == "classe" %}
-
-                        {% elseif moyennes != null and typemoyenne == "eleve" %}
+                        {% if ( typechoisi >= 1 or typechoisi == null ) or moyennes == null %}
+                            <!-- CLASSE -->
+                            <td>
+                                <a href="{{ path("eklerni_back_classe_fiche", {idClasse:resultat.eleve.classe.id}) }}">
+                                    {{ resultat.eleve.classe.nom }}
+                                </a>
+                            </td>
+                        {% endif %}
+                        {% if ( typechoisi >= 2 or typechoisi == null ) or moyennes == null %}
                             <!-- ELEVE -->
                             <td>
                                 <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:resultat.eleve.id}) }}">
                                     {{ resultat.eleve.prenom }} {{ resultat.eleve.nom }}
                                 </a>
                             </td>
-                            {% if typerecherche >= 1 %}
-                                <!-- MATIERE -->
-                                {# TODO Lien Série #}
-                                <td>{{ resultat.serie.activite.matiere.name }}</td>
-                            {% endif %}
-                            {% if typerecherche >= 2 %}
-                                <!-- ACTIVITE -->
-                                <td>{{ resultat.serie.activite.name }}</td>
-                            {% endif %}
-                            {% if typerecherche >= 3 %}
-                                <!-- NOM -->
-                                <td>{{ resultat.serie.nom }}</td>
-                            {% endif %}
-                        {% else %}
-                            <!-- ELEVE -->
-                            <td>
-                                <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:resultat.eleve.id}) }}">
-                                    {{ resultat.eleve.prenom }} {{ resultat.eleve.nom }}
-                                </a>
-                            </td>
+                        {% endif %}
+                        {% if typerecherche >= 1 %}
                             <!-- MATIERE -->
                             {# TODO Lien Série #}
                             <td>{{ resultat.serie.activite.matiere.name }}</td>
+                        {% endif %}
+                        {% if typerecherche >= 2 or moyennes == null %}
                             <!-- ACTIVITE -->
                             <td>{{ resultat.serie.activite.name }}</td>
+                        {% endif %}
+                        {% if typerecherche >= 3 or moyennes == null %}
                             <!-- NOM -->
-                            <td>{{ resultat.serie.nom }}</td>
+                            <td>
+                                <a href="{{ path("eklerni_back_serie_fiche", {idSerie:resultat.serie.id}) }}">
+                                    {{ resultat.serie.nom }}
+                                </a>
+                            </td>
                         {% endif %}
                         <td class="hidden-xs">
                             <div class="progress xs">
@@ -161,12 +145,12 @@
             $('#table').dataTable({
                 "bSort": true
                 /*"columnDefs": [
-                    {
-                        "targets": [5],
-                        "orderable": false,
-                        "searchable": false
-                    }
-                ]*/
+                 {
+                 "targets": [5],
+                 "orderable": false,
+                 "searchable": false
+                 }
+                 ]*/
             });
         });
     </script>

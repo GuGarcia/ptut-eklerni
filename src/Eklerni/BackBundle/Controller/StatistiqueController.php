@@ -25,6 +25,7 @@ class StatistiqueController extends Controller{
         $moyennes = null;
         $typemoyenne = null;
         $typerecherche = null;
+        $typechoisi = null;
         if ($form->isValid()) {
             $data = $form->getData();
             $resultats = $this->get('eklerni.manager.resultat')->findResults($data, $data["limit"], array());
@@ -42,9 +43,11 @@ class StatistiqueController extends Controller{
                 }
                 $resultats = $temp_resultat;
             }
-            if($data["matiere"]) {$typerecherche = "1";}
-            if($data["activite"]) {$typerecherche = "2";}
-            if($data["serie"]) {$typerecherche = "3";}
+            if($data["matiere"]){$typerecherche = "1";}
+            if($data["activite"]){$typerecherche = "2";}
+            if($data["serie"])  {$typerecherche = "3";}
+            if($data["classe"]) {$typechoisi = "1";}
+            if($data["eleve"])  {$typechoisi = "2";}
         }
 
         return $this->render(
@@ -55,7 +58,8 @@ class StatistiqueController extends Controller{
                 'resultats' => $resultats,
                 "moyennes" => $moyennes,
                 "typemoyenne" => $typemoyenne,
-                "typerecherche" => $typerecherche
+                "typerecherche" => $typerecherche,
+                "typechoisi" => $typechoisi
             )
         );
     }

@@ -104,4 +104,8 @@ class Eleve extends Personne {
         return $this->listeAttribution;
     }
 
+    public function getParent() {
+        return $this->getClasse()->getNom() . " => ". $this->getFullName();
+    }
+
 }
