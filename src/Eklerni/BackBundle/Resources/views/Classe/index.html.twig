@@ -5,6 +5,7 @@
         <table class="table">
             {% for eleve in classe.eleves %}
                 <tr>
+                    <td><img alt="{% trans %}personne.picture{% endtrans %}" src="{{ asset(eleve.picture) }}"></td>
                     <td><a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
                 </tr>
             {% endfor %}

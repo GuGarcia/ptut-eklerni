@@ -3,6 +3,7 @@
 namespace Eklerni\BackBundle\Controller;
 
 
+use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;
 use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -145,10 +146,9 @@ class EleveController extends Controller
             }
 
             if (!$formError) {
-                $eleve->upload();
 
-                $this->get('eklerni.manager.eleve')->save($eleve, true);
-                return $this->redirect($this->generateUrl('eklerni_back_eleve'));
+                $this->get('eklerni.manager.eleve')->save($eleve);
+                return $this->redirect($this->generateUrl('eklerni_back_eleve_fiche', array("idEleve" => $eleve->getId())));
             }
         } else {
             return $this->render(

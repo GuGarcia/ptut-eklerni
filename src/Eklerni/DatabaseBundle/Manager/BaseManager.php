@@ -32,15 +32,14 @@ abstract class BaseManager implements CASManagerInterface
     /**
      * Save Entity in database
      * @param BaseEntity $entity
-     * @param bool $persist false when updating
      */
-    public function save(BaseEntity $entity, $persist = true)
+    public function save(BaseEntity $entity)
     {
         if (property_exists($entity, 'dateModification')) {
             $entity->setDateModification(new \DateTime('now'));
         }
 
-        if ($persist) {
+        if ($entity->getId() > 0) {
             if (property_exists($entity, 'dateCreation')) {
                 $entity->setDateCreation(new \DateTime('now'));
             }
