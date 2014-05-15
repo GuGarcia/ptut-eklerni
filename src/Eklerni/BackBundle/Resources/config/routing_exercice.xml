@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="eklerni_back_exercice" pattern="/">
-        <default key="_controller">EklerniBackBundle:Exercice:index</default>
+        <default key="_controller">EklerniBackBundle:Exercice:list</default>
     </route>
     <route id="eklerni_back_serie_create" pattern="/add/{idActivite}">
         <default key="_controller">EklerniBackBundle:Exercice:ajouter</default>
@@ -21,6 +21,10 @@
     </route>
     <route id="eklerni_back_serie_duplicate" pattern="/duplicate/{idSerie}">
         <default key="_controller">EklerniBackBundle:Exercice:dupliquer</default>
+        <requirement key="idSerie">\d+</requirement>
+    </route>
+    <route id="eklerni_back_serie_fiche" pattern="/serie/{idSerie}">
+        <default key="_controller">EklerniBackBundle:Exercice:index</default>
         <requirement key="idSerie">\d+</requirement>
     </route>
 </routes>

@@ -166,17 +166,19 @@ class ResultatManager extends BaseManager
             }
             $query->groupBy("c.id");
         } else if (isset($condition["moyenne"]) && $condition["moyenne"] == "matiere") {
-            if (!isset($condition["serie"]) && !isset($condition["activite"])) {
+            if (!isset($condition["serie"]) && !isset($condition["activite"]) &&  !isset($condition["matiere"])) {
                 $query->innerJoin("r.serie", "s");
             }
-            if (!isset($condition["activite"])) {
+            if (!isset($condition["activite"]) &&  !isset($condition["matiere"])) {
                 $query->innerJoin("s.activite", "a");
             }
             if (!isset($condition["matiere"])) {
                 $query->innerJoin("a.matiere", "m");
             }
             $query->groupBy("m.id");
-        }
+        } /*else if (isset($condition["moyenne"]) && $condition["moyenne"] == "total") {
+            $query->groupBy("r.id");
+        }*/
 
         if(isset($condition["istest"]) && count($condition["istest"])) {
             $query->andwhere("r.isTest = :istest")

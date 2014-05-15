@@ -41,7 +41,7 @@ class ResultatType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control'
                 ),
-                'property' => "fullName",
+                'property' => "parent",
                 'empty_value' => 'Choisissez un eleve',
                 'required' => false,
             )
@@ -163,7 +163,8 @@ class ResultatType extends AbstractType
                     "" => 'aucun',
                     'eleve' => 'Par Eleve',
                     'classe' => 'Par Classe',
-                    'matiere' => 'Par Matiere'
+                    'matiere' => 'Par Matiere',
+                    'total' => 'Sur Tout'
                 ),
                 'label' => "moyenne.text",
                 'required' => false,

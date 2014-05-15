@@ -1,235 +1,105 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
-{% block stylesheets %}
-    <link href="{{ asset('bundles/eklerniback/css/Exercice/index.css') }}" type="text/css" rel="stylesheet"/>
-{% endblock %}
+{#
+    1. Info Série XXX
+    2. Derniers Résultats
+    3. Moyenne Série XXX
+#}
+
+{% set bodySerie %}
+<table class="table">
+    <tr>
+        <td>{% trans %}matiere.text{% endtrans %}</td><td>{{ serie.activite.matiere.name }}</td>
+    </tr>
+    <tr>
+        <td>{% trans %}activite.text{% endtrans %}</td><td>{{ serie.activite.name }}</td>
+    </tr>
+    <tr>
+        <td>{% trans %}serie.text{% endtrans %}</td><td>{{ serie.nom }}</td>
+    </tr>
+    <tr>
+        <td>{% trans %}serie.question.nombre{% endtrans %}</td><td>{{ serie.questions|length }}</td>
+    </tr>
+    <tr>
+        <td>{% trans %}serie.niveau{% endtrans %}</td><td>{{ serie.niveau }}</td>
+    </tr>
+    <tr>
+        <td>{% trans %}serie.difficulte{% endtrans %}</td><td>{{ serie.difficulte }}</td>
+    </tr>
+    <tr>
+        <td>{% trans %}serie.moyenne{% endtrans %}</td><td>{{ note|number_format }}%</td>
+    </tr>
+</table>
+{% endset %}
+
+
+{% if resultats|length > 0 %}
+    {# TODO Trad #}
+    {% set resultatbody %}
+    <table class="table table-bordered">
+        <tr>
+            <th>Classe</th>
+            <th>Nom</th>
+            <th>Série</th>
+            <th class="col-md-6"></th>
+            <th>note</th>
+        </tr>
+        {% for resultat in resultats %}
+            {% if resultat.note < 25 %}
+                {% set typebar = "danger" %}
+                {% set typecolor = "red" %}
+            {% elseif resultat.note < 50 %}
+                {% set typebar = "warning" %}
+                {% set typecolor = "orange" %}
+            {% elseif resultat.note < 75 %}
+                {% set typebar = "primary" %}
+                {% set typecolor = "light-blue" %}
+            {% else %}
+                {% set typebar = "success" %}
+                {% set typecolor = "green" %}
+            {% endif %}
+            <tr>
+                <td>
+                    <a href="{{ path("eklerni_back_classe_fiche", {idClasse:resultat.eleve.classe.id}) }}">
+                        {{ resultat.eleve.classe.nom }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:resultat.eleve.id}) }}">
+                        {{ resultat.eleve.prenom }} {{ resultat.eleve.nom }}
+                    </a>
+                </td>
+                {# TODO Lien Série #}
+                <td>
+                    <a href="{{ path("eklerni_back_serie_fiche", {idSerie:resultat.serie.id}) }}">
+                        {{ resultat.serie.nom }}
+                    </a>
+                </td>
+                <td>
+                    <div class="progress xs">
+                        <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ resultat.note|number_format }}%;"></div>
+                    </div>
+                </td>
+                <td>
+                    <span class="badge bg-{{ typecolor }}">{{ resultat.note|number_format }}%</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endset %}
+{% else %}
+    {% set resultatbody %}
+    Il n'y a pas de résutlat disponnible.
+    {% endset %}
+{% endif %}
 
 {% block body %}
-    {% for matiere in matieres %}
-        <div class="box box-solid box-danger">
-            <div class="box-header">
-                <h3 class="box-title">{{ matiere.name }}</h3>
-                <div class="box-tools pull-right">
-                    <button class="btn btn-danger btn-sm" data-widget="collapse">
-                        <i class="fa fa-minus"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="box-body">
-                {% for activite in matiere.activites %}
-                    <div class="box box-primary">
-                        <div class="nav-tabs-custom">
-                            <ul id="tabs" class="nav nav-tabs pull-right">
-                                <li class="tab active">
-                                    <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">{% trans %}serie.personnal{% endtrans %}</a>
-                                </li>
-                                <li class="tab">
-                                    <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">{% trans %}serie.public{% endtrans %}</a>
-                                </li>
-                                <li class="noborder">
-                                    <a class="btn btn-primary bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
-                                        <i class="fa fa-plus"></i>
-                                        {% trans %}serie.name{% endtrans %}
-                                    </a>
-                                </li>
-                                <li class="pull-left header">
-                                    {{ activite.name }}
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-
-                                {% set seriesPublic = [] %}
-                                {% for serie in activite.series %}
-                                    {% if serie.public %}
-                                        {% set seriesPublic = seriesPublic|merge([serie]) %}
-                                    {% endif %}
-                                {% endfor %}
-
-                                {% set seriesPerso = [] %}
-                                {% for serie in activite.series %}
-                                    {% if serie.enseignant.id == app.user.id %}
-                                        {% set seriesPerso = seriesPerso|merge([serie]) %}
-                                    {% endif %}
-                                {% endfor %}
-
-                                <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
-                                    {% if seriesPerso is empty %}
-                                        {% trans %}serie.notfound.personnal{% endtrans %}
-                                    {% else %}
-                                        <table class="table table-hover">
-                                            <tbody>
-                                                <tr>
-                                                    <th class="tdsize">{% trans %}serie.name{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.description{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.level{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.difficulty{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.questions.number{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.statut{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
-                                                </tr>
-                                                {% for serie in seriesPerso if serie.enseignant.id == app.user.id %}
-                                                    <tr>
-                                                        <td class="tdsize">{{ serie.nom }}</td>
-                                                        <td class="tdsize">{{ serie.description }}</td>
-                                                        <td class="tdsize">{{ serie.niveau }}</td>
-                                                        <td class="tdsize">
-                                                            {% if serie.difficulte == 1 %}
-                                                                <span class="badge bg-green">Facile</span>
-                                                            {% elseif serie.difficulte == 2 %}
-                                                                <span class="badge bg-orange">Moyen</span>
-                                                            {% elseif serie.difficulte == 3 %}
-                                                                <span class="badge bg-red">Difficile</span>
-                                                            {% endif %}
-                                                        </td>
-                                                        <td class="tdsize">{{ serie.questions|length }}</td>
-                                                        <td class="tdsize">
-                                                            {% if serie.public %}
-                                                                <span class="badge bg-blue">Publique</span>
-                                                            {% else %}
-                                                                <span class="badge bg-red">Privée</span>
-                                                            {% endif %}
-                                                        </td>
-                                                        <td class="tdsize">
-                                                            <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
-                                                                <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
-                                                            </a>
-
-                                                            <a class="btn btn-default btn-xs duplicateSerieBtn" href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}">
-                                                                <i class="fa fa-copy"></i> {% trans %}utils.duplicate{% endtrans %}
-                                                            </a>
-
-                                                            <a class="btn btn-danger btn-xs deleteSerieBtn{% if serie.resultats is not empty %} disabled{% endif %}" href="{{ path('eklerni_back_serie_delete', { idSerie: serie.id }) }}" >
-                                                                <i class="fa fa-times"></i> {% trans %}utils.delete{% endtrans %}
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    {% endif %}
-                                </div>
-                                <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
-                                    {% if seriesPublic is empty %}
-                                        {% trans %}serie.notfound.public{% endtrans %}
-                                    {% else %}
-                                        <table class="table table-hover">
-                                            <tbody>
-                                                <tr>
-                                                    <th class="tdsize">{% trans %}serie.name{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.description{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.level{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.difficulty{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.questions.number{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.enseignant{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
-                                                </tr>
-                                                {% for serie in seriesPublic %}
-                                                    <tr>
-                                                        <td class="tdsize">{{ serie.nom }}</td>
-                                                        <td class="tdsize">{{ serie.description }}</td>
-                                                        <td class="tdsize">{{ serie.niveau }}</td>
-                                                        <td class="tdsize">
-                                                            {% if serie.difficulte == 1 %}
-                                                                <span class="badge bg-green">Facile</span>
-                                                            {% elseif serie.difficulte == 2 %}
-                                                                <span class="badge bg-orange">Moyen</span>
-                                                            {% elseif serie.difficulte == 3 %}
-                                                                <span class="badge bg-red">Difficile</span>
-                                                            {% endif %}
-                                                        </td>
-                                                        <td class="tdsize">{{ serie.questions|length }}</td>
-                                                        <td class="tdsize">
-                                                            {% if serie.enseignant.id == app.user.id %}
-                                                                <span class="badge">
-                                                                    {{ serie.enseignant.nom ~ ' ' ~ serie.enseignant.prenom }}
-                                                                </span>
-                                                            {% else %}
-                                                                {{ serie.enseignant.nom ~ ' ' ~ serie.enseignant.prenom }}
-                                                            {% endif %}
-                                                        </td>
-                                                        <td class="tdsize">
-                                                            {% if serie.enseignant.id == app.user.id %}
-                                                                <a class="btn btn-default btn-xs" href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
-                                                                    <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
-                                                                </a>
-                                                            {% endif %}
-                                                            <a class="btn btn-default btn-xs duplicateSerieBtn" href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}" title="">
-                                                                <i class="fa fa-copy"></i> {% trans %}utils.duplicate{% endtrans %}
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+    <div class="row">
+        <div class="col-md-4">
+            {{ eklerni.block("Informations", bodySerie, "", "primary") }}
         </div>
-    {% endfor %}
-{% endblock %}
-
-{% block javascripts %}
-    <script type="application/javascript">
-        $(function () {
-            $('#tabs li.tab').on('click', function (e) {
-                e.preventDefault();
-                $(this).tab('show');
-            });
-
-            $('.noborder').css('border-top-width', '0');
-
-            $("[data-widget='collapse']").each(function() {
-                //Find the box parent
-                var box = $(this).parents(".box").first();
-                //Find the body and the footer
-                var bf = box.find(".box-body, .box-footer");
-                if (!box.hasClass("collapsed-box")) {
-                    box.addClass("collapsed-box");
-                    bf.slideUp();
-                } else {
-                    box.removeClass("collapsed-box");
-                    bf.slideDown();
-                }
-            });
-
-            $('.deleteSerieBtn').on('click', function(event) {
-                event.preventDefault();
-                var _this = this;
-
-                $.ajax({
-                    type: "POST",
-                    url: $(_this).attr("href"),
-                    dataType: "json"
-                }).success(function (data) {
-                    if (data.success) {
-                        displayMessage("success", data.message);
-                        $(_this).parent().parent().remove();
-                    } else {
-                        displayMessage("danger", data.message);
-                    }
-                });
-            });
-
-            $('.duplicateSerieBtn').on('click', function(event) {
-                event.preventDefault();
-                var _this = this;
-
-                $.ajax({
-                    type: "POST",
-                    url: $(_this).attr("href"),
-                    dataType: "json"
-                }).success(function (data) {
-                    if (data.success) {
-                        displayMessage("success", data.message);
-                    } else {
-                        displayMessage("danger", data.message);
-                    }
-                });
-            });
-        });
-    </script>
+        <div class="col-md-8">
+            {{ eklerni.block("Les Derniers Résultats", resultatbody, "", "primary") }}
+        </div>
+    </div>
 {% endblock %}

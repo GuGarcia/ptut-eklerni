@@ -13,16 +13,45 @@ use Symfony\Component\HttpFoundation\Response;
 class ExerciceController extends Controller
 {
 
+    public function indexAction($idSerie) {
+        /** @var Serie $serie */
+        $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
+        $lastResult = $this->get('eklerni.manager.resultat')->findResults(
+            array(
+                "serie" => $serie
+            ), 10,
+            array(
+                "champs" => "r.dateCreation",
+                "order" => "desc"
+            )
+        );
+        $moyenne = $this->get('eklerni.manager.resultat')->findResults(
+            array(
+                "serie" => $serie,
+                "moyenne" => "total"
+            )
+        )[0]["note"];
+        return $this->render(
+            'EklerniBackBundle:Exercice:index.html.twig',
+            array(
+                "title" => $this->get('translator')->trans("title.serie")." ".ucfirst($serie->getNom()),
+                "serie" => $serie,
+                "resultats" => $lastResult,
+                "note" => $moyenne
+            )
+        );
+    }
+
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function listAction()
     {
         // Liste des matières
         $matieres = $this->get('eklerni.manager.matiere')->findAll();
 
         return $this->render(
-            'EklerniBackBundle:Exercice:index.html.twig',
+            'EklerniBackBundle:Exercice:list.html.twig',
             array(
                 "title" => $this->get('translator')->trans("title.exercice"),
                 "matieres" => $matieres,
@@ -56,7 +85,7 @@ class ExerciceController extends Controller
             $serie->setEnseignant($enseignant);
             $enseignant->addSerie($serie);
 
-            $this->get('eklerni.manager.serie')->save($serie, true);
+            $this->get('eklerni.manager.serie')->save($serie);
             return $this->redirect($this->generateUrl('eklerni_back_exercice'));
         }
 
@@ -87,7 +116,7 @@ class ExerciceController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->get('eklerni.manager.serie')->save($serie, true);
+            $this->get('eklerni.manager.serie')->save($serie);
 
             return $this->redirect($this->generateUrl('eklerni_back_exercice'));
         }
