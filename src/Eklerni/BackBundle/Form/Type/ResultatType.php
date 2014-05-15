@@ -124,7 +124,7 @@ class ResultatType extends AbstractType
             'integer',
             array(
                 'label' => 'limit.text',
-                'data' => 10,
+                'data' => 100,
                 'attr' => array(
                     'class' => 'form-control'
                 ),
@@ -162,7 +162,8 @@ class ResultatType extends AbstractType
                 'choices' => array(
                     "" => 'aucun',
                     'eleve' => 'Par Eleve',
-                    'classe' => 'Par Classe'
+                    'classe' => 'Par Classe',
+                    'matiere' => 'Par Matiere'
                 ),
                 'label' => "moyenne.text",
                 'required' => false,
@@ -180,6 +181,23 @@ class ResultatType extends AbstractType
             'empty_value' => 'Choose your gender',
             'empty_data' => null
         ));
+
+        $builder->add(
+            'istest',
+            'choice',
+            array(
+                'choices' => array(
+                    "" => 'aucun',
+                    "true" => 'Oui',
+                    "false" => 'Non'
+                ),
+                'label' => 'istest.text',
+                'required' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                )
+            )
+        );
 
         $builder->add(
             'valider',

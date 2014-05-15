@@ -34,7 +34,11 @@ class StatistiqueController extends Controller{
                 $moyennes = array();
                 foreach($resultats as $result) {
                     $temp_resultat[] = $result[0];
-                    $moyennes[$result[0]->getId()] = round($result[1]);
+                    if(isset($result["note"])) {
+                        $moyennes[$result[0]->getId()] = round($result["note"]);
+                    } else {
+                        $moyennes[$result[0]->getId()] = null;
+                    }
                 }
                 $resultats = $temp_resultat;
             }

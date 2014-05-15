@@ -75,18 +75,17 @@ class ResultatManager extends BaseManager
     public function findResults(array $condition = array(), $limit = null, array $orderby = array())
     {
         /** @var QueryBuilder $query */
+        $query = $this->repository->createQueryBuilder("r");
 
-        $query = $this->repository->createQueryBuilder("y");
         /**
          * SELECT
          */
         if (isset($condition["moyenne"]) && count($condition["moyenne"])) {
-            $query->select("r, avg(r.note)");
+            $query->select("r, avg(r.note) as note");
         } else {
             $query->select("r");
         }
 
-        $query->from("EklerniDatabaseBundle:Resultat", "r");
         /**
          * JOIN
          */
@@ -112,7 +111,6 @@ class ResultatManager extends BaseManager
             $query->innerJoin("e.classe", "c")
                 ->andWhere("c.id = :idclasse")
                 ->setParameter("idclasse", $classe->getId());
-
         }
 
         /** @var Activite $activite */
@@ -156,7 +154,6 @@ class ResultatManager extends BaseManager
                 $query->innerJoin("r.eleve", "e");
             }
             if (!isset($condition["classe"])) {
-
                 $query->innerJoin("e.classe", "c");
             }
             $query->groupBy("e.id");
@@ -168,6 +165,22 @@ class ResultatManager extends BaseManager
                 $query->innerJoin("e.classe", "c");
             }
             $query->groupBy("c.id");
+        } else if (isset($condition["moyenne"]) && $condition["moyenne"] == "matiere") {
+            if (!isset($condition["serie"]) && !isset($condition["activite"])) {
+                $query->innerJoin("r.serie", "s");
+            }
+            if (!isset($condition["activite"])) {
+                $query->innerJoin("s.activite", "a");
+            }
+            if (!isset($condition["matiere"])) {
+                $query->innerJoin("a.matiere", "m");
+            }
+            $query->groupBy("m.id");
+        }
+
+        if(isset($condition["istest"]) && count($condition["istest"])) {
+            $query->andwhere("r.isTest = :istest")
+                ->setParameter("istest", ($condition["istest"] == "false")?false:true);
         }
 
         if ($limit) {
@@ -175,9 +188,9 @@ class ResultatManager extends BaseManager
         }
         if (isset($orderby["champs"])) {
             if (isset($orderby["order"])) {
-                $query->orderBy("r." . $orderby["champs"], $orderby["order"]);
+                $query->orderBy( $orderby["champs"], $orderby["order"]);
             } else {
-                $query->orderBy("r." . $orderby["champs"]);
+                $query->orderBy( $orderby["champs"]);
             }
         }
 

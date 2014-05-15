@@ -30,7 +30,7 @@
                         <th>Activité</th>
                         <th>Série</th>
                     {% endif %}
-                    <th class="col-md-4"></th>
+                    <th class="col-md-4 hidden-xs"></th>
                     <th>note</th>
                 </tr>
                 </thead>
@@ -99,7 +99,7 @@
                             <!-- NOM -->
                             <td>{{ resultat.serie.nom }}</td>
                         {% endif %}
-                        <td>
+                        <td class="hidden-xs">
                             <div class="progress xs">
                                 <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ note }}%;"></div>
                             </div>
@@ -126,11 +126,14 @@
         <div class="body">
             {{ eklerni.row(form.classe) }}
             {{ eklerni.row(form.eleve) }}
+            <hr>
             {{ eklerni.row(form.matiere) }}
             {{ eklerni.row(form.activite) }}
             {{ eklerni.row(form.serie) }}
+            <hr>
             {{ eklerni.row(form.limit) }}
             {{ eklerni.row(form.moyenne) }}
+            {{ eklerni.row(form.istest) }}
             {# {{ eklerni.row(form.datedebut) }}#}
 
             {{ form_widget(form._token) }}

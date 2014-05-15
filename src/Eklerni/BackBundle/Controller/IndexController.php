@@ -17,11 +17,11 @@ class IndexController extends Controller
         $classes = $this->get("eklerni.manager.classe")->findByProf($enseignant);
         $resultats = $this->get('eklerni.manager.resultat')->findResults(
             array(
-                "enseignant" => $enseignant
+                "enseignant" => $enseignant,
             ),
             10,
             array(
-                "champs" => "dateCreation",
+                "champs" => "r.dateCreation",
                 "order" => "desc"
             )
         );

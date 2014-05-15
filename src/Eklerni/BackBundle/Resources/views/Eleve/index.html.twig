@@ -1,25 +1,25 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
         {% set eleveTable %}
-        <table class="table">
-            <tr>
-                <td>{% trans %}personne.lastname.colon{% endtrans %} {{ eleve.nom }}</td>
-            </tr>
-            <tr>
-                <td>{% trans %}personne.firstname.colon{% endtrans %} {{ eleve.prenom }}</td>
-            </tr>
-            <tr>
-                <td>
-                    {% trans %}classe.name.colon{% endtrans %} <a href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>{% trans %}personne.birthdate.colon{% endtrans %} {{ eleve.dateNaissance|datelocale() }}</td>
-            </tr>
-        </table>
-        {% endset %}
+<table class="table">
+    <tr>
+        <td>{% trans %}personne.lastname.colon{% endtrans %} {{ eleve.nom }}</td>
+    </tr>
+    <tr>
+        <td>{% trans %}personne.firstname.colon{% endtrans %} {{ eleve.prenom }}</td>
+    </tr>
+    <tr>
+        <td>
+            {% trans %}classe.name.colon{% endtrans %} <a href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}</a>
+        </td>
+    </tr>
+    <tr>
+        <td>{% trans %}personne.birthdate.colon{% endtrans %} {{ eleve.dateNaissance|datelocale() }}</td>
+    </tr>
+</table>
+{% endset %}
 {% set footereleve %}
-    <a href="{{ path ("eklerni_back_eleve_modifier", {idEleve:eleve.id}) }}" class="btn btn-primary">{% trans %}url.modify.eleve{% endtrans %}</a>
+<a href="{{ path ("eklerni_back_eleve_modifier", {idEleve:eleve.id}) }}" class="btn btn-primary">{% trans %}url.modify.eleve{% endtrans %}</a>
 {% endset %}
 
 
@@ -67,13 +67,106 @@
     {% endset %}
 {% endif %}
 
+
+{% if moyennes|length > 0 %}
+    {% if moyennes|length == moyennesClasse|length %}
+        {% set moyennesbody %}
+        <div id="moyennes" style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
+        {% endset %}
+    {% else %}
+        {% set moyennesbody %}
+        {% trans %}eleve.noteinsuffisante{% endtrans %}
+        {% endset %}
+    {% endif %}
+{% else %}
+    {% set moyennesbody %}
+    {% trans %}eleve.notnote{% endtrans %}
+    {% endset %}
+{% endif %}
+
 {% block body %}
     <div class="row">
         <div class="col-md-4">
             {{ eklerni.block( "Eleve", eleveTable, footereleve, "primary") }}
+            {{ eklerni.block("Moyenne par Matiere", moyennesbody, "", "primary") }}
         </div>
         <div class="col-md-8">
             {{ eklerni.block("Liste des Derniers Résultats", resultatbody, "", "primary") }}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var matieres = [];
+            var notes = [];
+            {% for moyenne in moyennes %}
+                matieres[{{ (loop.index0/moyennes|length) * 360 }}] = "{{ moyenne[0].serie.activite.matiere.name }}";
+                notes.push({{ moyenne["note"]|number_format }});
+            {% endfor %}
+            var notesClasse = [];
+            {% for moyenne in moyennesClasse %}
+                notesClasse.push({{ moyenne["note"]|number_format }});
+            {% endfor %}
+            /* matieres[72] = "Dictée";
+             matieres[144] = "Lecture";
+             matieres[216] = "Compter";
+             matieres[288] = "Conjugaison";*/
+
+            $('#moyennes').highcharts({
+                chart: {
+                    polar: true
+                },
+                title: {
+                    text: '{% trans %}stats.moyenne.matiere{% endtrans %}'
+                },
+                subtitle: {
+                    text: '{{ eleve.prenom }} {{ eleve.nom }}'
+                },
+                pane: {
+                    startAngle: 0,
+                    endAngle: 360
+                },
+                xAxis: {
+                    tickInterval: {{ (360 / moyennes|length)|number_format  }},
+                    min: 0,
+                    max: 360,
+                    labels: {
+                        formatter: function () {
+                            return matieres[this.value];
+                        },
+                        overflow: 'justify'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 100
+                },
+                plotOptions: {
+                    series: {
+                        pointStart: 0,
+                        pointInterval: {{ (360 / moyennes|length)|number_format  }}
+                    },
+                    column: {
+                        pointPadding: 0,
+                        groupPadding: 0
+                    }
+                },
+                series: [
+                    {
+                        type: 'area',
+                        name: '{% trans %}stats.moyenne.eleve{% endtrans %}',
+                        data: notes
+                    },
+                    {
+                        type: 'line',
+                        name: '{% trans %}stats.moyenne.classe{% endtrans %}',
+                        data: notesClasse
+                    }
+                ]
+            });
+        });
+    </script>
 {% endblock %}

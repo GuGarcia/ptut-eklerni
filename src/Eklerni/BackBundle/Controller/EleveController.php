@@ -8,7 +8,8 @@ use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class EleveController extends Controller{
+class EleveController extends Controller
+{
 
     /**
      * @param $idEleve
@@ -16,24 +17,61 @@ class EleveController extends Controller{
      */
     public function indexAction($idEleve)
     {
+        /** @var Eleve $eleve */
         $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve)[0];
-        $resultats = $this->get('eklerni.manager.resultat')->findByEleve($eleve, 10, array("champs" => "dateCreation", "order" => "desc"));
+        $resultats = $this->get('eklerni.manager.resultat')->findResults(
+            array(
+                "eleve" => $eleve
+            ),
+            10,
+            array(
+                "champs" => "r.dateCreation",
+                "order" => "desc"
+            )
+        );
+        $moyennes = $this->get('eklerni.manager.resultat')->findResults(
+            array(
+                "eleve" => $eleve,
+                "moyenne" => "matiere",
+                "istest" => true
+            ), null,
+            array(
+                "champs" => "m.name",
+                "order" => "asc"
+            )
+        );
+
+        $moyennesClasse = $this->get('eklerni.manager.resultat')->findResults(
+            array(
+                "classe" => $eleve->getClasse(),
+                "moyenne" => "matiere",
+                "istest" => true
+            ), null,
+            array(
+                "champs" => "m.name",
+                "order" => "asc"
+            )
+        );
+
         return $this->render('EklerniBackBundle:Eleve:index.html.twig', array(
-            "title" => "Élève ".$eleve->getNom()." ".$eleve->getPrenom(),
+            "title" => "Élève " . $eleve->getNom() . " " . $eleve->getPrenom(),
             "eleve" => $eleve,
-            "resultats" => $resultats
+            "resultats" => $resultats,
+            "moyennes" => $moyennes,
+            "moyennesClasse" => $moyennesClasse
         ));
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction() {
+    public function listAction()
+    {
         /** @var Enseignant $prof */
         $prof = $this->get('security.context')->getToken()->getUser();
         $classes = $this->get("eklerni.manager.classe")->findByProf($prof);
 
-        return $this->render('EklerniBackBundle:Eleve:list.html.twig', array("title" => "Listes des Elèves par Classes","classes" => $classes));
+        return $this->render('EklerniBackBundle:Eleve:list.html.twig', array("title" => "Listes des Elèves par Classes", "classes" => $classes));
     }
 
     public function ajouterAction(Request $request, $idClasse)
@@ -82,7 +120,8 @@ class EleveController extends Controller{
         }
     }
 
-    public function modifierAction(Request $request, $idEleve) {
+    public function modifierAction(Request $request, $idEleve)
+    {
         /** @var Eleve $eleve */
         $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve)[0];
 
