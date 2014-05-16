@@ -22,15 +22,13 @@ class EnseignantManager extends BaseManager
             $entity->setDateModification(new \DateTime('now'));
         }
 
-        if (0 === $entity->getId()) {
+        if (null === $entity->getId()) {
             if (property_exists($entity, 'dateCreation')) {
                 $entity->setDateCreation(new \DateTime('now'));
             }
             $this->em->persist($entity);
         }
-        // TODO GV Finish
         $this->em->flush();
-        $entity = $this->em->merge($entity);
         $entity->upload();
         $this->em->flush();
     }
