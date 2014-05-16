@@ -1,5 +1,15 @@
 <aside class="left-side sidebar-offcanvas">
     <section class="sidebar">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img alt="{% trans %}personne.picture{% endtrans %}" class="img-circle img-header" src="{{ asset(app.user.picture) }}">
+            </div>
+            <div class="pull-left info">
+                <p>{% trans with {'%name%': app.user.prenom } %}Hello, %name%{% endtrans %}</p>
+
+                <a href="{{ path("eklerni_cas_logout") }}"><i class="fa fa-power-off"></i> {% trans %}btn.logout{% endtrans %}</a>
+            </div>
+        </div>
         <ul class="sidebar-menu">
             <li class="bg-red">
                 <a href="{{ path("eklerni_back_classe") }}">
@@ -38,11 +48,6 @@
                     <i class="fa fa-tablet"></i><span>{% trans %}sidebar.tablet{% endtrans %}</span>
                 </a>
             </li>
-            <!--<li class="bg-green">
-                <a href="{{ path("eklerni_front_homepage") }}">
-                    <i class="fa fa-undo"></i><span>{% trans %}sidebar.gotofront{% endtrans %}</span>
-                </a>
-            </li>-->
         </ul>
         <div id="messages"></div>
     </section>

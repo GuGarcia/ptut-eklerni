@@ -34,3 +34,29 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+jms_translation:
+    configs:
+        back:
+            dirs: [%kernel.root_dir%/../src/Eklerni/BackBundle]
+            output_dir: %kernel.root_dir%/../src/Eklerni/BackBundle/Resources/translations
+            ignored_domains: [routes]
+            excluded_names: [*TestCase.php, *Test.php]
+            excluded_dirs: [cache, data, logs]
+        cas:
+            dirs: [%kernel.root_dir%/../src/Eklerni/CASBundle]
+            output_dir: %kernel.root_dir%/../src/Eklerni/CASBundle/Resources/translations
+            ignored_domains: [routes]
+            excluded_names: [*TestCase.php, *Test.php]
+            excluded_dirs: [cache, data, logs]
+        front:
+            dirs: [%kernel.root_dir%/../src/Eklerni/FrontBundle]
+            output_dir: %kernel.root_dir%/../src/Eklerni/FrontBundle/Resources/translations
+            ignored_domains: [routes]
+            excluded_names: [*TestCase.php, *Test.php]
+            excluded_dirs: [cache, data, logs]
+services:
+    twig.text_extension:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - name: twig.extension
