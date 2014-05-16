@@ -2,26 +2,26 @@
 
 {% set eleveTable %}
 <div class="row">
-    <div class="col-md-4">
-        <img alt="{% trans %}personne.picture{% endtrans %}" src="{{ asset(eleve.picture) }}">
+    <div class="col-lg-4">
+        <div class="img-crop img-md" style="background-image:url('{{ asset(eleve.picture) }}')"></div>
     </div>
-    <div class="col-md-8">
-    <table class="table">
-        <tr>
-            <td>{% trans %}personne.lastname.colon{% endtrans %} {{ eleve.nom }}</td>
-        </tr>
-        <tr>
-            <td>{% trans %}personne.firstname.colon{% endtrans %} {{ eleve.prenom }}</td>
-        </tr>
-        <tr>
-            <td>
-                {% trans %}classe.name.colon{% endtrans %} <a href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}</a>
-            </td>
-        </tr>
-        <tr>
-            <td>{% trans %}personne.birthdate.colon{% endtrans %} {{ eleve.dateNaissance|datelocale() }}</td>
-        </tr>
-    </table>
+    <div class="col-lg-8">
+        <table class="table">
+            <tr>
+                <td>{% trans %}personne.lastname.colon{% endtrans %} {{ eleve.nom }}</td>
+            </tr>
+            <tr>
+                <td>{% trans %}personne.firstname.colon{% endtrans %} {{ eleve.prenom }}</td>
+            </tr>
+            <tr>
+                <td>
+                    {% trans %}classe.name.colon{% endtrans %} <a href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>{% trans %}personne.birthdate.colon{% endtrans %} {{ eleve.dateNaissance|datelocale() }}</td>
+            </tr>
+        </table>
     </div>
 </div>
 {% endset %}
@@ -87,18 +87,27 @@
     {% endif %}
 {% else %}
     {% set moyennesbody %}
-    {% trans %}eleve.notnote{% endtrans %}
+    {% trans %}eleve.no.note{% endtrans %}
     {% endset %}
 {% endif %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-4">
-            {{ eklerni.block( "Eleve", eleveTable, footereleve, "primary") }}
-            {{ eklerni.block("Moyenne par Matiere", moyennesbody, "", "primary") }}
+            {% set eleveList %}
+                {% trans %}eleve.text{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(eleveList, eleveTable, footereleve, "primary") }}
+            {% set statMoyList %}
+                {% trans %}statistique.moyenne.matiere{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(statMoyList, moyennesbody, "", "primary") }}
         </div>
         <div class="col-md-8">
-            {{ eklerni.block("Liste des Derniers Résultats", resultatbody, "", "primary") }}
+            {% set latestStatList %}
+                {% trans %}statistique.result.latest{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(latestStatList, resultatbody, "", "primary") }}
         </div>
     </div>
 {% endblock %}

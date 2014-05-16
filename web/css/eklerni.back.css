@@ -1,8 +1,33 @@
-/** HEADER **/
+/** IMAGES **/
 .img-header {
     width: auto;
     height: 45px;
 }
+.img-crop {
+    position: relative;
+    height: 75px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.img-xs {
+    height: 75px;
+    width: 60px;
+}
+.img-sm {
+    height: 100px;
+    width: 85px;
+}
+.img-md {
+    height: 150px;
+    width: 120px;
+}
+.img-lg {
+    height: 200px;
+    width: 135px;
+}
+
 /** MESSAGES BOX **/
 #messages .alert {
     padding: 5px;

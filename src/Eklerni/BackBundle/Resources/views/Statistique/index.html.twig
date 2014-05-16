@@ -130,10 +130,16 @@
 
     <div class="row">
         <div class="col-md-3">
-            {{ eklerni.block("Générateur de Satistiques", formbody, "", "primary") }}
+            {% set statList %}
+                {% trans %}statistique.generator{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(statList, formbody, "", "primary") }}
         </div>
         <div class="col-md-9">
-            {{ eklerni.block("Liste des Résultats", resultatbody, "", "primary") }}
+            {% set resultList %}
+                {% trans %}resultat.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(resultList, resultatbody, "", "primary") }}
         </div>
     </div>
 {% endblock %}

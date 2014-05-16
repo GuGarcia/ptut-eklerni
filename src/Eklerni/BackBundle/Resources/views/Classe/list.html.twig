@@ -7,31 +7,26 @@
                 <table id="table" class="table table-bordered table-hover dataTable"
                        aria-describedby="table_info">
                     <thead>
-                    <tr role="row">
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                            colspan="1">
-                            {% trans %}classe.name{% endtrans %}
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                            colspan="1">
-                            {% trans %}classe.level{% endtrans %}
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                            colspan="1">
-                            {% trans %}classe.year{% endtrans %}
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                            colspan="1">
-                            {% trans %}classe.eleve.count{% endtrans %}
-                        </th>
-                        <th class="sorting_desc" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                            colspan="1">
-                            {% trans %}ecole.text{% endtrans %}
-                        </th>
-                        <th>
-                            {% trans %}utils.tools{% endtrans %}
-                        </th>
-                    </tr>
+                        <tr role="row">
+                            <th>
+                                {% trans %}classe.name{% endtrans %}
+                            </th>
+                            <th>
+                                {% trans %}classe.level{% endtrans %}
+                            </th>
+                            <th>
+                                {% trans %}classe.year{% endtrans %}
+                            </th>
+                            <th>
+                                {% trans %}classe.eleve.count{% endtrans %}
+                            </th>
+                            <th>
+                                {% trans %}ecole.text{% endtrans %}
+                            </th>
+                            <th>
+                                {% trans %}utils.tools{% endtrans %}
+                            </th>
+                        </tr>
                     </thead>
                     <tbody role="alert" aria-live="polite" aria-relevant="all">
                     {% for classe in classes %}

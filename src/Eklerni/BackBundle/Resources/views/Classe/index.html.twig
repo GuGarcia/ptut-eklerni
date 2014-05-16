@@ -5,19 +5,23 @@
         <table class="table">
             {% for eleve in classe.eleves %}
                 <tr>
-                    <td><img alt="{% trans %}personne.picture{% endtrans %}" src="{{ asset(eleve.picture) }}"></td>
-                    <td><a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">{{ eleve.nom }} {{ eleve.prenom }}</a></td>
+                    <td class="col-lg-2">
+                        <div class="img-crop img-xs" style="background-image:url('{{ asset(eleve.picture) }}')"></div>
+                    </td>
+                    <td class="col-lg-10">
+                        <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">{{ eleve.nom }} {{ eleve.prenom }}</a>
+                    </td>
                 </tr>
             {% endfor %}
         </table>
     {% endset %}
 {% else %}
     {% set elevesTable %}
-    Il n'y a pas d'eleve dans cette Classe.
+        {% trans %}classe.no.eleve{% endtrans %}
     {% endset %}
 {% endif %}
 {% set footereleves %}
-<a href="{{ path("eklerni_back_eleve_ajouter", {idClasse:classe.id}) }}" class="btn btn-primary">{% trans %}btn.eleve.add{% endtrans %}</a>
+    <a href="{{ path("eklerni_back_eleve_ajouter", {idClasse:classe.id}) }}" class="btn btn-primary">{% trans %}btn.eleve.add{% endtrans %}</a>
 {% endset %}
 
 {% set profsTable %}
@@ -26,7 +30,7 @@
         <tr id="{{ prof.id }}">
             <td>
                 {% if prof.id != app.user.id %}
-                    <a href="" title="Supprimer" class="delete right block">
+                    <a href="#" title="{% trans %}utils.delete{% endtrans %}" class="delete right block">
                         <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                     </a>
                     <span>{{ prof.nom }} {{ prof.prenom }}</span>

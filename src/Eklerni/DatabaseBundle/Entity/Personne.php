@@ -295,7 +295,11 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
      */
     public function getPicture()
     {
-        return 'uploads/profile/'.$this->picture;
+        if (null != $this->picture) {
+            return 'uploads/profile/'.$this->picture;
+        } else {
+            return 'uploads/profile/no-image.jpg';
+        }
     }
 
     /**

@@ -15,11 +15,14 @@
                         {% if classe.eleves|length > 0 %}
                             {% set header %}
                             <tr role="row">
-                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                                    colspan="1" aria-label="Rendering engine: activate to sort column ascending">Nom
+                                <th>
+                                    {% trans %}personne.picture{% endtrans %}
                                 </th>
-                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="table" rowspan="1"
-                                    colspan="1" aria-label="Rendering engine: activate to sort column ascending">Date de naissance
+                                <th>
+                                    {% trans %}personne.firstname{% endtrans %}
+                                </th>
+                                <th>
+                                    {% trans %}personne.birthdate{% endtrans %}
                                 </th>
                                 <th>
                                     {% trans %}utils.tools{% endtrans %}
@@ -28,16 +31,19 @@
                             {% endset %}
                             {% set content %}
                                 {% for eleve in classe.eleves %}
-                                    <tr class="odd">
-                                        <td class="">
+                                    <tr class="{% if loop.index0 is even %}even{% else %}odd{% endif %}">
+                                        <td>
+                                            <div class="img-crop img-xs" style="background-image:url('{{ asset(eleve.picture) }}')"></div>
+                                        </td>
+                                        <td>
                                             <a href="{{ path("eklerni_back_eleve_fiche", {idEleve: eleve.id}) }}">
                                                 {{ eleve.nom }} {{ eleve.prenom }}
                                             </a>
                                         </td>
-                                        <td class="">
+                                        <td>
                                             {{ eleve.dateNaissance|datelocale() }}
                                         </td>
-                                        <td class="">
+                                        <td>
                                             <a href="{{ path("eklerni_back_eleve_modifier", {idEleve: eleve.id}) }}" class="btn btn-default btn-xs">
                                                 <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
                                             </a>
@@ -51,7 +57,7 @@
 
                             {{ eklerni.dataTable(header, content, "") }}
                         {% else %}
-                            Il n'y a pas d'élève dans cette Classe !
+                            {% trans %}classe.no.eleve{% endtrans %}
                         {% endif %}
 
                     {% endset %}
@@ -69,7 +75,7 @@
             </div>
         </div>
     {% else %}
-        <div class="box-body">Vous n'avez pas de classe et donc pas d'élève !</div>
+        <div class="box-body">{% trans %}enseignant.no.classe{% endtrans %}</div>
     {% endif %}
 
 {% endblock %}
@@ -78,7 +84,7 @@
     <script type="application/javascript">
         $(function () {
             $('#table').dataTable({
-                "bPaginate": false,
+                "bPaginate": true,
                 "bLengthChange": false,
                 "bFilter": false,
                 "bSort": true,

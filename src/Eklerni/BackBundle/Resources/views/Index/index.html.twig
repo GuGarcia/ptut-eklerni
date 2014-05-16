@@ -2,22 +2,32 @@
 
 {% if eleves|length > 0 %}
     {% set elevesTable %}
-    <table class="table">
-        <tr>
-            <th>{% trans %}personne.name{% endtrans %}</th>
-            <th>{% trans %}classe.text{% endtrans %}</th>
-        </tr>
-        {% for eleve in eleves %}
-            <tr>
-                <td>
-                    <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">{{ eleve.nom ~ " " ~ eleve.prenom }}</a>
-                </td>
-                <td>
-                    <a href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div id="table_wrapper" class="dataTables_wrapper form-inline" role="grid">
+        <table id="table_eleve" class="table table-bordered table-hover dataTable" aria-describedby="table_info">
+            <thead>
+                <tr>
+                    <th>{% trans %}personne.picture{% endtrans %}</th>
+                    <th>{% trans %}personne.name{% endtrans %}</th>
+                    <th>{% trans %}classe.text{% endtrans %}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for eleve in eleves %}
+                <tr>
+                    <td>
+                        <div class="img-crop img-xs" style="background-image:url('{{ asset(eleve.picture) }}')"></div>
+                    </td>
+                    <td>
+                        <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:eleve.id}) }}">{{ eleve.nom ~ " " ~ eleve.prenom }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ path("eklerni_back_classe_fiche", {idClasse:eleve.classe.id}) }}">{{ eleve.classe.nom }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     {% endset %}
 {% else %}
     {% set elevesTable %}
@@ -61,15 +71,14 @@
 {% endset %}
 
 {% if resultats|length > 0 %}
-    {# TODO Trad #}
     {% set resultatbody %}
     <table class="table table-bordered">
         <tr>
-            <th>Classe</th>
-            <th>Nom</th>
-            <th>Série</th>
+            <th>{% trans %}classe.text{% endtrans %}</th>
+            <th>{% trans %}personne.lastname{% endtrans %}</th>
+            <th>{% trans %}serie.text{% endtrans %}</th>
             <th class="col-md-6"></th>
-            <th>note</th>
+            <th>{% trans %}note.text{% endtrans %}</th>
         </tr>
         {% for resultat in resultats %}
             {% if resultat.note < 25 %}
@@ -96,7 +105,6 @@
                         {{ resultat.eleve.prenom }} {{ resultat.eleve.nom }}
                     </a>
                 </td>
-                {# TODO Lien Série #}
                 <td>
                     <a href="{{ path("eklerni_back_serie_fiche", {idSerie:resultat.serie.id}) }}">
                         {{ resultat.serie.nom }}
@@ -116,7 +124,7 @@
     {% endset %}
 {% else %}
     {% set resultatbody %}
-    Il n'y a pas de résutlat disponnible.
+        {% trans %}result.notfound{% endtrans %}
     {% endset %}
 {% endif %}
 
@@ -124,18 +132,36 @@
     <div class="row">
         <div class="col-md-4">
             {% set classList %}
-            {% trans %}classe.list{% endtrans %}
+                {% trans %}classe.list{% endtrans %}
             {% endset %}
             {{ eklerni.block(classList, classesTable, footerclasses, "danger") }}
             {% set eleveList %}
-            {% trans %}eleve.list{% endtrans %}
+                {% trans %}eleve.list{% endtrans %}
             {% endset %}
             {{ eklerni.block(eleveList, elevesTable, "", "primary") }}
         </div>
         <div class="col-md-8">
-            {{ eklerni.block("Liste des Derniers Résultats", resultatbody, "", "primary") }}
+            {% set resultList %}
+                {% trans %}result.list.last{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(resultList, resultatbody, "", "primary") }}
         </div>
 
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script type="application/javascript">
+        $(function () {
+            $('#table_eleve').dataTable({
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+        });
+    </script>
 {% endblock %}
