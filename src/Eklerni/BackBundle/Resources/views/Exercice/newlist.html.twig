@@ -1,0 +1,244 @@
+{% extends "EklerniBackBundle:Template:template.html.twig" %}
+
+{% set listActivite %}
+<div id="activitelist">
+    {% for matiere in matieres %}
+            <h3>{{ matiere.name }}</h3>
+            {% for activite in matiere.activites %}
+                <div class="col-sm-offset-2">
+                    <button id="{{ activite.id }}" type="button"
+                            class="btn btn-block btn-default activite-button">{{ activite.name }}</button>
+                </div>
+            {% endfor %}
+    {% endfor %}
+</div>
+{% endset %}
+
+{% set listSerie %}
+<div id="serielist">
+    {% for matiere in matieres %}
+        {% for activite in matiere.activites %}
+            <div class="box box-primary hidden" id="{{ activite.id }}">
+                <div class="nav-tabs-custom">
+                    <ul id="tabs" class="nav nav-tabs pull-right">
+                        <li class="tab active">
+                            <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">{% trans %}
+                                serie.personnal{% endtrans %}</a>
+                        </li>
+                        <li class="tab">
+                            <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">{% trans %}
+                                serie.public{% endtrans %}</a>
+                        </li>
+                        <li class="noborder">
+                            <a class="btn btn-primary bg-blue"
+                               href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
+                                <i class="fa fa-plus"></i>
+                                {% trans %}serie.name{% endtrans %}
+                            </a>
+                        </li>
+                        <li class="pull-left header">
+                            {{ activite.name }}
+                        </li>
+                    </ul>
+                    <div class="tab-content">  {% set seriesPublic = [] %}
+                        {% for serie in activite.series %}
+                            {% if serie.public %}
+                                {% set seriesPublic = seriesPublic|merge([serie]) %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% set seriesPerso = [] %}
+                        {% for serie in activite.series %}
+                            {% if serie.enseignant.id == app.user.id %}
+                                {% set seriesPerso = seriesPerso|merge([serie]) %}
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
+                            {% if seriesPerso is empty %}
+                                {% trans %}serie.notfound.personnal{% endtrans %}
+                            {% else %}
+                                <div id="table_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                    <table class="table table-hover dataTable">
+                                        <tbody>
+                                        <tr>
+                                            <th class="tdsize">{% trans %}serie.name{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}serie.description{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}serie.level{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}serie.difficulty{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}serie.questions.number{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}serie.statut{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
+                                        </tr>
+                                        {% for serie in seriesPerso if serie.enseignant.id == app.user.id %}
+                                            <tr>
+                                                <td class="tdsize">{{ serie.nom }}</td>
+                                                <td class="tdsize">{{ serie.description }}</td>
+                                                <td class="tdsize">{{ serie.niveau }}</td>
+                                                <td class="tdsize">
+                                                    {% if serie.difficulte == 1 %}
+                                                        <span class="badge bg-green">Facile</span>
+                                                    {% elseif serie.difficulte == 2 %}
+                                                        <span class="badge bg-orange">Moyen</span>
+                                                    {% elseif serie.difficulte == 3 %}
+                                                        <span class="badge bg-red">Difficile</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="tdsize">{{ serie.questions|length }}</td>
+                                                <td class="tdsize">
+                                                    {% if serie.public %}
+                                                        <span class="badge bg-blue">Publique</span>
+                                                    {% else %}
+                                                        <span class="badge bg-red">Privée</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="tdsize">
+                                                    <a class="btn btn-default btn-xs"
+                                                       href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
+                                                        <i class="fa fa-pencil"></i> {% trans %}
+                                                        utils.modify{% endtrans %}
+                                                    </a>
+
+                                                    <a class="btn btn-default btn-xs duplicateSerieBtn"
+                                                       href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}">
+                                                        <i class="fa fa-copy"></i> {% trans %}
+                                                        utils.duplicate{% endtrans %}
+                                                    </a>
+
+                                                    <a class="btn btn-danger btn-xs deleteSerieBtn{% if serie.resultats is not empty %} disabled{% endif %}"
+                                                       href="{{ path('eklerni_back_serie_delete', { idSerie: serie.id }) }}">
+                                                        <i class="fa fa-times"></i> {% trans %}
+                                                        utils.delete{% endtrans %}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
+                            {% if seriesPublic is empty %}
+                                {% trans %}serie.notfound.public{% endtrans %}
+                            {% else %}
+                                <div id="table_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                        <tr>
+                                            <th class="tdsize">{% trans %}serie.name{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}serie.description{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}serie.level{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}serie.difficulty{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}serie.questions.number{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}serie.enseignant{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
+                                        </tr>
+                                        {% for serie in seriesPublic %}
+                                            <tr>
+                                                <td class="tdsize">{{ serie.nom }}</td>
+                                                <td class="tdsize">{{ serie.description }}</td>
+                                                <td class="tdsize">{{ serie.niveau }}</td>
+                                                <td class="tdsize">
+                                                    {% if serie.difficulte == 1 %}
+                                                        <span class="badge bg-green">Facile</span>
+                                                    {% elseif serie.difficulte == 2 %}
+                                                        <span class="badge bg-orange">Moyen</span>
+                                                    {% elseif serie.difficulte == 3 %}
+                                                        <span class="badge bg-red">Difficile</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="tdsize">{{ serie.questions|length }}</td>
+                                                <td class="tdsize">
+                                                    {% if serie.enseignant.id == app.user.id %}
+                                                        <span class="badge">
+                                                                {{ serie.enseignant.nom ~ ' ' ~ serie.enseignant.prenom }}
+                                                            </span>
+                                                    {% else %}
+                                                        {{ serie.enseignant.nom ~ ' ' ~ serie.enseignant.prenom }}
+                                                    {% endif %}
+                                                </td>
+                                                <td class="tdsize">
+                                                    {% if serie.enseignant.id == app.user.id %}
+                                                        <a class="btn btn-default btn-xs"
+                                                           href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
+                                                            <i class="fa fa-pencil"></i> {% trans %}
+                                                            utils.modify{% endtrans %}
+                                                        </a>
+                                                    {% endif %}
+                                                    <a class="btn btn-default btn-xs duplicateSerieBtn"
+                                                       href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}"
+                                                       title="">
+                                                        <i class="fa fa-copy"></i> {% trans %}
+                                                        utils.duplicate{% endtrans %}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>·
+{% endset %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-4">
+            {{ eklerni.block("Liste des Activités", listActivite, "", "primary") }}
+        </div>
+        <div class="col-sm-8">
+            {{ eklerni.block("Liste des Series", listSerie, "", "primary") }}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="application/javascript">
+        $(function () {
+           /* $('.dataTable').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });*/
+            $('#activitelist button').on("click", function() {
+                $('#activitelist button').removeClass("btn-primary");
+                $('#activitelist button').addClass("btn-default");
+                $('#serielist > div.box').addClass("hidden");
+                $(this).removeClass("btn-default");
+                $(this).addClass("btn-primary");
+                $('#serielist > #'+this.id).removeClass("hidden");
+            });
+
+            $('.deleteClassBtn').on('click', function(event){
+                event.preventDefault();
+                var _this = this;
+
+                $.ajax({
+                    type: "POST",
+                    url: $(_this).attr("href"),
+                    dataType: "json"
+                }).success(function (data) {
+                    if (data.success) {
+                        displayMessage("success", data.message);
+                        $(_this).parent().parent().remove();
+                    } else {
+                        displayMessage("danger", data.message);
+                    }
+                });
+            });
+        });
+
+    </script>
+
+{% endblock %}
