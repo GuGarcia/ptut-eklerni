@@ -30,9 +30,9 @@ class SerieType extends AbstractType
             'nom',
             'text',
             array(
-                'label' => 'serie.name',
+                'label' => 'exercice.name',
                 'attr' => array(
-                    'placeholder' => "serie.name",
+                    'placeholder' => "exercice.name",
                     'class' => 'form-control'
                 )
             )
@@ -42,9 +42,9 @@ class SerieType extends AbstractType
             'description',
             'textarea',
             array(
-                'label' => 'serie.description',
+                'label' => 'exercice.description',
                 'attr' => array(
-                    'placeholder' => "serie.description",
+                    'placeholder' => "exercice.description",
                     'class' => 'form-control'
                 ),
                 'required' => false
@@ -53,7 +53,7 @@ class SerieType extends AbstractType
 
         $builder->add(
             'niveau', 'choice', array(
-                'label' => 'serie.level',
+                'label' => 'exercice.level',
                 'choices' => array(
                     'CP'  => 'grade.year1',
                     'CE1' => 'grade.year2',
@@ -71,7 +71,7 @@ class SerieType extends AbstractType
             'difficulte',
             'choice',
             array(
-                'label' => "serie.difficulty",
+                'label' => "exercice.difficulty",
                 'choices' => array(
                     '1' => 'difficulte.niveau1',
                     '2' => 'difficulte.niveau2',
@@ -87,7 +87,7 @@ class SerieType extends AbstractType
             "public",
             "checkbox",
             array(
-                'label' => "serie.public",
+                'label' => "exercice.public",
                 'required' => false,
                 'attr' => array(
                     'class' => 'form-control'

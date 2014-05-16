@@ -24,7 +24,7 @@ class AttributionController extends Controller
             $attributionClasses[$classe->getId()] = $this->get("eklerni.manager.attribuer")->findByClasse($classe);
         }
         return $this->render('EklerniBackBundle:Attribution:index.html.twig', array(
-            "title" => "Attribution des Exercices",
+            "title" => $this->get('translator')->trans("title.exercice.attribution"),
             "seriesProf" => $seriesProf,
             "prof" => $prof,
             "attributionClasses" => $attributionClasses

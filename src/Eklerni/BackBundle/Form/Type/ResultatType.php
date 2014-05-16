@@ -42,7 +42,7 @@ class ResultatType extends AbstractType
                     'class' => 'form-control'
                 ),
                 'property' => "parent",
-                'empty_value' => 'Choisissez un eleve',
+                'empty_value' => 'eleve.choose',
                 'required' => false,
             )
         );
@@ -60,7 +60,7 @@ class ResultatType extends AbstractType
                     'class' => 'form-control'
                 ),
                 'property' => "name",
-                'empty_value' => 'Choisissez une matiere',
+                'empty_value' => 'matiere.choose',
                 'required' => false,
             )
         );
@@ -78,7 +78,7 @@ class ResultatType extends AbstractType
                     'class' => 'form-control'
                 ),
                 'property' => "nom",
-                'empty_value' => 'Choisissez une classe',
+                'empty_value' => 'classe.choose',
                 'required' => false,
             )
         );
@@ -96,7 +96,7 @@ class ResultatType extends AbstractType
                     'class' => 'form-control'
                 ),
                 'property' => "parent",
-                'empty_value' => 'Choisissez une activite',
+                'empty_value' => 'activite.choose',
                 'required' => false,
             )
         );
@@ -105,7 +105,7 @@ class ResultatType extends AbstractType
             'serie',
             'entity',
             array(
-                'label' => 'serie.text',
+                'label' => 'exercice.text',
                 'class' => 'EklerniDatabaseBundle:Serie',
                 'query_builder' => function (SerieRepository $er) {
                         return $er->findByProf($this->enseignant);
@@ -114,7 +114,7 @@ class ResultatType extends AbstractType
                     'class' => 'form-control'
                 ),
                 'property' => "parent",
-                'empty_value' => 'Choisissez une serie',
+                'empty_value' => 'exercice.choose',
                 'required' => false,
             )
         );
@@ -161,10 +161,10 @@ class ResultatType extends AbstractType
             array(
                 'choices' => array(
                     "" => 'aucun',
-                    'eleve' => 'Par Eleve',
-                    'classe' => 'Par Classe',
-                    'matiere' => 'Par Matiere',
-                    'total' => 'Sur Tout'
+                    'eleve' => 'stats.moyenne.by.eleve',
+                    'classe' => 'stats.moyenne.by.classe',
+                    'matiere' => 'stats.moyenne.by.matiere',
+                    'total' => 'stats.moyenne.by.all'
                 ),
                 'label' => "moyenne.text",
                 'required' => false,
@@ -173,15 +173,6 @@ class ResultatType extends AbstractType
                 )
             )
         );
-        $builder->add('gender', 'choice', array(
-            'choices' => array(
-                'm' => 'Male',
-                'f' => 'Female'
-            ),
-            'required' => false,
-            'empty_value' => 'Choose your gender',
-            'empty_data' => null
-        ));
 
         $builder->add(
             'istest',
@@ -189,8 +180,8 @@ class ResultatType extends AbstractType
             array(
                 'choices' => array(
                     "" => 'aucun',
-                    "true" => 'Oui',
-                    "false" => 'Non'
+                    "true" => 'utils.yes',
+                    "false" => 'utils.no'
                 ),
                 'label' => 'istest.text',
                 'required' => false,

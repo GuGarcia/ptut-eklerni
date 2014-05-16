@@ -34,7 +34,7 @@ class ExerciceController extends Controller
         return $this->render(
             'EklerniBackBundle:Exercice:index.html.twig',
             array(
-                "title" => $this->get('translator')->trans("title.serie")." ".ucfirst($serie->getNom()),
+                "title" => $this->get('translator')->trans("title.exercice")." ".ucfirst($serie->getNom()),
                 "serie" => $serie,
                 "resultats" => $lastResult,
                 "note" => $moyenne
@@ -93,7 +93,7 @@ class ExerciceController extends Controller
             'EklerniBackBundle:Exercice:form.html.twig',
             array(
                 'form' => $form->createView(),
-                'title' => $this->get('translator')->trans("title.create_serie"),
+                'title' => $this->get('translator')->trans("title.exercice.create"),
             )
         );
     }
@@ -104,7 +104,7 @@ class ExerciceController extends Controller
         $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
 
         if (!$serie) {
-            throw new \Exception($this->get('translator')->trans('serie.notfound'));
+            throw new \Exception($this->get('translator')->trans('exercice.notfound'));
         }
 
         $form = $this->createForm(
@@ -125,7 +125,7 @@ class ExerciceController extends Controller
             'EklerniBackBundle:Exercice:form.html.twig',
             array(
                 'form' => $form->createView(),
-                'title' => $this->get('translator')->trans("title.modify_serie"),
+                'title' => $this->get('translator')->trans("title.exercice.modify"),
             )
         );
     }
@@ -150,7 +150,7 @@ class ExerciceController extends Controller
                         json_encode(
                             array(
                                 "success" => true,
-                                "message" => $this->get('translator')->trans('serie.delete.success')
+                                "message" => $this->get('translator')->trans('exercice.delete.success')
                             )
                         )
                     );
@@ -162,7 +162,7 @@ class ExerciceController extends Controller
             json_encode(
                 array(
                     "success" => false,
-                    "message" => $this->get('translator')->trans('serie.delete.fail')
+                    "message" => $this->get('translator')->trans('exercice.delete.fail')
                 )
             )
         );
@@ -183,7 +183,7 @@ class ExerciceController extends Controller
                 json_encode(
                     array(
                         "success" => true,
-                        "message" => $this->get('translator')->trans('serie.duplicate.success')
+                        "message" => $this->get('translator')->trans('exercice.duplicate.success')
                     )
                 )
             );
@@ -193,7 +193,7 @@ class ExerciceController extends Controller
             json_encode(
                 array(
                     "success" => false,
-                    "message" => $this->get('translator')->trans('serie.duplicate.fail')
+                    "message" => $this->get('translator')->trans('exercice.duplicate.fail')
                 )
             )
         );
