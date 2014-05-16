@@ -51,7 +51,7 @@ class ExerciceController extends Controller
         $matieres = $this->get('eklerni.manager.matiere')->findAll();
 
         return $this->render(
-            'EklerniBackBundle:Exercice:list.html.twig',
+            'EklerniBackBundle:Exercice:newlist.html.twig',
             array(
                 "title" => $this->get('translator')->trans("title.exercice"),
                 "matieres" => $matieres,
