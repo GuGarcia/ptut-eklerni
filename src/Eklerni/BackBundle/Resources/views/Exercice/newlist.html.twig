@@ -22,18 +22,16 @@
                 <div class="nav-tabs-custom">
                     <ul id="tabs" class="nav nav-tabs pull-right">
                         <li class="tab active">
-                            <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">{% trans %}
-                                serie.personnal{% endtrans %}</a>
+                            <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">{% trans %}serie.personnal{% endtrans %}</a>
                         </li>
                         <li class="tab">
-                            <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">{% trans %}
-                                serie.public{% endtrans %}</a>
+                            <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">{% trans %}serie.public{% endtrans %}</a>
                         </li>
                         <li class="noborder">
                             <a class="btn btn-primary bg-blue"
                                href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
                                 <i class="fa fa-plus"></i>
-                                {% trans %}serie.name{% endtrans %}
+                                {% trans %}exercice.name{% endtrans %}
                             </a>
                         </li>
                         <li class="pull-left header">
@@ -56,18 +54,18 @@
 
                         <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
                             {% if seriesPerso is empty %}
-                                {% trans %}serie.notfound.personnal{% endtrans %}
+                                {% trans %}exercice.notfound.personnal{% endtrans %}
                             {% else %}
                                 <div id="table_wrapper" class="dataTables_wrapper form-inline" role="grid">
                                     <table class="table table-hover dataTable">
                                         <tbody>
                                         <tr>
-                                            <th class="tdsize">{% trans %}serie.name{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}serie.description{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}serie.level{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}serie.difficulty{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}serie.questions.number{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}serie.statut{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.name{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.description{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.level{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.difficulty{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.questions.number{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.statut{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
                                         </tr>
                                         {% for serie in seriesPerso if serie.enseignant.id == app.user.id %}
@@ -95,20 +93,17 @@
                                                 <td class="tdsize">
                                                     <a class="btn btn-default btn-xs"
                                                        href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
-                                                        <i class="fa fa-pencil"></i> {% trans %}
-                                                        utils.modify{% endtrans %}
+                                                        <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
                                                     </a>
 
                                                     <a class="btn btn-default btn-xs duplicateSerieBtn"
                                                        href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}">
-                                                        <i class="fa fa-copy"></i> {% trans %}
-                                                        utils.duplicate{% endtrans %}
+                                                        <i class="fa fa-copy"></i> {% trans %}utils.duplicate{% endtrans %}
                                                     </a>
 
                                                     <a class="btn btn-danger btn-xs deleteSerieBtn{% if serie.resultats is not empty %} disabled{% endif %}"
                                                        href="{{ path('eklerni_back_serie_delete', { idSerie: serie.id }) }}">
-                                                        <i class="fa fa-times"></i> {% trans %}
-                                                        utils.delete{% endtrans %}
+                                                        <i class="fa fa-times"></i> {% trans %}utils.delete{% endtrans %}
                                                     </a>
                                                 </td>
                                             </tr>
@@ -120,18 +115,18 @@
                         </div>
                         <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
                             {% if seriesPublic is empty %}
-                                {% trans %}serie.notfound.public{% endtrans %}
+                                {% trans %}exercice.notfound.public{% endtrans %}
                             {% else %}
                                 <div id="table_wrapper" class="dataTables_wrapper form-inline" role="grid">
                                     <table class="table table-hover">
                                         <tbody>
                                         <tr>
-                                            <th class="tdsize">{% trans %}serie.name{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}serie.description{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}serie.level{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}serie.difficulty{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}serie.questions.number{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}serie.enseignant{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.name{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.description{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.level{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.difficulty{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.questions.number{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.enseignant{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
                                         </tr>
                                         {% for serie in seriesPublic %}
@@ -162,15 +157,13 @@
                                                     {% if serie.enseignant.id == app.user.id %}
                                                         <a class="btn btn-default btn-xs"
                                                            href="{{ path('eklerni_back_serie_modify', { idSerie: serie.id }) }}">
-                                                            <i class="fa fa-pencil"></i> {% trans %}
-                                                            utils.modify{% endtrans %}
+                                                            <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
                                                         </a>
                                                     {% endif %}
                                                     <a class="btn btn-default btn-xs duplicateSerieBtn"
                                                        href="{{ path('eklerni_back_serie_duplicate', { idSerie: serie.id }) }}"
                                                        title="">
-                                                        <i class="fa fa-copy"></i> {% trans %}
-                                                        utils.duplicate{% endtrans %}
+                                                        <i class="fa fa-copy"></i> {% trans %}utils.duplicate{% endtrans %}
                                                     </a>
                                                 </td>
                                             </tr>
