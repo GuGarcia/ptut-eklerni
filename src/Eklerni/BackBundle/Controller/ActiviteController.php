@@ -14,12 +14,13 @@ class ActiviteController extends Controller
     {
         /** @var Matiere $matiere */
         $matiere = $this->get('eklerni.manager.matiere')->findById($idMatiere);
+        if (!$matiere) {
+            throw $this->createNotFoundException($this->get("translator")->trans("matiere.notfound"));
+        }
 
         /** @var Activite $activite */
         $activite = new Activite();
 
-        if (!$matiere) {
-        }
         $activite->setMatiere($matiere);
 
         $form = $this->createForm('eklerni_activite', $activite);
@@ -43,7 +44,10 @@ class ActiviteController extends Controller
     {
         /** @var Activite $activite */
         $activite = $this->get("eklerni.manager.activite")->findById($idActivite);
-
+        if (!$activite) {
+            throw $this->createNotFoundException($this->get("translator")->trans("activite.notfound"));
+        }
+        
         $form = $this->createForm('eklerni_activite', $activite);
         $form->handleRequest($request);
 
@@ -66,22 +70,23 @@ class ActiviteController extends Controller
         if ($request->isXmlHttpRequest()) {
             /** @var Activite $activite */
             $activite = $this->get("eklerni.manager.activite")->findById($idActivite);
+            if (!$activite) {
+                throw $this->createNotFoundException($this->get("translator")->trans("activite.notfound"));
+            }
+            
+            if (0 === $activite->getSeries()->count()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($activite);
+                $em->flush();
 
-            if ($activite) {
-                if (0 === $activite->getSeries()->count()) {
-                    $em = $this->getDoctrine()->getManager();
-                    $em->remove($activite);
-                    $em->flush();
-
-                    return new Response(
-                        json_encode(
-                            array(
-                                "success" => true,
-                                'message' => $this->get('translator')->trans('activite.delete.success')
-                            )
+                return new Response(
+                    json_encode(
+                        array(
+                            "success" => true,
+                            'message' => $this->get('translator')->trans('activite.delete.success')
                         )
-                    );
-                }
+                    )
+                );
             }
         }
         return new Response(

@@ -2,7 +2,6 @@
 
 namespace Eklerni\BackBundle\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Eklerni\DatabaseBundle\Entity\Attribuer;
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;

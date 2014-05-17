@@ -30,6 +30,9 @@ class EcoleController extends Controller
     {
         /** @var Ecole $ecole */
         $ecole = $this->get("eklerni.manager.ecole")->findById($idEcole);
+        if (!$ecole) {
+            throw $this->createNotFoundException($this->get("translator")->trans("ecole.notfound"));
+        }
 
         $form = $this->createForm('eklerni_ecole', $ecole);
         $form->handleRequest($request);

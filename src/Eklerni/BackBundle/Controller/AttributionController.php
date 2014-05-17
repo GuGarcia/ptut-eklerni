@@ -2,7 +2,6 @@
 
 namespace Eklerni\BackBundle\Controller;
 
-
 use Eklerni\DatabaseBundle\Entity\Attribuer;
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;
@@ -16,9 +15,9 @@ class AttributionController extends Controller
 
     public function indexAction()
     {
-        $seriesProf = $this->get("eklerni.manager.serie")->findAllOrderByMatiereActiviteByProf($this->getUser());
-        $prof = $this->get("eklerni.manager.enseignant")->findById($this->getUser()->getId());
-        $classes = $this->get("eklerni.manager.classe")->findByProf($this->getUser());
+        $prof = $this->getUser();
+        $seriesProf = $this->get("eklerni.manager.serie")->findAllOrderByMatiereActiviteByProf($prof);
+        $classes = $this->get("eklerni.manager.classe")->findByProf($prof);
         $attributionClasses = array();
         foreach ($classes as $classe) {
             $attributionClasses[$classe->getId()] = $this->get("eklerni.manager.attribuer")->findByClasse($classe);

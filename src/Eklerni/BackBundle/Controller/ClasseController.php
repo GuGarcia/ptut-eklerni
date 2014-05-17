@@ -16,6 +16,9 @@ class ClasseController extends Controller
     {
         /** @var Classe $classe */
         $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
+        if (!$classe) {
+            throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
+        }
         $enseignants = $this->get("eklerni.manager.enseignant")->findAll();
         $i = 0;
 
@@ -85,7 +88,7 @@ class ClasseController extends Controller
     {
         $classe = new Classe();
         /** @var Enseignant $enseignants */
-        $enseignant = $this->get("security.context")->getToken()->getUser();
+        $enseignant = $this->getUser();
 
         $form = $this->createForm('eklerni_classe', $classe);
         $form->handleRequest($request);
@@ -111,6 +114,9 @@ class ClasseController extends Controller
     {
         /** @var Classe $classe */
         $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
+        if (!$classe) {
+            throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
+        }
 
         $form = $this->createForm('eklerni_classe', $classe);
         $form->handleRequest($request);
@@ -135,6 +141,9 @@ class ClasseController extends Controller
         if ($request->isXmlHttpRequest()) {
             /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
+            if (!$classe) {
+                throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
+            }
 
             if ($classe) {
                 if ($classe->getEleves()->count() == 0) {
@@ -202,6 +211,9 @@ class ClasseController extends Controller
         if ($request->isXmlHttpRequest()) {
             /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
+            if (!$classe) {
+                throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
+            }
 
             if ($classe) {
                 $this->get("eklerni.manager.classe")->clearMatieres($classe);

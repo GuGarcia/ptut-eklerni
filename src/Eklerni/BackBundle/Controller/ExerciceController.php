@@ -16,6 +16,10 @@ class ExerciceController extends Controller
     public function indexAction($idSerie) {
         /** @var Serie $serie */
         $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
+        if (!$serie) {
+            throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
+        }
+        
         $lastResult = $this->get('eklerni.manager.resultat')->findResults(
             array(
                 "serie" => $serie
@@ -63,14 +67,13 @@ class ExerciceController extends Controller
     {
         /** @var Activite $activite */
         $activite = $this->get('eklerni.manager.activite')->findById($idActivite);
-
         if (!$activite) {
-            throw new \Exception($this->get('translator')->trans('activite.notfound'));
+            throw $this->createNotFoundException($this->get("translator")->trans("activite.notfound"));
         }
 
         $serie = new Serie();
         /** @var Enseignant $enseignant */
-        $enseignant = $this->get("security.context")->getToken()->getUser();
+        $enseignant = $this->getUser();
 
         $form = $this->createForm(
             new SerieType(
@@ -102,9 +105,8 @@ class ExerciceController extends Controller
     {
         /** @var Serie $serie */
         $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
-
         if (!$serie) {
-            throw new \Exception($this->get('translator')->trans('exercice.notfound'));
+            throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
         }
 
         $form = $this->createForm(
@@ -135,9 +137,12 @@ class ExerciceController extends Controller
         if ($request->isXmlHttpRequest()) {
             /** @var Serie $serie */
             $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
+            if (!$serie) {
+                throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
+            }
 
             /** @var Enseignant $enseignants */
-            $enseignant = $this->get("security.context")->getToken()->getUser();
+            $enseignant = $this->getUser();
 
             if ($serie) {
                 if ($serie->getListeAttribution()->count() == 0 and
@@ -173,9 +178,12 @@ class ExerciceController extends Controller
         if ($request->isXmlHttpRequest()) {
             /** @var Serie $serie */
             $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
+            if (!$serie) {
+                throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
+            }
 
             $newSerie = $serie->duplicate();
-            $newSerie->setEnseignant($this->get("security.context")->getToken()->getUser());
+            $newSerie->setEnseignant($this->getUser());
 
             $this->get('eklerni.manager.serie')->save($newSerie);
 
