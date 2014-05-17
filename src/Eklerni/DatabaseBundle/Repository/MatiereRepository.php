@@ -4,7 +4,8 @@ namespace Eklerni\DatabaseBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class MatiereRepository extends EntityRepository implements CASRepositoryInterface {
+class MatiereRepository extends EntityRepository implements CASRepositoryInterface
+{
 
     /**
      * @return mixed
@@ -15,19 +16,6 @@ class MatiereRepository extends EntityRepository implements CASRepositoryInterfa
             ->select("m")
             ->from("EklerniDatabaseBundle:Matiere", "m")
             ->orderBy('m.name');
-    }
-
-    /**
-     * @param $id integer
-     * @return mixed
-     */
-    public function findById($id)
-    {
-        return $this->_em->createQueryBuilder()
-            ->select("m")
-            ->from("EklerniDatabaseBundle:Matiere", "m")
-            ->where("m.id = :id")
-            ->setParameter("id", $id);
     }
 
     /**
@@ -46,7 +34,8 @@ class MatiereRepository extends EntityRepository implements CASRepositoryInterfa
             ->orderBy('m.name');
     }
 
-    public function findByClasse($idClasse) {
+    public function findByClasse($idClasse)
+    {
 
         return $this->_em->createQueryBuilder()
             ->select("m")

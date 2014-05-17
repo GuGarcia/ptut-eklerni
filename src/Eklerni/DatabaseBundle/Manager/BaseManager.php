@@ -39,7 +39,7 @@ abstract class BaseManager implements CASManagerInterface
             $entity->setDateModification(new \DateTime('now'));
         }
 
-        if ($entity->getId() > 0) {
+        if (null === $entity->getId()) {
             if (property_exists($entity, 'dateCreation')) {
                 $entity->setDateCreation(new \DateTime('now'));
             }
@@ -62,7 +62,7 @@ abstract class BaseManager implements CASManagerInterface
      */
     public function findById($id)
     {
-        return $this->repository->findById($id)->getQuery()->getResult();
+        return $this->repository->findOneBy(array("id" => $id));
     }
 
     /**

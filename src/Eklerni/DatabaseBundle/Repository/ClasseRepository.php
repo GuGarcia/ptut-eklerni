@@ -19,19 +19,6 @@ class ClasseRepository extends EntityRepository implements CASRepositoryInterfac
     }
 
     /**
-     * @param $id integer
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    public function findById($id)
-    {
-        return $this->_em->createQueryBuilder()
-            ->select("c")
-            ->from("EklerniDatabaseBundle:Classe", "c")
-            ->where("c.id = :id")
-            ->setParameter("id", $id);
-    }
-
-    /**
      * @param $idProf integer
      * @return \Doctrine\ORM\QueryBuilder
      */

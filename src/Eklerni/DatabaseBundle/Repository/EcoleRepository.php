@@ -4,7 +4,8 @@ namespace Eklerni\DatabaseBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class EcoleRepository extends EntityRepository implements CASRepositoryInterface {
+class EcoleRepository extends EntityRepository implements CASRepositoryInterface
+{
 
     /**
      * @return \Doctrine\ORM\QueryBuilder
@@ -14,19 +15,6 @@ class EcoleRepository extends EntityRepository implements CASRepositoryInterface
         return $this->_em->createQueryBuilder()
             ->select("e")
             ->from("EklerniDatabaseBundle:Ecole", "e");
-    }
-
-    /**
-     * @param $id integer
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    public function findById($id)
-    {
-        return $this->_em->createQueryBuilder()
-            ->select("e")
-            ->from("EklerniDatabaseBundle:Ecole", "e")
-            ->where("e.id = :id")
-            ->setParameter("id", $id);
     }
 
     /**
@@ -48,7 +36,8 @@ class EcoleRepository extends EntityRepository implements CASRepositoryInterface
      * @param $idEleve
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function findByEleve($idEleve) {
+    public function findByEleve($idEleve)
+    {
         return $this->_em->createQueryBuilder()
             ->select("e")
             ->from("EklerniDatabaseBundle:Ecole", "e")

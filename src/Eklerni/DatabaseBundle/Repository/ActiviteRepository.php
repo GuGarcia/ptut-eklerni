@@ -20,19 +20,6 @@ class ActiviteRepository extends EntityRepository implements CASRepositoryInterf
     }
 
     /**
-     * @param $id integer
-     * @return mixed
-     */
-    public function findById($id)
-    {
-        return $this->_em->createQueryBuilder()
-            ->select("a")
-            ->from("EklerniDatabaseBundle:Activite", "a")
-            ->where("a.id = :id")
-            ->setParameter("id", $id);
-    }
-
-    /**
      * @param $idProf integer
      * @return mixed
      */

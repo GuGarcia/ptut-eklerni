@@ -15,7 +15,7 @@ class ExerciceController extends Controller
 
     public function indexAction($idSerie) {
         /** @var Serie $serie */
-        $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
+        $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
         $lastResult = $this->get('eklerni.manager.resultat')->findResults(
             array(
                 "serie" => $serie
@@ -62,7 +62,7 @@ class ExerciceController extends Controller
     public function ajouterAction(Request $request, $idActivite)
     {
         /** @var Activite $activite */
-        $activite = $this->get('eklerni.manager.activite')->findById($idActivite)[0];
+        $activite = $this->get('eklerni.manager.activite')->findById($idActivite);
 
         if (!$activite) {
             throw new \Exception($this->get('translator')->trans('activite.notfound'));
@@ -101,7 +101,7 @@ class ExerciceController extends Controller
     public function modifierAction(Request $request, $idSerie)
     {
         /** @var Serie $serie */
-        $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
+        $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
 
         if (!$serie) {
             throw new \Exception($this->get('translator')->trans('exercice.notfound'));
@@ -134,7 +134,7 @@ class ExerciceController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var Serie $serie */
-            $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
+            $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
 
             /** @var Enseignant $enseignants */
             $enseignant = $this->get("security.context")->getToken()->getUser();
@@ -172,7 +172,7 @@ class ExerciceController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var Serie $serie */
-            $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
+            $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
 
             $newSerie = $serie->duplicate();
             $newSerie->setEnseignant($this->get("security.context")->getToken()->getUser());

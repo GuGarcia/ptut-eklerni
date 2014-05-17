@@ -17,19 +17,6 @@ class EleveRepository extends EntityRepository implements CASRepositoryInterface
     }
 
     /**
-     * @param $id integer
-     * @return mixed
-     */
-    public function findById($id)
-    {
-        return $this->_em->createQueryBuilder()
-            ->select("e")
-            ->from("EklerniDatabaseBundle:Eleve", "e")
-            ->where("e.id = :id")
-            ->setParameter("id", $id);
-    }
-
-    /**
      * @param $idProf integer
      * @return mixed
      */

@@ -19,7 +19,7 @@ class EleveController extends Controller
     public function indexAction($idEleve)
     {
         /** @var Eleve $eleve */
-        $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve)[0];
+        $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve);
         $resultats = $this->get('eklerni.manager.resultat')->findResults(
             array(
                 "eleve" => $eleve
@@ -79,7 +79,7 @@ class EleveController extends Controller
     {
         $eleve = new Eleve();
         /** @var Classe $classe */
-        $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+        $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
 
         $form = $this->createForm('eklerni_eleve', $eleve);
         $form->handleRequest($request);
@@ -124,7 +124,7 @@ class EleveController extends Controller
     public function modifierAction(Request $request, $idEleve)
     {
         /** @var Eleve $eleve */
-        $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve)[0];
+        $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve);
 
         $form = $this->createForm('eklerni_eleve', $eleve);
         $form->handleRequest($request);

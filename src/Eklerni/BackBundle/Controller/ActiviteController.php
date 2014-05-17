@@ -13,7 +13,7 @@ class ActiviteController extends Controller
     public function ajouterAction(Request $request, $idMatiere)
     {
         /** @var Matiere $matiere */
-        $matiere = $this->get('eklerni.manager.matiere')->findById($idMatiere)[0];
+        $matiere = $this->get('eklerni.manager.matiere')->findById($idMatiere);
 
         /** @var Activite $activite */
         $activite = new Activite();
@@ -42,7 +42,7 @@ class ActiviteController extends Controller
     public function modifierAction(Request $request, $idActivite)
     {
         /** @var Activite $activite */
-        $activite = $this->get("eklerni.manager.activite")->findById($idActivite)[0];
+        $activite = $this->get("eklerni.manager.activite")->findById($idActivite);
 
         $form = $this->createForm('eklerni_activite', $activite);
         $form->handleRequest($request);
@@ -65,7 +65,7 @@ class ActiviteController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var Activite $activite */
-            $activite = $this->get("eklerni.manager.activite")->findById($idActivite)[0];
+            $activite = $this->get("eklerni.manager.activite")->findById($idActivite);
 
             if ($activite) {
                 if (0 === $activite->getSeries()->count()) {

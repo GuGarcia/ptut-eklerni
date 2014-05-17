@@ -2,10 +2,10 @@
 
 namespace Eklerni\DatabaseBundle\Repository;
 
-
 use Doctrine\ORM\EntityRepository;
 
-class ResultatRepository extends EntityRepository implements CASRepositoryInterface {
+class ResultatRepository extends EntityRepository implements CASRepositoryInterface
+{
 
     /**
      * @return array|\Doctrine\ORM\QueryBuilder|mixed
@@ -14,19 +14,6 @@ class ResultatRepository extends EntityRepository implements CASRepositoryInterf
         return $this->_em->createQueryBuilder()
             ->select("r")
             ->from("EklerniDatabaseBundle:Resultat", "r");
-    }
-
-    /**
-     * @param $id integer
-     * @return mixed
-     */
-    public function findById($id)
-    {
-        return $this->_em->createQueryBuilder()
-            ->select("r")
-            ->from("EklerniDatabaseBundle:Resultat", "r")
-            ->where("r.id = :id")
-            ->setParameter("id", $id);
     }
 
     /**
