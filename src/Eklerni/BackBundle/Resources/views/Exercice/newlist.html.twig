@@ -72,7 +72,7 @@
                                         </tr>
                                         {% for serie in seriesPerso if serie.enseignant.id == app.user.id %}
                                             <tr>
-                                                <td class="tdsize">{{ serie.nom }}</td>
+                                                <td class="tdsize"><a href="{{ path('eklerni_back_serie_fiche', {idSerie:serie.id}) }}">{{ serie.nom }}</a></td>
                                                 <td class="tdsize">{{ serie.description }}</td>
                                                 <td class="tdsize">{{ serie.niveau }}</td>
                                                 <td class="tdsize">
