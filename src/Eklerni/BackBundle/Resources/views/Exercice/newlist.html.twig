@@ -22,10 +22,10 @@
                 <div class="nav-tabs-custom">
                     <ul id="tabs" class="nav nav-tabs pull-right">
                         <li class="tab active">
-                            <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">{% trans %}serie.personnal{% endtrans %}</a>
+                            <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">{% trans %}exercice.personnal{% endtrans %}</a>
                         </li>
                         <li class="tab">
-                            <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">{% trans %}serie.public{% endtrans %}</a>
+                            <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">{% trans %}exercice.public{% endtrans %}</a>
                         </li>
                         <li class="noborder">
                             <a class="btn btn-primary bg-blue"
@@ -64,7 +64,7 @@
                                             <th class="tdsize">{% trans %}exercice.description{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.level{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.difficulty{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}exercice.questions.number{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.question.number{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.statut{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
                                         </tr>
@@ -125,7 +125,7 @@
                                             <th class="tdsize">{% trans %}exercice.description{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.level{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.difficulty{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}exercice.questions.number{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.question.number{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.enseignant{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
                                         </tr>
