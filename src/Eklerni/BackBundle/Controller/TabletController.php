@@ -2,7 +2,6 @@
 
 namespace Eklerni\BackBundle\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Eklerni\DatabaseBundle\Entity\Attribuer;
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;
@@ -28,12 +27,12 @@ class TabletController extends Controller
             $type = $request->get("type");
             if($type == "classe") {
                 /** @var Classe $classe */
-                $classe = $this->get("eklerni.manager.classe")->findById($idType)[0];
+                $classe = $this->get("eklerni.manager.classe")->findById($idType);
                 $attributions = $this->get("eklerni.manager.attribuer")->findByClasse($classe);
                 $this->putInView($retour, $attributions);
             } else if ($type == "eleve") {
                 /** @var Eleve $eleve */
-                $eleve = $this->get("eklerni.manager.eleve")->findById($idType)[0];
+                $eleve = $this->get("eklerni.manager.eleve")->findById($idType);
                 $attributions = $this->get("eklerni.manager.attribuer")->findByEleve($eleve);
                 $this->putInView($retour, $attributions);
             }

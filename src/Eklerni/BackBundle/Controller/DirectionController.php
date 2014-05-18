@@ -3,7 +3,6 @@
 namespace Eklerni\BackBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Eklerni\DatabaseBundle\Entity\Ecole;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

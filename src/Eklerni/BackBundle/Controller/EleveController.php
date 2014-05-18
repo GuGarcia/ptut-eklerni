@@ -19,7 +19,11 @@ class EleveController extends Controller
     public function indexAction($idEleve)
     {
         /** @var Eleve $eleve */
-        $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve)[0];
+        $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve);
+        if (!$eleve) {
+            throw $this->createNotFoundException($this->get("translator")->trans("eleve.notfound"));
+        }
+        
         $resultats = $this->get('eklerni.manager.resultat')->findResults(
             array(
                 "eleve" => $eleve
@@ -72,14 +76,21 @@ class EleveController extends Controller
         $prof = $this->get('security.context')->getToken()->getUser();
         $classes = $this->get("eklerni.manager.classe")->findByProf($prof);
 
-        return $this->render('EklerniBackBundle:Eleve:list.html.twig', array("title" => "Listes des Elèves par Classes", "classes" => $classes));
+        return $this->render(
+            'EklerniBackBundle:Eleve:list.html.twig',
+            array("title" => "Listes des Elèves par Classes", "classes" => $classes)
+        );
     }
 
     public function ajouterAction(Request $request, $idClasse)
     {
         $eleve = new Eleve();
         /** @var Classe $classe */
-        $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+        $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
+        if (!$classe) {
+            throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
+        }
+        
 
         $form = $this->createForm('eklerni_eleve', $eleve);
         $form->handleRequest($request);
@@ -124,7 +135,10 @@ class EleveController extends Controller
     public function modifierAction(Request $request, $idEleve)
     {
         /** @var Eleve $eleve */
-        $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve)[0];
+        $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve);
+        if (!$eleve) {
+            throw $this->createNotFoundException($this->get("translator")->trans("eleve.notfound"));
+        }
 
         $form = $this->createForm('eklerni_eleve', $eleve);
         $form->handleRequest($request);

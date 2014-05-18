@@ -12,7 +12,7 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
-        $enseignant = $this->get("eklerni.manager.enseignant")->findById($this->get("security.context")->getToken()->getUser()->getId())[0];
+        $enseignant = $this->getUser();
         $eleves = $this->get("eklerni.manager.eleve")->findByProf($enseignant);
         $classes = $this->get("eklerni.manager.classe")->findByProf($enseignant);
         $resultats = $this->get('eklerni.manager.resultat')->findResults(

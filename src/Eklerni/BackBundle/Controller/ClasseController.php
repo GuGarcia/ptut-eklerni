@@ -15,7 +15,10 @@ class ClasseController extends Controller
     public function indexAction($idClasse)
     {
         /** @var Classe $classe */
-        $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+        $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
+        if (!$classe) {
+            throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
+        }
         $enseignants = $this->get("eklerni.manager.enseignant")->findAll();
         $i = 0;
 
@@ -85,7 +88,7 @@ class ClasseController extends Controller
     {
         $classe = new Classe();
         /** @var Enseignant $enseignants */
-        $enseignant = $this->get("security.context")->getToken()->getUser();
+        $enseignant = $this->getUser();
 
         $form = $this->createForm('eklerni_classe', $classe);
         $form->handleRequest($request);
@@ -110,7 +113,10 @@ class ClasseController extends Controller
     public function modifierAction(Request $request, $idClasse)
     {
         /** @var Classe $classe */
-        $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+        $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
+        if (!$classe) {
+            throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
+        }
 
         $form = $this->createForm('eklerni_classe', $classe);
         $form->handleRequest($request);
@@ -134,7 +140,10 @@ class ClasseController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var Classe $classe */
-            $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+            $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
+            if (!$classe) {
+                throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
+            }
 
             if ($classe) {
                 if ($classe->getEleves()->count() == 0) {
@@ -167,9 +176,9 @@ class ClasseController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var Enseignant $enseignant */
-            $enseignant = $this->get("eklerni.manager.enseignant")->findById($request->get("idEnseignant"))[0];
+            $enseignant = $this->get("eklerni.manager.enseignant")->findById($request->get("idEnseignant"));
             /** @var Classe $classe */
-            $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+            $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
 
             if ($classe) {
                 $enseignant->addClasse($classe);
@@ -201,14 +210,17 @@ class ClasseController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var Classe $classe */
-            $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+            $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
+            if (!$classe) {
+                throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
+            }
 
             if ($classe) {
                 $this->get("eklerni.manager.classe")->clearMatieres($classe);
                 if ($request->get("matieres")) {
                     foreach ($request->get("matieres") as $idMatiere) {
                         /** @var Matiere $matiere */
-                        $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere)[0];
+                        $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere);
 
                         if (get_class($matiere) == "Eklerni\\DatabaseBundle\\Entity\\Matiere") {
                             $classe->getMatieres()->removeElement($matiere);
@@ -244,14 +256,14 @@ class ClasseController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var Classe $classe */
-            $classe = $this->get("eklerni.manager.classe")->findById($idClasse)[0];
+            $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
 
             if ($classe) {
                 $this->get("eklerni.manager.classe")->clearEnseignants($classe);
 
                 foreach ($request->get("profs") as $idEnseignant) {
                     /** @var Enseignant $prof */
-                    $prof = $this->get("eklerni.manager.enseignant")->findById($idEnseignant)[0];
+                    $prof = $this->get("eklerni.manager.enseignant")->findById($idEnseignant);
 
                     if (get_class($prof) == "Eklerni\\DatabaseBundle\\Entity\\Enseignant") {
                         $prof->addClasse($classe);

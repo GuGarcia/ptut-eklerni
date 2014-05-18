@@ -32,7 +32,7 @@
 {% endset %}
 
 {% set serieAttribuer %}
-<h3>Donner un Exercice à une Classe</h3>
+<h3>{% trans %}exercice.attribution.classe{% endtrans %}</h3>
 <div class="nav-tabs-custom">
     <table class="table attribution classe">
         {% for classe in prof.classes %}
@@ -62,7 +62,7 @@
     </table>
 </div>
 
-<h3>Donner un Exercice à un Eleve</h3>
+<h3>{% trans %}exercice.attribution.eleve{% endtrans %}</h3>
 {% for classe in prof.classes %}
     {% set background %}{% if loop.index is odd %}danger{% else %}primary{% endif %}{% endset %}
     <div id="{{ classe.id }}" class="box box-{{ background }}">
@@ -107,11 +107,20 @@
 {% block body %}
     <div class="row">
         <div id="series" class="col-md-4">
-            {{ eklerni.block("Liste des Séries", serieTable, "", "primary") }}
-            {{ eklerni.block("Corbeille", trashcontent, "", "danger") }}
+            {% set serieList %}
+                {% trans %}exercice.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(serieList, serieTable, "", "primary") }}
+            {% set binList %}
+                {% trans %}utils.bin{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(binList, trashcontent, "", "danger") }}
         </div>
         <div class="col-md-8">
-            {{ eklerni.block("Attribution des Exercices", serieAttribuer, "", "success") }}
+            {% set attributionList %}
+                {% trans %}exercice.attribution{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(attributionList, serieAttribuer, "", "success") }}
         </div>
     </div>
 {% endblock %}

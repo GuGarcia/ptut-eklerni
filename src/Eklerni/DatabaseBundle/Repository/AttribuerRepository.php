@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: GarciaGuillaume
- * Date: 17/04/2014
- * Time: 15:53
- */
 
 namespace Eklerni\DatabaseBundle\Repository;
-
 
 use Doctrine\ORM\EntityRepository;
 

@@ -2,7 +2,6 @@
 
 namespace Eklerni\BackBundle\Controller;
 
-
 use Eklerni\DatabaseBundle\Entity\Attribuer;
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;
@@ -16,15 +15,15 @@ class AttributionController extends Controller
 
     public function indexAction()
     {
-        $seriesProf = $this->get("eklerni.manager.serie")->findAllOrderByMatiereActiviteByProf($this->getUser());
-        $prof = $this->get("eklerni.manager.enseignant")->findById($this->getUser()->getId())[0];
-        $classes = $this->get("eklerni.manager.classe")->findByProf($this->getUser());
+        $prof = $this->getUser();
+        $seriesProf = $this->get("eklerni.manager.serie")->findAllOrderByMatiereActiviteByProf($prof);
+        $classes = $this->get("eklerni.manager.classe")->findByProf($prof);
         $attributionClasses = array();
         foreach ($classes as $classe) {
             $attributionClasses[$classe->getId()] = $this->get("eklerni.manager.attribuer")->findByClasse($classe);
         }
         return $this->render('EklerniBackBundle:Attribution:index.html.twig', array(
-            "title" => "Attribution des Exercices",
+            "title" => $this->get('translator')->trans("title.exercice.attribution"),
             "seriesProf" => $seriesProf,
             "prof" => $prof,
             "attributionClasses" => $attributionClasses
@@ -34,8 +33,8 @@ class AttributionController extends Controller
     public function addSerieEleveAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $serie = $this->get("eklerni.manager.serie")->findById($request->get("idSerie"))[0];
-            $eleve = $this->get("eklerni.manager.eleve")->findById($request->get("idEleve"))[0];
+            $serie = $this->get("eklerni.manager.serie")->findById($request->get("idSerie"));
+            $eleve = $this->get("eklerni.manager.eleve")->findById($request->get("idEleve"));
             $this->saveAttribution($serie, $eleve);
         }
         return new Response(json_encode(array()));
@@ -45,8 +44,8 @@ class AttributionController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var \Eklerni\DatabaseBundle\Entity\Serie * */
-            $serie = $this->get("eklerni.manager.serie")->findById($request->get("idSerie"))[0];
-            $classe = $this->get("eklerni.manager.classe")->findById($request->get("idClasse"))[0];
+            $serie = $this->get("eklerni.manager.serie")->findById($request->get("idSerie"));
+            $classe = $this->get("eklerni.manager.classe")->findById($request->get("idClasse"));
 
             foreach ($classe->getEleves() as $eleve) {
                 $this->saveAttribution($serie, $eleve, true);
@@ -62,16 +61,16 @@ class AttributionController extends Controller
             $serie = $request->get("idSerie");
             $active = ($request->get("active") == "true")?true:false;
             $type = $request->get("type");
-            $serie = $this->get("eklerni.manager.serie")->findById($serie)[0];
+            $serie = $this->get("eklerni.manager.serie")->findById($serie);
             if ($type == "eleve") {
                 $eleve = $idType;
                 /** @var Eleve $eleve */
-                $eleve = $this->get("eklerni.manager.eleve")->findById($eleve)[0];
+                $eleve = $this->get("eklerni.manager.eleve")->findById($eleve);
                 $this->saveAttribution($serie, $eleve, false, $active);
             } else if ($type == "classe") {
                 $classe = $idType;
                 /** @var Classe $classe */
-                $classe = $this->get("eklerni.manager.classe")->findById($classe)[0];
+                $classe = $this->get("eklerni.manager.classe")->findById($classe);
                 foreach ($classe->getEleves() as $eleve) {
                     $this->saveAttribution($serie, $eleve, true, $active);
                 }
@@ -87,16 +86,16 @@ class AttributionController extends Controller
         if ($request->isXmlHttpRequest()) {
             if ($serie = $request->get("idSerie")) {
                 /** @var Serie $serie */
-                $serie = $this->get("eklerni.manager.serie")->findById($serie)[0];
+                $serie = $this->get("eklerni.manager.serie")->findById($serie);
                 if ($eleve = $request->get("idEleve")) {
                     /** @var Eleve $eleve */
-                    $eleve = $this->get("eklerni.manager.eleve")->findById($eleve)[0];
+                    $eleve = $this->get("eklerni.manager.eleve")->findById($eleve);
                     /** @var Attribuer $attribution */
                     $attribution = $this->get("eklerni.manager.attribuer")->findById($eleve, $serie)[0];
                     $em->remove($attribution);
                 } else if ($classe = $request->get("idClasse")) {
                     /** @var Classe $classe */
-                    $classe = $this->get("eklerni.manager.classe")->findById($classe)[0];
+                    $classe = $this->get("eklerni.manager.classe")->findById($classe);
                     foreach ($classe->getEleves() as $eleve) {
                         /** @var Attribuer $attribution */
                         $attribution = $this->get("eklerni.manager.attribuer")->findById($eleve, $serie)[0];

@@ -21,19 +21,6 @@ class SerieRepository extends EntityRepository implements CASRepositoryInterface
     }
 
     /**
-     * @param $id integer
-     * @return mixed
-     */
-    public function findById($id)
-    {
-        return $this->_em->createQueryBuilder()
-            ->select("s")
-            ->from("EklerniDatabaseBundle:Serie", "s")
-            ->where("s.id = :id")
-            ->setParameter("id", $id);
-    }
-
-    /**
      * @param $idProf integer
      * @return mixed
      */
@@ -71,7 +58,8 @@ class SerieRepository extends EntityRepository implements CASRepositoryInterface
             ->setParameter("id", $idMatiere);
     }
 
-    public function findAllOrderByMatiereActivite() {
+    public function findAllOrderByMatiereActivite()
+    {
         return $this->_em->createQueryBuilder()
             ->select("s")
             ->from("EklerniDatabaseBundle:Serie", "s")
@@ -81,7 +69,8 @@ class SerieRepository extends EntityRepository implements CASRepositoryInterface
             );
     }
 
-    public function findAllOrderByMatiereActiviteByProf($idProf) {
+    public function findAllOrderByMatiereActiviteByProf($idProf)
+    {
         return $this->_em->createQueryBuilder()
             ->select("s, m.name as HIDDEN matiere, a.name as HIDDEN activite")
             ->from("EklerniDatabaseBundle:Serie", "s")

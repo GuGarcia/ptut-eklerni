@@ -74,7 +74,7 @@
     {% endset %}
 {% else %}
     {% set resultatbody %}
-    Il n'y a pas de résutlat disponnible.
+        {% trans %}stats.no.result{% endtrans %}
     {% endset %}
 {% endif %}
 
@@ -82,16 +82,16 @@
 {% if moyennes|length > 0 %}
     {% if moyennes|length == moyennesClasse|length %}
         {% set moyennesbody %}
-        <div id="moyennes" style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
+            <div id="moyennes" style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
         {% endset %}
     {% else %}
         {% set moyennesbody %}
-        {% trans %}eleve.noteinsuffisante{% endtrans %}
+            {% trans %}eleve.noteinsuffisante{% endtrans %}
         {% endset %}
     {% endif %}
 {% else %}
     {% set moyennesbody %}
-    {% trans %}eleve.no.note{% endtrans %}
+        {% trans %}eleve.no.note{% endtrans %}
     {% endset %}
 {% endif %}
 
@@ -103,13 +103,13 @@
             {% endset %}
             {{ eklerni.block(eleveList, eleveTable, footereleve, "primary") }}
             {% set statMoyList %}
-                {% trans %}statistique.moyenne.matiere{% endtrans %}
+                {% trans %}stats.moyenne.matiere{% endtrans %}
             {% endset %}
             {{ eklerni.block(statMoyList, moyennesbody, "", "primary") }}
         </div>
         <div class="col-md-8">
             {% set latestStatList %}
-                {% trans %}statistique.result.latest{% endtrans %}
+                {% trans %}stats.result.latest{% endtrans %}
             {% endset %}
             {{ eklerni.block(latestStatList, resultatbody, "", "primary") }}
         </div>

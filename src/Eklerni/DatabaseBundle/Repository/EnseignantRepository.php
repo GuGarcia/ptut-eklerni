@@ -17,19 +17,6 @@ class EnseignantRepository extends EntityRepository implements CASRepositoryInte
     }
 
     /**
-     * @param $id integer
-     * @return mixed
-     */
-    public function findById($id)
-    {
-        return $this->_em->createQueryBuilder()
-            ->select("e")
-            ->from("EklerniDatabaseBundle:Enseignant", "e")
-            ->where("e.id = :id")
-            ->setParameter("id", $id);
-    }
-
-    /**
      * @param $idProf integer
      * @return mixed
      */

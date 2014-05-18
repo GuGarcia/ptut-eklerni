@@ -15,7 +15,11 @@ class ExerciceController extends Controller
 
     public function indexAction($idSerie) {
         /** @var Serie $serie */
-        $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
+        $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
+        if (!$serie) {
+            throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
+        }
+        
         $lastResult = $this->get('eklerni.manager.resultat')->findResults(
             array(
                 "serie" => $serie
@@ -34,7 +38,7 @@ class ExerciceController extends Controller
         return $this->render(
             'EklerniBackBundle:Exercice:index.html.twig',
             array(
-                "title" => $this->get('translator')->trans("title.serie")." ".ucfirst($serie->getNom()),
+                "title" => $this->get('translator')->trans("title.exercice")." ".ucfirst($serie->getNom()),
                 "serie" => $serie,
                 "resultats" => $lastResult,
                 "note" => $moyenne
@@ -62,15 +66,14 @@ class ExerciceController extends Controller
     public function ajouterAction(Request $request, $idActivite)
     {
         /** @var Activite $activite */
-        $activite = $this->get('eklerni.manager.activite')->findById($idActivite)[0];
-
+        $activite = $this->get('eklerni.manager.activite')->findById($idActivite);
         if (!$activite) {
-            throw new \Exception($this->get('translator')->trans('activite.notfound'));
+            throw $this->createNotFoundException($this->get("translator")->trans("activite.notfound"));
         }
 
         $serie = new Serie();
         /** @var Enseignant $enseignant */
-        $enseignant = $this->get("security.context")->getToken()->getUser();
+        $enseignant = $this->getUser();
 
         $form = $this->createForm(
             new SerieType(
@@ -93,7 +96,7 @@ class ExerciceController extends Controller
             'EklerniBackBundle:Exercice:form.html.twig',
             array(
                 'form' => $form->createView(),
-                'title' => $this->get('translator')->trans("title.create_serie"),
+                'title' => $this->get('translator')->trans("title.exercice.create"),
             )
         );
     }
@@ -101,10 +104,9 @@ class ExerciceController extends Controller
     public function modifierAction(Request $request, $idSerie)
     {
         /** @var Serie $serie */
-        $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
-
+        $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
         if (!$serie) {
-            throw new \Exception($this->get('translator')->trans('serie.notfound'));
+            throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
         }
 
         $form = $this->createForm(
@@ -125,7 +127,7 @@ class ExerciceController extends Controller
             'EklerniBackBundle:Exercice:form.html.twig',
             array(
                 'form' => $form->createView(),
-                'title' => $this->get('translator')->trans("title.modify_serie"),
+                'title' => $this->get('translator')->trans("title.exercice.modify"),
             )
         );
     }
@@ -134,10 +136,13 @@ class ExerciceController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var Serie $serie */
-            $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
+            $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
+            if (!$serie) {
+                throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
+            }
 
             /** @var Enseignant $enseignants */
-            $enseignant = $this->get("security.context")->getToken()->getUser();
+            $enseignant = $this->getUser();
 
             if ($serie) {
                 if ($serie->getListeAttribution()->count() == 0 and
@@ -150,7 +155,7 @@ class ExerciceController extends Controller
                         json_encode(
                             array(
                                 "success" => true,
-                                "message" => $this->get('translator')->trans('serie.delete.success')
+                                "message" => $this->get('translator')->trans('exercice.delete.success')
                             )
                         )
                     );
@@ -162,7 +167,7 @@ class ExerciceController extends Controller
             json_encode(
                 array(
                     "success" => false,
-                    "message" => $this->get('translator')->trans('serie.delete.fail')
+                    "message" => $this->get('translator')->trans('exercice.delete.fail')
                 )
             )
         );
@@ -172,10 +177,13 @@ class ExerciceController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var Serie $serie */
-            $serie = $this->get('eklerni.manager.serie')->findById($idSerie)[0];
+            $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
+            if (!$serie) {
+                throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
+            }
 
             $newSerie = $serie->duplicate();
-            $newSerie->setEnseignant($this->get("security.context")->getToken()->getUser());
+            $newSerie->setEnseignant($this->getUser());
 
             $this->get('eklerni.manager.serie')->save($newSerie);
 
@@ -183,7 +191,7 @@ class ExerciceController extends Controller
                 json_encode(
                     array(
                         "success" => true,
-                        "message" => $this->get('translator')->trans('serie.duplicate.success')
+                        "message" => $this->get('translator')->trans('exercice.duplicate.success')
                     )
                 )
             );
@@ -193,7 +201,7 @@ class ExerciceController extends Controller
             json_encode(
                 array(
                     "success" => false,
-                    "message" => $this->get('translator')->trans('serie.duplicate.fail')
+                    "message" => $this->get('translator')->trans('exercice.duplicate.fail')
                 )
             )
         );

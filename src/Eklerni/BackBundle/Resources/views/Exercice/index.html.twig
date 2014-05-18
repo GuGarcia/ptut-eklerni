@@ -15,19 +15,19 @@
         <td>{% trans %}activite.text{% endtrans %}</td><td>{{ serie.activite.name }}</td>
     </tr>
     <tr>
-        <td>{% trans %}serie.text{% endtrans %}</td><td>{{ serie.nom }}</td>
+        <td>{% trans %}exercice.text{% endtrans %}</td><td>{{ serie.nom }}</td>
     </tr>
     <tr>
-        <td>{% trans %}serie.question.nombre{% endtrans %}</td><td>{{ serie.questions|length }}</td>
+        <td>{% trans %}exercice.question.number{% endtrans %}</td><td>{{ serie.questions|length }}</td>
     </tr>
     <tr>
-        <td>{% trans %}serie.niveau{% endtrans %}</td><td>{{ serie.niveau }}</td>
+        <td>{% trans %}exercice.level{% endtrans %}</td><td>{{ serie.niveau }}</td>
     </tr>
     <tr>
-        <td>{% trans %}serie.difficulty{% endtrans %}</td><td>{{ serie.difficulte }}</td>
+        <td>{% trans %}exercice.difficulty{% endtrans %}</td><td>{{ serie.difficulte }}</td>
     </tr>
     <tr>
-        <td>{% trans %}serie.moyenne{% endtrans %}</td><td>{{ note|number_format }}%</td>
+        <td>{% trans %}exercice.moyenne{% endtrans %}</td><td>{{ note|number_format }}%</td>
     </tr>
 </table>
 {% endset %}
@@ -38,11 +38,11 @@
     {% set resultatbody %}
     <table class="table table-bordered">
         <tr>
-            <th>Classe</th>
+            <th>{% trans %}classe.text{% endtrans %}</th>
             <th>Nom</th>
-            <th>Série</th>
+            <th>{% trans %}exercice.text{% endtrans %}</th>
             <th class="col-md-6"></th>
-            <th>note</th>
+            <th>no{% trans %}note.text{% endtrans %}te</th>
         </tr>
         {% for resultat in resultats %}
             {% if resultat.note < 25 %}
@@ -89,17 +89,23 @@
     {% endset %}
 {% else %}
     {% set resultatbody %}
-    Il n'y a pas de résutlat disponnible.
+        {% trans %}stats.no.result{% endtrans %}
     {% endset %}
 {% endif %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-4">
-            {{ eklerni.block("Informations", bodySerie, "", "primary") }}
+            {% set infoList %}
+                {% trans %}utils.info{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(infoList, bodySerie, "", "primary") }}
         </div>
         <div class="col-md-8">
-            {{ eklerni.block("Les Derniers Résultats", resultatbody, "", "primary") }}
+            {% set lastResultList %}
+                {% trans %}stats.result.latest{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(lastResultList, resultatbody, "", "primary") }}
         </div>
     </div>
 {% endblock %}

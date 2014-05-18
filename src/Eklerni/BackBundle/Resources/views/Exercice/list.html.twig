@@ -21,15 +21,15 @@
                         <div class="nav-tabs-custom">
                             <ul id="tabs" class="nav nav-tabs pull-right">
                                 <li class="tab active">
-                                    <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">{% trans %}serie.personnal{% endtrans %}</a>
+                                    <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">{% trans %}exercice.personnal{% endtrans %}</a>
                                 </li>
                                 <li class="tab">
-                                    <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">{% trans %}serie.public{% endtrans %}</a>
+                                    <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">{% trans %}exercice.public{% endtrans %}</a>
                                 </li>
                                 <li class="noborder">
                                     <a class="btn btn-primary bg-blue" href="{{ path('eklerni_back_serie_create', { idActivite: activite.id }) }}">
                                         <i class="fa fa-plus"></i>
-                                        {% trans %}serie.name{% endtrans %}
+                                        {% trans %}exercice.text{% endtrans %}
                                     </a>
                                 </li>
                                 <li class="pull-left header">
@@ -54,17 +54,17 @@
 
                                 <div class="tab-pane active" id="tab_{{ matiere.id ~ '_' ~ activite.id }}_1">
                                     {% if seriesPerso is empty %}
-                                        {% trans %}serie.notfound.personnal{% endtrans %}
+                                        {% trans %}exercice.notfound.personnal{% endtrans %}
                                     {% else %}
                                         <table class="table table-hover">
                                             <tbody>
                                                 <tr>
-                                                    <th class="tdsize">{% trans %}serie.name{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.description{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.level{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.difficulty{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.questions.number{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.statut{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.name{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.description{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.level{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.difficulty{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.question.number{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.statut{% endtrans %}</th>
                                                     <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
                                                 </tr>
                                                 {% for serie in seriesPerso if serie.enseignant.id == app.user.id %}
@@ -110,17 +110,17 @@
                                 </div>
                                 <div class="tab-pane" id="tab_{{ matiere.id ~'_'~ activite.id }}_2">
                                     {% if seriesPublic is empty %}
-                                        {% trans %}serie.notfound.public{% endtrans %}
+                                        {% trans %}exercice.notfound.public{% endtrans %}
                                     {% else %}
                                         <table class="table table-hover">
                                             <tbody>
                                                 <tr>
-                                                    <th class="tdsize">{% trans %}serie.name{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.description{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.level{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.difficulty{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.questions.number{% endtrans %}</th>
-                                                    <th class="tdsize">{% trans %}serie.enseignant{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.name{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.description{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.level{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.difficulty{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.question.number{% endtrans %}</th>
+                                                    <th class="tdsize">{% trans %}exercice.enseignant{% endtrans %}</th>
                                                     <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
                                                 </tr>
                                                 {% for serie in seriesPublic %}

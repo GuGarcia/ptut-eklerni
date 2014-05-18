@@ -29,7 +29,10 @@ class EcoleController extends Controller
     public function modifierAction(Request $request, $idEcole)
     {
         /** @var Ecole $ecole */
-        $ecole = $this->get("eklerni.manager.ecole")->findById($idEcole)[0];
+        $ecole = $this->get("eklerni.manager.ecole")->findById($idEcole);
+        if (!$ecole) {
+            throw $this->createNotFoundException($this->get("translator")->trans("ecole.notfound"));
+        }
 
         $form = $this->createForm('eklerni_ecole', $ecole);
         $form->handleRequest($request);

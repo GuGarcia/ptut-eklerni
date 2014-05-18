@@ -2,7 +2,6 @@
 
 
 {% if resultats|length > 0 %}
-    {# TODO Trad #}
     {% set resultatbody %}
     <div class="box-body table-responsive">
 
@@ -23,7 +22,7 @@
                         <th>{% trans %}activite.text{% endtrans %}</th>
                     {% endif %}
                     {% if typerecherche >= 3 or moyennes == null %}
-                        <th>{% trans %}serie.text{% endtrans %}</th>
+                        <th>{% trans %}exercice.text{% endtrans %}</th>
                     {% endif %}
                     <th class="col-md-4 hidden-xs"></th>
                     <th>{% trans %}note.text{% endtrans %}</th>
@@ -100,7 +99,7 @@
     {% endset %}
 {% else %}
     {% set resultatbody %}
-    Il n'y a pas de résutlat disponnible.
+        {% trans %}stats.no.result{% endtrans %}
     {% endset %}
 {% endif %}
 
@@ -131,7 +130,7 @@
     <div class="row">
         <div class="col-md-3">
             {% set statList %}
-                {% trans %}statistique.generator{% endtrans %}
+                {% trans %}stats.generator{% endtrans %}
             {% endset %}
             {{ eklerni.block(statList, formbody, "", "primary") }}
         </div>

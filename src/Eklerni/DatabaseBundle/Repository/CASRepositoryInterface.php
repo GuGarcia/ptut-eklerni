@@ -14,12 +14,6 @@ interface CASRepositoryInterface {
     public function findAll();
 
     /**
-     * @param $id integer
-     * @return mixed
-     */
-    public function findById($id);
-
-    /**
      * @param $idProf integer
      * @return mixed
      */

@@ -34,7 +34,10 @@ class MatiereController extends Controller
     public function modifierAction(Request $request, $idMatiere)
     {
         /** @var Matiere $matiere */
-        $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere)[0];
+        $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere);
+        if (!$matiere) {
+            throw $this->createNotFoundException($this->get("translator")->trans("matiere.notfound"));
+        }
 
         $form = $this->createForm('eklerni_matiere', $matiere);
         $form->handleRequest($request);
@@ -57,7 +60,10 @@ class MatiereController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             /** @var Matiere $matiere */
-            $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere)[0];
+            $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere);
+            if (!$matiere) {
+                throw $this->createNotFoundException($this->get("translator")->trans("matiere.notfound"));
+            }
 
             if ($matiere) {
                 if (0 === $matiere->getActivites()->count()) {
