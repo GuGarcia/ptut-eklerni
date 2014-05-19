@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-05-19T00:02:42Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2014-05-19T15:46:53Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -37,6 +37,10 @@
       <trans-unit id="4af8c9b027767f16140fbcda369eb283da011652" resname="activite.description">
         <source>activite.description</source>
         <target>Description</target>
+      </trans-unit>
+      <trans-unit id="c3457b82893c685c848951eda00ee34f71c473fc" resname="activite.list">
+        <source>activite.list</source>
+        <target>Liste des activités</target>
       </trans-unit>
       <trans-unit id="005cbbd214fc0abf543b330013ded5706d81235e" resname="activite.name">
         <source>activite.name</source>
@@ -128,7 +132,7 @@
       </trans-unit>
       <trans-unit id="fefe3ac779a4c18ffd8afb7d1d0f7250226a15d9" resname="classe.notfound">
         <source>classe.notfound</source>
-        <target>classe.notfound</target>
+        <target>Cette classe n'existe pas.</target>
       </trans-unit>
       <trans-unit id="ad1c821a40b80356aca9d5c5b3ee29ee13344f19" resname="classe.save.matiere.fail">
         <source>classe.save.matiere.fail</source>
@@ -149,6 +153,10 @@
       <trans-unit id="ed1fbbda49f99332bba6d16f2f33913ba0a959fc" resname="classe.year">
         <source>classe.year</source>
         <target>Année</target>
+      </trans-unit>
+      <trans-unit id="6248727f1982df16885c8c0bd538e2d45f434962" resname="classes.text">
+        <source>classes.text</source>
+        <target>Classes</target>
       </trans-unit>
       <trans-unit id="c921573341bc598fc26bddc1f09c1385396e68f1" resname="datedebut.text">
         <source>datedebut.text</source>
@@ -194,6 +202,10 @@
         <source>ecole.text</source>
         <target>Ecole</target>
       </trans-unit>
+      <trans-unit id="79bd0694f3a0ed21121de2d8e6294e2a00f3d733" resname="eleve.%nom%.%prenom%">
+        <source>eleve.%nom%.%prenom%</source>
+        <target>Élevè %nom% %prenom%</target>
+      </trans-unit>
       <trans-unit id="394abec483e394d1f42c9792dd255e000a5733ca" resname="eleve.choose">
         <source>eleve.choose</source>
         <target>Choisissez un élève</target>
@@ -201,6 +213,10 @@
       <trans-unit id="a05487467cc142ff796e07b112c098cf03bc6e78" resname="eleve.list">
         <source>eleve.list</source>
         <target>Liste des élèves</target>
+      </trans-unit>
+      <trans-unit id="22128ffeeb19d9f0097f6eef42eea8899b0f823b" resname="eleve.list.by.classe">
+        <source>eleve.list.by.classe</source>
+        <target>Liste des élèves par classe</target>
       </trans-unit>
       <trans-unit id="fc667791ed9fabb3c398c911001689ca6b76ff53" resname="eleve.no.note">
         <source>eleve.no.note</source>
@@ -214,9 +230,17 @@
         <source>eleve.notfound</source>
         <target>L'élève demandé n'existe pas.</target>
       </trans-unit>
+      <trans-unit id="81c22307461ea80f8a08a93db933c9e20f4cc461" resname="eleve.switch">
+        <source>eleve.switch</source>
+        <target>Changer d'élève</target>
+      </trans-unit>
       <trans-unit id="02e0ae98a713e05eafa8b3655031814e1f301bfc" resname="eleve.text">
         <source>eleve.text</source>
         <target>Élève</target>
+      </trans-unit>
+      <trans-unit id="862136c3c856184d4ffb3ec805b98bb7b0d40f50" resname="eleves.text">
+        <source>eleves.text</source>
+        <target>Élèves</target>
       </trans-unit>
       <trans-unit id="7b37bf92e2ef457ea6ba9afc1b3bcdcd2679d635" resname="enseignant.add">
         <source>enseignant.add</source>
@@ -274,14 +298,6 @@
         <source>exercice.difficulty</source>
         <target>Difficulté</target>
       </trans-unit>
-      <trans-unit id="ae1c543242309045cbd6dc9e1d25e301e6d3855d" resname="exercice.duplicate.fail">
-        <source>exercice.duplicate.fail</source>
-        <target>Une erreur est survenue lors de la duplication de l'exercice.</target>
-      </trans-unit>
-      <trans-unit id="c61894b175db2c33de735e83e1f860d43c74799d" resname="exercice.duplicate.success">
-        <source>exercice.duplicate.success</source>
-        <target>La duplication de l'exercice a réussi.</target>
-      </trans-unit>
       <trans-unit id="d18ee6c8f4e42416121d93c987ba3d71fd1ddb39" resname="exercice.enseignant">
         <source>exercice.enseignant</source>
         <target>Auteur</target>
@@ -333,6 +349,10 @@
       <trans-unit id="703711b6ab8ea778de1ce24992b7af32a5b657c9" resname="exercice.text">
         <source>exercice.text</source>
         <target>Exercice</target>
+      </trans-unit>
+      <trans-unit id="b6903849225eda6aef709c6facd095adb2d10840" resname="exercices.text">
+        <source>exercices.text</source>
+        <target>exercices.text</target>
       </trans-unit>
       <trans-unit id="7f76859e0156ac54a8692f6cf14946aed30a28bd" resname="grade.year1">
         <source>grade.year1</source>
@@ -394,9 +414,17 @@
         <source>matiere.text</source>
         <target>Matière</target>
       </trans-unit>
+      <trans-unit id="ef50cd98b68911d1368d8f36f969d61496cea1f3" resname="more.info">
+        <source>more.info</source>
+        <target>Plus d'info</target>
+      </trans-unit>
       <trans-unit id="33142b93ab8afe75019bcd0944149cd5ca7423e9" resname="moyenne.text">
         <source>moyenne.text</source>
         <target>Moyenne</target>
+      </trans-unit>
+      <trans-unit id="d4d6bb968689ef5146ce8c198cd1772c54253b79" resname="moyennede.text">
+        <source>moyennede.text</source>
+        <target>Moyenne de</target>
       </trans-unit>
       <trans-unit id="86f01d895605a368280123cf22e56e24cc892b32" resname="no.ecole">
         <source>no.ecole</source>
@@ -476,7 +504,7 @@
       </trans-unit>
       <trans-unit id="d8928cd2d738a733231d303d3f85ce52e50deca4" resname="question.media">
         <source>question.media</source>
-        <target>Média</target>
+        <target>Média de la question</target>
       </trans-unit>
       <trans-unit id="922a8af4f67835a8f4317dfe3b87f6bfdbb3f659" resname="question.media.file.audio">
         <source>question.media.file.audio</source>
@@ -512,7 +540,7 @@
       </trans-unit>
       <trans-unit id="178f955d8ae281dc1e9a15e22862a75a81002d9e" resname="reponse.media">
         <source>reponse.media</source>
-        <target>Média</target>
+        <target>Média de la réponse</target>
       </trans-unit>
       <trans-unit id="508085acb671951c14c314e88d4e10d175286045" resname="reponse.media.file.audio">
         <source>reponse.media.file.audio</source>
@@ -626,6 +654,10 @@
         <source>stats.result.latest</source>
         <target>Derniers résultats</target>
       </trans-unit>
+      <trans-unit id="be8f06f4c04f1402090b711e0ab690f8b7f12886" resname="tablet.text">
+        <source>tablet.text</source>
+        <target>Tablette</target>
+      </trans-unit>
       <trans-unit id="6929a2c5bc8080684fd61cf3ad4dcfcbf803770a" resname="title.accueil">
         <source>title.accueil</source>
         <target>Accueil</target>
@@ -701,6 +733,10 @@
       <trans-unit id="82863178c7eab8e0d8de641c10c32e465c06a0f7" resname="url.modify.eleve">
         <source>url.modify.eleve</source>
         <target>Modifier un élève</target>
+      </trans-unit>
+      <trans-unit id="08d6834671be21d820333c3875fe34c65ce672ec" resname="url.modify.exercice">
+        <source>url.modify.exercice</source>
+        <target>Modifier un exercice</target>
       </trans-unit>
       <trans-unit id="5363a12cf6dce30fe73579ffd336dc333e41fd9a" resname="utils.bin">
         <source>utils.bin</source>

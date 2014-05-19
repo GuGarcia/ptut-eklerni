@@ -35,7 +35,7 @@ class EleveRepository extends EntityRepository implements CASRepositoryInterface
 
     /**
      * @param $idClasse
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return mixed
      */
     public function findByClasse($idClasse)
     {
@@ -44,6 +44,7 @@ class EleveRepository extends EntityRepository implements CASRepositoryInterface
             ->from("EklerniDatabaseBundle:Eleve", "e")
             ->innerJoin("e.classe","c")
             ->where("c.id = :id")
+            ->orderBy("e.nom, e.prenom")
             ->setParameter("id", $idClasse);
     }
 }

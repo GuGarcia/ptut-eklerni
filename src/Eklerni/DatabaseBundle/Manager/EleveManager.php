@@ -39,6 +39,6 @@ class EleveManager extends BaseManager
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function findByClasse(Classe $classe) {
-        return $this->repository->findByClasse($classe->getId());
+        return $this->repository->findByClasse($classe->getId())->getQuery()->getResult();
     }
 }
