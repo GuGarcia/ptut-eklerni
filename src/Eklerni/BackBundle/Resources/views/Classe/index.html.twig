@@ -112,7 +112,6 @@
 </table>
 {% endset %}
 {% set bestsBody %}
-
 <table class="table table-bordered">
     <tr>
         <th>Nom</th>
@@ -154,6 +153,22 @@
 </table>
 {% endset %}
 
+{% if moyennes|length > 0 %}
+    {% if moyennes|length %}
+        {% set moyennesbody %}
+        <div id="moyennes" style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
+        {% endset %}
+    {% else %}
+        {% set moyennesbody %}
+        {% trans %}eleve.noteinsuffisante{% endtrans %}
+        {% endset %}
+    {% endif %}
+{% else %}
+    {% set moyennesbody %}
+    {% trans %}eleve.no.note{% endtrans %}
+    {% endset %}
+{% endif %}
+
 {% block body %}
     <div class="row">
         <div class="col-md-4">
@@ -171,11 +186,15 @@
             {% trans %}matiere.text{% endtrans %}
             {% endset %}
             {{ eklerni.block(matiereText, matieresTables, footermatieres, "primary") }}
+            {% set moyenneText %}
+            {% trans %}moyenne.text{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(moyenneText, moyennesbody, "", "primary") }}
+
         </div>
         <div class="col-md-4">
             {{ eklerni.block("Liste des Meilleurs Élèves", bestsBody, "", "success") }}
             {{ eklerni.block("Liste des moins bons Élèves", worstsBody, "", "danger") }}
-
         </div>
     </div>
 {% endblock %}
@@ -184,6 +203,57 @@
     <script type="application/javascript">
         $(document).ready(function () {
             init();
+            var matieres = [];
+            var notes = [];
+            {% for moyenne in moyennes %}
+            matieres[{{ (loop.index0/moyennes|length) * 360 }}] = "{{ moyenne[0].serie.activite.matiere.name }}";
+            notes.push({{ moyenne["note"]|number_format }});
+            {% endfor %}
+console.log(notes);
+            $('#moyennes').highcharts({
+                chart: {
+                    polar: true
+                },
+                title: {
+                    text: '{% trans %}stats.moyenne.classe{% endtrans %}'
+                },
+                pane: {
+                    startAngle: 0,
+                    endAngle: 360
+                },
+                xAxis: {
+                    tickInterval: {{ (360 / moyennes|length)|number_format  }},
+                    min: 0,
+                    max: 360,
+                    labels: {
+                        formatter: function () {
+                            return matieres[this.value];
+                        },
+                        overflow: 'justify'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 100
+                },
+                plotOptions: {
+                    series: {
+                        pointStart: 0,
+                        pointInterval: {{ (360 / moyennes|length)|number_format  }}
+                    },
+                    column: {
+                        pointPadding: 0,
+                        groupPadding: 0
+                    }
+                },
+                series: [
+                    {
+                        type: 'area',
+                        name: '{{ classe.nom }}',
+                        data: notes
+                    }
+                ]
+            });
         });
 
         function init() {

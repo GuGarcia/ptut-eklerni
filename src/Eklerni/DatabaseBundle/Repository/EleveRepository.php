@@ -13,7 +13,9 @@ class EleveRepository extends EntityRepository implements CASRepositoryInterface
     {
         return $this->_em->createQueryBuilder()
             ->select("e")
-            ->from("EklerniDatabaseBundle:Eleve", "e");
+            ->from("EklerniDatabaseBundle:Eleve", "e")
+            ->orderBy("e.nom asc")
+            ->orderBy("e.prenom asc");
     }
 
     /**
@@ -29,5 +31,20 @@ class EleveRepository extends EntityRepository implements CASRepositoryInterface
             ->innerJoin("c.enseignants","p")
             ->where("p.id = :id")
             ->setParameter("id", $idProf);
+    }
+
+    /**
+     * @param $idClasse
+     * @return mixed
+     */
+    public function findByClasse($idClasse)
+    {
+        return $this->_em->createQueryBuilder()
+            ->select("e")
+            ->from("EklerniDatabaseBundle:Eleve", "e")
+            ->innerJoin("e.classe","c")
+            ->where("c.id = :id")
+            ->orderBy("e.nom, e.prenom")
+            ->setParameter("id", $idClasse);
     }
 }

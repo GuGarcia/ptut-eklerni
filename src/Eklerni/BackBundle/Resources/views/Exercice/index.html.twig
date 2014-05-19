@@ -31,6 +31,11 @@
     </tr>
 </table>
 {% endset %}
+{% set footerSerie %}
+    <a href="{{ path ("eklerni_back_serie_modify", {idSerie: serie.id}) }}" class="btn btn-primary">
+        {% trans %}url.modify.serie{% endtrans %}
+    </a>
+{% endset %}
 
 
 {% if resultats|length > 0 %}
@@ -99,7 +104,7 @@
             {% set infoList %}
                 {% trans %}utils.info{% endtrans %}
             {% endset %}
-            {{ eklerni.block(infoList, bodySerie, "", "primary") }}
+            {{ eklerni.block(infoList, bodySerie, footerSerie, "primary") }}
         </div>
         <div class="col-md-8">
             {% set lastResultList %}
