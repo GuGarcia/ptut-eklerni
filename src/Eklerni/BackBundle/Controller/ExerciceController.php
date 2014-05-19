@@ -173,13 +173,15 @@ class ExerciceController extends Controller
         );
     }
 
-    public function dupliquerAction(Request $request, $idSerie)
+    public function dupliquerAction($idSerie)
     {
         /** @var Serie $serie */
         $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
         if (!$serie) {
             throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
         }
+
+        $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("exercice.duplication.success"));
 
         $newSerie = $serie->duplicate();
         $newSerie->setEnseignant($this->getUser());
