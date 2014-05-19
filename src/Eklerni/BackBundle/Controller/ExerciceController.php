@@ -175,33 +175,20 @@ class ExerciceController extends Controller
 
     public function dupliquerAction(Request $request, $idSerie)
     {
-        if ($request->isXmlHttpRequest()) {
-            /** @var Serie $serie */
-            $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
-            if (!$serie) {
-                throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
-            }
-
-            $newSerie = $serie->duplicate();
-            $newSerie->setEnseignant($this->getUser());
-
-            $this->get('eklerni.manager.serie')->save($newSerie);
-
-            return new Response(
-                json_encode(
-                    array(
-                        "success" => true,
-                        "message" => $this->get('translator')->trans('exercice.duplicate.success')
-                    )
-                )
-            );
+        /** @var Serie $serie */
+        $serie = $this->get('eklerni.manager.serie')->findById($idSerie);
+        if (!$serie) {
+            throw $this->createNotFoundException($this->get("translator")->trans("exercice.notfound"));
         }
 
-        return new Response(
-            json_encode(
-                array(
-                    "success" => false,
-                    "message" => $this->get('translator')->trans('exercice.duplicate.fail')
+        $newSerie = $serie->duplicate();
+        $newSerie->setEnseignant($this->getUser());
+
+        $this->get('eklerni.manager.serie')->save($newSerie);
+
+        return $this->redirect(
+            $this->generateUrl('eklerni_back_serie_fiche', array(
+                    'idSerie' => $newSerie->getId()
                 )
             )
         );

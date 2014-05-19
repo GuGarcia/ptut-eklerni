@@ -178,13 +178,19 @@
             </div>
         {% endfor %}
     {% endfor %}
-</div>·
+</div>
 {% endset %}
 
 {% block body %}
     <div class="row">
+        {% set activiteList %}
+            {% trans %}activite.list{% endtrans %}
+        {% endset %}
+        {% set serieList %}
+            {% trans %}serie.list{% endtrans %}
+        {% endset %}
         <div class="col-sm-4">
-            {{ eklerni.block("Liste des Activités", listActivite, "", "primary") }}
+            {{ eklerni.block(activiteList, listActivite, "", "primary") }}
         </div>
         <div class="col-sm-8">
             {{ eklerni.block("Liste des Series", listSerie, "", "primary") }}
@@ -230,6 +236,23 @@
                     }
                 });
             });
+
+            /*$('.duplicateSerieBtn').on('click', function(event) {
+                event.preventDefault();
+                var _this = this;
+
+                $.ajax({
+                    type: "POST",
+                    url: $(_this).attr("href"),
+                    dataType: "json"
+                }).success(function (data) {
+                    if (data.success) {
+                        displayMessage("success", data.message);
+                    } else {
+                        displayMessage("danger", data.message);
+                    }
+                });
+            });*/
         });
 
     </script>
