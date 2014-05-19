@@ -199,7 +199,11 @@ class ResultatManager extends BaseManager
         }
         if (isset($condition["dateCreation"]) && !isset($condition["date"])) {
             $query->andWhere( 'r.dateCreation > :date_from' );
-            $query->setParameter('date_from', $condition["date"], Type::DATETIME);
+            if( is_object($condition["date"] )) {
+                $query->setParameter('date_from', $condition["date"], Type::DATETIME);
+            } else {
+                $query->setParameter('date_from', new \DateTime($condition["date"]), Type::DATETIME);
+            }
         }
 
         if ($limit) {

@@ -72,7 +72,7 @@
 
 {% if resultats|length > 0 %}
     {% set resultatbody %}
-    <table class="table table-bordered">
+    <table id="lastresult" class="table table-bordered">
         <tr>
             <th>{% trans %}classe.text{% endtrans %}</th>
             <th>{% trans %}personne.lastname{% endtrans %}</th>
@@ -222,6 +222,22 @@
                 "bInfo": false,
                 "bAutoWidth": false
             });
+
+            var LastDate = new Date();
+            setInterval(function(){
+                $.ajax({
+                    url: "{{ path('eklerni_back_ajax_lastresutlat') }}",
+                    type: "POST",
+                    dataType:'html',
+                    data: { "lastdate" : LastDate.toLocaleString() }
+                }).success(function(data) {
+                    $("#lastresult").html(data);
+                    LastDate = new Date();
+                });
+
+            }, 10000);
+
+
         });
     </script>
 {% endblock %}

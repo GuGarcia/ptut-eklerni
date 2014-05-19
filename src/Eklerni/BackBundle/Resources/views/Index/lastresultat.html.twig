@@ -1,0 +1,51 @@
+<tr>
+    <th>{% trans %}classe.text{% endtrans %}</th>
+    <th>{% trans %}personne.lastname{% endtrans %}</th>
+    <th>{% trans %}exercice.text{% endtrans %}</th>
+    <th class="col-md-6 hidden-sm"></th>
+    <th>{% trans %}note.text{% endtrans %}</th>
+</tr>
+{% for resultat in resultats %}
+    {% if resultat.note < 25 %}
+        {% set typebar = "danger" %}
+        {% set typecolor = "red" %}
+    {% elseif resultat.note < 50 %}
+        {% set typebar = "warning" %}
+        {% set typecolor = "orange" %}
+    {% elseif resultat.note < 75 %}
+        {% set typebar = "primary" %}
+        {% set typecolor = "light-blue" %}
+    {% else %}
+        {% set typebar = "success" %}
+        {% set typecolor = "green" %}
+    {% endif %}
+    {% if lastresultat > resultat.dateCreation %}
+    <tr>
+    {% else %}
+    <tr class="bg-success">
+    {% endif %}
+        <td>
+            <a href="{{ path("eklerni_back_classe_fiche", {idClasse:resultat.eleve.classe.id}) }}">
+                {{ resultat.eleve.classe.nom }}
+            </a>
+        </td>
+        <td>
+            <a href="{{ path("eklerni_back_eleve_fiche", {idEleve:resultat.eleve.id}) }}">
+                {{ resultat.eleve.prenom }} {{ resultat.eleve.nom }}
+            </a>
+        </td>
+        <td>
+            <a href="{{ path("eklerni_back_serie_fiche", {idSerie:resultat.serie.id}) }}">
+                {{ resultat.serie.nom }}
+            </a>
+        </td>
+        <td class="hidden-sm">
+            <div class="progress xs">
+                <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ resultat.note }}%;"></div>
+            </div>
+        </td>
+        <td>
+            <span class="badge bg-{{ typecolor }}">{{ resultat.note }}%</span>
+        </td>
+    </tr>
+{% endfor %}

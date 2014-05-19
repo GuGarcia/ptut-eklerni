@@ -14,8 +14,8 @@ class EleveRepository extends EntityRepository implements CASRepositoryInterface
         return $this->_em->createQueryBuilder()
             ->select("e")
             ->from("EklerniDatabaseBundle:Eleve", "e")
-            ->orderBy("e.nom asc")
-            ->orderBy("e.prenom asc");
+            ->orderBy("e.nom")
+            ->orderBy("e.prenom");
     }
 
     /**

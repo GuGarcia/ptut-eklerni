@@ -8,6 +8,7 @@
         <default key="_controller">EklerniBackBundle:Index:index</default>
     </route>
 
+    <import resource="@EklerniBackBundle/Resources/config/routing_ajax.xml" prefix="/ajax" />
     <import resource="@EklerniBackBundle/Resources/config/routing_activite.xml" prefix="/activite" />
     <import resource="@EklerniBackBundle/Resources/config/routing_attribution.xml" prefix="/attribution" />
     <import resource="@EklerniBackBundle/Resources/config/routing_classe.xml" prefix="/classe" />
