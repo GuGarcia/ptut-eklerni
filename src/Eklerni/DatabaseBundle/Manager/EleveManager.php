@@ -4,6 +4,7 @@ namespace Eklerni\DatabaseBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
 use Eklerni\DatabaseBundle\Entity\BaseEntity;
+use Eklerni\DatabaseBundle\Entity\Classe;
 
 class EleveManager extends BaseManager
 {
@@ -31,5 +32,13 @@ class EleveManager extends BaseManager
         $this->em->flush();
         $entity->upload();
         $this->em->flush();
+    }
+
+    /**
+     * @param Classe $classe
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findByClasse(Classe $classe) {
+        return $this->repository->findByClasse($classe->getId());
     }
 }
