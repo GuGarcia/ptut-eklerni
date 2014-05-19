@@ -2,96 +2,108 @@
 
 {% block body %}
     {% if classes|length > 0 %}
-        <div class="row">
-            <div class="col-md-12">
-                {% set titleBlock = "" %}
-                {% set contentBlock = "" %}
-                {% for classe in classes %}
-                    {% set titleBlock %}
-                        {{ classe.nom }}
-                    {% endset %}
+<div class="row">
+    <div class="col-md-12">
+        {% set titleBlock = "" %}
+        {% set contentBlock = "" %}
+        {% for classe in classes %}
+            {% set titleBlock %}
+            {{ classe.nom }}
+            {% endset %}
 
-                    {% set contentBlock %}
-                        {% if classe.eleves|length > 0 %}
-                            {% set header %}
-                            <tr role="row">
-                                <th>
-                                    {% trans %}personne.picture{% endtrans %}
-                                </th>
-                                <th>
-                                    {% trans %}personne.firstname{% endtrans %}
-                                </th>
-                                <th>
-                                    {% trans %}personne.birthdate{% endtrans %}
-                                </th>
-                                <th>
-                                    {% trans %}utils.tools{% endtrans %}
-                                </th>
-                            </tr>
-                            {% endset %}
-                            {% set content %}
-                                {% for eleve in classe.eleves %}
-                                    <tr class="{% if loop.index0 is even %}even{% else %}odd{% endif %}">
-                                        <td>
-                                            <div class="img-crop img-xs" style="background-image:url('{{ asset(eleve.picture) }}')"></div>
-                                        </td>
-                                        <td>
-                                            <a href="{{ path("eklerni_back_eleve_fiche", {idEleve: eleve.id}) }}">
-                                                {{ eleve.nom }} {{ eleve.prenom }}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {{ eleve.dateNaissance|datelocale() }}
-                                        </td>
-                                        <td>
-                                            <a href="{{ path("eklerni_back_eleve_modifier", {idEleve: eleve.id}) }}" class="btn btn-default btn-xs">
-                                                <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
-                                            </a>
-                                            <a href="#" class="deleteClassBtn btn btn-danger btn-xs disabled">
-                                                <i class="fa fa-minus"></i> {% trans %}utils.delete{% endtrans %}
-                                            </a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            {% endset %}
+            {% set contentBlock %}
 
-                            {{ eklerni.dataTable(header, content, "") }}
-                        {% else %}
-                            {% trans %}classe.no.eleve{% endtrans %}
-                        {% endif %}
-
-                    {% endset %}
-                    {% set footerBlock %}
-                        <a href="{{ path("eklerni_back_eleve_ajouter", {idClasse: classe.id}) }}" class="btn btn-primary">
-                            <i class="fa fa-plus"></i> {% trans %}btn.eleve.add{% endtrans %}
-                        </a>
-                    {% endset %}
-                    {% if loop.index is odd %}
-                        {{ eklerni.block(titleBlock, contentBlock, footerBlock, "danger") }}
-                    {% else %}
-                        {{ eklerni.block(titleBlock, contentBlock, footerBlock, "primary") }}
-                    {% endif %}
+            {% if classe.eleves|length > 0 %}
+                <div class="box-body table-responsive">
+                <div id="table_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                <table id="table-{{ classe.id }}" class="table table-bordered table-hover dataTable">
+                <thead>
+                <tr role="row">
+                    <th>
+                        {% trans %}personne.picture{% endtrans %}
+                    </th>
+                    <th>
+                        {% trans %}personne.name{% endtrans %}
+                    </th>
+                    <th>
+                        {% trans %}personne.username{% endtrans %}
+                    </th>
+                    <th>
+                        {% trans %}personne.email{% endtrans %}
+                    </th>
+                    <th>
+                        {% trans %}utils.tools{% endtrans %}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for eleve in classe.eleves %}
+                    <tr class="{% if loop.index0 is even %}even{% else %}odd{% endif %}">
+                        <td>
+                            <div class="img-crop img-xs"
+                                 style="background-image:url('{{ asset(eleve.picture) }}')"></div>
+                        </td>
+                        <td>
+                            <a href="{{ path("eklerni_back_eleve_fiche", {idEleve: eleve.id}) }}">
+                                {{ eleve.nom }} {{ eleve.prenom }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ eleve.username }}
+                        </td>
+                        <td>
+                            {{ eleve.email }}
+                        </td>
+                        <td>
+                            <a href="{{ path("eklerni_back_eleve_modifier", {idEleve: eleve.id}) }}"
+                               class="btn btn-default btn-xs">
+                                <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
+                            </a>
+                            <a href="#" class="deleteClassBtn btn btn-danger btn-xs disabled">
+                                <i class="fa fa-minus"></i> {% trans %}utils.delete{% endtrans %}
+                            </a>
+                        </td>
+                    </tr>
                 {% endfor %}
+                </tbody>
+            {% else %}
+                {% trans %}classe.no.eleve{% endtrans %}
+            {% endif %}
+            {% endset %}
+            {% set footerBlock %}
+            <a href="{{ path("eklerni_back_eleve_ajouter", {idClasse: classe.id}) }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i> {% trans %}btn.eleve.add{% endtrans %}
+            </a>
+            {% endset %}
+            {% if loop.index is odd %}
+                {{ eklerni.block(titleBlock, contentBlock, footerBlock, "danger") }}
+            {% else %}
+                {{ eklerni.block(titleBlock, contentBlock, footerBlock, "primary") }}
+            {% endif %}
+            </table>
             </div>
-        </div>
-    {% else %}
-        <div class="box-body">{% trans %}enseignant.no.classe{% endtrans %}</div>
-    {% endif %}
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="box-body">{% trans %}enseignant.no.classe{% endtrans %}</div>
+        {% endif %}
 
-{% endblock %}
+        {% endblock %}
 
-{% block javascripts %}
-    <script type="application/javascript">
-        $(function () {
-            $('#table').dataTable({
-                "bPaginate": true,
-                "bLengthChange": false,
-                "bFilter": false,
-                "bSort": true,
-                "bInfo": false,
-                "bAutoWidth": false
-            });
-        });
-    </script>
+        {% block javascripts %}
+            <script type="application/javascript">
+                $(function () {
+                    {% for classe in classes %}
+                    $('#table-{{ classe.id }}').dataTable({
+                        "bPaginate": true,
+                        "bLengthChange": false,
+                        "bFilter": false,
+                        "bSort": true,
+                        "bInfo": false,
+                        "bAutoWidth": false
+                    });
+                    {% endfor %}
+                });
+            </script>
 
-{% endblock %}
+        {% endblock %}

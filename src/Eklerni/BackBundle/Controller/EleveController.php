@@ -78,7 +78,10 @@ class EleveController extends Controller
 
         return $this->render(
             'EklerniBackBundle:Eleve:list.html.twig',
-            array("title" => "Listes des Elèves par Classes", "classes" => $classes)
+            array(
+                "title" => "Listes des Elèves par Classes",
+                "classes" => $classes
+            )
         );
     }
 

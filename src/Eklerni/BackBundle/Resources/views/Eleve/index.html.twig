@@ -174,15 +174,16 @@
                         groupPadding: 0
                     }
                 },
+
                 series: [
                     {
                         type: 'area',
-                        name: '{% trans %}stats.moyenne.eleve{% endtrans %}',
+                        name: '{{ "stats.moyenne.eleve"|trans|escape('js') }}',
                         data: notes
                     },
                     {
                         type: 'line',
-                        name: '{% trans %}stats.moyenne.classe{% endtrans %}',
+                        name: '{{ "stats.moyenne.classe"|trans|escape('js') }}',
                         data: notesClasse
                     }
                 ]
