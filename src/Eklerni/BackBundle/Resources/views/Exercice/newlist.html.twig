@@ -1,5 +1,9 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
+{% block stylesheets %}
+    <link href="{{ asset('bundles/eklerniback/css/Exercice/index.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
 {% set listActivite %}
 <div id="activitelist">
     {% for matiere in matieres %}
@@ -70,7 +74,7 @@
                                         </tr>
                                         {% for serie in seriesPerso if serie.enseignant.id == app.user.id %}
                                             <tr>
-                                                <td class="tdsize">{{ serie.nom }}</td>
+                                                <td class="tdsize"><a href="{{ path('eklerni_back_serie_fiche', {idSerie:serie.id}) }}">{{ serie.nom }}</a></td>
                                                 <td class="tdsize">{{ serie.description }}</td>
                                                 <td class="tdsize">{{ serie.niveau }}</td>
                                                 <td class="tdsize">
