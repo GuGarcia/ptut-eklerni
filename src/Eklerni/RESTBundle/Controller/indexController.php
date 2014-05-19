@@ -4,6 +4,8 @@ namespace Eklerni\RESTBundle\Controller;
 
 use Eklerni\DatabaseBundle\Entity\Attribuer;
 use Eklerni\DatabaseBundle\Entity\Personne;
+use Eklerni\DatabaseBundle\Entity\Question;
+use Eklerni\DatabaseBundle\Entity\Reponse;
 use Eklerni\DatabaseBundle\Entity\Resultat;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +26,7 @@ class IndexController extends Controller
     public function exercicesAction(Request $request, $idEleve)
     {
         $retour = array();
-            $eleve = $this->get('eklerni.manager.eleve')->findById($idEleve)[0];
+            $eleve = $this->get('eklerni.manager.eleve')->findById($idEleve);
             $attributions = $this->get('eklerni.manager.attribuer')->findByEleve($eleve);
             $this->putAttributionsInArray(
                 $retour,
@@ -50,8 +52,25 @@ class IndexController extends Controller
                                 "description" => descriptionSerie,
                                 "difficulte" => difficulteSerie,
                                 "niveau" => niveauSerie
-                                //TODO ADD QUESTION REPONSE
+                                "questions" => array(
+                                    questionId => array(
 
+                                        "id" => questionId,
+                                        "label" => questionLabel,
+                                        "media" => questionMediaUrl,
+                                        "mediaType" => questionMedia,
+                                        "reponses" => array(
+                                            idreponse => array(
+
+                                                "id" => reponseId,
+                                                "label" => reponseLabel,
+                                                "media" => reponseMediaUrl,
+                                                "mediaType" => reponseMedia,
+
+                                            ), ... others reponses
+                                        )
+                                    ), ... others questions
+                                )
                             ),
                          'idactivite" => array(),
                          ...
@@ -83,15 +102,35 @@ class IndexController extends Controller
                         "exercice" => array()
                     );
                 }
-                $array[$matiere->getId()]["activites"][$activite->getId()]["exercice"][$serie->getId()] = array(
+                $exercice = array(
                     "id" => $serie->getId(),
                     "nom" => $serie->getNom(),
                     "description" => $serie->getDescription(),
                     "difficulte" => $serie->getDifficulte(),
-                    "niveau" => $serie->getNiveau()
+                    "niveau" => $serie->getNiveau(),
+                    "questions" => array()
                 );
 
-                //TODO ADD QUESTION & REPONSE
+                /** @var Question $question */
+                foreach ($serie->getQuestions() as $question) {
+                    $exercice["questions"][$question->getId()] = array(
+                        "id" => $question->getId(),
+                        "label" => $question->getLabel(),
+                        "media" => $question->getMediaUrl(),
+                        "mediaType" => $question->getMedia()->getMedia(),
+                        "reponses" => array()
+                    );
+                    /** @var Reponse $reponse */
+                    foreach ($question->getReponses() as $reponse) {
+                        $exercice["questions"][$question->getId()]["reponses"][$reponse->getId()] = array(
+                            "id" => $reponse->getId(),
+                            "label" => $reponse->getLabel(),
+                            "media" => $reponse->getMediaUrl(),
+                            "mediaType" => $reponse->getMedia()->getMedia(),
+                        );
+                    }
+                }
+                $array[$matiere->getId()]["activites"][$activite->getId()]["exercice"][$serie->getId()] = $exercice;
             }
         }
     }
