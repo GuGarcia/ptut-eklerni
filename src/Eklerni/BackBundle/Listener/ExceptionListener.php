@@ -36,10 +36,16 @@ class ExceptionListener
             $response = new Response();
 
             // set response content
-            // TODO check user with container and redirect Front or Back
-            $response->setContent(
-                $this->templating->render('EklerniBackBundle:Exception:Exception.html.twig', array('exception' => $exception))
-            );
+            $user = $this->getUser();
+            if ($user) {
+                if ('ROLE_ELEVE' === $user->getRoles()) {
+                    // TODO handle error in front
+                } else {
+                    $response->setContent(
+                        $this->templating->render('EklerniBackBundle:Exception:Exception.html.twig', array('exception' => $exception))
+                    );
+                }
+            }
 
             // HttpExceptionInterface is a special type of exception that
             // holds status code and header details
@@ -53,5 +59,22 @@ class ExceptionListener
             // set the new $response object to the $event
             $event->setResponse($response);
         }
+    }
+
+    private function getUser()
+    {
+        if (!$this->container->has('security.context')) {
+            throw new \LogicException('The SecurityBundle is not registered in your application.');
+        }
+
+        if (null === $token = $this->container->get('security.context')->getToken()) {
+            return;
+        }
+
+        if (!is_object($user = $token->getUser())) {
+            return;
+        }
+
+        return $user;
     }
 }
