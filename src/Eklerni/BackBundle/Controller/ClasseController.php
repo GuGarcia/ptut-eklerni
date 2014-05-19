@@ -85,7 +85,7 @@ class ClasseController extends Controller
 
     public function listAction()
     {
-        $enseignant = $this->get('security.context')->getToken()->getUser();
+        $enseignant = $this->getUser();
         $classes = $this->get("eklerni.manager.classe")->findByProf($enseignant);
         $matieres = $this->get('eklerni.manager.matiere')->findAll();
         $moyennes = array();

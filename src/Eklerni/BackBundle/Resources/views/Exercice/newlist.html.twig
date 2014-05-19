@@ -26,10 +26,10 @@
                 <div class="nav-tabs-custom">
                     <ul id="tabs" class="nav nav-tabs pull-right">
                         <li class="tab active">
-                            <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">{% trans %}serie.personnal{% endtrans %}</a>
+                            <a href="#tab_{{ matiere.id ~ '_' ~ activite.id }}_1" data-toggle="tab">{% trans %}exercice.personnal{% endtrans %}</a>
                         </li>
                         <li class="tab">
-                            <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">{% trans %}serie.public{% endtrans %}</a>
+                            <a href="#tab_{{ matiere.id ~'_'~ activite.id }}_2" data-toggle="tab">{% trans %}exercice.public{% endtrans %}</a>
                         </li>
                         <li class="noborder">
                             <a class="btn btn-primary bg-blue"
@@ -68,7 +68,7 @@
                                             <th class="tdsize">{% trans %}exercice.description{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.level{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.difficulty{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}exercice.questions.number{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.question.number{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.statut{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
                                         </tr>
@@ -129,7 +129,7 @@
                                             <th class="tdsize">{% trans %}exercice.description{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.level{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.difficulty{% endtrans %}</th>
-                                            <th class="tdsize">{% trans %}exercice.questions.number{% endtrans %}</th>
+                                            <th class="tdsize">{% trans %}exercice.question.number{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}exercice.enseignant{% endtrans %}</th>
                                             <th class="tdsize">{% trans %}utils.tools{% endtrans %}</th>
                                         </tr>
@@ -182,13 +182,19 @@
             </div>
         {% endfor %}
     {% endfor %}
-</div>·
+</div>
 {% endset %}
 
 {% block body %}
     <div class="row">
+        {% set activiteList %}
+            {% trans %}activite.list{% endtrans %}
+        {% endset %}
+        {% set serieList %}
+            {% trans %}serie.list{% endtrans %}
+        {% endset %}
         <div class="col-sm-4">
-            {{ eklerni.block("Liste des Activités", listActivite, "", "primary") }}
+            {{ eklerni.block(activiteList, listActivite, "", "primary") }}
         </div>
         <div class="col-sm-8">
             {{ eklerni.block("Liste des Series", listSerie, "", "primary") }}
@@ -217,7 +223,7 @@
                 $('#serielist > #'+this.id).removeClass("hidden");
             });
 
-            $('.deleteClassBtn').on('click', function(event){
+            $('.deleteSerieBtn').on('click', function(event) {
                 event.preventDefault();
                 var _this = this;
 
@@ -234,6 +240,23 @@
                     }
                 });
             });
+
+            /*$('.duplicateSerieBtn').on('click', function(event) {
+                event.preventDefault();
+                var _this = this;
+
+                $.ajax({
+                    type: "POST",
+                    url: $(_this).attr("href"),
+                    dataType: "json"
+                }).success(function (data) {
+                    if (data.success) {
+                        displayMessage("success", data.message);
+                    } else {
+                        displayMessage("danger", data.message);
+                    }
+                });
+            });*/
         });
 
     </script>

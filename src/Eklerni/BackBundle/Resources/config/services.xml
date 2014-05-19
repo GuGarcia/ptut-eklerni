@@ -8,5 +8,11 @@
         <service id="eklerni.back.erklerni_back_ext" class="Eklerni\BackBundle\Twig\EklerniBackExtension">
             <tag name="twig.extension" />
         </service>
+        <service id="kernel.listener.eklerni_exception_listener" class="Eklerni\BackBundle\Listener\ExceptionListener">
+            <argument type="service" id="templating" />
+            <argument type="service" id="kernel" />
+            <argument type="service" id="service_container" />
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+        </service>
     </services>
 </container>

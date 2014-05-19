@@ -1,19 +1,10 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
 {% block body %}
-
-    <div style="text-align: center">
-        <h1>Error {{ exception.statusCode }}</h1>
-
-        <br><br><br>
-
-        <p style="font-size: 20px;">
-            The resource you are looking for is unavailable or not found.
-            <br><br>
-            <p style="">
-                You can return to <a href="{{ path('eklerni_back_homepage') }}">Home</a>
-            </p>
+    <div class="callout callout-danger">
+        <h1>{% trans with {'%code%': exception.statusCode } %}Error %code%{% endtrans %}</h1>
+        <p>
+            {{ exception.message }}
         </p>
     </div>
-
 {% endblock %}

@@ -33,7 +33,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ EklerniBackBundle, EklerniCASBundle ]
+    #bundles:        [ EklerniBackBundle, EklerniCASBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -73,10 +73,3 @@ jms_i18n_routing:
     default_locale: en
     locales: [en, fr]
     strategy: prefix
-
-services:
-    kernel.listener.eklerni_exception_listener:
-        class: Eklerni\BackBundle\Listener\ExceptionListener
-        arguments: [@templating, @kernel]
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

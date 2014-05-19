@@ -17,7 +17,7 @@ class StatistiqueController extends Controller{
         //TODO datedebut use calandar
         $form = $this->createForm(
             new ResultatType(
-                $this->get('security.context')->getToken()->getUser()
+                $this->getUser()
             ), null
         );
         $form->handleRequest($request);

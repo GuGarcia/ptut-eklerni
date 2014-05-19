@@ -73,7 +73,7 @@ class EleveController extends Controller
     public function listAction()
     {
         /** @var Enseignant $prof */
-        $prof = $this->get('security.context')->getToken()->getUser();
+        $prof = $this->getUser();
         $classes = $this->get("eklerni.manager.classe")->findByProf($prof);
 
         return $this->render(
