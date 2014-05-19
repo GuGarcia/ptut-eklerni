@@ -114,10 +114,10 @@
             {{ eklerni.row(form.activite) }}
             {{ eklerni.row(form.serie) }}
             <hr>
+            {{ eklerni.row(form.date) }}
             {{ eklerni.row(form.limit) }}
             {{ eklerni.row(form.moyenne) }}
             {{ eklerni.row(form.istest) }}
-            {# {{ eklerni.row(form.datedebut) }}#}
 
             {{ form_widget(form._token) }}
         </div>
@@ -146,6 +146,8 @@
 {% block javascripts %}
     <script type="application/javascript">
         $(function () {
+
+            $(".datepicker").daterangepicker();
 
             $('#table').dataTable({
                 "bSort": true

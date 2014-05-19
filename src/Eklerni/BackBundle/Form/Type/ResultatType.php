@@ -132,12 +132,12 @@ class ResultatType extends AbstractType
         );
 
         $builder->add(
-            'datedebut',
+            'date',
             'text',
             array(
-                'label' => 'datedebut.text',
+                'label' => 'date.text',
                 'attr' => array(
-                    'class' => 'form-control'
+                    'class' => 'form-control datepicker'
                 ),
                 'required' => false,
             )

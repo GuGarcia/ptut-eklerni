@@ -3,6 +3,7 @@
 namespace Eklerni\DatabaseBundle\Manager;
 
 
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Eklerni\DatabaseBundle\Entity\Activite;
@@ -166,10 +167,10 @@ class ResultatManager extends BaseManager
             }
             $query->groupBy("c.id");
         } else if (isset($condition["moyenne"]) && $condition["moyenne"] == "matiere") {
-            if (!isset($condition["serie"]) && !isset($condition["activite"]) && !isset($condition["matiere"]) && !isset($condition["enseignant"]) ) {
+            if (!isset($condition["serie"]) && !isset($condition["activite"]) && !isset($condition["matiere"]) && !isset($condition["enseignant"])) {
                 $query->innerJoin("r.serie", "s");
             }
-            if (!isset($condition["activite"]) &&  !isset($condition["matiere"])) {
+            if (!isset($condition["activite"]) && !isset($condition["matiere"])) {
                 $query->innerJoin("s.activite", "a");
             }
             if (!isset($condition["matiere"])) {
@@ -180,19 +181,36 @@ class ResultatManager extends BaseManager
             $query->groupBy("r.id");
         }*/
 
-        if(isset($condition["istest"]) && count($condition["istest"])) {
+        if (isset($condition["istest"]) && count($condition["istest"])) {
             $query->andwhere("r.isTest = :istest")
-                ->setParameter("istest", ($condition["istest"] == "false")?false:true);
+                ->setParameter("istest", ($condition["istest"] == "false") ? false : true);
+        }
+        if (isset($condition["date"])) {
+            $dates = explode("-", $condition["date"]);
+            if (count($dates) == 2) {
+                $query->andWhere(
+                    $query->expr()->between('r.dateCreation', ':date_from', ':date_to')
+                );
+                $date = new \DateTime($dates[0]);
+                $query->setParameter('date_from', $date, Type::DATETIME);
+                $date = new \DateTime($dates[1]);
+                $query->setParameter('date_to',  $date, Type::DATETIME);
+            }
+        }
+        if (isset($condition["dateCreation"]) && !isset($condition["date"])) {
+            $query->andWhere( 'r.dateCreation > :date_from' );
+            $query->setParameter('date_from', $condition["date"], Type::DATETIME);
         }
 
         if ($limit) {
             $query->setMaxResults($limit);
         }
+
         if (isset($orderby["champs"])) {
             if (isset($orderby["order"])) {
-                $query->orderBy( $orderby["champs"], $orderby["order"]);
+                $query->orderBy($orderby["champs"], $orderby["order"]);
             } else {
-                $query->orderBy( $orderby["champs"]);
+                $query->orderBy($orderby["champs"]);
             }
         }
 
