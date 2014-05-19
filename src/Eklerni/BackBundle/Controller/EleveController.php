@@ -2,7 +2,6 @@
 
 namespace Eklerni\BackBundle\Controller;
 
-
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;
 use Eklerni\DatabaseBundle\Entity\Enseignant;
@@ -11,11 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class EleveController extends Controller
 {
-
-    /**
-     * @param $idEleve
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     public function indexAction($idEleve)
     {
         /** @var Eleve $eleve */
@@ -23,6 +17,8 @@ class EleveController extends Controller
         if (!$eleve) {
             throw $this->createNotFoundException($this->get("translator")->trans("eleve.notfound"));
         }
+
+        $elevesClasse = $this->get("eklerni.manager.eleve")->findByClasse($eleve->getClasse());
         
         $resultats = $this->get('eklerni.manager.resultat')->findResults(
             array(
@@ -39,7 +35,8 @@ class EleveController extends Controller
                 "eleve" => $eleve,
                 "moyenne" => "matiere",
                 "istest" => true
-            ), null,
+            ),
+            null,
             array(
                 "champs" => "m.name",
                 "order" => "asc"
@@ -51,7 +48,8 @@ class EleveController extends Controller
                 "classe" => $eleve->getClasse(),
                 "moyenne" => "matiere",
                 "istest" => true
-            ), null,
+            ),
+            null,
             array(
                 "champs" => "m.name",
                 "order" => "asc"
@@ -59,8 +57,12 @@ class EleveController extends Controller
         );
 
         return $this->render('EklerniBackBundle:Eleve:index.html.twig', array(
-            "title" => "Élève " . $eleve->getNom() . " " . $eleve->getPrenom(),
+            "title" => $this->get("translator")->trans(
+                "eleve.%nom%.%prenom%",
+                array("%nom%" => $eleve->getNom(), "%prenom%" => $eleve->getPrenom())
+            ),
             "eleve" => $eleve,
+            "elevesClasse" => $elevesClasse,
             "resultats" => $resultats,
             "moyennes" => $moyennes,
             "moyennesClasse" => $moyennesClasse
@@ -78,7 +80,7 @@ class EleveController extends Controller
 
         return $this->render(
             'EklerniBackBundle:Eleve:list.html.twig',
-            array("title" => "Listes des Elèves par Classes", "classes" => $classes)
+            array("title" => $this->get('translator')->trans("eleve.list.by.classe"), "classes" => $classes)
         );
     }
 

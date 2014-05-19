@@ -1,5 +1,18 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
+{% set dropDownEleve %}
+    <div class="hidden" id="wrapperFormDropDownEleve">
+        <form id="formDropDownEleve">
+            <label for="selectDropDownEleve" class="hidden">{% trans %}eleve.switch{% endtrans %}</label>
+            <select id="selectDropDownEleve">
+                {% for pupil in elevesClasse %}
+                    <option value="{{ pupil.id }}"{% if pupil.id == eleve.id %} selected="selected"{% endif %}>{{ pupil.getFullName }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+{% endset %}
+
 {% set eleveTable %}
 <div class="row">
     <div class="col-lg-4">
@@ -31,13 +44,12 @@
 
 
 {% if resultats|length > 0 %}
-    {# TODO Trad #}
     {% set resultatbody %}
     <table class="table table-bordered">
         <tr>
-            <th>Série</th>
+            <th>{% trans %}exercice.text{% endtrans %}</th>
             <th class="col-md-6"></th>
-            <th>note</th>
+            <th>{% trans %}note.text{% endtrans %}</th>
         </tr>
         {% for resultat in resultats %}
             {% if resultat.note < 25 %}
@@ -54,7 +66,6 @@
                 {% set typecolor = "green" %}
             {% endif %}
             <tr>
-                {# TODO Lien Série #}
                 <td>
                     <a href="{{ path("eklerni_back_serie_fiche", {idSerie:resultat.serie.id}) }}">
                         {{ resultat.serie.nom }}
@@ -114,11 +125,30 @@
             {{ eklerni.block(latestStatList, resultatbody, "", "primary") }}
         </div>
     </div>
+    {{ dropDownEleve }}
 {% endblock %}
 
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function () {
+            // Drop Down Eleve
+            var header = $(".content-header");
+            var dropDownEleve = $('#wrapperFormDropDownEleve');
+            var selectDropDownEleve = $("#selectDropDownEleve");
+            var btnDropDownEleve = $("#btnDropDownEleve");
+
+            header.addClass("row");
+            header.children("h1").addClass("col-md-8");
+            dropDownEleve.removeClass("hidden");
+            dropDownEleve.addClass("col-md-4");
+            header.append(dropDownEleve);
+            selectDropDownEleve.on("change", function(e){
+                e.preventDefault();
+                var url = "{{ path('eklerni_back_eleve_fiche', {idEleve: 0}) }}";
+                window.location.assign(url.replace("0", $(this).val()));
+            });
+
+
 
             var matieres = [];
             var notes = [];
@@ -130,63 +160,61 @@
             {% for moyenne in moyennesClasse %}
                 notesClasse.push({{ moyenne["note"]|number_format }});
             {% endfor %}
-            /* matieres[72] = "Dictée";
-             matieres[144] = "Lecture";
-             matieres[216] = "Compter";
-             matieres[288] = "Conjugaison";*/
 
-            $('#moyennes').highcharts({
-                chart: {
-                    polar: true
-                },
-                title: {
-                    text: '{% trans %}stats.moyenne.matiere{% endtrans %}'
-                },
-                subtitle: {
-                    text: '{{ eleve.prenom }} {{ eleve.nom }}'
-                },
-                pane: {
-                    startAngle: 0,
-                    endAngle: 360
-                },
-                xAxis: {
-                    tickInterval: {{ (360 / moyennes|length)|number_format  }},
-                    min: 0,
-                    max: 360,
-                    labels: {
-                        formatter: function () {
-                            return matieres[this.value];
+            {% if moyennes is not empty %}
+                $('#moyennes').highcharts({
+                    chart: {
+                        polar: true
+                    },
+                    title: {
+                        text: '{% trans %}stats.moyenne.matiere{% endtrans %}'
+                    },
+                    subtitle: {
+                        text: '{{ eleve.prenom }} {{ eleve.nom }}'
+                    },
+                    pane: {
+                        startAngle: 0,
+                        endAngle: 360
+                    },
+                    xAxis: {
+                        tickInterval: {{ (360 / moyennes|length)|number_format  }},
+                        min: 0,
+                        max: 360,
+                        labels: {
+                            formatter: function () {
+                                return matieres[this.value];
+                            },
+                            overflow: 'justify'
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        max: 100
+                    },
+                    plotOptions: {
+                        series: {
+                            pointStart: 0,
+                            pointInterval: {{ (360 / moyennes|length)|number_format  }}
                         },
-                        overflow: 'justify'
-                    }
-                },
-                yAxis: {
-                    min: 0,
-                    max: 100
-                },
-                plotOptions: {
-                    series: {
-                        pointStart: 0,
-                        pointInterval: {{ (360 / moyennes|length)|number_format  }}
+                        column: {
+                            pointPadding: 0,
+                            groupPadding: 0
+                        }
                     },
-                    column: {
-                        pointPadding: 0,
-                        groupPadding: 0
-                    }
-                },
-                series: [
-                    {
-                        type: 'area',
-                        name: '{% trans %}stats.moyenne.eleve{% endtrans %}',
-                        data: notes
-                    },
-                    {
-                        type: 'line',
-                        name: '{% trans %}stats.moyenne.classe{% endtrans %}',
-                        data: notesClasse
-                    }
-                ]
-            });
+                    series: [
+                        {
+                            type: 'area',
+                            name: '{% trans %}stats.moyenne.eleve{% endtrans %}',
+                            data: notes
+                        },
+                        {
+                            type: 'line',
+                            name: '{% trans %}stats.moyenne.classe{% endtrans %}',
+                            data: notesClasse
+                        }
+                    ]
+                });
+            {% endif %}
         });
     </script>
 {% endblock %}
