@@ -77,7 +77,7 @@
             <th>{% trans %}classe.text{% endtrans %}</th>
             <th>{% trans %}personne.lastname{% endtrans %}</th>
             <th>{% trans %}exercice.text{% endtrans %}</th>
-            <th class="col-md-6"></th>
+            <th class="col-md-6 hidden-sm"></th>
             <th>{% trans %}note.text{% endtrans %}</th>
         </tr>
         {% for resultat in resultats %}
@@ -110,7 +110,7 @@
                         {{ resultat.serie.nom }}
                     </a>
                 </td>
-                <td>
+                <td class="hidden-sm">
                     <div class="progress xs">
                         <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ resultat.note }}%;"></div>
                     </div>
@@ -209,7 +209,6 @@
         </div>
 
     </div>
-
 {% endblock %}
 
 {% block javascripts %}
