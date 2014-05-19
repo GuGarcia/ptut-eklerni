@@ -7,15 +7,19 @@
     <route id="eklerni_rest_exercice" pattern="/exercice/{idEleve}">
         <default key="_controller">EklerniRESTBundle:Index:exercices</default>
         <requirement key="idEleve">\d+</requirement>
+        <option key="i18n">false</option>
     </route>
     <route id="eklerni_rest_users" pattern="/users/">
         <default key="_controller">EklerniRESTBundle:Index:users</default>
+        <option key="i18n">false</option>
     </route>
     <route id="eklerni_rest_generate_resultat" pattern="/resultat/">
         <default key="_controller">EklerniRESTBundle:Index:generateResultat</default>
+        <option key="i18n">false</option>
     </route>
     <route id="eklerni_rest_generate_resultat_nb" pattern="/resultat/{nb}">
         <default key="_controller">EklerniRESTBundle:Index:generateResultat</default>
         <requirement key="nb">\d+</requirement>
+        <option key="i18n">false</option>
     </route>
 </routes>
