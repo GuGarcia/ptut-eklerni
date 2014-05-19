@@ -5,11 +5,11 @@
     <div id="table_wrapper" class="dataTables_wrapper form-inline" role="grid">
         <table id="table_eleve" class="table table-bordered table-hover dataTable" aria-describedby="table_info">
             <thead>
-                <tr>
-                    <th>{% trans %}personne.picture{% endtrans %}</th>
-                    <th>{% trans %}personne.name{% endtrans %}</th>
-                    <th>{% trans %}classe.text{% endtrans %}</th>
-                </tr>
+            <tr>
+                <th>{% trans %}personne.picture{% endtrans %}</th>
+                <th>{% trans %}personne.name{% endtrans %}</th>
+                <th>{% trans %}classe.text{% endtrans %}</th>
+            </tr>
             </thead>
             <tbody>
             {% for eleve in eleves %}
@@ -124,25 +124,86 @@
     {% endset %}
 {% else %}
     {% set resultatbody %}
-        {% trans %}result.notfound{% endtrans %}
+    {% trans %}result.notfound{% endtrans %}
     {% endset %}
 {% endif %}
 
 {% block body %}
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-sm-3 col-xs-6">
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>{{ enseignant.series|length }}</h3>
+                    <p>{% trans %}series.text{% endtrans %}</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-document-text"></i>
+                </div>
+                <a href="{{ path("eklerni_back_exercice") }}" class="small-box-footer">
+                    {% trans %}more.info{% endtrans %} <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-sm-3 col-xs-6">
+            <div class="small-box bg-purple">
+                <div class="inner">
+                    <h3>&nbsp;</h3>
+                    <p>{% trans %}tablet.text{% endtrans %}</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-ipad"></i>
+                </div>
+                <a href="{{ path("eklerni_back_tablet") }}" class="small-box-footer">
+                    {% trans %}more.info{% endtrans %} <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-sm-3 col-xs-6">
+            <div class="small-box bg-light-blue">
+                <div class="inner">
+                    <h3>{{ classes|length }}</h3>
+                    <p>{% trans %}classes.text{% endtrans %}</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-android-friends"></i>
+                </div>
+                <a href="{{ path("eklerni_back_classe") }}" class="small-box-footer">
+                    {% trans %}more.info{% endtrans %} <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>{{ eleves|length }}</h3>
+                    <p>{% trans %}eleves.text{% endtrans %}</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-android-contact"></i>
+                </div>
+                <a href="{{ path("eklerni_back_eleve") }}" class="small-box-footer">
+                    {% trans %}more.info{% endtrans %} <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
             {% set classList %}
-                {% trans %}classe.list{% endtrans %}
+            {% trans %}classe.list{% endtrans %}
             {% endset %}
             {{ eklerni.block(classList, classesTable, footerclasses, "danger") }}
             {% set eleveList %}
-                {% trans %}eleve.list{% endtrans %}
+            {% trans %}eleve.list{% endtrans %}
             {% endset %}
             {{ eklerni.block(eleveList, elevesTable, "", "primary") }}
         </div>
-        <div class="col-md-8">
+        <div class="col-sm-8">
             {% set resultList %}
-                {% trans %}result.list.last{% endtrans %}
+            {% trans %}result.list.last{% endtrans %}
             {% endset %}
             {{ eklerni.block(resultList, resultatbody, "", "primary") }}
         </div>
