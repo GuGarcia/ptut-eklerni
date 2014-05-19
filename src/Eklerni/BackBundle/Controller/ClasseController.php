@@ -147,8 +147,11 @@ class ClasseController extends Controller
         if ($form->isValid()) {
             $classe->addEnseignant($enseignant);
             $enseignant->addClasse($classe);
+
             $this->get("eklerni.manager.classe")->save($classe);
             $this->get("eklerni.manager.enseignant")->save($enseignant);
+
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("classe.add.success"));
             return $this->redirect($this->generateUrl('eklerni_back_classe'));
         } else {
             return $this->render(
@@ -175,6 +178,7 @@ class ClasseController extends Controller
         if ($form->isValid()) {
             $this->get("eklerni.manager.classe")->save($classe);
 
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("classe.modify.success"));
             return $this->redirect($this->generateUrl('eklerni_back_classe'));
         } else {
             return $this->render(

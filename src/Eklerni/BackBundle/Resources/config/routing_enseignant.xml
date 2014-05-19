@@ -6,7 +6,4 @@
         <route id="eklerni_back_enseignant_create" pattern="/ajouter">
             <default key="_controller">EklerniBackBundle:Enseignant:ajouter</default>
         </route>
-        <route id="eklerni_back_enseignant_update" pattern="/idEnseignant">
-            <default key="_controller">EklerniBackBundle:Enseignant:modifier</default>
-        </route>
 </routes>

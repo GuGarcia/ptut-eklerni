@@ -7,7 +7,4 @@
     <route id="eklerni_back_direction" pattern="/">
         <default key="_controller">EklerniBackBundle:Direction:index</default>
     </route>
-    <route id="eklerni_back_direction_create_prof" pattern="/ajouterprof">
-        <default key="_controller">EklerniBackBundle:Direction:ajouterProfesseur</default>
-    </route>
 </routes>

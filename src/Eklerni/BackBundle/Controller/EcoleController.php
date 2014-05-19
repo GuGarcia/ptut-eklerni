@@ -17,6 +17,8 @@ class EcoleController extends Controller
 
         if ($form->isValid()) {
             $this->get("eklerni.manager.ecole")->save($ecole);
+
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("ecole.add.success"));
             return $this->redirect($this->generateUrl('eklerni_back_classe'));
         } else {
             return $this->render(
@@ -39,6 +41,8 @@ class EcoleController extends Controller
 
         if ($form->isValid()) {
             $this->get("eklerni.manager.ecole")->save($ecole);
+
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("ecole.modify.success"));
             return $this->redirect($this->generateUrl('eklerni_back_direction'));
         } else {
             return $this->render(

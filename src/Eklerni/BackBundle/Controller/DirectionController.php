@@ -24,9 +24,4 @@ class DirectionController extends Controller
             )
         );
     }
-    
-    public function ajouterProfesseurAction(Request $request)
-    {
-        return new Response();
-    }
 }

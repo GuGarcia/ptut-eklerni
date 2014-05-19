@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-05-19T15:47:49Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2014-05-19T18:47:10Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -22,6 +22,10 @@
         <source>Hello, %name%</source>
         <target>Hello, %name%</target>
       </trans-unit>
+      <trans-unit id="e1075c3ef69eec6b91126824bb927cc519295f37" resname="activite.add.success">
+        <source>activite.add.success</source>
+        <target>Activity successfully added.</target>
+      </trans-unit>
       <trans-unit id="ce239152dbd0efd259843bfdfb8926a9b2eb603f" resname="activite.choose">
         <source>activite.choose</source>
         <target>Choose an activity</target>
@@ -41,6 +45,10 @@
       <trans-unit id="c3457b82893c685c848951eda00ee34f71c473fc" resname="activite.list">
         <source>activite.list</source>
         <target>Activities' list</target>
+      </trans-unit>
+      <trans-unit id="062eb5512fb02d350c2b9924693a733bab201094" resname="activite.modify.success">
+        <source>activite.modify.success</source>
+        <target>Activity successfully modified.</target>
       </trans-unit>
       <trans-unit id="005cbbd214fc0abf543b330013ded5706d81235e" resname="activite.name">
         <source>activite.name</source>
@@ -86,6 +94,10 @@
         <source>classe.add.enseignant.success</source>
         <target>Teacher successfully bound to the classroom.</target>
       </trans-unit>
+      <trans-unit id="e4f2bcf131d86de65963204e6b1eada10cf47d7a" resname="classe.add.success">
+        <source>classe.add.success</source>
+        <target>Classroom successfully added.</target>
+      </trans-unit>
       <trans-unit id="40776a6c45c4ce36c1201f00f9100dfb22cc14d0" resname="classe.choose">
         <source>classe.choose</source>
         <target>Choose a classroom</target>
@@ -117,6 +129,10 @@
       <trans-unit id="3c0d38b79f55fa292d4d89ae1fa3f70f08e60281" resname="classe.list">
         <source>classe.list</source>
         <target>Classrooms' list</target>
+      </trans-unit>
+      <trans-unit id="8155b384eac07424b21cfed5e8a3b08fd75bf43b" resname="classe.modify.success">
+        <source>classe.modify.success</source>
+        <target>Classroom successfully modified.</target>
       </trans-unit>
       <trans-unit id="c72eab01165e5f9f7c867ef919ec97802aa7cfbf" resname="classe.name">
         <source>classe.name</source>
@@ -158,9 +174,9 @@
         <source>classes.text</source>
         <target>Classrooms</target>
       </trans-unit>
-      <trans-unit id="c921573341bc598fc26bddc1f09c1385396e68f1" resname="datedebut.text">
-        <source>datedebut.text</source>
-        <target>Beginning date</target>
+      <trans-unit id="c663a497696af1a237c45ed95083523817957df3" resname="date.text">
+        <source>date.text</source>
+        <target>Date</target>
       </trans-unit>
       <trans-unit id="9c63e52db498345c5c710be3320962545c4a3d7b" resname="difficulte.niveau1">
         <source>difficulte.niveau1</source>
@@ -174,6 +190,10 @@
         <source>difficulte.niveau3</source>
         <target>Hard</target>
       </trans-unit>
+      <trans-unit id="bd1840ea235e8559fd4c19317ee8375de3976128" resname="ecole.add.success">
+        <source>ecole.add.success</source>
+        <target>School successfully added.</target>
+      </trans-unit>
       <trans-unit id="54fc87a1ba80ffbf0442bca619ddd3b2c1ec7752" resname="ecole.city">
         <source>ecole.city</source>
         <target>City</target>
@@ -185,6 +205,10 @@
       <trans-unit id="09d193e92830b2870de766708c1768f4b206ef0f" resname="ecole.list">
         <source>ecole.list</source>
         <target>Schools' list</target>
+      </trans-unit>
+      <trans-unit id="3a73027f7b2f51e6ac249c7776acb9a6f172603a" resname="ecole.modify.success">
+        <source>ecole.modify.success</source>
+        <target>School successfully modified.</target>
       </trans-unit>
       <trans-unit id="82f59f133355e967eb96258009c2fb58f516c01c" resname="ecole.name">
         <source>ecole.name</source>
@@ -206,6 +230,10 @@
         <source>eleve.%nom%.%prenom%</source>
         <target>Pupil %nom% %prenom%</target>
       </trans-unit>
+      <trans-unit id="2ebbfb6bf591596baf778cf9eaae5a90c65aab8b" resname="eleve.add.success">
+        <source>eleve.add.success</source>
+        <target>Pupil successfully added.</target>
+      </trans-unit>
       <trans-unit id="394abec483e394d1f42c9792dd255e000a5733ca" resname="eleve.choose">
         <source>eleve.choose</source>
         <target>Choose a pupil</target>
@@ -217,6 +245,10 @@
       <trans-unit id="22128ffeeb19d9f0097f6eef42eea8899b0f823b" resname="eleve.list.by.classe">
         <source>eleve.list.by.classe</source>
         <target>Eleve's list by classroom</target>
+      </trans-unit>
+      <trans-unit id="7d02ab7697e9505b470694c6b83e5463e085ca60" resname="eleve.modify.success">
+        <source>eleve.modify.success</source>
+        <target>Pupil successfully modified.</target>
       </trans-unit>
       <trans-unit id="fc667791ed9fabb3c398c911001689ca6b76ff53" resname="eleve.no.note">
         <source>eleve.no.note</source>
@@ -245,6 +277,10 @@
       <trans-unit id="7b37bf92e2ef457ea6ba9afc1b3bcdcd2679d635" resname="enseignant.add">
         <source>enseignant.add</source>
         <target>Add a teacher</target>
+      </trans-unit>
+      <trans-unit id="4180fe4a282dbf6a27d257dd39d8f3705331765e" resname="enseignant.add.success">
+        <source>enseignant.add.success</source>
+        <target>Teacher successfully added.</target>
       </trans-unit>
       <trans-unit id="2cfe252db70c088a3c3e894e61e823b8677962bc" resname="enseignant.isDirecteur">
         <source>enseignant.isDirecteur</source>
@@ -297,6 +333,10 @@
       <trans-unit id="d104951f5fb824bc712f338a4c963ecd6d05a34f" resname="exercice.difficulty">
         <source>exercice.difficulty</source>
         <target>Difficulty</target>
+      </trans-unit>
+      <trans-unit id="e18b67beba6ddcd34bff3ec37abd9f8b5d15709a" resname="exercice.duplication.success">
+        <source>exercice.duplication.success</source>
+        <target>Exercise successfully duplicated.</target>
       </trans-unit>
       <trans-unit id="d18ee6c8f4e42416121d93c987ba3d71fd1ddb39" resname="exercice.enseignant">
         <source>exercice.enseignant</source>
@@ -352,7 +392,7 @@
       </trans-unit>
       <trans-unit id="b6903849225eda6aef709c6facd095adb2d10840" resname="exercices.text">
         <source>exercices.text</source>
-        <target>exercices.text</target>
+        <target>Exercises</target>
       </trans-unit>
       <trans-unit id="7f76859e0156ac54a8692f6cf14946aed30a28bd" resname="grade.year1">
         <source>grade.year1</source>
@@ -382,6 +422,10 @@
         <source>limit.text</source>
         <target>Limit</target>
       </trans-unit>
+      <trans-unit id="1d8c6694dfcbc74c5c368ed064527e7028368f29" resname="matiere.add.success">
+        <source>matiere.add.success</source>
+        <target>Subject successfully added.</target>
+      </trans-unit>
       <trans-unit id="b907e3df16ac6231902748f2ad3953eae73d5ec1" resname="matiere.add_activite">
         <source>matiere.add_activite</source>
         <target>Add an activity</target>
@@ -401,6 +445,10 @@
       <trans-unit id="c619ecb85f52e8726583e7643f8f4c3b5ce6c269" resname="matiere.list">
         <source>matiere.list</source>
         <target>Subjects' list</target>
+      </trans-unit>
+      <trans-unit id="8bb04416fa0893b278905f460c91eee62cf73a77" resname="matiere.modify.success">
+        <source>matiere.modify.success</source>
+        <target>Subject successfully modified.</target>
       </trans-unit>
       <trans-unit id="fc0fb372cdca554a1ba756be6d0703c03b9c5568" resname="matiere.name">
         <source>matiere.name</source>
