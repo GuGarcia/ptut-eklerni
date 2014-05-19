@@ -190,14 +190,14 @@
         {% set activiteList %}
             {% trans %}activite.list{% endtrans %}
         {% endset %}
-        {% set serieList %}
-            {% trans %}serie.list{% endtrans %}
+        {% set exerciceList %}
+            {% trans %}exercice.list{% endtrans %}
         {% endset %}
         <div class="col-sm-4">
             {{ eklerni.block(activiteList, listActivite, "", "primary") }}
         </div>
         <div class="col-sm-8">
-            {{ eklerni.block("Liste des Series", listSerie, "", "primary") }}
+            {{ eklerni.block(exerciceList, listSerie, "", "primary") }}
         </div>
     </div>
 {% endblock %}
