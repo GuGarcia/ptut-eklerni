@@ -166,7 +166,7 @@ class ResultatManager extends BaseManager
             }
             $query->groupBy("c.id");
         } else if (isset($condition["moyenne"]) && $condition["moyenne"] == "matiere") {
-            if (!isset($condition["serie"]) && !isset($condition["activite"]) &&  !isset($condition["matiere"])) {
+            if (!isset($condition["serie"]) && !isset($condition["activite"]) && !isset($condition["matiere"]) && !isset($condition["enseignant"]) ) {
                 $query->innerJoin("r.serie", "s");
             }
             if (!isset($condition["activite"]) &&  !isset($condition["matiere"])) {

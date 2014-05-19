@@ -130,7 +130,7 @@ class IndexController extends Controller
             $resultat->setIsTest((rand(0,1) > 0.5)?false:true);
 
             $this->get('eklerni.manager.resultat')->save($resultat);
-            //sleep();
+            //sleep(1);
         }
         return new Response();
     }

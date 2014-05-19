@@ -1,38 +1,39 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
-{% block body %}
+{% set listbody %}
     {% if classes|length > 0 %}
         <div class="box-body table-responsive">
             <div id="table_wrapper" class="dataTables_wrapper form-inline" role="grid">
                 <table id="table" class="table table-bordered table-hover dataTable"
                        aria-describedby="table_info">
                     <thead>
-                        <tr role="row">
-                            <th>
-                                {% trans %}classe.name{% endtrans %}
-                            </th>
-                            <th>
-                                {% trans %}classe.level{% endtrans %}
-                            </th>
-                            <th>
-                                {% trans %}classe.year{% endtrans %}
-                            </th>
-                            <th>
-                                {% trans %}classe.eleve.count{% endtrans %}
-                            </th>
-                            <th>
-                                {% trans %}ecole.text{% endtrans %}
-                            </th>
-                            <th>
-                                {% trans %}utils.tools{% endtrans %}
-                            </th>
-                        </tr>
+                    <tr role="row">
+                        <th>
+                            {% trans %}classe.name{% endtrans %}
+                        </th>
+                        <th>
+                            {% trans %}classe.level{% endtrans %}
+                        </th>
+                        <th>
+                            {% trans %}classe.year{% endtrans %}
+                        </th>
+                        <th>
+                            {% trans %}classe.eleve.count{% endtrans %}
+                        </th>
+                        <th>
+                            {% trans %}ecole.text{% endtrans %}
+                        </th>
+                        <th>
+                            {% trans %}utils.tools{% endtrans %}
+                        </th>
+                    </tr>
                     </thead>
                     <tbody role="alert" aria-live="polite" aria-relevant="all">
                     {% for classe in classes %}
                         <tr class="odd">
                             <td class="sorting_1">
-                                <a title="{% trans %}classe.view{% endtrans %}" href="{{ path("eklerni_back_classe_fiche", {idClasse: classe.id}) }}">{{ classe.nom }}</a>
+                                <a title="{% trans %}classe.view{% endtrans %}"
+                                   href="{{ path("eklerni_back_classe_fiche", {idClasse: classe.id}) }}">{{ classe.nom }}</a>
                             </td>
                             <td>
                                 {{ classe.niveau }}
@@ -41,12 +42,16 @@
                                 {{ classe.annee }}
                             </td>
                             <td>
-                               {{ classe.eleves|length }}
+                                {{ classe.eleves|length }}
                             </td>
                             <td>{{ classe.ecole }}</td>
                             <td>
-                                <a href="{{ path("eklerni_back_classe_update", { idClasse: classe.id }) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}</a>
-                                <a href="{{ path("eklerni_back_classe_ajax_delete", { idClasse: classe.id }) }}" class="deleteClassBtn btn btn-danger btn-xs{% if classe.eleves|length > 0 %} disabled{% endif %}"><i class="fa fa-minus"></i> {% trans %}utils.delete{% endtrans %}</a>
+                                <a href="{{ path("eklerni_back_classe_update", { idClasse: classe.id }) }}"
+                                   class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> {% trans %}
+                                    utils.modify{% endtrans %}</a>
+                                <a href="{{ path("eklerni_back_classe_ajax_delete", { idClasse: classe.id }) }}"
+                                   class="deleteClassBtn btn btn-danger btn-xs{% if classe.eleves|length > 0 %} disabled{% endif %}"><i
+                                            class="fa fa-minus"></i> {% trans %}utils.delete{% endtrans %}</a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -59,8 +64,43 @@
     {% else %}
         <div class="box-body ">{% trans %}enseignant.no.classe{% endtrans %}!</div>
     {% endif %}
+{% endset %}
+{% set listfooter %}
+<a href="{{ path("eklerni_back_classe_create") }}" class="btn btn-primary"><i class="fa fa-plus"></i> {% trans %}
+    classe.text{% endtrans %}</a>
+{% endset %}
 
-    <a href="{{ path("eklerni_back_classe_create") }}" class="btn btn-primary"><i class="fa fa-plus"></i> {% trans %}classe.text{% endtrans %}</a>
+{% if moyennes|length > 0 %}
+    {% if moyennes|length %}
+        {% set moyennesbody %}
+        <div id="moyennes" style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
+        {% endset %}
+    {% else %}
+        {% set moyennesbody %}
+        {% trans %}eleve.noteinsuffisante{% endtrans %}
+        {% endset %}
+    {% endif %}
+{% else %}
+    {% set moyennesbody %}
+    {% trans %}eleve.no.note{% endtrans %}
+    {% endset %}
+{% endif %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-8">
+            {% set classeList %}
+            {% trans %}enseignant.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(classeList, listbody, listfooter, "primary") }}
+        </div>
+        <div class="col-md-4">
+            {% set statMoyList %}
+            {% trans %}stats.moyenne.matiere{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(statMoyList, moyennesbody, "", "primary") }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -75,7 +115,7 @@
                 "bAutoWidth": false
             });
 
-            $('.deleteClassBtn').on('click', function(event){
+            $('.deleteClassBtn').on('click', function (event) {
                 event.preventDefault();
                 var _this = this;
 
@@ -91,6 +131,68 @@
                         displayMessage("danger", data.message);
                     }
                 });
+            });
+
+
+            var notes = [];
+            {% for classe in classes %}
+                notes[{{ classe.id }}] = [];
+                {% for matiere in matieres %}
+                    notes[{{ classe.id }}].push({{ moyennes[matiere.id][classe.id]|number_format }});
+                {% endfor %}
+            {% endfor %}
+            var matieres = [];
+            {% for matiere in matieres %}
+                matieres[{{ (loop.index0/matieres|length) * 360 }}] = "{{ matiere.name }}";
+            {% endfor %}
+
+            console.log(matieres);
+            console.log(notes);
+            $('#moyennes').highcharts({
+                chart: {
+                    polar: true
+                },
+                title: {
+                    text: '{% trans %}stats.moyenne.matiere{% endtrans %}'
+                },
+                pane: {
+                    startAngle: 0,
+                    endAngle: 360
+                },
+                xAxis: {
+                    tickInterval: {{ (360 / moyennes|length)|number_format  }},
+                    min: 0,
+                    max: 360,
+                    labels: {
+                        formatter: function () {
+                            return matieres[this.value];
+                        },
+                        overflow: 'justify'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 100
+                },
+                plotOptions: {
+                    series: {
+                        pointStart: 0,
+                        pointInterval: {{ (360 / moyennes|length)|number_format  }}
+                    },
+                    column: {
+                        pointPadding: 0,
+                        groupPadding: 0
+                    }
+                },
+                series: [
+                    {% for classe in classes %}
+                    {
+                        type: 'line',
+                        name: '{% trans %}moyennede.text{% endtrans %} {{ classe.nom }}',
+                        data: notes[{{ classe.id }}]
+                    },
+                    {% endfor %}
+                ]
             });
         });
     </script>

@@ -6,6 +6,7 @@ use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;
 use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Eklerni\DatabaseBundle\Entity\Matiere;
+use Eklerni\DatabaseBundle\Entity\Resultat;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +37,8 @@ class ClasseController extends Controller
         $bests = $this->get('eklerni.manager.resultat')->findResults(
             array(
                 "classe" => $classe,
-                "moyenne" => "eleve"
+                "moyenne" => "eleve",
+                "isTest" => true
             ),
             3,
             array(
@@ -48,12 +50,22 @@ class ClasseController extends Controller
         $worsts = $this->get('eklerni.manager.resultat')->findResults(
             array(
                 "classe" => $classe,
-                "moyenne" => "eleve"
+                "moyenne" => "eleve",
+                "isTest" => true
             ),
             5,
             array(
                 "champs" => "note",
                 "order" => "asc"
+            )
+        );
+
+
+        $moyennes = $this->get('eklerni.manager.resultat')->findResults(
+            array(
+                "classe" => $classe,
+                "moyenne" => "matiere",
+                "isTest" => true
             )
         );
 
@@ -65,21 +77,60 @@ class ClasseController extends Controller
                 "title" => $this->get('translator')->trans("Classe %name%", array("%name%" => $classe->getNom())),
                 "matieres" => $matieres,
                 "bests" => $bests,
-                "worsts" => $worsts
+                "worsts" => $worsts,
+                "moyennes" => $moyennes
             )
         );
     }
 
     public function listAction()
     {
-        $prof = $this->get('security.context')->getToken()->getUser();
-        $classes = $this->get("eklerni.manager.classe")->findByProf($prof);
+        $enseignant = $this->get('security.context')->getToken()->getUser();
+        $classes = $this->get("eklerni.manager.classe")->findByProf($enseignant);
+        $matieres = $this->get('eklerni.manager.matiere')->findAll();
+        $moyennes = array();
+        /** @var Classe $classe */
+        /*foreach($classes as $classe) {
+            $moyennes[$classe->getId()] = $this->get('eklerni.manager.resultat')->findResults(
+                array(
+                    "classe" => $classe,
+                    "moyenne" => "classe",
+                    "enseignant" => $this->getUser()
+                )
+            );
+        }*/
+        /** @var Matiere $matiere */
+        foreach($matieres as $matiere) {
+            $moyenne = $this->get('eklerni.manager.resultat')->findResults(
+                array(
+                    "enseignant" => $enseignant,
+                    "matiere" => $matiere,
+                    "moyenne" => "classe",
+                    "isTest" => true
+                )
+            );
+            if(!isset($moyennes[$matiere->getId()])) {
+                $moyennes[$matiere->getId()] = array();
+            }
+            foreach($classes as $classe) {
+                $moyennes[$matiere->getId()][$classe->getId()] = 0;
+            }
+            foreach($moyenne as $moy) {
+                /** @var Resultat $resultat */
+                $resultat = $moy[0];
+                $note = $moy["note"];
+                $moyennes[$matiere->getId()][$resultat->getEleve()->getClasse()->getId()] = $note;
+            }
 
+        }
+        var_dump($moyennes);
         return $this->render(
             'EklerniBackBundle:Classe:list.html.twig',
             array(
                 "classes" => $classes,
-                "title" => $this->get('translator')->trans("title.classe")
+                "title" => $this->get('translator')->trans("title.classe"),
+                "moyennes" => $moyennes,
+                "matieres" => $matieres
             )
         );
     }

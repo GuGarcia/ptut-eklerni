@@ -1,5 +1,9 @@
 {% extends "EklerniBackBundle:Template:template.html.twig" %}
 
+{% block stylesheets %}
+    <link href="{{ asset('bundles/eklerniback/css/Exercice/index.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
 {% set listActivite %}
 <div id="activitelist">
     {% for matiere in matieres %}
