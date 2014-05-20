@@ -5,6 +5,7 @@ namespace Eklerni\DatabaseBundle\Manager;
 use Doctrine\ORM\EntityManager;
 use Eklerni\DatabaseBundle\Entity\BaseEntity;
 use Eklerni\DatabaseBundle\Entity\Classe;
+use Eklerni\DatabaseBundle\Entity\Eleve;
 
 class EleveManager extends BaseManager
 {
@@ -40,5 +41,29 @@ class EleveManager extends BaseManager
      */
     public function findByClasse(Classe $classe) {
         return $this->repository->findByClasse($classe->getId())->getQuery()->getResult();
+    }
+
+    /**
+     * @param Eleve $eleve
+     * @return string
+     */
+    public function defineUsername(Eleve $eleve) {
+        $i = 1;
+        while ( ! $this->isUsernameExists($eleve->generateUsername($i))) {
+            $i++;
+        }
+        return $eleve->getUsername();
+    }
+
+    /**
+     * @param $username
+     * @return bool
+     */
+    public function isUsernameExists($username) {
+        if(count($this->repository->isUsernameExists($username)->getQuery()->getResult())) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

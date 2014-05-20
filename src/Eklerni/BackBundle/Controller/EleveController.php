@@ -95,9 +95,8 @@ class EleveController extends Controller
         if (!$classe) {
             throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
         }
-        
 
-        $form = $this->createForm('eklerni_eleve', $eleve);
+        $form = $this->createForm('eklerni_eleve_create', $eleve);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -105,7 +104,7 @@ class EleveController extends Controller
 
             /** @var \Symfony\Component\Security\Core\Encoder\EncoderFactory $factory */
             $factory = $this->get('security.encoder_factory');
-
+            $eleve->setPassword($eleve->getNom().".".$eleve->getPrenom());
             $encoder = $factory->getEncoder($eleve);
             $password = $encoder->encodePassword($eleve->getPassword(), $eleve->getSalt());
 
@@ -114,7 +113,7 @@ class EleveController extends Controller
             } else {
                 $eleve->setPassword($password);
             }
-
+            $this->get('eklerni.manager.eleve')->defineUsername($eleve);
             $this->get("eklerni.manager.eleve")->save($eleve);
 
             $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("eleve.add.success"));

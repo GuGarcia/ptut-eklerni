@@ -47,4 +47,16 @@ class EleveRepository extends EntityRepository implements CASRepositoryInterface
             ->orderBy("e.nom, e.prenom")
             ->setParameter("id", $idClasse);
     }
+
+    /**
+     * @param string $username
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function isUsernameExists($username) {
+        return $this->_em->createQueryBuilder()
+            ->select("e")
+            ->from("EklerniDatabaseBundle:Eleve", "e")
+            ->where("e.username = :username")
+            ->setParameter("username", $username);
+    }
 }

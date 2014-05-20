@@ -3,13 +3,15 @@
 {% block body %}
     <form action="" enctype='multipart/form-data' method="post">
         <div class="body bg-gray">
+            {#
             {{ eklerni.row(form.eleve.username) }}
             {{ eklerni.row(form.eleve.password) }}
-            {{ eklerni.row(form.eleve.nom) }}
-            {{ eklerni.row(form.eleve.prenom) }}
-            {{ eklerni.row(form.eleve.email) }}
-            {{ eklerni.row(form.eleve.dateNaissance) }}
-            {{ eklerni.row(form.eleve.file) }}
+            #}
+            {{ eklerni.row(form.nom) }}
+            {{ eklerni.row(form.prenom) }}
+            {{ eklerni.row(form.email) }}
+            {{ eklerni.row(form.dateNaissance) }}
+            {{ eklerni.row(form.file) }}
             {{ form_widget(form._token) }}
         </div>
         {% if form_error is defined and form_error is not null %}
@@ -18,7 +20,7 @@
             </div>
         {% endif %}
         <div class="footer">
-            {{ eklerni.submit(form.eleve.valider) }}
+            {{ eklerni.submit(form.valider) }}
         </div>
     </form>
 {% endblock %}

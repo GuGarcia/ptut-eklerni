@@ -17,6 +17,9 @@
         <service id="eklerni.form.type.eleve" class="Eklerni\BackBundle\Form\Type\EleveType">
             <tag name="form.type" alias="eklerni_eleve"/>
         </service>
+        <service id="eklerni.form.type.eleve.create" class="Eklerni\BackBundle\Form\Type\CreateEleveType">
+            <tag name="form.type" alias="eklerni_eleve_create"/>
+        </service>
         <service id="eklerni.form.type.enseignant" class="Eklerni\BackBundle\Form\Type\EnseignantType">
             <tag name="form.type" alias="eklerni_enseignant"/>
         </service>
