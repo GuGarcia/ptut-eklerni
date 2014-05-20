@@ -38,6 +38,8 @@ class ProfileController extends Controller
 
             if (!$formError) {
                 $this->get('eklerni.manager.enseignant')->save($enseignant);
+
+                $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("password_change.success"));
                 return $this->redirect($this->generateUrl('eklerni_back_homepage'));
             }
 
@@ -63,6 +65,7 @@ class ProfileController extends Controller
 
             $this->get('eklerni.manager.enseignant')->save($enseignant);
 
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("profile.modify.success"));
             return $this->redirect($this->generateUrl('eklerni_back_homepage'));
         }
 
