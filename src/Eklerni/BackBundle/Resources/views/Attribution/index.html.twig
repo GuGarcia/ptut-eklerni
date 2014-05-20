@@ -42,7 +42,7 @@
                 </div>
                 <div id="collapseOne" class="panel-collapse in" style="height: auto;">
                     <div id="classe-{{ classe.id }}" class="box-body classe">
-                        <h4>{% trans %}nouveau.txt{% endtrans %}</h4>
+                        <h4>{% trans %}nouveau.text{% endtrans %}</h4>
                         <div id="classe-{{ classe.id }}" style="min-height: 50px;"
                              class="droppable classe-{{ classe.id }}"
                              info="{% for matiere in classe.matieres %}.{{ matiere.name }}{% if not loop.last %}, {% endif %}{% endfor %}">

@@ -67,15 +67,15 @@
 </table>
 {% endset %}
 {% set footermatieres %}
-<a href="#" id="matieres_link" class="btn btn-primary">{% trans %}utils.save{% endtrans %}</a>
+    <a href="#" id="matieres_link" class="btn btn-primary">{% trans %}utils.save{% endtrans %}</a>
 {% endset %}
 
 {% set worstsBody %}
 <table class="table table-bordered">
     <tr>
-        <th>Nom</th>
+        <th>{% trans %}personne.name{% endtrans %}</th>
         <th class="col-md-6"></th>
-        <th>note</th>
+        <th>{% trans %}note.text{% endtrans %}</th>
     </tr>
     {% for resultat in worsts %}
         {% set note = resultat["note"] %}
@@ -114,9 +114,9 @@
 {% set bestsBody %}
 <table class="table table-bordered">
     <tr>
-        <th>Nom</th>
+        <th>{% trans %}personne.name{% endtrans %}</th>
         <th class="col-md-6"></th>
-        <th>note</th>
+        <th>{% trans %}note.text{% endtrans %}</th>
     </tr>
     {% for resultat in bests %}
         {% set note = resultat["note"] %}
@@ -156,45 +156,52 @@
 {% if moyennes|length > 0 %}
     {% if moyennes|length %}
         {% set moyennesbody %}
-        <div id="moyennes" style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
+            <div id="moyennes" style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
         {% endset %}
     {% else %}
         {% set moyennesbody %}
-        {% trans %}eleve.noteinsuffisante{% endtrans %}
+            {% trans %}eleve.noteinsuffisante{% endtrans %}
         {% endset %}
     {% endif %}
 {% else %}
     {% set moyennesbody %}
-    {% trans %}eleve.no.note{% endtrans %}
+        {% trans %}eleve.no.note{% endtrans %}
     {% endset %}
 {% endif %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-4">
-            {% set eleveList %}
-            {% trans %}eleve.list{% endtrans %}
+            {% set eleveListText %}
+                {% trans %}eleve.list{% endtrans %}
             {% endset %}
-            {{ eklerni.block(eleveList, elevesTable, footereleves, "primary") }}
+            {{ eklerni.block(eleveListText, elevesTable, footereleves, "primary") }}
         </div>
         <div class="col-md-4">
-            {% set enseignantList %}
-            {% trans %}enseignant.list{% endtrans %}
+            {% set enseignantListText %}
+                {% trans %}enseignant.list{% endtrans %}
             {% endset %}
-            {{ eklerni.block(enseignantList, profsTable, footerprofs, "primary") }}
+            {{ eklerni.block(enseignantListText, profsTable, footerprofs, "primary") }}
+
             {% set matiereText %}
-            {% trans %}matiere.text{% endtrans %}
+                {% trans %}matiere.text{% endtrans %}
             {% endset %}
             {{ eklerni.block(matiereText, matieresTables, footermatieres, "primary") }}
+
             {% set moyenneText %}
-            {% trans %}moyenne.text{% endtrans %}
+                {% trans %}moyenne.text{% endtrans %}
             {% endset %}
             {{ eklerni.block(moyenneText, moyennesbody, "", "primary") }}
-
         </div>
         <div class="col-md-4">
-            {{ eklerni.block("Liste des Meilleurs Élèves", bestsBody, "", "success") }}
-            {{ eklerni.block("Liste des moins bons Élèves", worstsBody, "", "danger") }}
+            {% set bestText %}
+                {% trans %}stats.best.eleves{% endtrans %}
+            {% endset %}
+            {% set worstText %}
+                {% trans %}stats.worst.eleves{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(bestText, bestsBody, "", "success") }}
+            {{ eklerni.block(worstText, worstsBody, "", "danger") }}
         </div>
     </div>
 {% endblock %}
@@ -205,55 +212,56 @@
             init();
             var matieres = [];
             var notes = [];
-            {% for moyenne in moyennes %}
-            matieres[{{ (loop.index0/moyennes|length) * 360 }}] = "{{ moyenne[0].serie.activite.matiere.name }}";
-            notes.push({{ moyenne["note"]|number_format }});
-            {% endfor %}
-console.log(notes);
-            $('#moyennes').highcharts({
-                chart: {
-                    polar: true
-                },
-                title: {
-                    text: '{% trans %}stats.moyenne.classe{% endtrans %}'
-                },
-                pane: {
-                    startAngle: 0,
-                    endAngle: 360
-                },
-                xAxis: {
-                    tickInterval: {{ (360 / moyennes|length)|number_format  }},
-                    min: 0,
-                    max: 360,
-                    labels: {
-                        formatter: function () {
-                            return matieres[this.value];
-                        },
-                        overflow: 'justify'
-                    }
-                },
-                yAxis: {
-                    min: 0,
-                    max: 100
-                },
-                plotOptions: {
-                    series: {
-                        pointStart: 0,
-                        pointInterval: {{ (360 / moyennes|length)|number_format  }}
+            {% if moyennes is not empty %}
+                {% for moyenne in moyennes %}
+                    matieres[{{ (loop.index0/moyennes|length) * 360 }}] = "{{ moyenne[0].serie.activite.matiere.name }}";
+                    notes.push({{ moyenne["note"]|number_format }});
+                {% endfor %}
+                $('#moyennes').highcharts({
+                    chart: {
+                        polar: true
                     },
-                    column: {
-                        pointPadding: 0,
-                        groupPadding: 0
-                    }
-                },
-                series: [
-                    {
-                        type: 'area',
-                        name: '{{ classe.nom }}',
-                        data: notes
-                    }
-                ]
-            });
+                    title: {
+                        text: '{% trans %}stats.moyenne.classe{% endtrans %}'
+                    },
+                    pane: {
+                        startAngle: 0,
+                        endAngle: 360
+                    },
+                    xAxis: {
+                        tickInterval: {{ (360 / moyennes|length)|number_format  }},
+                        min: 0,
+                        max: 360,
+                        labels: {
+                            formatter: function () {
+                                return matieres[this.value];
+                            },
+                            overflow: 'justify'
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        max: 100
+                    },
+                    plotOptions: {
+                        series: {
+                            pointStart: 0,
+                            pointInterval: {{ (360 / moyennes|length)|number_format  }}
+                        },
+                        column: {
+                            pointPadding: 0,
+                            groupPadding: 0
+                        }
+                    },
+                    series: [
+                        {
+                            type: 'area',
+                            name: '{{ classe.nom }}',
+                            data: notes
+                        }
+                    ]
+                });
+            {% endif %}
         });
 
         function init() {

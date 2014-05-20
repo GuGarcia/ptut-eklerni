@@ -65,22 +65,22 @@
     {% endif %}
 {% endset %}
 {% set listfooter %}
-<a href="{{ path("eklerni_back_classe_create") }}" class="btn btn-primary"><i class="fa fa-plus"></i> {% trans %}classe.text{% endtrans %}</a>
+    <a href="{{ path("eklerni_back_classe_create") }}" class="btn btn-primary"><i class="fa fa-plus"></i> {% trans %}classe.text{% endtrans %}</a>
 {% endset %}
 
 {% if moyennes|length > 0 %}
     {% if moyennes|length %}
         {% set moyennesbody %}
-        <div id="moyennes" style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
+            <div id="moyennes" style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
         {% endset %}
     {% else %}
         {% set moyennesbody %}
-        {% trans %}eleve.noteinsuffisante{% endtrans %}
+            {% trans %}eleve.noteinsuffisante{% endtrans %}
         {% endset %}
     {% endif %}
 {% else %}
     {% set moyennesbody %}
-    {% trans %}eleve.no.note{% endtrans %}
+        {% trans %}eleve.no.note{% endtrans %}
     {% endset %}
 {% endif %}
 
@@ -88,13 +88,13 @@
     <div class="row">
         <div class="col-md-8">
             {% set classeList %}
-            {% trans %}enseignant.list{% endtrans %}
+                {% trans %}enseignant.list{% endtrans %}
             {% endset %}
             {{ eklerni.block(classeList, listbody, listfooter, "primary") }}
         </div>
         <div class="col-md-4">
             {% set statMoyList %}
-            {% trans %}stats.moyenne.matiere{% endtrans %}
+                {% trans %}stats.moyenne.matiere{% endtrans %}
             {% endset %}
             {{ eklerni.block(statMoyList, moyennesbody, "", "primary") }}
         </div>
@@ -194,5 +194,4 @@
             });
         });
     </script>
-
 {% endblock %}

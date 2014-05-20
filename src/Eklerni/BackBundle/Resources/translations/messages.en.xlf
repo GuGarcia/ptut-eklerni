@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-05-19T18:47:10Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2014-05-20T18:54:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -490,6 +490,10 @@
         <source>note.text</source>
         <target>Note</target>
       </trans-unit>
+      <trans-unit id="f1fddcd071858b4bc21ccae770d85b471c01074a" resname="nouveau.text">
+        <source>nouveau.text</source>
+        <target>New</target>
+      </trans-unit>
       <trans-unit id="05bc001b3c0ef85743d1c8e9a348ec7c7671a5c1" resname="password_change.encode_error">
         <source>password_change.encode_error</source>
         <target>password_change.encode_error</target>
@@ -660,7 +664,11 @@
       </trans-unit>
       <trans-unit id="28d844b565fb87e828f6d69e7a85254bfe06489b" resname="sidebar.tablet">
         <source>sidebar.tablet</source>
-        <target>Tablet</target>
+        <target>Tablet view</target>
+      </trans-unit>
+      <trans-unit id="6255952126e2369cc4b475139349cac0ad0c2330" resname="stats.best.eleves">
+        <source>stats.best.eleves</source>
+        <target>stats.best.eleves</target>
       </trans-unit>
       <trans-unit id="2ede45a7054503c08fdd4c0ddd2259676b49f1bb" resname="stats.generator">
         <source>stats.generator</source>
@@ -702,9 +710,17 @@
         <source>stats.result.latest</source>
         <target>Latest marks</target>
       </trans-unit>
+      <trans-unit id="40f628d44c85bfb51b8f99f52a85111fbaba6b9c" resname="stats.worst.eleves">
+        <source>stats.worst.eleves</source>
+        <target>stats.worst.eleves</target>
+      </trans-unit>
       <trans-unit id="be8f06f4c04f1402090b711e0ab690f8b7f12886" resname="tablet.text">
         <source>tablet.text</source>
         <target>Tablet</target>
+      </trans-unit>
+      <trans-unit id="fbbc9778fe64b8e8fbdf672023e7f7d930b22f04" resname="tablet.view">
+        <source>tablet.view</source>
+        <target>Tablet view</target>
       </trans-unit>
       <trans-unit id="6929a2c5bc8080684fd61cf3ad4dcfcbf803770a" resname="title.accueil">
         <source>title.accueil</source>

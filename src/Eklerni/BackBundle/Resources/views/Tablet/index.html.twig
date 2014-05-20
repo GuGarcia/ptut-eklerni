@@ -36,11 +36,21 @@
 {% block body %}
     <div class="row">
         <div id="series" class="col-md-3">
-            {{ eklerni.block("Liste des classes", classesTable, "", "primary") }}
-            {{ eklerni.block("Liste des élèves", eleveTable, "", "primary") }}
+            {% set classeListText %}
+                {% trans %}classe.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(classeListText, classesTable, "", "primary") }}
+
+            {% set eleveListText %}
+                {% trans %}eleve.list{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(eleveListText, eleveTable, "", "primary") }}
         </div>
         <div class="col-md-9">
-            {{ eklerni.block("Vue Tablette", view, "", "primary") }}
+            {% set tabletViewText %}
+                {% trans %}tablet.view{% endtrans %}
+            {% endset %}
+            {{ eklerni.block(tabletViewText, view, "", "primary") }}
         </div>
     </div>
 {% endblock %}
