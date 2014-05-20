@@ -117,6 +117,7 @@ class EleveController extends Controller
 
             $this->get("eklerni.manager.eleve")->save($eleve);
 
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("eleve.add.success"));
             return $this->redirect(
                 $this->generateUrl(
                     'eklerni_back_classe_fiche',
@@ -165,8 +166,9 @@ class EleveController extends Controller
             }
 
             if (!$formError) {
-
                 $this->get('eklerni.manager.eleve')->save($eleve);
+
+                $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("eleve.modify.success"));
                 return $this->redirect($this->generateUrl('eklerni_back_eleve_fiche', array("idEleve" => $eleve->getId())));
             }
         } else {

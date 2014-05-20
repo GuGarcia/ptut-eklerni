@@ -28,6 +28,8 @@ class ActiviteController extends Controller
 
         if ($form->isValid()) {
             $this->get("eklerni.manager.activite")->save($activite);
+
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("activite.add.success"));
             return $this->redirect($this->generateUrl('eklerni_back_direction'));
         } else {
             return $this->render(
@@ -53,6 +55,8 @@ class ActiviteController extends Controller
 
         if ($form->isValid()) {
             $this->get("eklerni.manager.activite")->save($activite);
+
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("activite.modify.success"));
             return $this->redirect($this->generateUrl('eklerni_back_direction'));
         } else {
             return $this->render(
@@ -71,7 +75,14 @@ class ActiviteController extends Controller
             /** @var Activite $activite */
             $activite = $this->get("eklerni.manager.activite")->findById($idActivite);
             if (!$activite) {
-                throw $this->createNotFoundException($this->get("translator")->trans("activite.notfound"));
+                return new Response(
+                    json_encode(
+                        array(
+                            "success" => false,
+                            'message' => $this->get("translator")->trans("activite.notfound")
+                        )
+                    )
+                );
             }
             
             if (0 === $activite->getSeries()->count()) {

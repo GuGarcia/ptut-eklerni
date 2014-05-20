@@ -31,6 +31,8 @@ class EnseignantController extends Controller
             $enseignant->upload();
             $this->get("eklerni.manager.enseignant")->save($enseignant);
 
+
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("enseignant.add.success"));
             return $this->redirect(
                 $this->generateUrl(
                     'eklerni_back_direction'
@@ -45,10 +47,5 @@ class EnseignantController extends Controller
                 )
             );
         }
-    }
-
-    public function modifierAction($idEnseignant)
-    {
-
     }
 }
