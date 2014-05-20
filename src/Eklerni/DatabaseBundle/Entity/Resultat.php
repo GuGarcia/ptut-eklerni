@@ -11,7 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Eklerni\DatabaseBundle\Repository\ResultatRepository")
  * @ORM\Table(name="t_resultat")
  */
-class Resultat extends BaseEntity {
+class Resultat extends BaseEntity
+{
 
     /********************
      * ATTRIBUTES
@@ -54,8 +55,8 @@ class Resultat extends BaseEntity {
      * @var Attribuer
      * @ORM\ManyToOne(targetEntity="Attribuer", inversedBy="resultats")
      * @ORM\JoinColumns({
-         * @ORM\JoinColumn(name="idSerie", referencedColumnName="idSerie"),
-         * @ORM\JoinColumn(name="idEleve", referencedColumnName="idEleve")
+     * @ORM\JoinColumn(name="idSerie", referencedColumnName="idSerie"),
+     * @ORM\JoinColumn(name="idEleve", referencedColumnName="idEleve")
      * })
      */
     private $attribution;
@@ -163,7 +164,4 @@ class Resultat extends BaseEntity {
     }
 
 
-
-
-
-} 
+}

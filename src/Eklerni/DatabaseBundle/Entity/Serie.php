@@ -17,7 +17,8 @@ class Serie extends BaseEntity
      * CONSTRUCTORS
      ********************/
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->questions = new ArrayCollection();
         $this->listeAttribution = new ArrayCollection();
@@ -172,7 +173,7 @@ class Serie extends BaseEntity
     public function setQuestions($questions)
     {
         /** @var Question $question */
-        foreach($questions as $question) {
+        foreach ($questions as $question) {
             $question->setSerie($this);
         }
         $this->questions = $questions;
@@ -327,7 +328,12 @@ class Serie extends BaseEntity
     /**
      * @return string
      */
-    public function getParent() {
-        return $this->getActivite()->getMatiere()->getName()." => ".$this->getActivite()->getName()." => ".$this->nom;
+    public function getParent()
+    {
+        return $this->getActivite()->getMatiere()->getName()
+            . " => "
+            . $this->getActivite()->getName()
+            ." => "
+            . $this->nom;
     }
 }

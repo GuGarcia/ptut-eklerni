@@ -158,25 +158,29 @@ class ResultatManager extends BaseManager
                 $query->innerJoin("e.classe", "c");
             }
             $query->groupBy("e.id");
-        } else if (isset($condition["moyenne"]) && $condition["moyenne"] == "classe") {
-            if (!isset($condition["eleve"]) && !isset($condition["classe"])) {
-                $query->innerJoin("r.eleve", "e");
+        } else {
+            if (isset($condition["moyenne"]) && $condition["moyenne"] == "classe") {
+                if (!isset($condition["eleve"]) && !isset($condition["classe"])) {
+                    $query->innerJoin("r.eleve", "e");
+                }
+                if (!isset($condition["classe"])) {
+                    $query->innerJoin("e.classe", "c");
+                }
+                $query->groupBy("c.id");
+            } else {
+                if (isset($condition["moyenne"]) && $condition["moyenne"] == "matiere") {
+                    if (!isset($condition["serie"]) && !isset($condition["activite"]) && !isset($condition["matiere"]) && !isset($condition["enseignant"])) {
+                        $query->innerJoin("r.serie", "s");
+                    }
+                    if (!isset($condition["activite"]) && !isset($condition["matiere"])) {
+                        $query->innerJoin("s.activite", "a");
+                    }
+                    if (!isset($condition["matiere"])) {
+                        $query->innerJoin("a.matiere", "m");
+                    }
+                    $query->groupBy("m.id");
+                }
             }
-            if (!isset($condition["classe"])) {
-                $query->innerJoin("e.classe", "c");
-            }
-            $query->groupBy("c.id");
-        } else if (isset($condition["moyenne"]) && $condition["moyenne"] == "matiere") {
-            if (!isset($condition["serie"]) && !isset($condition["activite"]) && !isset($condition["matiere"]) && !isset($condition["enseignant"])) {
-                $query->innerJoin("r.serie", "s");
-            }
-            if (!isset($condition["activite"]) && !isset($condition["matiere"])) {
-                $query->innerJoin("s.activite", "a");
-            }
-            if (!isset($condition["matiere"])) {
-                $query->innerJoin("a.matiere", "m");
-            }
-            $query->groupBy("m.id");
         } /*else if (isset($condition["moyenne"]) && $condition["moyenne"] == "total") {
             $query->groupBy("r.id");
         }*/
@@ -194,12 +198,12 @@ class ResultatManager extends BaseManager
                 $date = new \DateTime($dates[0]);
                 $query->setParameter('date_from', $date, Type::DATETIME);
                 $date = new \DateTime($dates[1]);
-                $query->setParameter('date_to',  $date, Type::DATETIME);
+                $query->setParameter('date_to', $date, Type::DATETIME);
             }
         }
         if (isset($condition["dateCreation"]) && !isset($condition["date"])) {
-            $query->andWhere( 'r.dateCreation > :date_from' );
-            if( is_object($condition["date"] )) {
+            $query->andWhere('r.dateCreation > :date_from');
+            if (is_object($condition["date"])) {
                 $query->setParameter('date_from', $condition["date"], Type::DATETIME);
             } else {
                 $query->setParameter('date_from', new \DateTime($condition["date"]), Type::DATETIME);

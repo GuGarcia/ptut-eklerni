@@ -124,18 +124,17 @@ class EleveController extends Controller
                     array("idClasse" => $idClasse)
                 )
             );
-        } else {
-            return $this->render(
-                'EklerniBackBundle:Eleve:ajouter.html.twig',
-                array(
-                    "form" => $form->createView(),
-                    "title" => $this->get('translator')->trans(
-                            "Ajout d'un Eleve à la Classe : %name%",
-                            array("%name%" => $classe->getNom())
-                        )
-                )
-            );
         }
+        return $this->render(
+            'EklerniBackBundle:Eleve:ajouter.html.twig',
+            array(
+                "form" => $form->createView(),
+                "title" => $this->get('translator')->trans(
+                        "Ajout d'un Eleve à la Classe : %name%",
+                        array("%name%" => $classe->getNom())
+                    )
+            )
+        );
     }
 
     public function modifierAction(Request $request, $idEleve)
@@ -171,14 +170,34 @@ class EleveController extends Controller
                 $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("eleve.modify.success"));
                 return $this->redirect($this->generateUrl('eklerni_back_eleve_fiche', array("idEleve" => $eleve->getId())));
             }
+        }
+        return $this->render(
+            'EklerniBackBundle:Eleve:modifier.html.twig',
+            array(
+                "form" => $form->createView(),
+                "title" => $this->get('translator')->trans("title.modify_eleve")
+            )
+        );
+    }
+
+    public function supprimerAction(Request $request, $idEleve)
+    {
+        /** @var Eleve $eleve */
+        $eleve = $this->get("eklerni.manager.eleve")->findById($idEleve);
+        if (!$eleve) {
+            throw $this->createNotFoundException($this->get("translator")->trans("eleve.notfound"));
+        }
+
+        if ($eleve->getResultats()->count() == 0) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($eleve);
+            $em->flush();
+
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("eleve.delete.success"));
+            return $this->redirect($this->generateUrl('eklerni_back_eleve'));
         } else {
-            return $this->render(
-                'EklerniBackBundle:Eleve:modifier.html.twig',
-                array(
-                    "form" => $form->createView(),
-                    "title" => $this->get('translator')->trans("title.modify_eleve")
-                )
-            );
+            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("eleve.delete.fail"));
+            return $this->redirect($this->generateUrl('eklerni_back_eleve'));
         }
     }
 } 

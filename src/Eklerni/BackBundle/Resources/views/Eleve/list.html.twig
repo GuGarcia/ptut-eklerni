@@ -59,7 +59,8 @@
                                class="btn btn-default btn-xs">
                                 <i class="fa fa-pencil"></i> {% trans %}utils.modify{% endtrans %}
                             </a>
-                            <a href="#" class="deleteClassBtn btn btn-danger btn-xs disabled">
+                            <a href="{{ path("eklerni_back_eleve_supprimer", {idEleve: eleve.id}) }}"
+                               class="deleteClassBtn btn btn-danger btn-xs{% if eleve.resultats|length > 0 %} disabled{% endif %}">
                                 <i class="fa fa-minus"></i> {% trans %}utils.delete{% endtrans %}
                             </a>
                         </td>
@@ -71,9 +72,9 @@
             {% endif %}
             {% endset %}
             {% set footerBlock %}
-            <a href="{{ path("eklerni_back_eleve_ajouter", {idClasse: classe.id}) }}" class="btn btn-primary">
-                <i class="fa fa-plus"></i> {% trans %}btn.eleve.add{% endtrans %}
-            </a>
+                <a href="{{ path("eklerni_back_eleve_ajouter", {idClasse: classe.id}) }}" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> {% trans %}btn.eleve.add{% endtrans %}
+                </a>
             {% endset %}
             {% if loop.index is odd %}
                 {{ eklerni.block(titleBlock, contentBlock, footerBlock, "danger") }}
@@ -88,22 +89,21 @@
             <div class="box-body">{% trans %}enseignant.no.classe{% endtrans %}</div>
         {% endif %}
 
-        {% endblock %}
+{% endblock %}
 
-        {% block javascripts %}
-            <script type="application/javascript">
-                $(function () {
-                    {% for classe in classes %}
-                    $('#table-{{ classe.id }}').dataTable({
-                        "bPaginate": true,
-                        "bLengthChange": false,
-                        "bFilter": false,
-                        "bSort": true,
-                        "bInfo": false,
-                        "bAutoWidth": false
-                    });
-                    {% endfor %}
-                });
-            </script>
-
-        {% endblock %}
+{% block javascripts %}
+    <script type="application/javascript">
+        $(function () {
+            {% for classe in classes %}
+            $('#table-{{ classe.id }}').dataTable({
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+            {% endfor %}
+        });
+    </script>
+{% endblock %}

@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * Class BaseEntity
  * @package Eklerni\DatabaseBundle\Entity
  */
-class BaseEntity {
+class BaseEntity
+{
 
     /********************
      * ATTRIBUTES

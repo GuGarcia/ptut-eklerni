@@ -17,7 +17,8 @@ class Enseignant extends Personne
      * CONSTRUCTORS
      ********************/
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->classes = new ArrayCollection();
         $this->series = new ArrayCollection();
@@ -40,7 +41,7 @@ class Enseignant extends Personne
      * @ORM\OneToMany(targetEntity="Serie", mappedBy="enseignant")
      */
     private $series;
-    
+
     /**
      * @var bool
      * @ORM\Column(name="isDirecteur", type="boolean", nullable=false)
@@ -73,7 +74,8 @@ class Enseignant extends Personne
      * @param Classe $c
      * @return \Eklerni\DatabaseBundle\Entity\Enseignant
      */
-    public function addClasse(Classe $c) {
+    public function addClasse(Classe $c)
+    {
         $this->classes->add($c);
         return $this;
     }
@@ -100,15 +102,17 @@ class Enseignant extends Personne
      * @param Serie $s
      * @return \Eklerni\DatabaseBundle\Entity\Enseignant $this
      */
-    public function addSerie(Serie $s) {
+    public function addSerie(Serie $s)
+    {
         $this->series->add($s);
         return $this;
     }
-    
+
     /**
      * @return bool
      */
-    public function getIsDirecteur() {
+    public function getIsDirecteur()
+    {
         return $this->isDirecteur;
     }
 
@@ -116,7 +120,8 @@ class Enseignant extends Personne
      * @param bool $isDirecteur
      * @return \Eklerni\DatabaseBundle\Entity\Enseignant
      */
-    public function setIsDirecteur($isDirecteur) {
+    public function setIsDirecteur($isDirecteur)
+    {
         $this->isDirecteur = $isDirecteur;
         return $this;
     }

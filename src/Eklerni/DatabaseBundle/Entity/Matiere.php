@@ -103,7 +103,8 @@ class Matiere extends BaseEntity
      * @param Classe $classe
      * @return Matiere
      */
-    public function addClasse(Classe $classe) {
+    public function addClasse(Classe $classe)
+    {
         $this->classes->add($classe);
         return $this;
     }

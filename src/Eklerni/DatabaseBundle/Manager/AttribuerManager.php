@@ -41,8 +41,9 @@ class AttribuerManager
         $this->em->flush();
     }
 
-    public function remove(Attribuer $attribuer) {
-        if(count($attribuer->getResultats()) > 0) {
+    public function remove(Attribuer $attribuer)
+    {
+        if (count($attribuer->getResultats()) > 0) {
             $attribuer->setIsDelete(true);
         } else {
             $this->em->remove($attribuer);
@@ -60,7 +61,7 @@ class AttribuerManager
             ->innerJoin("a.eleve", "e")
             ->where("e.id = :idEleve")
             ->andwhere("a.isDelete = 0")
-            ->setParameter("idEleve", $eleve->getId() )->getQuery()->getResult();
+            ->setParameter("idEleve", $eleve->getId())->getQuery()->getResult();
     }
 
     public function findBySerie(Serie $serie)
@@ -84,16 +85,18 @@ class AttribuerManager
 
     public function findById(Eleve $eleve, Serie $serie)
     {
-         $query = $this->repository->createQueryBuilder("p")
+        $query = $this->repository->createQueryBuilder("p")
             ->select("a")
             ->from("EklerniDatabaseBundle:Attribuer", "a")
             ->where("a.eleve = :idEleve")
             ->andWhere("a.serie = :idSerie")
-             ->andwhere("a.isDelete = 0")
-            ->setParameters(array(
-                "idSerie" => $serie->getId(),
-                "idEleve" => $eleve->getId()
-            ));
+            ->andwhere("a.isDelete = 0")
+            ->setParameters(
+                array(
+                    "idSerie" => $serie->getId(),
+                    "idEleve" => $eleve->getId()
+                )
+            );
         return $query->getQuery()->getResult();
     }
 

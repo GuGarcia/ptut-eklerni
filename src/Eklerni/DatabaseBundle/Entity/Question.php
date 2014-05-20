@@ -17,7 +17,8 @@ class Question extends BaseEntity
      * CONSTRUCTORS
      ********************/
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->reponses = new ArrayCollection();
     }
@@ -66,7 +67,7 @@ class Question extends BaseEntity
      * GETTERS AND SETTERS
      ********************/
 
-     /**
+    /**
      * @param string $label
      *
      * @return Question
@@ -199,7 +200,7 @@ class Question extends BaseEntity
         $question->setMedia($this->media);
         $question->setMediaUrl($this->mediaUrl);
 
-        foreach($this->reponses as $reponse) {
+        foreach ($this->reponses as $reponse) {
             $newReponse = $reponse->duplicate();
             $newReponse->setQuestion($question);
             $question->reponses->add($newReponse);

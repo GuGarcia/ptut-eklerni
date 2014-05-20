@@ -11,7 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Eklerni\DatabaseBundle\Repository\ActiviteRepository")
  * @ORM\Table(name="t_activite")
  */
-class Activite extends BaseEntity {
+class Activite extends BaseEntity
+{
 
     /********************
      * ATTRIBUTES
@@ -41,14 +42,14 @@ class Activite extends BaseEntity {
      * @ORM\JoinColumn(name="idMatiere", referencedColumnName="id")
      */
     private $matiere;
-    
+
     /**
      * @var Media
      * @ORM\ManyToOne(targetEntity="Media")
      * @ORM\JoinColumn(name="questionMedia", referencedColumnName="id")
      */
     private $questionMedia;
-    
+
     /**
      * @var Media
      * @ORM\ManyToOne(targetEntity="Media")
@@ -123,7 +124,7 @@ class Activite extends BaseEntity {
     {
         return $this->description;
     }
-    
+
     /**
      * @return Media
      */
@@ -147,7 +148,7 @@ class Activite extends BaseEntity {
     public function setQuestionMedia(Media $questionMedia)
     {
         $this->questionMedia = $questionMedia;
-        
+
         return $this;
     }
 
@@ -158,14 +159,15 @@ class Activite extends BaseEntity {
     public function setReponseMedia(Media $reponseMedia)
     {
         $this->reponseMedia = $reponseMedia;
-        
+
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getParent() {
-        return $this->getMatiere()->getName()." => ".$this->name;
+    public function getParent()
+    {
+        return $this->getMatiere()->getName() . " => " . $this->name;
     }
 }

@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @package Eklerni\DatabaseBundle\Entity
  * @ORM\Entity(repositoryClass="Eklerni\DatabaseBundle\Repository\EleveRepository")
  */
-class Eleve extends Personne {
+class Eleve extends Personne
+{
 
     /********************
      * ATTRIBUTES
@@ -104,8 +105,9 @@ class Eleve extends Personne {
         return $this->listeAttribution;
     }
 
-    public function getParent() {
-        return $this->getClasse()->getNom() . " => ". $this->getFullName();
+    public function getParent()
+    {
+        return $this->getClasse()->getNom() . " => " . $this->getFullName();
     }
 
 

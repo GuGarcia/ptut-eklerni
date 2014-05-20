@@ -5,7 +5,8 @@ namespace Eklerni\DatabaseBundle\Manager;
 use Doctrine\ORM\EntityManager;
 use Eklerni\DatabaseBundle\Entity\Eleve;
 
-class EcoleManager extends BaseManager {
+class EcoleManager extends BaseManager
+{
 
     public function __construct(EntityManager $em)
     {
@@ -13,7 +14,8 @@ class EcoleManager extends BaseManager {
         $this->repository = $em->getRepository("EklerniDatabaseBundle:Ecole");
     }
 
-    public function findByEleve(Eleve $eleve) {
+    public function findByEleve(Eleve $eleve)
+    {
         return $this->repository->findById($eleve->getId())->getQuery()->getResult();
     }
 }

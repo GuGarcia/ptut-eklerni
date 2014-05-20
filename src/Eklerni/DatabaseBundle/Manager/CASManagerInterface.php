@@ -5,7 +5,8 @@ namespace Eklerni\DatabaseBundle\Manager;
 use Eklerni\DatabaseBundle\Entity\BaseEntity;
 use Eklerni\DatabaseBundle\Entity\Enseignant;
 
-interface CASManagerInterface {
+interface CASManagerInterface
+{
 
     /**
      * @return mixed

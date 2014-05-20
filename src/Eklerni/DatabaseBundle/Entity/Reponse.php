@@ -3,7 +3,6 @@
 namespace Eklerni\DatabaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\BrowserKit\Response;
 
 /**
  * Class Reponse
@@ -11,7 +10,8 @@ use Symfony\Component\BrowserKit\Response;
  * @ORM\Table(name="t_reponse")
  * @ORM\Entity
  */
-class Reponse extends BaseEntity {
+class Reponse extends BaseEntity
+{
 
     /********************
      * ATTRIBUTES
@@ -66,7 +66,7 @@ class Reponse extends BaseEntity {
      * GETTERS AND SETTERS
      ********************/
 
-     /**
+    /**
      * @param string $label
      *
      * @return Reponse

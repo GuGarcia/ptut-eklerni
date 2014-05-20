@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="t_media")
  * @ORM\Entity(repositoryClass="Eklerni\DatabaseBundle\Repository\MediaRepository")
  */
-class Media extends BaseEntity {
+class Media extends BaseEntity
+{
 
     /********************
      * ATTRIBUTES

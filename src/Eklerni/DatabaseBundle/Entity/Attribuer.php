@@ -199,7 +199,4 @@ class Attribuer
     {
         return $this->isDelete;
     }
-
-
-
 }

@@ -199,21 +199,19 @@ class ClasseController extends Controller
                 throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
             }
 
-            if ($classe) {
-                if ($classe->getEleves()->count() == 0) {
-                    $em = $this->getDoctrine()->getManager();
-                    $em->remove($classe);
-                    $em->flush();
+            if ($classe->getEleves()->count() == 0) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($classe);
+                $em->flush();
 
-                    return new Response(
-                        json_encode(
-                            array(
-                                "success" => true,
-                                'message' => $this->get('translator')->trans('classe.delete.success')
-                            )
+                return new Response(
+                    json_encode(
+                        array(
+                            "success" => true,
+                            'message' => $this->get('translator')->trans('classe.delete.success')
                         )
-                    );
-                }
+                    )
+                );
             }
         }
         return new Response(
@@ -233,22 +231,30 @@ class ClasseController extends Controller
             $enseignant = $this->get("eklerni.manager.enseignant")->findById($request->get("idEnseignant"));
             /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
-
-            if ($classe) {
-                $enseignant->addClasse($classe);
-                $classe->addEnseignant($enseignant);
-
-                $this->get("eklerni.manager.classe")->save($classe);
-
+            if (!$classe) {
                 return new Response(
                     json_encode(
                         array(
-                            "success" => true,
-                            'message' => $this->get('translator')->trans('classe.add.enseignant.success')
+                            "success" => false,
+                            'message' => $this->get("translator")->trans("classe.notfound")
                         )
                     )
                 );
             }
+
+            $enseignant->addClasse($classe);
+            $classe->addEnseignant($enseignant);
+
+            $this->get("eklerni.manager.classe")->save($classe);
+
+            return new Response(
+                json_encode(
+                    array(
+                        "success" => true,
+                        'message' => $this->get('translator')->trans('classe.add.enseignant.success')
+                    )
+                )
+            );
         }
         return new Response(
             json_encode(
@@ -266,35 +272,40 @@ class ClasseController extends Controller
             /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
             if (!$classe) {
-                throw $this->createNotFoundException($this->get("translator")->trans("classe.notfound"));
-            }
-
-            if ($classe) {
-                $this->get("eklerni.manager.classe")->clearMatieres($classe);
-                if ($request->get("matieres")) {
-                    foreach ($request->get("matieres") as $idMatiere) {
-                        /** @var Matiere $matiere */
-                        $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere);
-
-                        if (get_class($matiere) == "Eklerni\\DatabaseBundle\\Entity\\Matiere") {
-                            $classe->getMatieres()->removeElement($matiere);
-                            $matiere->addClasse($classe);
-                            $this->get("eklerni.manager.matiere")->save($matiere);
-                            $classe->addMatiere($matiere);
-                        }
-                    }
-                    $this->get("eklerni.manager.classe")->save($classe);
-                }
-
                 return new Response(
                     json_encode(
                         array(
-                            "success" => true,
-                            'message' => $this->get('translator')->trans('classe.save.matiere.success')
+                            "success" => false,
+                            'message' => $this->get("translator")->trans("classe.notfound")
                         )
                     )
                 );
             }
+
+            $this->get("eklerni.manager.classe")->clearMatieres($classe);
+            if ($request->get("matieres")) {
+                foreach ($request->get("matieres") as $idMatiere) {
+                    /** @var Matiere $matiere */
+                    $matiere = $this->get("eklerni.manager.matiere")->findById($idMatiere);
+
+                    if (get_class($matiere) == "Eklerni\\DatabaseBundle\\Entity\\Matiere") {
+                        $classe->getMatieres()->removeElement($matiere);
+                        $matiere->addClasse($classe);
+                        $this->get("eklerni.manager.matiere")->save($matiere);
+                        $classe->addMatiere($matiere);
+                    }
+                }
+                $this->get("eklerni.manager.classe")->save($classe);
+            }
+
+            return new Response(
+                json_encode(
+                    array(
+                        "success" => true,
+                        'message' => $this->get('translator')->trans('classe.save.matiere.success')
+                    )
+                )
+            );
         }
         return new Response(
             json_encode(
@@ -311,31 +322,39 @@ class ClasseController extends Controller
         if ($request->isXmlHttpRequest()) {
             /** @var Classe $classe */
             $classe = $this->get("eklerni.manager.classe")->findById($idClasse);
-
-            if ($classe) {
-                $this->get("eklerni.manager.classe")->clearEnseignants($classe);
-
-                foreach ($request->get("profs") as $idEnseignant) {
-                    /** @var Enseignant $prof */
-                    $prof = $this->get("eklerni.manager.enseignant")->findById($idEnseignant);
-
-                    if (get_class($prof) == "Eklerni\\DatabaseBundle\\Entity\\Enseignant") {
-                        $prof->addClasse($classe);
-                        $this->get("eklerni.manager.enseignant")->save($prof);
-                        $classe->addEnseignant($prof);
-                    }
-                }
-                $this->get("eklerni.manager.classe")->save($classe);
-
+            if (!$classe) {
                 return new Response(
                     json_encode(
                         array(
-                            "success" => true,
-                            'message' => $this->get('translator')->trans('classe.delete.enseignant.success')
+                            "success" => false,
+                            'message' => $this->get("translator")->trans("classe.notfound")
                         )
                     )
                 );
             }
+
+            $this->get("eklerni.manager.classe")->clearEnseignants($classe);
+
+            foreach ($request->get("profs") as $idEnseignant) {
+                /** @var Enseignant $prof */
+                $prof = $this->get("eklerni.manager.enseignant")->findById($idEnseignant);
+
+                if (get_class($prof) == "Eklerni\\DatabaseBundle\\Entity\\Enseignant") {
+                    $prof->addClasse($classe);
+                    $this->get("eklerni.manager.enseignant")->save($prof);
+                    $classe->addEnseignant($prof);
+                }
+            }
+            $this->get("eklerni.manager.classe")->save($classe);
+
+            return new Response(
+                json_encode(
+                    array(
+                        "success" => true,
+                        'message' => $this->get('translator')->trans('classe.delete.enseignant.success')
+                    )
+                )
+            );
         }
         return new Response(
             json_encode(

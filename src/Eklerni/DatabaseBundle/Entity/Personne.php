@@ -2,10 +2,10 @@
 
 namespace Eklerni\DatabaseBundle\Entity;
 
-use Eklerni\BackBundle\Utils\EklerniUtils;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Eklerni\BackBundle\Utils\EklerniUtils;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -297,7 +297,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
     public function getPicture()
     {
         if (null != $this->picture) {
-            return 'uploads/profile/'.$this->picture;
+            return 'uploads/profile/' . $this->picture;
         } else {
             return 'uploads/profile/no-image.jpg';
         }
@@ -336,7 +336,7 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
         // move takes the target directory and then the
         // target filename to move to
         $this->getFile()->move(
-            __DIR__.'/../../../../web/uploads/profile/',
+            __DIR__ . '/../../../../web/uploads/profile/',
             $this->id . "." . $this->getFile()->getClientOriginalExtension()
         );
 
@@ -405,7 +405,8 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
             ) = unserialize($serialized);
     }
 
-    public function getFullName() {
+    public function getFullName()
+    {
         return $this->nom . " " . $this->getPrenom();
     }
 
@@ -413,12 +414,15 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
      * @param integer $nb
      * @return bool|string
      */
-    public function generateUsername($nb) {
-        if(is_int($nb) && $nb > 0) {
-            if($nb <= strlen($this->prenom)) {
-                return $this->username = EklerniUtils::cleanUsername(substr($this->prenom,0,$nb) . "." . $this->nom);
+    public function generateUsername($nb)
+    {
+        if (is_int($nb) && $nb > 0) {
+            if ($nb <= strlen($this->prenom)) {
+                return $this->username = EklerniUtils::cleanUsername(substr($this->prenom, 0, $nb) . "." . $this->nom);
             } else {
-                return $this->username = EklerniUtils::cleanUsername($this->prenom . "." . $this->nom . ($nb - strlen($this->prenom)));
+                return $this->username = EklerniUtils::cleanUsername(
+                    $this->prenom . "." . $this->nom . ($nb - strlen($this->prenom))
+                );
             }
         } else {
             return false;

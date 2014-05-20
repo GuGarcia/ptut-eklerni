@@ -17,7 +17,8 @@ class Classe extends BaseEntity
      * CONSTRUCTORS
      ********************/
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->eleves = new ArrayCollection();
         $this->matieres = new ArrayCollection();
@@ -177,7 +178,8 @@ class Classe extends BaseEntity
      * @param Matiere $matiere
      * @return Classe
      */
-    public function addMatiere(Matiere $matiere) {
+    public function addMatiere(Matiere $matiere)
+    {
         $this->matieres->add($matiere);
         return $this;
     }

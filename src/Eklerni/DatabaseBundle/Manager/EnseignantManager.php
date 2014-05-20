@@ -38,9 +38,10 @@ class EnseignantManager extends BaseManager
      * @param Enseignant $eleve
      * @return string
      */
-    public function defineUsername(Enseignant $eleve) {
+    public function defineUsername(Enseignant $eleve)
+    {
         $i = 1;
-        while ( ! $this->isUsernameExists($eleve->generateUsername($i))) {
+        while (!$this->isUsernameExists($eleve->generateUsername($i))) {
             $i++;
         }
         return $eleve->getUsername();
@@ -50,8 +51,9 @@ class EnseignantManager extends BaseManager
      * @param $username
      * @return bool
      */
-    public function isUsernameExists($username) {
-        if(count($this->repository->isUsernameExists($username)->getQuery()->getResult())) {
+    public function isUsernameExists($username)
+    {
+        if (count($this->repository->isUsernameExists($username)->getQuery()->getResult())) {
             return false;
         } else {
             return true;
