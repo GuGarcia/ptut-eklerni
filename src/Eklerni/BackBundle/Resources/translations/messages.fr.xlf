@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-05-20T18:54:42Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2014-05-20T19:23:58Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -493,6 +493,10 @@
       <trans-unit id="f1fddcd071858b4bc21ccae770d85b471c01074a" resname="nouveau.text">
         <source>nouveau.text</source>
         <target>Nouveau</target>
+      </trans-unit>
+      <trans-unit id="6086328fa3955f0456e01c93aa16a0177d4ae690" resname="password.change">
+        <source>password.change</source>
+        <target>Changer de mot de passe</target>
       </trans-unit>
       <trans-unit id="05bc001b3c0ef85743d1c8e9a348ec7c7671a5c1" resname="password_change.encode_error">
         <source>password_change.encode_error</source>
