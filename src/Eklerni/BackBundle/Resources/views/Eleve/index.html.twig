@@ -225,7 +225,7 @@
                     series: [
                         {
                             type: 'area',
-                            name: '{% trans %}stats.moyenne.eleve{% endtrans %}',
+                            name: '{{  "stats.moyenne.eleve"|trans|escape('js') }}',
                             data: notes
                         },
                         {
