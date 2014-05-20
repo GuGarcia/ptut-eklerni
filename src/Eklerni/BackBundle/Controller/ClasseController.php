@@ -123,7 +123,6 @@ class ClasseController extends Controller
             }
 
         }
-        var_dump($moyennes);
         return $this->render(
             'EklerniBackBundle:Classe:list.html.twig',
             array(
