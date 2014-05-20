@@ -99,7 +99,7 @@ class IndexController extends Controller
                     $array[$matiere->getId()]["activites"][$activite->getId()] = array(
                         "id" => $activite->getId(),
                         "nom" => $activite->getName(),
-                        "exercice" => array()
+                        "exercices" => array()
                     );
                 }
                 $exercice = array(
@@ -127,6 +127,7 @@ class IndexController extends Controller
                             "label" => $reponse->getLabel(),
                             "media" => $reponse->getMediaUrl(),
                             "mediaType" => $reponse->getMedia()->getMedia(),
+                            "valid" => $reponse->getValid()
                         );
                     }
                 }
