@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-05-20T09:07:13Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2014-05-20T18:54:42Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -368,7 +368,7 @@
       </trans-unit>
       <trans-unit id="7b3d9dac05caa5b5f6c44393d994f57160b6bdac" resname="exercice.notfound.public">
         <source>exercice.notfound.public</source>
-        <target>Aucun exercice publique</target>
+        <target>Aucun exercice public</target>
       </trans-unit>
       <trans-unit id="6375a8844b83927cb5598b9ad1997e82db9a7832" resname="exercice.personnal">
         <source>exercice.personnal</source>
@@ -376,7 +376,7 @@
       </trans-unit>
       <trans-unit id="6835263816b9f0dd98f23296fc527a2bc03e547d" resname="exercice.public">
         <source>exercice.public</source>
-        <target>Exercice publique</target>
+        <target>Exercice public</target>
       </trans-unit>
       <trans-unit id="800985a01b146767323a83751331b9515b974316" resname="exercice.question.number">
         <source>exercice.question.number</source>
@@ -489,6 +489,10 @@
       <trans-unit id="0e4e8cfea1143e94e0733cb06368a119025910c3" resname="note.text">
         <source>note.text</source>
         <target>Note</target>
+      </trans-unit>
+      <trans-unit id="f1fddcd071858b4bc21ccae770d85b471c01074a" resname="nouveau.text">
+        <source>nouveau.text</source>
+        <target>Nouveau</target>
       </trans-unit>
       <trans-unit id="05bc001b3c0ef85743d1c8e9a348ec7c7671a5c1" resname="password_change.encode_error">
         <source>password_change.encode_error</source>
@@ -662,6 +666,10 @@
         <source>sidebar.tablet</source>
         <target>Vue tablette</target>
       </trans-unit>
+      <trans-unit id="6255952126e2369cc4b475139349cac0ad0c2330" resname="stats.best.eleves">
+        <source>stats.best.eleves</source>
+        <target>Les élèves en réussite</target>
+      </trans-unit>
       <trans-unit id="2ede45a7054503c08fdd4c0ddd2259676b49f1bb" resname="stats.generator">
         <source>stats.generator</source>
         <target>Générateur de statistiques</target>
@@ -702,9 +710,17 @@
         <source>stats.result.latest</source>
         <target>Derniers résultats</target>
       </trans-unit>
+      <trans-unit id="40f628d44c85bfb51b8f99f52a85111fbaba6b9c" resname="stats.worst.eleves">
+        <source>stats.worst.eleves</source>
+        <target>Les élèves en difficulté</target>
+      </trans-unit>
       <trans-unit id="be8f06f4c04f1402090b711e0ab690f8b7f12886" resname="tablet.text">
         <source>tablet.text</source>
         <target>Tablette</target>
+      </trans-unit>
+      <trans-unit id="fbbc9778fe64b8e8fbdf672023e7f7d930b22f04" resname="tablet.view">
+        <source>tablet.view</source>
+        <target>Vue Tablette</target>
       </trans-unit>
       <trans-unit id="6929a2c5bc8080684fd61cf3ad4dcfcbf803770a" resname="title.accueil">
         <source>title.accueil</source>
