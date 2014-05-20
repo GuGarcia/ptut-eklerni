@@ -17,7 +17,7 @@
                     </a>
                 </h4>
             </div>
-            <div id="collapse{{ loop.index }}" class="panel-collapse collapse in">
+            <div id="collapse{{ loop.index }}" class="panel-collapse collapse">
                 <div class="box-body">
                     {% for eleve in classe.eleves %}
                         <div id="eleve-{{ eleve.id }}" class="btn btn-default btn-block view">{{ eleve.prenom }} {{ eleve.nom }}</div>
@@ -53,7 +53,7 @@
                 var myData = {};
                 myData.type = tab[0];
                 myData.idType = tab[1];
-                console.log(myData);
+                //console.log(myData);
 
                 $.ajax({
                     type: "POST",
