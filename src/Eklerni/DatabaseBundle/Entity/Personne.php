@@ -2,6 +2,7 @@
 
 namespace Eklerni\DatabaseBundle\Entity;
 
+use Eklerni\BackBundle\Utils\EklerniUtils;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -406,5 +407,22 @@ abstract class Personne extends BaseEntity implements AdvancedUserInterface, \Se
 
     public function getFullName() {
         return $this->nom . " " . $this->getPrenom();
+    }
+
+    /**
+     * @param integer $nb
+     * @return bool|string
+     */
+    public function generateUsername($nb) {
+        if(is_int($nb) && $nb > 0) {
+            if($nb <= strlen($this->prenom)) {
+                return $this->username = EklerniUtils::cleanUsername(substr($this->prenom,0,$nb) . "." . $this->nom);
+            } else {
+                return $this->username = EklerniUtils::cleanUsername($this->prenom . "." . $this->nom . ($nb - strlen($this->prenom)));
+            }
+        } else {
+            return false;
+        }
+
     }
 } 

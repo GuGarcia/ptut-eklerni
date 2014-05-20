@@ -28,4 +28,16 @@ class EnseignantRepository extends EntityRepository implements CASRepositoryInte
             ->where("e.id = :id")
             ->setParameter("id", $idProf);
     }
+
+    /**
+     * @param string $username
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function isUsernameExists($username) {
+        return $this->_em->createQueryBuilder()
+            ->select("e")
+            ->from("EklerniDatabaseBundle:Enseignant", "e")
+            ->where("e.username = :username")
+            ->setParameter("username", $username);
+    }
 }

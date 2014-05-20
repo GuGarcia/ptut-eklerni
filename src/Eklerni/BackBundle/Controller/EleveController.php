@@ -7,6 +7,7 @@ use Eklerni\DatabaseBundle\Entity\Eleve;
 use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Eklerni\BackBundle\Utils\EklerniUtils;
 
 class EleveController extends Controller
 {
@@ -104,7 +105,7 @@ class EleveController extends Controller
 
             /** @var \Symfony\Component\Security\Core\Encoder\EncoderFactory $factory */
             $factory = $this->get('security.encoder_factory');
-            $eleve->setPassword($eleve->getNom().".".$eleve->getPrenom());
+            $eleve->setPassword(EklerniUtils::cleanUsername($eleve->getNom().".".$eleve->getPrenom()));
             $encoder = $factory->getEncoder($eleve);
             $password = $encoder->encodePassword($eleve->getPassword(), $eleve->getSalt());
 

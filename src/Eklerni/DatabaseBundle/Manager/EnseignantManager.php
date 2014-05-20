@@ -4,6 +4,7 @@ namespace Eklerni\DatabaseBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
 use Eklerni\DatabaseBundle\Entity\BaseEntity;
+use Eklerni\DatabaseBundle\Entity\Enseignant;
 
 class EnseignantManager extends BaseManager
 {
@@ -32,4 +33,29 @@ class EnseignantManager extends BaseManager
         $entity->upload();
         $this->em->flush();
     }
+
+    /**
+     * @param Enseignant $eleve
+     * @return string
+     */
+    public function defineUsername(Enseignant $eleve) {
+        $i = 1;
+        while ( ! $this->isUsernameExists($eleve->generateUsername($i))) {
+            $i++;
+        }
+        return $eleve->getUsername();
+    }
+
+    /**
+     * @param $username
+     * @return bool
+     */
+    public function isUsernameExists($username) {
+        if(count($this->repository->isUsernameExists($username)->getQuery()->getResult())) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 } 

@@ -2,7 +2,6 @@
 
 namespace Eklerni\DatabaseBundle\Entity;
 
-use Eklerni\BackBundle\Utils\EklerniUtils;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -109,21 +108,5 @@ class Eleve extends Personne {
         return $this->getClasse()->getNom() . " => ". $this->getFullName();
     }
 
-    /**
-     * @param integer $nb
-     * @return bool|string
-     */
-    public function generateUsername($nb) {
-        if(is_int($nb) && $nb > 0) {
-            if($nb <= strlen($this->prenom)) {
-                return $this->username = EklerniUtils::cleanUsername(substr($this->prenom,0,$nb) . "." . $this->nom);
-            } else {
-                return $this->username = EklerniUtils::cleanUsername($this->prenom . "." . $this->nom . ($nb - strlen($this->prenom)));
-            }
-        } else {
-            return false;
-        }
-
-    }
 
 }

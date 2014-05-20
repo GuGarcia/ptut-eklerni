@@ -5,6 +5,7 @@ namespace Eklerni\BackBundle\Controller;
 use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Eklerni\BackBundle\Utils\EklerniUtils;
 
 class EnseignantController extends Controller
 {
@@ -12,13 +13,14 @@ class EnseignantController extends Controller
     {
         $enseignant = new Enseignant();
 
-        $form = $this->createForm('eklerni_enseignant', $enseignant);
+        $form = $this->createForm('eklerni_enseignant_create', $enseignant);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var \Symfony\Component\Security\Core\Encoder\EncoderFactory $factory */
             $factory = $this->get('security.encoder_factory');
-
+            $enseignant->setPassword(EklerniUtils::cleanUsername($enseignant->getNom().".".$enseignant->getPrenom()));
+            echo EklerniUtils::cleanUsername($enseignant->getNom().".".$enseignant->getPrenom());
             $encoder = $factory->getEncoder($enseignant);
             $password = $encoder->encodePassword($enseignant->getPassword(), $enseignant->getSalt());
 
@@ -27,7 +29,7 @@ class EnseignantController extends Controller
             } else {
                 $enseignant->setPassword($password);
             }
-
+            $this->get('eklerni.manager.enseignant')->defineUsername($enseignant);
             $enseignant->upload();
             $this->get("eklerni.manager.enseignant")->save($enseignant);
 
