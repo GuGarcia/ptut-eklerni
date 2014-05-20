@@ -13,7 +13,7 @@ class ReponseAudioType extends AbstractType
     {
         $builder->add(
             'mediaUrl',
-            'file',
+            'url',
             array(
                 'label' => 'reponse.media.file.audio',
                 'attr' => array(

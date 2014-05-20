@@ -20,7 +20,7 @@ class QuestionImageType extends AbstractType
     {
         $builder->add(
             'mediaUrl',
-            'file',
+            'url',
             array(
                 'label' => 'question.media.file.image',
                 'attr' => array(

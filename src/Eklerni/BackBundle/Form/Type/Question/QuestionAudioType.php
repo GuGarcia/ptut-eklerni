@@ -20,7 +20,7 @@ class QuestionAudioType extends AbstractType
     {
         $builder->add(
             'mediaUrl',
-            'file',
+            'url',
             array(
                 'label' => 'question.media.file.audio',
                 'attr' => array(

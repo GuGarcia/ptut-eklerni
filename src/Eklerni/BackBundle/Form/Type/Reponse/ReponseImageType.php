@@ -13,7 +13,7 @@ class ReponseImageType extends AbstractType
     {
         $builder->add(
             'mediaUrl',
-            'file',
+            'url',
             array(
                 'label' => 'reponse.media.file.image',
                 'attr' => array(

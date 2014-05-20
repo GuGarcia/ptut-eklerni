@@ -20,7 +20,7 @@ class QuestionVideoType extends AbstractType
     {
         $builder->add(
             'mediaUrl',
-            'file',
+            'url',
             array(
                 'label' => 'question.media.file.video',
                 'attr' => array(
