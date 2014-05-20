@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-05-20T19:23:46Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2014-05-20T21:44:22Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -237,6 +237,14 @@
       <trans-unit id="394abec483e394d1f42c9792dd255e000a5733ca" resname="eleve.choose">
         <source>eleve.choose</source>
         <target>Choose a pupil</target>
+      </trans-unit>
+      <trans-unit id="945619a68d6d899f0f54663bb807d9e10d00d91f" resname="eleve.delete.fail">
+        <source>eleve.delete.fail</source>
+        <target>Impossible to delete the pupil.</target>
+      </trans-unit>
+      <trans-unit id="853b8d67640fbf08b2631b7e05124af9f589e368" resname="eleve.delete.success">
+        <source>eleve.delete.success</source>
+        <target>Pupil successfully deleted.</target>
       </trans-unit>
       <trans-unit id="a05487467cc142ff796e07b112c098cf03bc6e78" resname="eleve.list">
         <source>eleve.list</source>

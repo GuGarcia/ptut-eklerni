@@ -29,7 +29,7 @@ class Question extends BaseEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="text")
+     * @ORM\Column(name="name", type="text", nullable=true)
      */
     private $label;
 

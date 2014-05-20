@@ -196,7 +196,7 @@ class EleveController extends Controller
             $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("eleve.delete.success"));
             return $this->redirect($this->generateUrl('eklerni_back_eleve'));
         } else {
-            $this->get("session")->getFlashBag()->add("notice", $this->get("translator")->trans("eleve.delete.fail"));
+            $this->get("session")->getFlashBag()->add("error", $this->get("translator")->trans("eleve.delete.fail"));
             return $this->redirect($this->generateUrl('eklerni_back_eleve'));
         }
     }

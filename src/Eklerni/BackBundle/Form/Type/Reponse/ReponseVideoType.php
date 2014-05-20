@@ -13,7 +13,7 @@ class ReponseVideoType extends AbstractType
     {
         $builder->add(
             'mediaUrl',
-            'file',
+            'url',
             array(
                 'label' => 'reponse.media.file.video',
                 'attr' => array(

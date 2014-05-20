@@ -56,6 +56,12 @@
                     {{ flashMessage }}
                 </div>
             {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="alert alert-dismissable alert-danger" style="display: block; opacity: 1; margin-top: 0px;">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
         </div>
     </section>
 </aside>
