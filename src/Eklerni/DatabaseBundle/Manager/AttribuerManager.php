@@ -4,6 +4,7 @@ namespace Eklerni\DatabaseBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Eklerni\DatabaseBundle\Entity\Attribuer;
 use Eklerni\DatabaseBundle\Entity\BaseEntity;
 use Eklerni\DatabaseBundle\Entity\Classe;
 use Eklerni\DatabaseBundle\Entity\Eleve;
@@ -34,8 +35,17 @@ class AttribuerManager
      */
     public function save(BaseEntity $entity, $persist = true)
     {
-        if ($persist) {
+        if ($entity->getId() == null) {
             $this->em->persist($entity);
+        }
+        $this->em->flush();
+    }
+
+    public function remove(Attribuer $attribuer) {
+        if(count($attribuer->getResultats()) > 0) {
+            $attribuer->setIsDelete(true);
+        } else {
+            $this->em->remove($attribuer);
         }
         $this->em->flush();
     }
@@ -49,6 +59,7 @@ class AttribuerManager
             ->from("EklerniDatabaseBundle:Attribuer", "a")
             ->innerJoin("a.eleve", "e")
             ->where("e.id = :idEleve")
+            ->andwhere("a.isDelete = 0")
             ->setParameter("idEleve", $eleve->getId() )->getQuery()->getResult();
     }
 
@@ -65,6 +76,7 @@ class AttribuerManager
             ->innerJoin("a.eleve", "e")
             ->innerJoin("e.classe", "c")
             ->where("c.id = :idClasse and a.isClasse = 1")
+            ->andwhere("a.isDelete = 0")
             ->groupBy("a.serie")
             ->setParameter("idClasse", $classe->getId());
         return $query->getQuery()->getResult();
@@ -77,6 +89,7 @@ class AttribuerManager
             ->from("EklerniDatabaseBundle:Attribuer", "a")
             ->where("a.eleve = :idEleve")
             ->andWhere("a.serie = :idSerie")
+             ->andwhere("a.isDelete = 0")
             ->setParameters(array(
                 "idSerie" => $serie->getId(),
                 "idEleve" => $eleve->getId()

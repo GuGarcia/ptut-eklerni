@@ -51,7 +51,13 @@ class Attribuer
      * @var boolean
      * @ORM\Column(name="isActive", type="boolean")
      */
-    private $isActive;
+    private $isActive = false;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="isDelete", type="boolean")
+     */
+    private $isDelete = false;
 
     /**
      * @var boolean
@@ -176,6 +182,22 @@ class Attribuer
     public function getIsClasse()
     {
         return $this->isClasse;
+    }
+
+    /**
+     * @param boolean $isDelete
+     */
+    public function setIsDelete($isDelete)
+    {
+        $this->isDelete = $isDelete;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsDelete()
+    {
+        return $this->isDelete;
     }
 
 

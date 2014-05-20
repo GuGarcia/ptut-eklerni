@@ -14,6 +14,7 @@ class AttribuerRepository extends EntityRepository {
             ->from("EklerniDatabaseBundle:Attribuer", "a")
             ->innerJoin("a.eleve", "e")
             ->where("e.id = :idEleve")
+            ->andwhere("a.isDelete = 0")
             ->setParameter("idEleve", $idEleve );
     }
 
@@ -23,6 +24,7 @@ class AttribuerRepository extends EntityRepository {
             ->select("a")
             ->from("EklerniDatabaseBundle:Attribuer", "a")
             ->where("a.idSerie = :idSerie")
+            ->andwhere("a.isDelete = 0")
             ->setParameter("idSerie", $idSerie );
     }
 

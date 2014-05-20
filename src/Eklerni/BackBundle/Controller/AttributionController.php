@@ -82,7 +82,6 @@ class AttributionController extends Controller
 
     public function deleteAttributionAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
         if ($request->isXmlHttpRequest()) {
             if ($serie = $request->get("idSerie")) {
                 /** @var Serie $serie */
@@ -92,21 +91,22 @@ class AttributionController extends Controller
                     $eleve = $this->get("eklerni.manager.eleve")->findById($eleve);
                     /** @var Attribuer $attribution */
                     $attribution = $this->get("eklerni.manager.attribuer")->findById($eleve, $serie)[0];
-                    $em->remove($attribution);
+                    $this->get('eklerni.manager.attribuer')->remove($attribution);
                 } else if ($classe = $request->get("idClasse")) {
                     /** @var Classe $classe */
                     $classe = $this->get("eklerni.manager.classe")->findById($classe);
                     foreach ($classe->getEleves() as $eleve) {
                         /** @var Attribuer $attribution */
                         $attribution = $this->get("eklerni.manager.attribuer")->findById($eleve, $serie)[0];
-                        $em->remove($attribution);
+                        $this->get('eklerni.manager.attribuer')->remove($attribution);
                     }
                 }
-                $em->flush();
             }
         }
         return new Response(json_encode(array()));
     }
+
+
 
     private function saveAttribution(Serie $serie, Eleve $eleve, $isClasse = false, $isActive = false)
     {
