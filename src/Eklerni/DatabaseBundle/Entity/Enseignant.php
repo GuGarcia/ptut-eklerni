@@ -39,6 +39,7 @@ class Enseignant extends Personne
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Serie", mappedBy="enseignant")
+     * @ORM\OrderBy({"nom" = "ASC"})
      */
     private $series;
 
