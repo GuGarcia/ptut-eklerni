@@ -33,6 +33,7 @@ class Activite extends BaseEntity
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Serie", mappedBy="activite")
+     * @ORM\OrderBy({"nom" = "ASC"})
      */
     private $series;
 
