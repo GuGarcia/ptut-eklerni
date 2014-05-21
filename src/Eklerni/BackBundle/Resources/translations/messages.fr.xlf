@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-05-20T21:44:59Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2014-05-21T08:46:02Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -26,9 +26,9 @@
         <source>activite.add.success</source>
         <target>L'activité a été ajoutée avec succès.</target>
       </trans-unit>
-      <trans-unit id="ce239152dbd0efd259843bfdfb8926a9b2eb603f" resname="activite.choose">
-        <source>activite.choose</source>
-        <target>Choisissez une activité</target>
+      <trans-unit id="0e473c84f9e2d2cd1c8896ce97b8320b6ff1e69f" resname="activite.all">
+        <source>activite.all</source>
+        <target>Toutes les activités</target>
       </trans-unit>
       <trans-unit id="9cca0f78e0270ec86570d0ee9b9945ccffe2efe3" resname="activite.delete.fail">
         <source>activite.delete.fail</source>
@@ -98,9 +98,9 @@
         <source>classe.add.success</source>
         <target>La classe a été ajoutée avec succès.</target>
       </trans-unit>
-      <trans-unit id="40776a6c45c4ce36c1201f00f9100dfb22cc14d0" resname="classe.choose">
-        <source>classe.choose</source>
-        <target>Choisissez une classe</target>
+      <trans-unit id="3f1947ec272ab037e258ad2df3a527cfb676ee20" resname="classe.all">
+        <source>classe.all</source>
+        <target>Toutes les classes</target>
       </trans-unit>
       <trans-unit id="7c6df226579b4486f64e548f6d2f59d26138d274" resname="classe.delete.enseignant.fail">
         <source>classe.delete.enseignant.fail</source>
@@ -234,9 +234,9 @@
         <source>eleve.add.success</source>
         <target>L'élève a été ajouté avec succès.</target>
       </trans-unit>
-      <trans-unit id="394abec483e394d1f42c9792dd255e000a5733ca" resname="eleve.choose">
-        <source>eleve.choose</source>
-        <target>Choisissez un élève</target>
+      <trans-unit id="c886178c4ca65ce341db277dafb491a74021b47e" resname="eleve.all">
+        <source>eleve.all</source>
+        <target>Tous les élèves</target>
       </trans-unit>
       <trans-unit id="945619a68d6d899f0f54663bb807d9e10d00d91f" resname="eleve.delete.fail">
         <source>eleve.delete.fail</source>
@@ -310,6 +310,10 @@
         <source>enseignant.text</source>
         <target>Enseignant</target>
       </trans-unit>
+      <trans-unit id="61e0250f3995b6e01cf1d920744af39adc300a7c" resname="exercice.all">
+        <source>exercice.all</source>
+        <target>Tous les exercices</target>
+      </trans-unit>
       <trans-unit id="2952e068295af92e666ead2657a85127fd7b6f70" resname="exercice.attribution">
         <source>exercice.attribution</source>
         <target>Attribution</target>
@@ -321,10 +325,6 @@
       <trans-unit id="5d7c027162605995503155142fd700045d2af01a" resname="exercice.attribution.eleve">
         <source>exercice.attribution.eleve</source>
         <target>Attribution d'exercice à un élève</target>
-      </trans-unit>
-      <trans-unit id="3fe37755031f030d433490421622c3a8be492371" resname="exercice.choose">
-        <source>exercice.choose</source>
-        <target>Choisissez un exercice</target>
       </trans-unit>
       <trans-unit id="ef9cf87ea8327d65312bdbc3072c6745816f1bb9" resname="exercice.delete.fail">
         <source>exercice.delete.fail</source>
@@ -438,9 +438,9 @@
         <source>matiere.add_activite</source>
         <target>Activité</target>
       </trans-unit>
-      <trans-unit id="63abb52d2786818772638ad7daa92ec5329a54ee" resname="matiere.choose">
-        <source>matiere.choose</source>
-        <target>Choisissez une matière</target>
+      <trans-unit id="e1551755ef1785dc6e2e1f9a6651cc3b7a35a830" resname="matiere.all">
+        <source>matiere.all</source>
+        <target>Toutes les matières</target>
       </trans-unit>
       <trans-unit id="5639ca872edcd830ad4eb57f92315e94e846298b" resname="matiere.delete.fail">
         <source>matiere.delete.fail</source>
@@ -817,6 +817,10 @@
       <trans-unit id="5363a12cf6dce30fe73579ffd336dc333e41fd9a" resname="utils.bin">
         <source>utils.bin</source>
         <target>Corbeille</target>
+      </trans-unit>
+      <trans-unit id="95a7cc8f667bc2fdf0fccd37a214ab818b518614" resname="utils.both">
+        <source>utils.both</source>
+        <target>Les deux</target>
       </trans-unit>
       <trans-unit id="c26dcb36bc0effc689eb5fe3cbd6a93ce9af0190" resname="utils.delete">
         <source>utils.delete</source>
