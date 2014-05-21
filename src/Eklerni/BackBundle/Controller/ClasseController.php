@@ -103,7 +103,7 @@ class ClasseController extends Controller
         foreach($matieres as $matiere) {
             $moyenne = $this->get('eklerni.manager.resultat')->findResults(
                 array(
-                    "enseignant" => $enseignant,
+                    //"enseignant" => $enseignant,
                     "matiere" => $matiere,
                     "moyenne" => "classe",
                     "isTest" => true

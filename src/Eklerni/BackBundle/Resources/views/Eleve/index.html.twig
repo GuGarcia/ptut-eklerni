@@ -36,10 +36,10 @@
 
 {% set eleveTable %}
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-xs-5">
         <div class="img-crop img-md" style="background-image:url('{{ asset(eleve.picture) }}')"></div>
     </div>
-    <div class="col-lg-8">
+    <div class="col-xs-7">
         <table class="table">
             <tr>
                 <td>{% trans %}personne.lastname.colon{% endtrans %} {{ eleve.nom }}</td>
@@ -69,7 +69,7 @@
     <table class="table table-bordered">
         <tr>
             <th>{% trans %}exercice.text{% endtrans %}</th>
-            <th class="col-md-6"></th>
+            <th class="col-sm-6 hidden-xs"></th>
             <th>{% trans %}note.text{% endtrans %}</th>
         </tr>
         {% for resultat in resultats %}
@@ -92,7 +92,7 @@
                         {{ resultat.serie.nom }}
                     </a>
                 </td>
-                <td>
+                <td class="hidden-xs">
                     <div class="progress xs">
                         <div class="progress-bar progress-bar-{{ typebar }}" style="width: {{ resultat.note }}%;"></div>
                     </div>
@@ -168,8 +168,6 @@
                 var url = "{{ path('eklerni_back_eleve_fiche', {idEleve: 0}) }}";
                 window.location.assign(url.replace("0", $(this).val()));
             });
-
-
 
             var matieres = [];
             var notes = [];

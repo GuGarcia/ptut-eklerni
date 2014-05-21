@@ -28,7 +28,7 @@ class StatistiqueController extends Controller{
         $typechoisi = null;
         if ($form->isValid()) {
             $data = $form->getData();
-            $data["enseignant"] = $this->getUser();
+            //$data["enseignant"] = $this->getUser();
             $resultats = $this->get('eklerni.manager.resultat')->findResults($data, $data["limit"], array());
             if($data["moyenne"]) {
                 $typemoyenne = $data["moyenne"];
