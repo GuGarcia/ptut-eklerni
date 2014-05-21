@@ -24,4 +24,8 @@
         <default key="_controller">EklerniCASBundle:Profile:changePassword</default>
         <option key="i18n">false</option>
     </route>
+    <route id="eklerni_cas_profile_redirect" pattern="/profile/redirect">
+        <default key="_controller">EklerniCASBundle:Profile:redirect</default>
+        <option key="i18n">false</option>
+    </route>
 </routes>

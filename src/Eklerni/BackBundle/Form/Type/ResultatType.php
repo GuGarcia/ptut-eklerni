@@ -36,13 +36,13 @@ class ResultatType extends AbstractType
                 'label' => 'eleve.text',
                 'class' => 'EklerniDatabaseBundle:Eleve',
                 'query_builder' => function (EleveRepository $er) {
-                        return $er->findByProf($this->enseignant);
+                        return $er->findByProf($this->enseignant->getId());
                     },
                 'attr' => array(
                     'class' => 'form-control'
                 ),
                 'property' => "parent",
-                'empty_value' => 'eleve.choose',
+                'empty_value' => 'eleve.all',
                 'required' => false,
             )
         );
@@ -54,13 +54,13 @@ class ResultatType extends AbstractType
                 'label' => 'matiere.text',
                 'class' => 'EklerniDatabaseBundle:Matiere',
                 'query_builder' => function (MatiereRepository $er) {
-                        return $er->findByProf($this->enseignant);
+                        return $er->findByProf($this->enseignant->getId());
                     },
                 'attr' => array(
                     'class' => 'form-control'
                 ),
                 'property' => "name",
-                'empty_value' => 'matiere.choose',
+                'empty_value' => 'matiere.all',
                 'required' => false,
             )
         );
@@ -72,13 +72,13 @@ class ResultatType extends AbstractType
                 'label' => 'classe.text',
                 'class' => 'EklerniDatabaseBundle:Classe',
                 'query_builder' => function (ClasseRepository $er) {
-                        return $er->findByProf($this->enseignant);
+                        return $er->findByProf($this->enseignant->getId());
                     },
                 'attr' => array(
                     'class' => 'form-control'
                 ),
                 'property' => "nom",
-                'empty_value' => 'classe.choose',
+                'empty_value' => 'classe.all',
                 'required' => false,
             )
         );
@@ -90,13 +90,13 @@ class ResultatType extends AbstractType
                 'label' => 'activite.text',
                 'class' => 'EklerniDatabaseBundle:Activite',
                 'query_builder' => function (ActiviteRepository $er) {
-                        return $er->findByProf($this->enseignant);
+                        return $er->findByProf($this->enseignant->getId());
                     },
                 'attr' => array(
                     'class' => 'form-control'
                 ),
                 'property' => "parent",
-                'empty_value' => 'activite.choose',
+                'empty_value' => 'activite.all',
                 'required' => false,
             )
         );
@@ -108,13 +108,13 @@ class ResultatType extends AbstractType
                 'label' => 'exercice.text',
                 'class' => 'EklerniDatabaseBundle:Serie',
                 'query_builder' => function (SerieRepository $er) {
-                        return $er->findByProf($this->enseignant);
+                        return $er->findByProf($this->enseignant->getId());
                     },
                 'attr' => array(
                     'class' => 'form-control'
                 ),
                 'property' => "parent",
-                'empty_value' => 'exercice.choose',
+                'empty_value' => 'exercice.all',
                 'required' => false,
             )
         );
@@ -144,18 +144,6 @@ class ResultatType extends AbstractType
         );
 
         $builder->add(
-            'tri',
-            'integer',
-            array(
-                'label' => 'limit.text',
-                'data' => 10,
-                'attr' => array(
-                    'class' => 'form-control'
-                ),
-            )
-        );
-
-        $builder->add(
             "moyenne",
             "choice",
             array(
@@ -179,7 +167,7 @@ class ResultatType extends AbstractType
             'choice',
             array(
                 'choices' => array(
-                    "" => 'aucun',
+                    "" => 'utils.both',
                     "true" => 'utils.yes',
                     "false" => 'utils.no'
                 ),
