@@ -19,6 +19,8 @@
         </div>
         <div class="footer">
             {{ eklerni_cas.submit(form.valider) }}
+            <a href="{{ path("eklerni_cas_profile_redirect") }}"
+               class="btn bg-red btn-block">{% trans %}utils.return{% endtrans %}</a>
         </div>
     </form>
 {% endblock %}

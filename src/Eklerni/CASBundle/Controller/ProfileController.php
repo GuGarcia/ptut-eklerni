@@ -4,6 +4,7 @@ namespace Eklerni\CASBundle\Controller;
 
 use Eklerni\DatabaseBundle\Entity\Enseignant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProfileController extends Controller
@@ -74,5 +75,17 @@ class ProfileController extends Controller
                 'title' => $this->get('translator')->trans("title.profile")
             )
         );
+    }
+    public function redirectAction(Request $request)
+    {
+        $securityContext = $this->container->get('security.context');
+
+        if ($securityContext->isGranted('ROLE_DIRECTEUR') || $securityContext->isGranted('ROLE_ENSEIGNANT')) {
+            $response = new RedirectResponse($this->generateUrl('eklerni_back_homepage'));
+        } elseif ($securityContext->isGranted('ROLE_ELEVE')) {
+            $response = new RedirectResponse($this->generateUrl('eklerni_front_homepage'));
+        }
+
+        return $response;
     }
 } 
