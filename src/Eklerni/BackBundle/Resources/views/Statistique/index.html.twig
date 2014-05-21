@@ -24,6 +24,9 @@
                     {% if typerecherche >= 3 or moyennes == null %}
                         <th>{% trans %}exercice.text{% endtrans %}</th>
                     {% endif %}
+                    {% if moyennes == null %}
+                    <th>{% trans %}test.text{% endtrans %}</th>
+                    {% endif %}
                     <th class="col-md-4 hidden-xs"></th>
                     <th>{% trans %}note.text{% endtrans %}</th>
                 </tr>
@@ -80,6 +83,15 @@
                                 <a href="{{ path("eklerni_back_serie_fiche", {idSerie:resultat.serie.id}) }}">
                                     {{ resultat.serie.nom }}
                                 </a>
+                            </td>
+                        {% endif %}
+                        {% if moyennes == null %}
+                            {% if resultat.isTest %}
+                            <td class="bg-green">
+                            {% else %}
+                            <td class="bg-red">
+                            {% endif %}
+                                <span class="hidden">{% if resultat.isTest %}1{% else %}0{% endif %}</span>
                             </td>
                         {% endif %}
                         <td class="hidden-xs">

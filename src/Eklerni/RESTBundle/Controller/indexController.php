@@ -165,9 +165,28 @@ class IndexController extends Controller
             $resultat = new Resultat();
             $resultat->setEleve($eleves[0]);
             $resultat->setSerie($attribution->getSerie());
-            $resultat->setAttribution($attribution);
-            $resultat->setNote(rand(0,100));
+
+            $note = rand(0,100);
             $resultat->setIsTest((rand(0,1) > 0.5)?false:true);
+
+            if($resultat->getIsTest()) {
+                $requete = $this->get('eklerni.manager.resultat')->findResults(array(
+                    "serie" => $resultat->getSerie(),
+                    "eleve" => $resultat->getEleve(),
+                    "isTest" => true
+                ));
+                if(count($requete) > 0) {
+                    /** @var Resultat $resultat */
+                    $resultat = $requete[0];
+                    if($note < $resultat->getNote()) {
+                        $note = $resultat->getNote();
+                        $resultat->setIsTest(false);
+                    }
+                }
+            }
+            $resultat->setNote($note);
+            $resultat->setAttribution($attribution);
+
 
             $this->get('eklerni.manager.resultat')->save($resultat);
             //sleep(1);

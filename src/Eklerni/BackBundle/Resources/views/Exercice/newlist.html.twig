@@ -216,6 +216,9 @@
                 $(this).removeClass("btn-default");
                 $(this).addClass("btn-primary");
                 $('#serielist > #'+this.id).removeClass("hidden");
+                $('html,body').animate({
+                    scrollTop: 0
+                }, 500);
             });
 
             $('.deleteSerieBtn').on('click', function(event) {
