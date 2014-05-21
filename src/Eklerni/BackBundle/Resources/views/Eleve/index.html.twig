@@ -11,8 +11,8 @@
     {% endfor %}
 {% endset %}
 
-{% set dropDownEleve %}
-    <div class="hidden" id="wrapperFormDropDownEleve">
+{% block rightTitle %}
+    <div id="wrapperFormDropDownEleve">
         <div class="pull-right">
             {% if indexCurrentUser > 0 %}
                 <a href="{{ path("eklerni_back_eleve_fiche", {idEleve: elevesClasse[indexCurrentUser - 1].id}) }}" class="btn btn-default inline">
@@ -32,7 +32,7 @@
             {% endif %}
         </div>
     </div>
-{% endset %}
+{% endblock %}
 
 {% set eleveTable %}
 <div class="row">
@@ -146,7 +146,6 @@
             {{ eklerni.block(latestStatList, resultatbody, "", "primary") }}
         </div>
     </div>
-    {{ dropDownEleve }}
 {% endblock %}
 
 {% block javascripts %}
@@ -154,30 +153,25 @@
         $(document).ready(function () {
             // Drop Down Eleve
             var header = $(".content-header");
-            var dropDownEleve = $('#wrapperFormDropDownEleve');
             var selectDropDownEleve = $("#selectDropDownEleve");
-            var btnDropDownEleve = $("#btnDropDownEleve");
 
             header.addClass("row");
             header.children("h1").addClass("col-md-8");
-            dropDownEleve.removeClass("hidden");
-            dropDownEleve.addClass("col-md-4");
-            header.append(dropDownEleve);
             selectDropDownEleve.on("change", function(e){
                 e.preventDefault();
-                var url = "{{ path('eklerni_back_eleve_fiche', {idEleve: 0}) }}";
-                window.location.assign(url.replace("0", $(this).val()));
+                window.location.assign("{{ path('eklerni_back_eleve_fiche', {idEleve: 0}) }}".replace("0", $(this).val()));
             });
 
+            //Polar Chart
             var matieres = [];
             var notes = [];
             {% for moyenne in moyennes %}
-                matieres[{{ (loop.index0/moyennes|length) * 360 }}] = "{{ moyenne[0].serie.activite.matiere.name }}";
-                notes.push({{ moyenne["note"]|number_format }});
+            matieres[{{ (loop.index0/moyennes|length) * 360 }}] = "{{ moyenne[0].serie.activite.matiere.name }}";
+            notes.push({{ moyenne["note"]|number_format }});
             {% endfor %}
             var notesClasse = [];
             {% for moyenne in moyennesClasse %}
-                notesClasse.push({{ moyenne["note"]|number_format }});
+            notesClasse.push({{ moyenne["note"]|number_format }});
             {% endfor %}
 
             {% if moyennes is not empty %}

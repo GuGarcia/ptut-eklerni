@@ -12,7 +12,8 @@
             <h3>{{ form.questions.vars.label|trans() }}</h3>
             <div id="questions" data-prototype="{{ form_widget(form.questions.vars.prototype)|e }}" data-index="{{ form.questions.count }}">
                 {% for question in form.questions %}
-                    <div class="question">
+                    <div class="question col-xs-offset-1">
+                        <h3>{% trans %}question.text{% endtrans %}</h3>
                         {% if question.label is defined %}
                             {{ form_row(question.label) }}
                         {% endif %}
@@ -21,12 +22,14 @@
                         {% endif %}
                         {{ form_row(question.media) }}
                         {{ form_row(question.addreponse) }}
+                        {{ form_row(question.delete) }}
                         <div>
                             <div id="eklerni_serie_questions_{{ question.vars.name }}_reponses"
                                  data-prototype="{{ form_widget(question.reponses.vars.prototype)|e }}"
                                  data-index="{{ question.reponses.count }}"></div>
                             {% for reponse in question.reponses %}
-                                <div>
+                                <div class="col-xs-offset-1">
+                                    <h4>{% trans %}reponse.text{% endtrans %}</h4>
                                     {% if reponse.label is defined %}
                                         {{ form_row(reponse.label) }}
                                     {% endif %}
@@ -39,7 +42,6 @@
                                 </div>
                             {% endfor %}
                         </div>
-                        {{ form_row(question.delete) }}
                     </div>
                 {% endfor %}
             </div>
@@ -92,7 +94,7 @@
                 var newQuestion = prototype.replace(/__question__/g, index);
                 questionCollectionHolder.data('index', index + 1);
 
-                var $newQuestionRow = $('<div></div>').attr('class', 'question').append(newQuestion);
+                var $newQuestionRow = $('<div class="col-xs-offset-1"></div>').attr('class', 'question').append(newQuestion);
                 questionCollectionHolder.append($newQuestionRow);
 
                 $newQuestionRow.find(".deleteQuestion").on("click", function(){
