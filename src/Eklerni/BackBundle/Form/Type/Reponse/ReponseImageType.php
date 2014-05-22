@@ -58,8 +58,8 @@ class ReponseImageType extends AbstractType
             'button',
             array(
                 'attr' => array(
-                    'class' => 'deleteReponse',
-                    'label' => 'utils.delete'
+                    'class' => 'deleteReponse btn btn-danger',
+                    'label' => 'reponse.delete'
                 ),
             )
         );
