@@ -716,7 +716,7 @@
       </trans-unit>
       <trans-unit id="16cb4e59d29359b2687f10095d2a360a66ef199b" resname="stats.moyenne.matiere">
         <source>stats.moyenne.matiere</source>
-        <target>Moyenne pour la matière</target>
+        <target>Moyenne par matière</target>
       </trans-unit>
       <trans-unit id="f642e036205b18a5941e88f10bf7dd792a88dc49" resname="stats.no.result">
         <source>stats.no.result</source>
