@@ -14,6 +14,10 @@
         <option key="i18n">false</option>
     </route>
     <route id="eklerni_rest_generate_resultat" pattern="/resultat/">
+        <default key="_controller">EklerniRESTBundle:Index:resultat</default>
+        <option key="i18n">false</option>
+    </route>
+    <route id="eklerni_rest_generate_resultat" pattern="/generateresultat/">
         <default key="_controller">EklerniRESTBundle:Index:generateResultat</default>
         <option key="i18n">false</option>
     </route>

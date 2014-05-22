@@ -154,6 +154,48 @@ class IndexController extends Controller
         }
     }
 
+    public function resultat(Request $request) {
+        /**
+         * JSON:
+         * [
+         *  {
+                "eleve": idEleve,
+                "serie": idSerie,
+                // si la reponse est vrai => boolean (true)
+                // si la reponse est fausse => l'erreur de l'élève
+                "responses": [string|boolean, ...]
+         *  },
+         *  {},
+         *  ...
+         * ]
+         */
+        $resultats = json_decode($request->get('json'));
+
+        foreach($resultats as $resultat) {
+            if( isset($ligne['eleve']) && isset($ligne['serie']) && isset($resultat['reponses'])) {
+                $resultat = new Resultat();
+                $resultat->setEleve($this->get('eklerni.manager.eleve')->findById($ligne['eleve']));
+                $resultat->getSerie($this->get('eklerni.manager.serie')->findById($ligne['serie']));
+                $resultat->setAttribution($this->get('eklerni.manager.attribuer')->findById($resultat->getEleve(),$resultat->getSerie()));
+                $i = 0;
+                foreach($resultat['reponses'] as $reponse) {
+                    if($reponse == true) {
+                        $i++;
+                    } else {
+                        $rep = new Reponse();
+                        $rep->setLabel($reponse);
+                        $rep->setMedia($resultat->getSerie()->getActivite()->getReponseMedia());
+                        //TODO Save Reponse
+                    }
+                }
+                $resultat->setNote(round(($i/$resultat['reponses'])*100));
+
+            }
+        }
+
+        return new Response();
+    }
+
     public function generateResultatAction($nb = 1) {
         $eleves = $this->get('eklerni.manager.eleve')->findAll();
         for($i=0;$i<$nb;$i++) {
