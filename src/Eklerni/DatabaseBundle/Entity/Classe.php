@@ -51,6 +51,7 @@ class Classe extends BaseEntity
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Eleve", mappedBy="classe")
+     * @ORM\OrderBy({"nom" = "ASC", "prenom" = "ASC"})
      */
     private $eleves;
 

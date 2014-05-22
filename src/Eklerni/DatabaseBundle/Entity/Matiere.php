@@ -37,6 +37,7 @@ class Matiere extends BaseEntity
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Activite", mappedBy="matiere")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $activites;
 

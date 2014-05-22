@@ -48,11 +48,22 @@ class QuestionTextType extends AbstractType
         );
 
         $builder->add(
+            'delete',
+            'button',
+            array(
+                'attr' => array(
+                    'class' => 'deleteQuestion btn btn-danger',
+                    'label' => 'question.delete'
+                ),
+            )
+        );
+
+        $builder->add(
             'addreponse',
             "button",
             array(
                 'attr' => array(
-                    'class' => 'addReponse'
+                    'class' => 'addReponse btn btn-primary'
                 ),
                 'label' => 'reponse.add'
             )
@@ -69,17 +80,6 @@ class QuestionTextType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => "reponses.text"
-            )
-        );
-
-        $builder->add(
-            'delete',
-            'button',
-            array(
-                'attr' => array(
-                    'class' => 'deleteQuestion',
-                    'label' => 'utils.delete'
-                ),
             )
         );
     }

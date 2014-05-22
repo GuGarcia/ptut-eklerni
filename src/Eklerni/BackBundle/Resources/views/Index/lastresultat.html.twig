@@ -2,6 +2,7 @@
     <th>{% trans %}classe.text{% endtrans %}</th>
     <th>{% trans %}personne.lastname{% endtrans %}</th>
     <th>{% trans %}exercice.text{% endtrans %}</th>
+    <th>{% trans %}test.text{% endtrans %}</th>
     <th class="col-md-6 hidden-sm"></th>
     <th>{% trans %}note.text{% endtrans %}</th>
 </tr>
@@ -38,6 +39,13 @@
             <a href="{{ path("eklerni_back_serie_fiche", {idSerie:resultat.serie.id}) }}">
                 {{ resultat.serie.nom }}
             </a>
+        </td>
+        {% if resultat.isTest %}
+        <td class="bg-green">
+            {% else %}
+        <td class="bg-red">
+        {% endif %}
+        <span class="hidden">{% if resultat.isTest %}1{% else %}0{% endif %}</span>
         </td>
         <td class="hidden-sm">
             <div class="progress xs">

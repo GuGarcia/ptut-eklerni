@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-05-21T10:04:29Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2014-05-21T18:11:42Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -566,6 +566,10 @@
         <source>question.add</source>
         <target>Add a question</target>
       </trans-unit>
+      <trans-unit id="5e5da83dcc38f63e7c013e67a28e82c41e2db8d4" resname="question.delete">
+        <source>question.delete</source>
+        <target>Delete question</target>
+      </trans-unit>
       <trans-unit id="5d6768bb8996a84a4c24399bcaf26882203d52fe" resname="question.label">
         <source>question.label</source>
         <target>Label</target>
@@ -602,6 +606,10 @@
         <source>reponse.add</source>
         <target>Add an answer</target>
       </trans-unit>
+      <trans-unit id="aa08625fe1b007483497e7001c8dd70008910532" resname="reponse.delete">
+        <source>reponse.delete</source>
+        <target>Delete response</target>
+      </trans-unit>
       <trans-unit id="64b37799456e3bb9a952f320c4250a97fa59dc9d" resname="reponse.label">
         <source>reponse.label</source>
         <target>Label</target>
@@ -632,7 +640,7 @@
       </trans-unit>
       <trans-unit id="1828d266e7e8c98a4c4a9b86b596c18a9b78be56" resname="reponses.text">
         <source>reponses.text</source>
-        <target>Answer</target>
+        <target>Answers</target>
       </trans-unit>
       <trans-unit id="b44c7367a2434b3d6c908ca3bc6fb8c17f72e04d" resname="result.list.last">
         <source>result.list.last</source>
@@ -737,6 +745,10 @@
       <trans-unit id="fbbc9778fe64b8e8fbdf672023e7f7d930b22f04" resname="tablet.view">
         <source>tablet.view</source>
         <target>Tablet view</target>
+      </trans-unit>
+      <trans-unit id="dc1b66411058b9ec17d5fcc393a26114a28880a1" resname="test.text">
+        <source>test.text</source>
+        <target>test.text</target>
       </trans-unit>
       <trans-unit id="6929a2c5bc8080684fd61cf3ad4dcfcbf803770a" resname="title.accueil">
         <source>title.accueil</source>
