@@ -145,8 +145,8 @@ class ExerciceController extends Controller
             $enseignant = $this->getUser();
 
             if ($serie) {
-                if ($serie->getListeAttribution()->count() == 0 and
-                    $serie->getResultats()->count() == 0 and $serie->getEnseignant() == $enseignant) {
+                if ($serie->getListeAttribution()->count() == 0 &&
+                    $serie->getResultats()->count() == 0 && $serie->getEnseignant() == $enseignant) {
                     $em = $this->getDoctrine()->getManager();
                     $em->remove($serie);
                     $em->flush();
